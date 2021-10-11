@@ -1,0 +1,281 @@
+#:kivy 2.0.0
+
+WindowManager:
+	Welcome:
+	Login:
+    Register: 
+    Tdashboard: 
+    Sdashboard: 
+
+<Welcome>:
+    name: "Welcome"
+
+    MDBoxLayout:
+        orientation :"vertical"
+        Image:
+            source: 'assets\welcome.png'
+            keep_ratio: False
+            allow_stretch: True
+
+ 
+        MDLabel:
+            text:"Welcome"
+            font_size: 48
+            halign: "center"
+        
+        MDFillRoundFlatButton:
+            text:"Let's  get  started"
+            font_size: 12
+            md_bg_color:"green"
+            pos_hint: {"center_x":0.5, "center_y":1}
+			on_release: 
+				app.root.current = "Login"
+				root.manager.transition.direction = "left"   
+
+        MDLabel:
+            text:"" 
+            size_hint: 1, 0.3
+
+
+<Login>:
+    name: "Login"
+    MDBoxLayout:
+        orientation :"vertical"
+        size_hint : 1, 1
+
+        Image:
+            source: 'assets\login.png'
+            keep_ratio: False
+            allow_stretch: True
+
+        MDBoxLayout:
+            size_hint : 1, 0.4
+            MDBoxLayout:
+                orientation :"vertical"
+
+                MDLabel:
+                    text: "Username"
+                    padding_x: 60
+
+                MDTextField:
+                    id: user
+                    mode: "rectangle"
+                    icon_right: "account"
+                    pos_hint:{"center_x":0.5, "center_y":1}
+                    size_hint_x: 0.7
+                    width: 200
+                    font_size: 18
+
+            MDBoxLayout:
+                orientation :"vertical"
+                MDLabel:
+                    text: ""
+
+                MDFillRoundFlatButton:
+                    id:"one"
+                    text: "Login"
+                    font_size: 12
+                    md_bg_color: "purple"
+                    pos_hint:{"center_x":0.3, "center_y":1}
+                    on_press:root.logger()
+
+
+        MDBoxLayout:
+            size_hint : 1, 0.4
+            MDBoxLayout:
+                orientation :"vertical"
+
+                MDLabel:
+                    text: "Password"
+                    padding_x: 60
+
+                MDTextField:
+                    id: password
+                    mode: "rectangle"
+                    icon_right: "eye-off"
+                    size_hint_x: 0.7
+                    pos_hint:{"center_x":0.5, "center_y":1}                
+                    width: 200
+                    font_size: 18
+                    password: False
+
+            MDBoxLayout:
+                orientation :"vertical"
+
+                MDLabel:
+                    text: "Don't have an account?"
+                    padding_x: 50
+
+                MDFillRoundFlatButton:
+                    text: "Signup"
+                    font_size: 12 
+                    md_bg_color: 1, 0.2, 0, 1
+                    pos_hint:{"center_x":0.3, "center_y":1}
+                    on_release: 
+                        app.root.current = "Register"
+                        root.manager.transition.direction = "left"    
+
+        MDLabel:
+            size_hint : 1, 0.3
+            text: ""
+
+<Register>:
+    name: "Register"
+
+    MDBoxLayout:
+        orientation: "vertical"
+
+        Image:
+            source: 'assets/register.png'
+            keep_ratio: False
+            allow_stretch: True
+
+        MDBoxLayout:  
+            size_hint: 1, 0.2
+            MDLabel:
+                text: "Username"
+                padding_x: 42
+                
+            MDLabel:
+                text: "Role"
+                padding_x: 125
+
+        MDBoxLayout:
+            size_hint: 1, 0.2
+            MDLabel:
+                text: ""
+                size_hint_x : 0.1                         
+            MDTextField:
+                id: user
+                mode: "rectangle"
+                icon_right: "account"
+                width: 100
+                size_hint_x: 0.5
+                font_size: 18
+            MDLabel:
+                text: ""
+            
+        MDBoxLayout:
+            size_hint: 1,  0.2
+
+            MDLabel:
+                text: "Email"
+                padding_x: 42
+            MDBoxLayout:
+                MDIconButton:
+                    icon: "assets/teacher.png"
+                    user_font_size: "54sp"
+                    on_press:root.teacher()
+                MDLabel:
+                    text: "" 
+                    size_hint : 0.3, 1                
+                MDIconButton:
+                    pos_hint_x: 1
+                    icon: "assets/student.png"
+                    user_font_size: "56sp"
+                    on_press:root.student()
+                MDLabel:
+                    text: "" 
+                    size_hint : 0.3, 1                      
+        MDBoxLayout:
+            size_hint: 1, 0.2 
+            MDLabel:
+                text: ""
+                size_hint_x : 0.1             
+            MDTextField:
+                id: email
+                mode: "rectangle"
+                icon_right: "email"
+                width: 100
+                size_hint_x: 0.5
+                font_size: 18
+            MDBoxLayout: 
+                MDLabel:
+                    text: ""
+                    size_hint_x : 0.3                
+                MDLabel:
+                    text: "Teacher"
+                    padding_x: 46
+
+                MDLabel:
+                    text: "Student"
+                    padding_x: 36
+
+        MDBoxLayout:
+            size_hint: 1, 0.2  
+            MDLabel:
+                text: "Password"
+                padding_x: 44 
+            MDLabel:
+                text: ""
+                padding_x: 40   
+        MDBoxLayout:
+            size_hint: 1, 0.2 
+            MDLabel:
+                text: ""
+                size_hint_x : 0.1                 
+            MDTextField:
+                id: password
+                mode: "rectangle"
+                icon_right: "eye-off"  
+                size_hint_x: 0.45
+                width: 100
+                font_size: 18
+                password: False
+            MDLabel:
+                text: ""
+                size_hint : 0.35, 1   
+            MDFillRoundFlatButton:
+                text: "Register"
+                font_size: 12 
+                md_bg_color: 1, 0.2, 0, 1
+                on_press:root.registration()
+                  
+            MDLabel:
+                text: ""
+                padding_x: 40
+                size_hint : 0.4 ,1               
+        MDLabel:
+            size_hint : 1, 0.3
+            text: ""                
+
+
+<Tdashboard>:
+
+    name: "Tdashboard"
+
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+
+        MDLabel:
+            text: "Teacher Dashboard"
+            halign: "center"
+            font_size: 32
+
+        Button:
+            text: "Go Back"
+            font_size: 32
+            on_release: 
+                app.root.current = "Login"
+                root.manager.transition.direction = "right"    
+
+<Sdashboard>:
+
+    name: "Sdashboard"
+
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+
+        MDLabel:
+            text: "Student Dashboard"
+            halign: "center"
+            font_size: 32
+
+        Button:
+            text: "Go Back"
+            font_size: 32
+            on_release: 
+                app.root.current = "Login"
+                root.manager.transition.direction = "right"    
