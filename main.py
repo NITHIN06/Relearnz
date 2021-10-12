@@ -71,7 +71,7 @@ class Register(Screen):
         if(username == "" or username =="FIELD SHOULD NOT BE EMPTY"):
             self.ids.user.text = "FIELD SHOULD NOT BE EMPTY"
             self.a=0
-              
+                  
         if(password == "" or password =="FIELD SHOULD NOT BE EMPTY"):
             self.ids.password.text = "FIELD SHOULD NOT BE EMPTY"
             self.a =0
