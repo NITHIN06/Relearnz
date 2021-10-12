@@ -39,6 +39,15 @@ WindowManager:
 
 <Login>:
     name: "Login"
+
+    MDScreen:
+        MDSpinner:
+            id : load
+            size_hint: None, None
+            size: dp(46), dp(46)
+            pos_hint: {'center_x': .5, 'center_y': .5}
+            active: False
+
     MDBoxLayout:
         orientation :"vertical"
         size_hint : 1, 1
@@ -121,6 +130,14 @@ WindowManager:
 
 <Register>:
     name: "Register"
+
+    MDScreen:
+        MDSpinner:
+            id : load
+            size_hint: None, None
+            size: dp(46), dp(46)
+            pos_hint: {'center_x': .5, 'center_y': .5}
+            active: False
 
     MDBoxLayout:
         orientation: "vertical"
@@ -221,11 +238,12 @@ WindowManager:
                 size_hint_x: 0.45
                 width: 100
                 font_size: 18
-                password: False
+                password: False 
             MDLabel:
                 text: ""
                 size_hint : 0.35, 1   
             MDFillRoundFlatButton:
+                id : register
                 text: "Register"
                 font_size: 12 
                 md_bg_color: 1, 0.2, 0, 1
