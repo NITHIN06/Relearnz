@@ -45,7 +45,7 @@ WindowManager:
             id : load
             size_hint: None, None
             size: dp(46), dp(46)
-            pos_hint: {'center_x': .5, 'center_y': .5}
+            pos_hint: {'center_x': .9, 'center_y': .1}
             active: False
 
     MDBoxLayout:
@@ -129,19 +129,19 @@ WindowManager:
             text: ""
 
 <Register>:
-    name: "Register"
+    name: "Register" 
 
     MDScreen:
         MDSpinner:
             id : load
             size_hint: None, None
             size: dp(46), dp(46)
-            pos_hint: {'center_x': .5, 'center_y': .5}
+            pos_hint: {'center_x': .9, 'center_y': .1}
             active: False
-
+ 
     MDBoxLayout:
         orientation: "vertical"
-
+    
         Image:
             source: 'assets/register.png'
             keep_ratio: False
