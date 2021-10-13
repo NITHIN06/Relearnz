@@ -33,6 +33,12 @@ class Login(Screen):
     a = 0
     dialog = None
 
+    def account_checker(self, username, password):
+        users_list = firebase.get("/Users", '')
+        for i in users_list:
+            if users_list[i]["username"] == username and users_list[i]["password"] == password:
+                return users_list[i]["role"]
+
     def logger(self):
         username = self.ids.user.text
         password = self.ids.password.text
@@ -45,20 +51,16 @@ class Login(Screen):
             self.ids.password.text = "FIELD SHOULD NOT BE EMPTY"
             self.a = 0
 
-        def account_checker(username, password):
-            users_list = firebase.get("/Users", '')
-            for i in users_list:
-                if users_list[i]["username"] == username and users_list[i]["password"] == password:
-                    return users_list[i]["role"]
-
         if(self.a == 1):
 
             self.ids.load.active = True
-            if(account_checker(username, password) == 1):  # search for inputs in teacher database
+            # search for inputs in teacher database
+            if(self.account_checker(username, password) == 1):
                 self.manager.current = "Tdashboard"
                 self.manager.transition.direction = "left"
 
-            elif(account_checker(username, password) == -1):  # search for inputs in student database
+            # search for inputs in student database
+            elif(self.account_checker(username, password) == -1):
                 self.manager.current = "Sdashboard"
                 self.manager.transition.direction = "left"
             else:
@@ -124,7 +126,7 @@ class Register(Screen):
                     "password": password, "role": self.t}
             firebase.post("/Users", info)
 
-            self.ids.username.text = ""
+            self.ids.user.text = ""
             self.ids.password.text = ""
             self.ids.email.text = ""
             self.t = 0
@@ -142,7 +144,7 @@ class Register(Screen):
                     "password": password, "role": self.t}
             firebase.post("/Users", info)
 
-            self.ids.username.text = ""
+            self.ids.user.text = ""
             self.ids.password.text = ""
             self.ids.email.text = ""
             self.t = 0
