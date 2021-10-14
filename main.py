@@ -1,3 +1,11 @@
+from kivy.config import Config
+
+Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
+Config.set('graphics', 'width', 870)
+Config.set('graphics', 'height', 580)
+Config.set('graphics', 'resizable', False)
+
+
 from kivymd.app import MDApp
 from kivy.lang import Builder
 from kivymd.uix.boxlayout import MDBoxLayout
@@ -7,10 +15,7 @@ from kivymd.uix.dialog import MDDialog
 from kivymd.uix.spinner import MDSpinner
 from kivy.uix.screenmanager import ScreenManager, Screen
 from firebase import firebase
-
-
-Window.size = (870, 580)
-Window.minimum_width, Window.minimum_height = Window.size
+import threading
 
 # firebase connection
 firebase = firebase.FirebaseApplication(
@@ -30,8 +35,20 @@ class Welcome(Screen):
 
 
 class Login(Screen):
-    a = 0
+
+    a = 1
     dialog = None
+
+    def login(self):
+        self.load()
+        threading.Thread(target = self.logger).start()
+
+
+    def load(self):
+        if self.ids.load.active == False:
+            self.ids.load.active = True
+        else:
+            self.ids.load.active = False
 
     def account_checker(self, username, password):
         users_list = firebase.get("/Users", '')
@@ -47,13 +64,14 @@ class Login(Screen):
             self.ids.user.text = "FIELD SHOULD NOT BE EMPTY"
             self.a = 0
 
+
         if(password == "" or password == "FIELD SHOULD NOT BE EMPTY"):
             self.ids.password.text = "FIELD SHOULD NOT BE EMPTY"
             self.a = 0
 
+
         if(self.a == 1):
 
-            self.ids.load.active = True
             # search for inputs in teacher database
             if(self.account_checker(username, password) == 1):
                 self.manager.current = "Tdashboard"
@@ -63,13 +81,16 @@ class Login(Screen):
             elif(self.account_checker(username, password) == -1):
                 self.manager.current = "Sdashboard"
                 self.manager.transition.direction = "left"
+
             else:
                 self.dialog = MDDialog(
                     title="Invalid Login", text="Enter correct credentials or signup if you don't have an account", radius=[20, 7, 20, 7])
                 self.dialog.open()
-            self.ids.load.active = False
+
             self.ids.user.text = ""
             self.ids.password.text = ""
+
+        self.load()    
         self.a = 1
 
 
@@ -78,6 +99,16 @@ class Register(Screen):
     t = 0
     dialog = None
     a = 1
+
+    def load(self):
+        if self.ids.load.active == False:
+            self.ids.load.active = True
+        else:
+            self.ids.load.active = False
+
+    def register(self):
+        self.load()
+        threading.Thread(target = self.registration).start()
 
     def teacher(self):
         if self.ids.btn_tch.icon == "assets/teacher.png":
@@ -126,6 +157,8 @@ class Register(Screen):
                     "password": password, "role": self.t}
             firebase.post("/Users", info)
 
+            self.ids.btn_tch.icon = "assets/teacher.png"
+            self.ids.btn_std.icon == "assets/student.png"
             self.ids.user.text = ""
             self.ids.password.text = ""
             self.ids.email.text = ""
@@ -133,8 +166,6 @@ class Register(Screen):
 
             self.manager.current = "Tdashboard"
             self.manager.transition.direction = "left"
-            self.ids.load.active = False
-            return
 
         if(self.a == 1 and self.t == -1):
             self.ids.load.active = True
@@ -143,7 +174,8 @@ class Register(Screen):
             info = {"username": username, "email": email,
                     "password": password, "role": self.t}
             firebase.post("/Users", info)
-
+            self.ids.btn_tch.icon = "assets/teacher.png"
+            self.ids.btn_std.icon == "assets/student.png"
             self.ids.user.text = ""
             self.ids.password.text = ""
             self.ids.email.text = ""
@@ -151,8 +183,8 @@ class Register(Screen):
 
             self.manager.current = "Sdashboard"
             self.manager.transition.direction = "left"
-            self.ids.load.active = False
-            return
+
+        self.load()
         self.a = 1
 
 
