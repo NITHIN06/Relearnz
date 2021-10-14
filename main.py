@@ -42,10 +42,10 @@ class Login(Screen):
     def login(self):
         self.load()
         threading.Thread(target = self.logger).start()
-
+  
 
     def load(self):
-        if self.ids.load.active == False:
+        if self.ids.load.active == False: 
             self.ids.load.active = True
         else:
             self.ids.load.active = False
