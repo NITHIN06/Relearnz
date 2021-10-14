@@ -17,11 +17,11 @@ WindowManager:
             keep_ratio: False
             allow_stretch: True
 
- 
         MDLabel:
             text:"Welcome"
             font_size: 48
             halign: "center"
+            size_hint: 1, 0.5
         
         MDFillRoundFlatButton:
             text:"Let's  get  started"
@@ -47,6 +47,7 @@ WindowManager:
             size: dp(46), dp(46)
             pos_hint: {'center_x': .9, 'center_y': .1}
             active: False
+
 
     MDBoxLayout:
         orientation :"vertical"
@@ -86,7 +87,7 @@ WindowManager:
                     font_size: 12
                     md_bg_color: "purple"
                     pos_hint:{"center_x":0.3, "center_y":1}
-                    on_press:root.logger()
+                    on_press: root.login()
 
 
         MDBoxLayout:
@@ -138,7 +139,7 @@ WindowManager:
             size: dp(46), dp(46)
             pos_hint: {'center_x': .9, 'center_y': .1}
             active: False
- 
+   
     MDBoxLayout:
         orientation: "vertical"
     
@@ -167,7 +168,7 @@ WindowManager:
                 mode: "rectangle"
                 icon_right: "account"
                 width: 100
-                size_hint_x: 0.5
+                size_hint_x: 0.57
                 font_size: 18
             MDLabel:
                 text: ""
@@ -206,7 +207,7 @@ WindowManager:
                 mode: "rectangle"
                 icon_right: "email"
                 width: 100
-                size_hint_x: 0.5
+                size_hint_x: 0.57
                 font_size: 18
             MDBoxLayout: 
                 MDLabel:
@@ -214,11 +215,11 @@ WindowManager:
                     size_hint_x : 0.3                
                 MDLabel:
                     text: "Teacher"
-                    padding_x: 46
+                    padding_x: 30
 
                 MDLabel:
                     text: "Student"
-                    padding_x: 36
+                    padding_x: 30
 
         MDBoxLayout:
             size_hint: 1, 0.2  
@@ -237,7 +238,7 @@ WindowManager:
                 id: password
                 mode: "rectangle"
                 icon_right: "eye-off"  
-                size_hint_x: 0.45
+                size_hint_x: 0.52
                 width: 100
                 font_size: 18
                 password: False 
@@ -249,7 +250,7 @@ WindowManager:
                 text: "Register"
                 font_size: 12 
                 md_bg_color: 1, 0.2, 0, 1
-                on_press:root.registration()
+                on_press:root.register()  
                   
             MDLabel:
                 text: ""
