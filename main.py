@@ -11,10 +11,11 @@ from kivymd.app import MDApp
 from kivy.config import Config
 
 Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
-Config.set('graphics', 'width', 870)
-Config.set('graphics', 'height', 580)
+Config.set('graphics', 'width', 1300)
+Config.set('graphics', 'height', 750)
 Config.set('graphics', 'resizable', False)
 
+ 
 
 # firebase connection
 firebase = firebase.FirebaseApplication(
@@ -148,7 +149,6 @@ class Register(Screen):
             return
 
         if(self.a == 1 and self.t == 1):
-            self.ids.load.active = True
 
             # store the values in the database
             info = {"username": username, "email": email,
@@ -161,12 +161,12 @@ class Register(Screen):
             self.ids.password.text = ""
             self.ids.email.text = ""
             self.t = 0
+            self.ids.load.active = False
 
             self.manager.current = "Tdashboard"
             self.manager.transition.direction = "left"
 
         if(self.a == 1 and self.t == -1):
-            self.ids.load.active = True
 
             # store the values in the database
             info = {"username": username, "email": email,
@@ -178,11 +178,12 @@ class Register(Screen):
             self.ids.password.text = ""
             self.ids.email.text = ""
             self.t = 0
+            self.ids.load.active = False
 
             self.manager.current = "Sdashboard"
             self.manager.transition.direction = "left"
 
-        self.load()
+        self.ids.load.active = False
         self.a = 1
 
 
@@ -192,6 +193,7 @@ class Tdashboard(Screen):
 
 class Sdashboard(Screen):
     pass
+
 
 
 Main().run()
