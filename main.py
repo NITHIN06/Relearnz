@@ -1,10 +1,11 @@
 from kivy.config import Config
 
 Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
-Config.set('graphics', 'width', 870)
-Config.set('graphics', 'height', 580)
+Config.set('graphics', 'width', 1300)
+Config.set('graphics', 'height', 750)
 Config.set('graphics', 'resizable', False)
 
+ 
 
 from kivymd.app import MDApp
 from kivy.lang import Builder
@@ -51,10 +52,12 @@ class Login(Screen):
             self.ids.load.active = False
 
     def account_checker(self, username, password):
-        users_list = firebase.get("/Users", '')
-        for i in users_list:
-            if users_list[i]["username"] == username and users_list[i]["password"] == password:
-                return users_list[i]["role"]
+        users_list1 = firebase.get("/Users/Teacher", '')
+        users_list2 = firebase.get("/Users/Student", '')
+        users_list2.update(users_list1)
+        for i in users_list2:
+            if users_list2[i]["username"] == username and users_list2[i]["password"] == password:
+                return users_list2[i]["role"]
 
     def logger(self):
         username = self.ids.user.text
@@ -150,12 +153,11 @@ class Register(Screen):
             return
 
         if(self.a == 1 and self.t == 1):
-            self.ids.load.active = True
 
             # store the values in the database
             info = {"username": username, "email": email,
                     "password": password, "role": self.t}
-            firebase.post("/Users", info)
+            firebase.post("/Users/Teacher", info)
 
             self.ids.btn_tch.icon = "assets/teacher.png"
             self.ids.btn_std.icon == "assets/student.png"
@@ -163,28 +165,29 @@ class Register(Screen):
             self.ids.password.text = ""
             self.ids.email.text = ""
             self.t = 0
+            self.ids.load.active = False
 
             self.manager.current = "Tdashboard"
             self.manager.transition.direction = "left"
 
         if(self.a == 1 and self.t == -1):
-            self.ids.load.active = True
 
             # store the values in the database
             info = {"username": username, "email": email,
                     "password": password, "role": self.t}
-            firebase.post("/Users", info)
+            firebase.post("/Users/Student", info)
             self.ids.btn_tch.icon = "assets/teacher.png"
             self.ids.btn_std.icon == "assets/student.png"
             self.ids.user.text = ""
             self.ids.password.text = ""
             self.ids.email.text = ""
             self.t = 0
+            self.ids.load.active = False
 
             self.manager.current = "Sdashboard"
             self.manager.transition.direction = "left"
 
-        self.load()
+        self.ids.load.active = False
         self.a = 1
 
 
@@ -194,6 +197,7 @@ class Tdashboard(Screen):
 
 class Sdashboard(Screen):
     pass
+
 
 
 Main().run()
