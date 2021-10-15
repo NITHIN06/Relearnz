@@ -194,6 +194,4 @@ class Tdashboard(Screen):
 class Sdashboard(Screen):
     pass
 
-
-
 Main().run()
