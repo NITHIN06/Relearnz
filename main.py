@@ -198,6 +198,7 @@ class Tdashboard(Screen):
 class Sdashboard(Screen):
     pass
 
+
 class Scourse(Screen):
     pass
 
@@ -213,8 +214,12 @@ class Sannouncement(Screen):
 class Sfeedback(Screen):
     pass
 
+
 class Main(MDApp):
     pass
 
 
+
 Main().run()
+
+
