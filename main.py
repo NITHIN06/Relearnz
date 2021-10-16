@@ -198,8 +198,28 @@ class Tdashboard(Screen):
 class Sdashboard(Screen):
     pass
 
+
+class Scourse(Screen):
+    pass
+
+class Sevent(Screen):
+    pass
+
+class Schat(Screen):
+    pass
+
+class Sannouncement(Screen):
+    pass    
+
+class Sfeedback(Screen):
+    pass
+
+
 class Main(MDApp):
     pass
 
 
+
 Main().run()
+
+
