@@ -3,9 +3,18 @@
 WindowManager:
 	Welcome:
 	Login:
-    Register: 
-    Tdashboard: 
-    Sdashboard: 
+    Register:
+    Tdashboard:
+    Sdashboard:
+    Scourse:
+    Sevent:
+    Schat:
+    Sannouncement:
+    Sfeedback:
+
+
+        
+
 
 <Welcome>:
     name: "Welcome"
@@ -22,18 +31,18 @@ WindowManager:
             font_style: "H2"
             halign: "center"
             size_hint: 1, 0.5
-        
+
         MDFillRoundFlatButton:
             text:"Let's  get  started"
             md_bg_color:"green"
             font_style: "Button"
             pos_hint: {"center_x":0.5, "center_y":1}
-			on_release: 
+			on_release:
 				app.root.current = "Login"
-				root.manager.transition.direction = "left"   
+				root.manager.transition.direction = "left"
 
         MDLabel:
-            text:"" 
+            text:""
             size_hint: 1, 0.3
 
 
@@ -109,10 +118,10 @@ WindowManager:
                     mode: "rectangle"
                     icon_right: "eye-off"
                     size_hint_x: 0.7
-                    pos_hint:{"center_x":0.5, "center_y":1}                
+                    pos_hint:{"center_x":0.5, "center_y":1}
                     width: 200
                     required: True
-                    helper_text_mode: "on_error"                    
+                    helper_text_mode: "on_error"
                     font_size: 18
                     password: False
 
@@ -126,20 +135,20 @@ WindowManager:
 
                 MDFillRoundFlatButton:
                     text: "Signup"
-                    font_size: 12 
+                    font_size: 12
                     font_style: "Button"
                     md_bg_color: 1, 0.2, 0, 1
                     pos_hint:{"center_x":0.3, "center_y":1}
-                    on_release: 
+                    on_release:
                         app.root.current = "Register"
-                        root.manager.transition.direction = "left"    
+                        root.manager.transition.direction = "left"
 
         MDLabel:
             size_hint : 1, 0.3
             text: ""
 
 <Register>:
-    name: "Register" 
+    name: "Register"
 
     MDScreen:
         MDSpinner:
@@ -149,22 +158,22 @@ WindowManager:
             pos_hint: {'center_x': .9, 'center_y': .1}
             active: False
             determinate: True
-   
+
     MDBoxLayout:
         orientation: "vertical"
-    
+
         Image:
             source: 'assets/register.png'
             keep_ratio: False
             allow_stretch: True
 
-        MDBoxLayout:  
+        MDBoxLayout:
             size_hint: 1, 0.2
             MDLabel:
                 text: "Username"
                 padding_x: 65
                 font_style: "H6"
-                
+
             MDLabel:
                 text: "Role"
                 font_style: "H3"
@@ -174,19 +183,19 @@ WindowManager:
             size_hint: 1, 0.2
             MDLabel:
                 text: ""
-                size_hint_x : 0.1                         
+                size_hint_x : 0.1
             MDTextField:
                 id: user
                 mode: "rectangle"
                 required: True
-                helper_text_mode: "on_error"                
+                helper_text_mode: "on_error"
                 icon_right: "account"
                 width: 100
                 size_hint_x: 0.57
                 font_size: 18
             MDLabel:
                 text: ""
-            
+
         MDBoxLayout:
             size_hint: 1,  0.2
 
@@ -201,8 +210,8 @@ WindowManager:
                     user_font_size: "54sp"
                     on_press:root.teacher()
                 MDLabel:
-                    text: "" 
-                    size_hint : 0.3, 1                
+                    text: ""
+                    size_hint : 0.3, 1
                 MDIconButton:
                     id: btn_std
                     pos_hint_x: 1
@@ -210,13 +219,13 @@ WindowManager:
                     user_font_size: "56sp"
                     on_press:root.student()
                 MDLabel:
-                    text: "" 
-                    size_hint : 0.3, 1                      
+                    text: ""
+                    size_hint : 0.3, 1
         MDBoxLayout:
-            size_hint: 1, 0.2 
+            size_hint: 1, 0.2
             MDLabel:
                 text: ""
-                size_hint_x : 0.1             
+                size_hint_x : 0.1
             MDTextField:
                 id: email
                 mode: "rectangle"
@@ -226,10 +235,10 @@ WindowManager:
                 width: 100
                 size_hint_x: 0.57
                 font_size: 18
-            MDBoxLayout: 
+            MDBoxLayout:
                 MDLabel:
                     text: ""
-                    size_hint_x : 0.3                
+                    size_hint_x : 0.3
                 MDLabel:
                     text: "Teacher"
                     padding_x: 30
@@ -241,47 +250,47 @@ WindowManager:
                     font_style: "H6"
 
         MDBoxLayout:
-            size_hint: 1, 0.2  
+            size_hint: 1, 0.2
             MDLabel:
                 text: "Password"
                 padding_x: 65
                 font_style: "H6"
             MDLabel:
                 text: ""
-                padding_x: 40   
+                padding_x: 40
         MDBoxLayout:
-            size_hint: 1, 0.2 
+            size_hint: 1, 0.2
             MDLabel:
                 text: ""
-                size_hint_x : 0.09                 
+                size_hint_x : 0.09
             MDTextField:
                 id: password
                 mode: "rectangle"
-                icon_right: "eye-off"  
+                icon_right: "eye-off"
                 required: True
                 helper_text_mode: "on_error"
                 size_hint_x: 0.52
                 width: 100
                 font_size: 18
-                password: False 
+                password: False
             MDLabel:
                 text: ""
-                size_hint : 0.35, 1   
+                size_hint : 0.35, 1
             MDFillRoundFlatButton:
                 id : register
                 text: "Register"
-                font_size: 12 
+                font_size: 12
                 font_style: "Button"
                 md_bg_color: 1, 0.2, 0, 1
-                on_press:root.register()  
-                  
+                on_press:root.register()
+
             MDLabel:
                 text: ""
                 padding_x: 40
-                size_hint : 0.45 ,1               
+                size_hint : 0.45 ,1
         MDLabel:
             size_hint : 1, 0.3
-            text: ""                
+            text: ""
 
 
 <Tdashboard>:
@@ -300,9 +309,9 @@ WindowManager:
         Button:
             text: "Go Back"
             font_size: 32
-            on_release: 
+            on_release:
                 app.root.current = "Login"
-                root.manager.transition.direction = "right"    
+                root.manager.transition.direction = "right"
 
 <Sdashboard>:
 
@@ -311,7 +320,7 @@ WindowManager:
     MDBoxLayout:
         orientation: "vertical"
         MDLabel:
-            size_hint_y:0.025  
+            size_hint_y:0.025
         MDBoxLayout:
             size_hint_y: 0.1
             MDLabel:
@@ -327,195 +336,230 @@ WindowManager:
                 mode: "fill"
                 icon_right: "magnify"
                 font_size: 20
-                hint_text: "Search" 
+                hint_text: "Search"
                 hint_text_color: 1,1,1
                 icon_left_color: 1,1,1
-                radius: [30]    
+                radius: [30]
                 fill_color: 184/255, 226/255, 1, 0.3
                 line_color_focus: 252/255, 5/255, 121/255, 1
                 size_hint_x:0.5
             MDLabel:
-                size_hint_x:0.4           
+                size_hint_x:0.4
             MDFloatingActionButton:
-                icon: "bell"  
-                elevation_normal: 8 
+                icon: "bell"
+                elevation_normal: 8
                 md_bg_color: "black"
             MDLabel:
-                size_hint_x:0.08   
+                size_hint_x:0.08
 
             MDFloatingActionButton:
-                icon: "account"  
-                elevation_normal: 8 
-                md_bg_color: "black"            
+                icon: "account"
+                elevation_normal: 8
+                md_bg_color: "black"
 
             MDLabel:
                 size_hint_x:0.09
         MDLabel:
-            size_hint_y:0.02    
+            size_hint_y:0.02
         MDBoxLayout:
-            md_bg_color: 117/255, 255/255, 230/255, 0.1 
+            md_bg_color: 117/255, 255/255, 230/255, 0.1
             MDLabel:
-                size_hint_x:0.02      
+                size_hint_x:0.02
             MDBoxLayout:
                 size_hint_x:0.4
                 orientation: "vertical"
                 MDLabel:
-                    size_hint_y: 0.1           
+                    size_hint_y: 0.1
                 MDCard:
                     size_hint: None, None
                     size: 240, 60
                     elevation:0
-                    ripple_behavior: True 
+                    ripple_behavior: True
                     padding: 20
                     border_radius: 15
-                    radius: [15]                
-                    MDIcon: 
+                    radius: [15]
+                    MDIcon:
                         icon: "eye"
                         font_size : 30
                         size_hint_x: 0.3
-                    MDLabel:
+                    MDTextButton:
                         text:"Overview"
                         bold: True
                         font_size : 20
+
+                    MDLabel:
+                        size_hint_x: 0.4
                 MDLabel:
-                    size_hint_y: 0.03                   
+                    size_hint_y: 0.03
                 MDCard:
                     size_hint: None, None
                     size: 240, 60
                     elevation:0
-                    ripple_behavior: True 
+                    ripple_behavior: True
                     padding: 20
                     border_radius: 15
-                    radius: [15]                
-                    MDIcon: 
+                    radius: [15]
+                    MDIcon:
                         icon: "book-multiple"
                         font_size : 30
                         size_hint_x: 0.3
-                    MDLabel:
+                    MDTextButton:
                         text:"Courses"
                         bold: True
                         font_size : 20
+                        on_release:
+                            app.root.current= "Scourse"
+                            root.manager.transition.direction="left"
+                    MDLabel:
+                        size_hint_x: 0.4
                 MDLabel:
-                    size_hint_y: 0.03  
+                    size_hint_y: 0.03
                 MDCard:
                     size_hint: None, None
                     size: 240, 60
                     elevation:0
-                    ripple_behavior: True 
+                    ripple_behavior: True
                     padding: 20
                     border_radius: 15
-                    radius: [15]                
-                    MDIcon: 
+                    radius: [15]
+                    MDIcon:
                         icon: "bookmark-multiple"
                         font_size : 30
                         size_hint_x: 0.3
-                    MDLabel:
+                    MDTextButton:
                         text:"Events"
                         bold: True
                         font_size : 20
+                        on_release:
+                            app.root.current= "Sevents"
+                            root.manager.transition.direction="left"
+                    MDLabel:
+                        size_hint_x: 0.4
                 MDLabel:
-                    size_hint_y: 0.03  
+                    size_hint_y: 0.03
                 MDCard:
                     size_hint: None, None
                     size: 240, 60
                     elevation:0
-                    ripple_behavior: True 
+                    ripple_behavior: True
                     padding: 20
                     border_radius: 15
-                    radius: [15]                
-                    MDIcon: 
+                    radius: [15]
+                    MDIcon:
                         icon: "chat"
                         font_size : 30
                         size_hint_x: 0.3
-                    MDLabel:
+                    MDTextButton:
                         text:"Chat"
                         bold: True
                         font_size : 20
+                        on_release:
+                            app.root.current= "Schat"
+                            root.manager.transition.direction="left"
+                    MDLabel:
+                        size_hint_x: 0.45
                 MDLabel:
-                    size_hint_y: 0.03  
+                    size_hint_y: 0.03
                 MDCard:
                     size_hint: None, None
                     size: 240, 60
                     elevation:0
-                    ripple_behavior: True 
+                    ripple_behavior: True
                     padding: 20
                     border_radius: 15
-                    radius: [15]                
-                    MDIcon: 
+                    radius: [15]
+                    MDIcon:
                         icon: "alert"
                         font_size : 30
                         size_hint_x: 0.3
-                    MDLabel:
+                    MDTextButton:
                         text:"Announcements"
                         bold: True
                         font_size : 20
+                        on_release:
+                            app.root.current= "Sannouncement"
+                            root.manager.transition.direction="left"
+                    MDLabel:
+                        size_hint_x: 0.1
                 MDLabel:
                     size_hint_y: 0.85
                 MDCard:
                     size_hint: None, None
                     size: 240, 60
                     elevation:0
-                    ripple_behavior: True 
+                    ripple_behavior: True
                     padding: 20
                     border_radius: 15
-                    radius: [15]                
-                    MDIcon: 
+                    radius: [15]
+                    MDIcon:
                         icon: "file-document"
                         font_size : 30
                         size_hint_x: 0.3
-                    MDLabel:
+                    MDTextButton:
                         text:"Feedback"
                         bold: True
                         font_size : 20
+                        on_release:
+                            app.root.current= "Sfeedback"
+                            root.manager.transition.direction="left"
+                    MDLabel:
+                        size_hint_x: 0.4
                 MDLabel:
-                    size_hint_y: 0.03 
+                    size_hint_y: 0.03
                 MDCard:
                     id: logout
                     size_hint: None, None
                     size: 240, 60
                     elevation:0
-                    ripple_behavior: True 
+                    ripple_behavior: True
                     padding: 20
                     border_radius: 15
-                    radius: [15]                     
+                    radius: [15]
                     MDIcon:
                         icon: "logout"
                         font_size : 30
-                        size_hint_x: 0.3   
+                        size_hint_x: 0.3
 
-                    MDLabel:
+                    MDTextButton:
                         text:"Logout"
                         bold: True
                         font_size : 20
+                        on_release:
+                            app.root.current= "Welcome"
+                            root.manager.transition.direction="right"
+                    MDLabel:
+                        size_hint_x: 0.4
+
                 MDLabel:
-                    size_hint_y: 0.05  
+                    size_hint_y: 0.05
 
 
             MDBoxLayout:
 
                 orientation: "vertical"
                 MDLabel:
-                    text: "" 
-                    size_hint_y: 0.03         
+                    text: ""
+                    size_hint_y: 0.03
                 MDCard:
                     size_hint: None, None
-                    size: 600, 300
+                    size: 600, 280
                     pos_hint: {"center_x": 0.5, "center_y": 0.5}
                     elevation: 10
                     padding: 20
                     border_radius: 30
-                    radius: [30]                
+                    radius: [30]
                     orientation: 'vertical'
 
                     MDLabel:
-                        text: "Hello Charan"
+                        id: susername
+                        text: "Hello "
                         font_size: 24
                         bold: True
                         adaptive_height: True
                     MDLabel:
                         text: "   "
                         adaptive_height: True
-                        
+
                     MDLabel:
                         text: "An investment in knowledge pays best intrest"
                         font_size: 18
@@ -525,17 +569,17 @@ WindowManager:
                     MDBoxLayout:
                         MDCard:
                             size_hint: None, None
-                            size:220,180
+                            size:220,160
                             elevation: 1
                             padding: 20
-                            border_radius: 30  
-                            ripple_behavior: True                                               
-                            radius: [30]   
-                            md_bg_color: 247/255, 126/255, 126/255, 0.2        
-                            orientation: 'vertical' 
+                            border_radius: 30
+                            ripple_behavior: True
+                            radius: [30]
+                            md_bg_color: 247/255, 126/255, 126/255, 0.2
+                            orientation: 'vertical'
 
-                            MDBoxLayout: 
-                                MDIcon: 
+                            MDBoxLayout:
+                                MDIcon:
                                     icon: "laptop"
                                     font_size : 48
                                 MDLabel:
@@ -552,21 +596,21 @@ WindowManager:
                                 color: 1,0,0
 
                         MDLabel:
-                            text: ""                     
+                            text: ""
 
                         MDCard:
                             size_hint: None, None
-                            size:220,180
+                            size:220,160
                             elevation: 1
                             padding: 20
                             md_bg_color: 86/255, 227/255, 157/255, 0.2
-                            border_radius: 30  
-                            ripple_behavior: True                                           
-                            radius: [30]                
-                            orientation: 'vertical'   
+                            border_radius: 30
+                            ripple_behavior: True
+                            radius: [30]
+                            orientation: 'vertical'
 
-                            MDBoxLayout: 
-                                MDIcon: 
+                            MDBoxLayout:
+                                MDIcon:
                                     icon: "clipboard-text-outline"
                                     font_size : 48
                                 MDLabel:
@@ -579,10 +623,10 @@ WindowManager:
                                 text:"Assignment"
                                 halign: 'center'
                                 bold: True
-                                font_size: 30                                     
+                                font_size: 30
                                 color: 22/255, 201/255, 34/255
                 MDLabel:
-                    text: " Courses" 
+                    text: " Courses"
                     size_hint_y: 0.2
                     font_size: 24
                     bold: True
@@ -606,31 +650,29 @@ WindowManager:
                     MDBoxLayout:
                         orientation: "vertical"
                         MDBoxLayout:
-
                             MDLabel:
-                                text: ""
+                                text: ""                
                             MDCard:
                                 size_hint: None, None
-                                size:150,40
-                                elevation: 1
+                                size:100,40
+                                elevation: 0
                                 padding: 20
                                 md_bg_color: 255/255, 204/255, 104/255, 0.5
-                                border_radius: 10                     
-                                radius: [20]                
-                                orientation: 'vertical'                       
+                                border_radius: 10
+                                radius: [20]
+                                orientation: 'vertical'
                                 MDLabel:
-                                    text: "      Current  " 
+                                    text: "Now"
                                     font_size: 18
                                     bold: True
-                                    color: 1, 105/255, 5/255  
-
-                        MDLabel:
+                                    color: 1, 105/255, 5/255
+                        MDTextButton:
                             text: "Artificial Intelligence"
                             font_size: 30
                             bold: True
 
                 MDLabel:
-                    text: "" 
+                    text: ""
                     size_hint_y: 0.05
 
                 MDCard:
@@ -640,9 +682,9 @@ WindowManager:
                     elevation: 10
                     padding: 25
                     border_radius: 30
-                    radius: [30]                
+                    radius: [30]
                     focus_behavior: True
-                    ripple_behavior: True                
+                    ripple_behavior: True
                     spacing: 25
                     MDIconButton:
                         icon: "assets/DSP.png"
@@ -650,33 +692,30 @@ WindowManager:
                     MDBoxLayout:
                         orientation: "vertical"
                         MDBoxLayout:
-
                             MDLabel:
                                 text: ""
                             MDCard:
                                 size_hint: None, None
-                                size:150,40
-                                elevation: 1
+                                size:100,40
+                                elevation: 0
                                 padding: 20
                                 md_bg_color: 178/255, 77/255, 1, 0.2
-                                border_radius: 10                      
-                                radius: [20]                
-                                orientation: 'vertical'                       
+                                border_radius: 10
+                                radius: [20]
+                                orientation: 'vertical'
                                 MDLabel:
-                                    text: "       Next  " 
+                                    text: "Next"
                                     font_size: 18
                                     bold: True
                                     color: 68/255, 4/255, 117/255
-                        MDLabel:
+                        MDTextButton:
                             text: "Digital Signal Processing"
                             font_size: 30
                             bold: True
 
-
-
                 MDLabel:
-                    text: "" 
-                    size_hint_y: 0.05       
+                    text: ""
+                    size_hint_y: 0.05
 
             MDCard:
                 size_hint: None, None
@@ -684,43 +723,43 @@ WindowManager:
                 pos_hint: {"center_x": 0.5, "center_y": 0.5}
                 elevation: 10
                 border_radius: 30
-                radius: [30]            
+                radius: [30]
                 padding: 10
                 orientation: 'vertical'
                 MDLabel:
                     text: "Today"
                     bold: True
-                    font_size: 30                
+                    font_size: 30
                     adaptive_height: True
                 MDLabel:
-                    text: "12-oct" 
+                    text: "12-oct"
                     bold: True
                     font_size: 30
                     adaptive_height: True
                 MDCard:
                     size_hint: None, None
-                    size: 380, 100
+                    size: 380, 80
                     pos_hint: {"center_x": 0.5, "center_y": 0.5}
                     elevation: 10
                     md_bg_color: 184/255, 226/255, 1, 1
-                    ripple_behavior: True 
+                    ripple_behavior: True
                     border_radius: 30
-                    radius: [30]            
+                    radius: [30]
                     padding: 10
-                    orientation: 'vertical'  
+                    orientation: 'vertical'
 
                     MDBoxLayout:
                         MDLabel:
-                            text: "LAB-1" 
+                            text: "LAB-1"
                             bold: True
                             font_size: 21
                             color: 7/255, 12/255, 173/255
 
                         MDLabel:
-                            text:"10:00 AM"  
+                            text:"10:00 AM"
                             font_size: 24
                             size_hint_x: 0.5
-                            bold: True    
+                            bold: True
                             color: 7/255, 12/255, 173/255
                     MDLabel:
                         text: "Artificial Intelligence"
@@ -729,33 +768,33 @@ WindowManager:
                         bold: True
 
                 MDLabel:
-                    text: ""  
+                    text: ""
                     size_hint_y: 0.05
 
                 MDCard:
                     size_hint: None, None
-                    size: 380, 100
+                    size: 380, 80
                     pos_hint: {"center_x": 0.5, "center_y": 0.5}
                     elevation: 10
                     border_radius: 30
                     md_bg_color: 255/255, 204/255, 104/255, 0.5
-                    ripple_behavior: True 
-                    radius: [30]            
+                    ripple_behavior: True
+                    radius: [30]
                     padding: 10
-                    orientation: 'vertical'                     
+                    orientation: 'vertical'
                     MDBoxLayout:
                         MDLabel:
-                            text: "ASSIGNMENT-1" 
+                            text: "ASSIGNMENT-1"
                             color: 1, 105/255, 5/255
                             font_size: 21
                             bold: True
 
                         MDLabel:
-                            text:"10:00 PM"  
-                            color: 1, 105/255, 5/255  
+                            text:"10:00 PM"
+                            color: 1, 105/255, 5/255
                             size_hint_x: 0.5
                             font_size: 24
-                            bold: True  
+                            bold: True
                     MDLabel:
                         text: "Soft Computing"
                         color: 1, 105/255, 5/255
@@ -763,30 +802,30 @@ WindowManager:
                         bold: True
 
                 MDLabel:
-                    text: ""  
+                    text: ""
                     size_hint_y: 0.05
 
                 MDCard:
                     size_hint: None, None
-                    size: 380, 100
+                    size: 380, 80
                     pos_hint: {"center_x": 0.5, "center_y": 0.5}
                     elevation: 10
                     border_radius: 30
                     md_bg_color: 184/255, 226/255, 1, 1
-                    ripple_behavior: True 
-                    radius: [30]            
+                    ripple_behavior: True
+                    radius: [30]
                     padding: 10
-                    orientation: 'vertical'   
+                    orientation: 'vertical'
                     MDBoxLayout:
                         MDLabel:
-                            text: "LAB-2" 
+                            text: "LAB-2"
                             bold: True
                             color: 7/255, 12/255, 173/255
                             font_size: 21
 
                         MDLabel:
-                            text:"12:00 PM" 
-                            bold: True     
+                            text:"12:00 PM"
+                            bold: True
                             size_hint_x: 0.5
                             color: 7/255, 12/255, 173/255
                             font_size: 24
@@ -795,38 +834,41 @@ WindowManager:
                         bold: True
                         color: 7/255, 12/255, 173/255
                         font_size: 21
-
+                        
+                MDLabel:
+                    text: ""
+                    size_hint_y: 0.05
 
                 MDLabel:
-                    text: "Tomorrow"  
+                    text: "Tomorrow"
                     bold: True
                     font_size: 30
                     adaptive_height: True
 
-                MDCard: 
+                MDCard:
                     size_hint: None, None
-                    size: 380, 100
+                    size: 380, 80
                     pos_hint: {"center_x": 0.5, "center_y": 0.5}
                     elevation: 10
                     border_radius: 30
                     md_bg_color: 255/255, 204/255, 104/255, 0.5
-                    ripple_behavior: True 
-                    radius: [30]            
+                    ripple_behavior: True
+                    radius: [30]
                     padding: 10
-                    orientation: 'vertical'   
+                    orientation: 'vertical'
                     MDBoxLayout:
                         MDLabel:
-                            text: "ASSIGNMENT-2" 
+                            text: "ASSIGNMENT-2"
                             color: 1, 105/255, 5/255
                             font_size: 21
                             bold: True
 
                         MDLabel:
-                            text:"10:00 PM"  
+                            text:"10:00 PM"
                             color: 1, 105/255, 5/255
                             font_size: 24
                             size_hint_x: 0.5
-                            bold: True    
+                            bold: True
                     MDLabel:
                         text: "Digital Signal Processing"
                         color: 1, 105/255, 5/255
@@ -835,31 +877,31 @@ WindowManager:
 
 
                 MDLabel:
-                    text: ""  
+                    text: ""
                     size_hint_y: 0.05
 
                 MDCard:
                     size_hint: None, None
-                    size: 380, 100
+                    size: 380, 80
                     pos_hint: {"center_x": 0.5, "center_y": 0.5}
                     elevation: 10
                     border_radius: 30
                     md_bg_color: 184/255, 226/255, 1, 1
-                    ripple_behavior: True 
-                    radius: [30]            
+                    ripple_behavior: True
+                    radius: [30]
                     padding: 10
-                    orientation: 'vertical'   
+                    orientation: 'vertical'
                     MDBoxLayout:
                         MDLabel:
-                            text: "LAB-2" 
+                            text: "LAB-2"
                             font_size: 21
                             bold: True
                             color: 7/255, 12/255, 173/255
 
                         MDLabel:
-                            text:"12:00 PM"     
+                            text:"12:00 PM"
                             font_size: 24
-                            bold: True 
+                            bold: True
                             size_hint_x: 0.5
                             color: 7/255, 12/255, 173/255
                     MDLabel:
@@ -867,6 +909,1140 @@ WindowManager:
                         bold: True
                         font_size: 21
                         color: 7/255, 12/255, 173/255
+
+
+<Scourse>:
+
+    name: "Scourse"
+    MDBoxLayout:
+        orientation: "vertical"
+        MDLabel:
+            size_hint_y:0.025
+        MDBoxLayout:
+            size_hint_y: 0.1
+            MDLabel:
+                size_hint_x:0.05
+            MDLabel:
+                text: "RelearnZ"
+                color: 8/255, 1, 98/255
+                font_size: 40
+                bold: True
+                size_hint_x:0.5
+            MDTextField:
+                id: "A"
+                mode: "fill"
+                icon_right: "magnify"
+                font_size: 20
+                hint_text: "Search"
+                hint_text_color: 1,1,1
+                icon_left_color: 1,1,1
+                radius: [30]
+                fill_color: 184/255, 226/255, 1, 0.3
+                line_color_focus: 252/255, 5/255, 121/255, 1
+                size_hint_x:0.5
+            MDLabel:
+                size_hint_x:0.4
+            MDFloatingActionButton:
+                icon: "bell"
+                elevation_normal: 8
+                md_bg_color: "black"
+            MDLabel:
+                size_hint_x:0.08
+
+            MDFloatingActionButton:
+                icon: "account"
+                elevation_normal: 8
+                md_bg_color: "black"
+
+            MDLabel:
+                size_hint_x:0.09
+        MDLabel:
+            size_hint_y:0.02
+        MDBoxLayout:
+            md_bg_color: 117/255, 255/255, 230/255, 0.1
+            MDLabel:
+                size_hint_x:0.02
+            MDBoxLayout:
+                size_hint_x:0.4
+                orientation: "vertical"
+                MDLabel:
+                    size_hint_y: 0.1
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "eye"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Overview"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Sdashboard"
+                            root.manager.transition.direction="right"
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "book-multiple"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Courses"
+                        bold: True
+                        font_size : 20
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "bookmark-multiple"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Events"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Sevent"
+                            root.manager.transition.direction="left"
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "chat"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Chat"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Schat"
+                            root.manager.transition.direction="left"
+                    MDLabel:
+                        size_hint_x: 0.45
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "alert"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Announcements"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Sannouncement"
+                            root.manager.transition.direction="left"
+                    MDLabel:
+                        size_hint_x: 0.1
+                MDLabel:
+                    size_hint_y: 0.85
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "file-document"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Feedback"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Sfeedback"
+                            root.manager.transition.direction="left"
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    id: logout
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "logout"
+                        font_size : 30
+                        size_hint_x: 0.3
+
+                    MDTextButton:
+                        text:"Logout"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Welcome"
+                            root.manager.transition.direction="right"
+                    MDLabel:
+                        size_hint_x: 0.4
+
+                MDLabel:
+                    size_hint_y: 0.05
+
+            MDLabel:
+                text:"COURSES"
+                font_style: "H1"
+                halign: "center"
+
+<Sevent>:
+
+    name: "Sevent"
+    MDBoxLayout:
+        orientation: "vertical"
+        MDLabel:
+            size_hint_y:0.025
+        MDBoxLayout:
+            size_hint_y: 0.1
+            MDLabel:
+                size_hint_x:0.05
+            MDLabel:
+                text: "RelearnZ"
+                color: 8/255, 1, 98/255
+                font_size: 40
+                bold: True
+                size_hint_x:0.5
+            MDTextField:
+                id: "A"
+                mode: "fill"
+                icon_right: "magnify"
+                font_size: 20
+                hint_text: "Search"
+                hint_text_color: 1,1,1
+                icon_left_color: 1,1,1
+                radius: [30]
+                fill_color: 184/255, 226/255, 1, 0.3
+                line_color_focus: 252/255, 5/255, 121/255, 1
+                size_hint_x:0.5
+            MDLabel:
+                size_hint_x:0.4
+            MDFloatingActionButton:
+                icon: "bell"
+                elevation_normal: 8
+                md_bg_color: "black"
+            MDLabel:
+                size_hint_x:0.08
+
+            MDFloatingActionButton:
+                icon: "account"
+                elevation_normal: 8
+                md_bg_color: "black"
+
+            MDLabel:
+                size_hint_x:0.09
+        MDLabel:
+            size_hint_y:0.02
+        MDBoxLayout:
+            md_bg_color: 117/255, 255/255, 230/255, 0.1
+            MDLabel:
+                size_hint_x:0.02
+            MDBoxLayout:
+                size_hint_x:0.4
+                orientation: "vertical"
+                MDLabel:
+                    size_hint_y: 0.1
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "eye"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Overview"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Sdashboard"
+                            root.manager.transition.direction="right"
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "book-multiple"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Courses"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Scourse"
+                            root.manager.transition.direction="left"
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "bookmark-multiple"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Events"
+                        bold: True
+                        font_size : 20
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "chat"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Chat"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Schat"
+                            root.manager.transition.direction="left"
+                    MDLabel:
+                        size_hint_x: 0.45
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "alert"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Announcements"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Sannouncement"
+                            root.manager.transition.direction="left"
+                    MDLabel:
+                        size_hint_x: 0.1
+                MDLabel:
+                    size_hint_y: 0.85
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "file-document"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Feedback"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Sfeedback"
+                            root.manager.transition.direction="left"
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    id: logout
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "logout"
+                        font_size : 30
+                        size_hint_x: 0.3
+
+                    MDTextButton:
+                        text:"Logout"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Welcome"
+                            root.manager.transition.direction="right"
+                    MDLabel:
+                        size_hint_x: 0.4
+
+                MDLabel:
+                    size_hint_y: 0.05
+
+            MDLabel:
+                text:"EVENTS"
+                font_style: "H1"
+                halign: "center"
+
+
+<Schat>:
+
+    name: "Schat"
+    MDBoxLayout:
+        orientation: "vertical"
+        MDLabel:
+            size_hint_y:0.025
+        MDBoxLayout:
+            size_hint_y: 0.1
+            MDLabel:
+                size_hint_x:0.05
+            MDLabel:
+                text: "RelearnZ"
+                color: 8/255, 1, 98/255
+                font_size: 40
+                bold: True
+                size_hint_x:0.5
+            MDTextField:
+                id: "A"
+                mode: "fill"
+                icon_right: "magnify"
+                font_size: 20
+                hint_text: "Search"
+                hint_text_color: 1,1,1
+                icon_left_color: 1,1,1
+                radius: [30]
+                fill_color: 184/255, 226/255, 1, 0.3
+                line_color_focus: 252/255, 5/255, 121/255, 1
+                size_hint_x:0.5
+            MDLabel:
+                size_hint_x:0.4
+            MDFloatingActionButton:
+                icon: "bell"
+                elevation_normal: 8
+                md_bg_color: "black"
+            MDLabel:
+                size_hint_x:0.08
+
+            MDFloatingActionButton:
+                icon: "account"
+                elevation_normal: 8
+                md_bg_color: "black"
+
+            MDLabel:
+                size_hint_x:0.09
+        MDLabel:
+            size_hint_y:0.02
+        MDBoxLayout:
+            md_bg_color: 117/255, 255/255, 230/255, 0.1
+            MDLabel:
+                size_hint_x:0.02
+            MDBoxLayout:
+                size_hint_x:0.4
+                orientation: "vertical"
+                MDLabel:
+                    size_hint_y: 0.1
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "eye"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Overview"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Sdashboard"
+                            root.manager.transition.direction="right"
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "book-multiple"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Courses"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Sacourse"
+                            root.manager.transition.direction="left"
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "bookmark-multiple"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Events"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Sevent"
+                            root.manager.transition.direction="left"
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "chat"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Chat"
+                        bold: True
+                        font_size : 20
+                    MDLabel:
+                        size_hint_x: 0.45
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "alert"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Announcements"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Sannouncement"
+                            root.manager.transition.direction="left"
+                    MDLabel:
+                        size_hint_x: 0.1
+                MDLabel:
+                    size_hint_y: 0.85
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "file-document"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Feedback"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Sfeedback"
+                            root.manager.transition.direction="left"
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    id: logout
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "logout"
+                        font_size : 30
+                        size_hint_x: 0.3
+
+                    MDTextButton:
+                        text:"Logout"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Welcome"
+                            root.manager.transition.direction="right"
+                    MDLabel:
+                        size_hint_x: 0.4
+
+                MDLabel:
+                    size_hint_y: 0.05
+
+            MDLabel:
+                text:"CHAT"
+                font_style: "H1"
+                halign: "center"
+
+<Sannouncement>:
+
+    name: "Sannouncement"
+    MDBoxLayout:
+        orientation: "vertical"
+        MDLabel:
+            size_hint_y:0.025
+        MDBoxLayout:
+            size_hint_y: 0.1
+            MDLabel:
+                size_hint_x:0.05
+            MDLabel:
+                text: "RelearnZ"
+                color: 8/255, 1, 98/255
+                font_size: 40
+                bold: True
+                size_hint_x:0.5
+            MDTextField:
+                id: "A"
+                mode: "fill"
+                icon_right: "magnify"
+                font_size: 20
+                hint_text: "Search"
+                hint_text_color: 1,1,1
+                icon_left_color: 1,1,1
+                radius: [30]
+                fill_color: 184/255, 226/255, 1, 0.3
+                line_color_focus: 252/255, 5/255, 121/255, 1
+                size_hint_x:0.5
+            MDLabel:
+                size_hint_x:0.4
+            MDFloatingActionButton:
+                icon: "bell"
+                elevation_normal: 8
+                md_bg_color: "black"
+            MDLabel:
+                size_hint_x:0.08
+
+            MDFloatingActionButton:
+                icon: "account"
+                elevation_normal: 8
+                md_bg_color: "black"
+
+            MDLabel:
+                size_hint_x:0.09
+        MDLabel:
+            size_hint_y:0.02
+        MDBoxLayout:
+            md_bg_color: 117/255, 255/255, 230/255, 0.1
+            MDLabel:
+                size_hint_x:0.02
+            MDBoxLayout:
+                size_hint_x:0.4
+                orientation: "vertical"
+                MDLabel:
+                    size_hint_y: 0.1
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "eye"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Overview"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Sdashboard"
+                            root.manager.transition.direction="right"
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "book-multiple"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Courses"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Scourse"
+                            root.manager.transition.direction="left"
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "bookmark-multiple"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Events"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Sevents"
+                            root.manager.transition.direction="left"
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "chat"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Chat"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Schat"
+                            root.manager.transition.direction="left"
+                    MDLabel:
+                        size_hint_x: 0.45
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "alert"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Announcements"
+                        bold: True
+                        font_size : 20
+                    MDLabel:
+                        size_hint_x: 0.1
+                MDLabel:
+                    size_hint_y: 0.85
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "file-document"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Feedback"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Sfeedback"
+                            root.manager.transition.direction="left"
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    id: logout
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "logout"
+                        font_size : 30
+                        size_hint_x: 0.3
+
+                    MDTextButton:
+                        text:"Logout"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Welcome"
+                            root.manager.transition.direction="right"
+                    MDLabel:
+                        size_hint_x: 0.4
+
+                MDLabel:
+                    size_hint_y: 0.05
+
+            MDLabel:
+                text:"ANNOUNCEMENTS"
+                font_style: "H1"
+                halign: "center"
+
+<Sfeedback>:
+
+    name: "Sfeedback"
+    MDBoxLayout:
+        orientation: "vertical"
+        MDLabel:
+            size_hint_y:0.025
+        MDBoxLayout:
+            size_hint_y: 0.1
+            MDLabel:
+                size_hint_x:0.05
+            MDLabel:
+                text: "RelearnZ"
+                color: 8/255, 1, 98/255
+                font_size: 40
+                bold: True
+                size_hint_x:0.5
+            MDTextField:
+                id: "A"
+                mode: "fill"
+                icon_right: "magnify"
+                font_size: 20
+                hint_text: "Search"
+                hint_text_color: 1,1,1
+                icon_left_color: 1,1,1
+                radius: [30]
+                fill_color: 184/255, 226/255, 1, 0.3
+                line_color_focus: 252/255, 5/255, 121/255, 1
+                size_hint_x:0.5
+            MDLabel:
+                size_hint_x:0.4
+            MDFloatingActionButton:
+                icon: "bell"
+                elevation_normal: 8
+                md_bg_color: "black"
+            MDLabel:
+                size_hint_x:0.08
+
+            MDFloatingActionButton:
+                icon: "account"
+                elevation_normal: 8
+                md_bg_color: "black"
+
+            MDLabel:
+                size_hint_x:0.09
+        MDLabel:
+            size_hint_y:0.02
+        MDBoxLayout:
+            md_bg_color: 117/255, 255/255, 230/255, 0.1
+            MDLabel:
+                size_hint_x:0.02
+            MDBoxLayout:
+                size_hint_x:0.4
+                orientation: "vertical"
+                MDLabel:
+                    size_hint_y: 0.1
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "eye"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Overview"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Sdashboard"
+                            root.manager.transition.direction="right"
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "book-multiple"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Courses"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Scourse"
+                            root.manager.transition.direction="left"
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "bookmark-multiple"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Events"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Sevent"
+                            root.manager.transition.direction="left"
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "chat"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Chat"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Schat"
+                            root.manager.transition.direction="left"
+                    MDLabel:
+                        size_hint_x: 0.45
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "alert"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Announcements"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Sannouncement"
+                            root.manager.transition.direction="left"
+                    MDLabel:
+                        size_hint_x: 0.1
+                MDLabel:
+                    size_hint_y: 0.85
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "file-document"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Feedback"
+                        bold: True
+                        font_size : 20
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    id: logout
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "logout"
+                        font_size : 30
+                        size_hint_x: 0.3
+
+                    MDTextButton:
+                        text:"Logout"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Welcome"
+                            root.manager.transition.direction="right"
+                    MDLabel:
+                        size_hint_x: 0.4
+
+                MDLabel:
+                    size_hint_y: 0.05
+
+            MDLabel:
+                text:"FEEDBACK"
+                halign: "center"
+                font_style: "H1"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

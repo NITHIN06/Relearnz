@@ -5,26 +5,24 @@ Config.set('graphics', 'width', 1300)
 Config.set('graphics', 'height', 750)
 Config.set('graphics', 'resizable', False)
 
- 
-
-from kivymd.app import MDApp
-from kivy.lang import Builder
-from kivymd.uix.boxlayout import MDBoxLayout
-from kivy.core.window import Window
-from kivymd.uix.button import MDFlatButton
-from kivymd.uix.dialog import MDDialog
-from kivymd.uix.spinner import MDSpinner
-from kivy.uix.screenmanager import ScreenManager, Screen
-from firebase import firebase
 import threading
+from firebase import firebase
+from kivy.uix.screenmanager import ScreenManager, Screen
+from kivymd.uix.spinner import MDSpinner
+from kivymd.uix.dialog import MDDialog
+from kivymd.uix.button import MDFlatButton
+from kivy.core.window import Window
+from kivymd.uix.boxlayout import MDBoxLayout
+from kivy.lang import Builder
+from kivymd.app import MDApp
+
 
 # firebase connection
 firebase = firebase.FirebaseApplication(
     "https://relearnz-default-rtdb.firebaseio.com/", None)
 
-
-class Main(MDApp):
-    pass
+user_info = {}
+user_id = ""
 
 
 class WindowManager(ScreenManager):
@@ -42,11 +40,10 @@ class Login(Screen):
 
     def login(self):
         self.load()
-        threading.Thread(target = self.logger).start()
-  
+        threading.Thread(target=self.logger).start()
 
     def load(self):
-        if self.ids.load.active == False: 
+        if self.ids.load.active == False:
             self.ids.load.active = True
         else:
             self.ids.load.active = False
@@ -57,6 +54,8 @@ class Login(Screen):
         users_list2.update(users_list1)
         for i in users_list2:
             if users_list2[i]["username"] == username and users_list2[i]["password"] == password:
+                user_id = i
+                user_info = users_list2[i]
                 return users_list2[i]["role"]
 
     def logger(self):
@@ -67,11 +66,9 @@ class Login(Screen):
             self.ids.user.text = "FIELD SHOULD NOT BE EMPTY"
             self.a = 0
 
-
         if(password == "" or password == "FIELD SHOULD NOT BE EMPTY"):
             self.ids.password.text = "FIELD SHOULD NOT BE EMPTY"
             self.a = 0
-
 
         if(self.a == 1):
 
@@ -93,7 +90,7 @@ class Login(Screen):
             self.ids.user.text = ""
             self.ids.password.text = ""
 
-        self.load()    
+        self.load()
         self.a = 1
 
 
@@ -111,7 +108,7 @@ class Register(Screen):
 
     def register(self):
         self.load()
-        threading.Thread(target = self.registration).start()
+        threading.Thread(target=self.registration).start()
 
     def teacher(self):
         if self.ids.btn_tch.icon == "assets/teacher.png":
@@ -157,8 +154,9 @@ class Register(Screen):
             # store the values in the database
             info = {"username": username, "email": email,
                     "password": password, "role": self.t}
-            firebase.post("/Users/Teacher", info)
-
+            x = firebase.post("/Users/Teacher", info)
+            user_id = x['name']
+            user_info = info
             self.ids.btn_tch.icon = "assets/teacher.png"
             self.ids.btn_std.icon == "assets/student.png"
             self.ids.user.text = ""
@@ -175,7 +173,9 @@ class Register(Screen):
             # store the values in the database
             info = {"username": username, "email": email,
                     "password": password, "role": self.t}
-            firebase.post("/Users/Student", info)
+            x = firebase.post("/Users/Student", info)
+            user_id = x['name']
+            user_info = info
             self.ids.btn_tch.icon = "assets/teacher.png"
             self.ids.btn_std.icon == "assets/student.png"
             self.ids.user.text = ""
@@ -197,5 +197,24 @@ class Tdashboard(Screen):
 
 class Sdashboard(Screen):
     pass
+
+class Scourse(Screen):
+    pass
+
+class Sevent(Screen):
+    pass
+
+class Schat(Screen):
+    pass
+
+class Sannouncement(Screen):
+    pass    
+
+class Sfeedback(Screen):
+    pass
+
+class Main(MDApp):
+    pass
+
 
 Main().run()
