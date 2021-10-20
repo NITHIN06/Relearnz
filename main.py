@@ -5,25 +5,25 @@ Config.set('graphics', 'width', 1300)
 Config.set('graphics', 'height', 750)
 Config.set('graphics', 'resizable', False)
 
-import threading
-from firebase import firebase
-from kivy.uix.screenmanager import ScreenManager, Screen
-from kivymd.uix.spinner import MDSpinner
-from kivymd.uix.dialog import MDDialog
-from kivymd.uix.button import MDFlatButton
-from kivy.core.window import Window
-from kivymd.uix.boxlayout import MDBoxLayout
-from kivy.lang import Builder
+import smtplib
+import socket
 from kivymd.app import MDApp
+from kivy.lang import Builder
+from kivymd.uix.boxlayout import MDBoxLayout
+from kivy.core.window import Window
+from kivymd.uix.button import MDFlatButton
+from kivymd.uix.dialog import MDDialog
+from kivymd.uix.spinner import MDSpinner
+from kivy.uix.screenmanager import ScreenManager, Screen
+from firebase import firebase
+import threading
 
 
 # firebase connection
 firebase = firebase.FirebaseApplication(
     "https://relearnz-default-rtdb.firebaseio.com/", None)
 
-user_info = {}
-user_id = ""
-
+socket.getaddrinfo('localhost',25)
 
 class WindowManager(ScreenManager):
     pass
@@ -34,7 +34,6 @@ class Welcome(Screen):
 
 
 class Login(Screen):
-
     a = 1
     dialog = None
 
@@ -49,6 +48,8 @@ class Login(Screen):
             self.ids.load.active = False
 
     def account_checker(self, username, password):
+        global user_id
+        global user_info
         users_list1 = firebase.get("/Users/Teacher", '')
         users_list2 = firebase.get("/Users/Student", '')
         users_list2.update(users_list1)
@@ -198,7 +199,6 @@ class Tdashboard(Screen):
 class Sdashboard(Screen):
     pass
 
-
 class Scourse(Screen):
     pass
 
@@ -209,16 +209,28 @@ class Schat(Screen):
     pass
 
 class Sannouncement(Screen):
-    pass    
+    pass
 
 class Sfeedback(Screen):
-    pass
+    def feedback_send(self):
+        server= smtplib.SMTP("smtp.gmail.com",587)
+        server.ehlo()
+        server.starttls()
+        server.login("vajrapusugnankranthiraju@gmail.com","yqqladmhfdgmuoes")
+        From="vajrapusugnankranthiraju@gmail.com"
+        To="akhilsaibande13@gmail.com"
+        txt=self.ids.feedback_txt.text
+
+        body="""Subject: Feedback from %s\n
+                %s"""%(user_info['username'],txt)
+        self.server.sendmail(From,[To],body)
+
+        self.ids.feedback_txt.text = ""
+        return
 
 
 class Main(MDApp):
     pass
 
-  
 
 Main().run()
-

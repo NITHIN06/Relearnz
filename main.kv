@@ -13,7 +13,7 @@ WindowManager:
     Sfeedback:
 
 
-        
+
 
 <Welcome>:
     name: "Welcome"
@@ -377,6 +377,7 @@ WindowManager:
                     padding: 20
                     border_radius: 15
                     radius: [15]
+                    md_bg_color: 8/255, 1, 98/255,1
                     MDIcon:
                         icon: "eye"
                         font_size : 30
@@ -650,15 +651,15 @@ WindowManager:
                         orientation: "vertical"
                         MDBoxLayout:
                             MDLabel:
-                                text: ""                
+                                text: ""
                             MDCard:
                                 size_hint: None, None
-                                size:100,40
+                                size:80,30
                                 elevation: 0
-                                padding: 20
+                                padding: 20,10
                                 md_bg_color: 255/255, 204/255, 104/255, 0.5
                                 border_radius: 10
-                                radius: [20]
+                                radius: [10]
                                 orientation: 'vertical'
                                 MDLabel:
                                     text: "Now"
@@ -695,12 +696,12 @@ WindowManager:
                                 text: ""
                             MDCard:
                                 size_hint: None, None
-                                size:100,40
+                                size:80,30
                                 elevation: 0
-                                padding: 20
+                                padding: 20,10
                                 md_bg_color: 178/255, 77/255, 1, 0.2
                                 border_radius: 10
-                                radius: [20]
+                                radius: [10]
                                 orientation: 'vertical'
                                 MDLabel:
                                     text: "Next"
@@ -833,7 +834,7 @@ WindowManager:
                         bold: True
                         color: 7/255, 12/255, 173/255
                         font_size: 21
-                        
+
                 MDLabel:
                     text: ""
                     size_hint_y: 0.05
@@ -997,6 +998,7 @@ WindowManager:
                     padding: 20
                     border_radius: 15
                     radius: [15]
+                    md_bg_color: 8/255, 1, 98/255,1
                     MDIcon:
                         icon: "book-multiple"
                         font_size : 30
@@ -1243,6 +1245,7 @@ WindowManager:
                     padding: 20
                     border_radius: 15
                     radius: [15]
+                    md_bg_color: 8/255, 1, 98/255,1
                     MDIcon:
                         icon: "bookmark-multiple"
                         font_size : 30
@@ -1490,6 +1493,7 @@ WindowManager:
                     padding: 20
                     border_radius: 15
                     radius: [15]
+                    md_bg_color: 8/255, 1, 98/255,1
                     MDIcon:
                         icon: "chat"
                         font_size : 30
@@ -1736,6 +1740,7 @@ WindowManager:
                     padding: 20
                     border_radius: 15
                     radius: [15]
+                    md_bg_color: 8/255, 1, 98/255,1
                     MDIcon:
                         icon: "alert"
                         font_size : 30
@@ -1798,10 +1803,84 @@ WindowManager:
                 MDLabel:
                     size_hint_y: 0.05
 
-            MDLabel:
-                text:"ANNOUNCEMENTS"
-                font_style: "H1"
-                halign: "center"
+            MDBoxLayout:
+                orientation: "vertical"
+                MDLabel:
+                    text: "Announcements"
+                    font_size: 24
+                    bold: True
+                    size_hint_y: 0.1
+
+                MDCard:
+                    id: announce_card
+                    size_hint: 1,0.5
+                    elevation: 0
+                    padding: 20
+                    border_radius: 20
+                    radius: [20]
+                    pos_hint: {"center_x":0.4,"center_y":0.5}
+                    orientation: "vertical"
+
+                    MDCard:
+                        size_hint: None,None
+                        size: 880,100
+                        elevation: 0
+                        padding: 10
+                        border_radius: 10
+                        radius: [10]
+                        md_bg_color: 230/255,230/255,230/255,1
+
+                        MDBoxLayout:
+                            orientation: "horizontal"
+                            MDIconButton:
+                                icon: "assets/AI.png"
+                                user_font_size: dp(36)
+                                pos_hint: {"center_x":0.5,"center_y":0.5}
+                            MDLabel:
+                                size_hint_x: 0.05
+                            MDBoxLayout:
+                                orientation: "vertical"
+                                MDLabel:
+                                    text: "Dr. Victer Paul@AI"
+                                    font_size: 20
+                                    bold: True
+                                    size_hint_y: 0.01
+                                MDLabel:
+                                    text: "There is a small quiz on this monday.Prepare well for quiz. Thank You :)"
+                                    font_size: 20
+                                    size_hint_y: 0.01
+                    MDLabel:
+                        size: 800,20
+                    MDCard:
+                        size_hint: None,None
+                        size: 880,100
+                        elevation: 0
+                        padding: 10
+                        border_radius: 10
+                        radius: [10]
+                        md_bg_color: 230/255,230/255,230/255,1
+
+                        MDBoxLayout:
+                            orientation: "horizontal"
+                            MDIconButton:
+                                icon: "assets/DSP.png"
+                                user_font_size: dp(36)
+                                pos_hint: {"center_x":0.5,"center_y":0.5}
+                            MDLabel:
+                                size_hint_x: 0.05
+                            MDBoxLayout:
+                                orientation: "vertical"
+                                MDLabel:
+                                    text: "Dr. Bini@DSP"
+                                    font_size: 20
+                                    bold: True
+                                    size_hint_y: 0.01
+                                MDLabel:
+                                    text: "There is a small test on this sunday.Prepare well for quiz.Don't leave the class.This is consider as attendence.Note it, write it, read it, share it, spread it, make it, take it. Thank You :)"
+                                    font_size: 20
+                                    size_hint_y: 0.01
+                MDLabel:
+                    size_hint_y: 0.55
 
 <Sfeedback>:
 
@@ -1982,6 +2061,7 @@ WindowManager:
                     padding: 20
                     border_radius: 15
                     radius: [15]
+                    md_bg_color: 8/255, 1, 98/255,1
                     MDIcon:
                         icon: "file-document"
                         font_size : 30
@@ -2020,18 +2100,55 @@ WindowManager:
 
                 MDLabel:
                     size_hint_y: 0.05
+            MDBoxLayout:
+                orientation: "vertical"
 
-            MDLabel:
-                text:"FEEDBACK"
-                halign: "center"
-                font_style: "H1"
+                MDLabel:
+                    text: "Feedback"
+                    size_hint_y: 0.2
+                    font_size: 24
+                    bold: True
+                MDCard:
+                    size_hint: None,None
+                    size: 600,300
+                    elevation: 0
+                    padding: 20
+                    border_radius: 20
+                    radius: [20]
+                    pos_hint: {"center_x":0.4,"center_y":0.5}
+                    orientation: "vertical"
 
-
-
-
-
-
-
-
-
-
+                    MDBoxLayout:
+                        orientation: "horizontal"
+                        size_hint: 1,0.2
+                        MDLabel:
+                            text: "user_email@gmail.com"
+                            font_size: 14
+                            size_hint: 1,0.2
+                            bold: True
+                        MDIcon:
+                            icon: "arrow-right"
+                            halign: "center"
+                        MDLabel:
+                            text: "relearnz_support@gmail.com"
+                            font_size: 14
+                            size_hint: 1,0.2
+                            bold: True
+                    MDTextField:
+                        id: feedback_txt
+                        hint_text: "Feedback"
+                        multiline: True
+                        max_height: 200
+                    MDBoxLayout:
+                        orientation: "horizontal"
+                        MDLabel:
+                            size_hint: 0.7,0
+                        MDFillRoundFlatIconButton:
+                            icon: "send"
+                            text: "send"
+                            fill_color: 185/255,0.4,58/255,1
+                            font_size: 24
+                            bold: True
+                            on_press: root.feedback_send()
+                MDLabel:
+                    size_hint_y: 0.8
