@@ -20,11 +20,17 @@ WindowManager:
 
     MDBoxLayout:
         orientation :"vertical"
-        Image:
-            source: 'assets\welcome.png'
-            keep_ratio: False
-            allow_stretch: True
-
+        MDBoxLayout:
+            MDLabel:
+                text:""
+                size_hint: 0.2 ,1   
+            Image:
+                source: 'assets\welcome.png'
+                keep_ratio: False
+                allow_stretch: True
+            MDLabel:
+                text:""
+                size_hint: 0.2 ,1   
         MDLabel:
             text:"Welcome"
             font_style: "H2"
@@ -60,10 +66,17 @@ WindowManager:
         orientation :"vertical"
         size_hint : 1, 1
 
-        Image:
-            source: 'assets\login.png'
-            keep_ratio: False
-            allow_stretch: True
+        MDBoxLayout:
+            MDLabel:
+                text:""
+                size_hint: 0.2 ,1   
+            Image:
+                source: 'assets\login.png'
+                keep_ratio: False
+                allow_stretch: True
+            MDLabel:
+                text:""
+                size_hint: 0.2 ,1   
 
         MDBoxLayout:
             size_hint : 1, 0.4
@@ -161,10 +174,17 @@ WindowManager:
     MDBoxLayout:
         orientation: "vertical"
 
-        Image:
-            source: 'assets/register.png'
-            keep_ratio: False
-            allow_stretch: True
+        MDBoxLayout:
+            MDLabel:
+                text:""
+                size_hint: 0.2 ,1   
+            Image:
+                source: 'assets/register.png'
+                keep_ratio: False
+                allow_stretch: True
+            MDLabel:
+                text:""
+                size_hint: 0.2 ,1   
 
         MDBoxLayout:
             size_hint: 1, 0.2
@@ -325,7 +345,7 @@ WindowManager:
             MDLabel:
                 size_hint_x:0.05
             MDLabel:
-                text: "RelearnZ"
+                text: "ReLearnz"
                 color: 8/255, 1, 98/255
                 font_size: 40
                 bold: True
@@ -431,7 +451,7 @@ WindowManager:
                         bold: True
                         font_size : 20
                         on_release:
-                            app.root.current= "Sevents"
+                            app.root.current= "Sevent"
                             root.manager.transition.direction="left"
                     MDLabel:
                         size_hint_x: 0.4
@@ -923,7 +943,7 @@ WindowManager:
             MDLabel:
                 size_hint_x:0.05
             MDLabel:
-                text: "RelearnZ"
+                text: "ReLearnz"
                 color: 8/255, 1, 98/255
                 font_size: 40
                 bold: True
@@ -1147,7 +1167,7 @@ WindowManager:
             MDLabel:
                 size_hint_x:0.05
             MDLabel:
-                text: "RelearnZ"
+                text: "ReLearnz"
                 color: 8/255, 1, 98/255
                 font_size: 40
                 bold: True
@@ -1372,7 +1392,7 @@ WindowManager:
             MDLabel:
                 size_hint_x:0.05
             MDLabel:
-                text: "RelearnZ"
+                text: "ReLearnz"
                 color: 8/255, 1, 98/255
                 font_size: 40
                 bold: True
@@ -1456,7 +1476,7 @@ WindowManager:
                         bold: True
                         font_size : 20
                         on_release:
-                            app.root.current= "Sacourse"
+                            app.root.current= "Scourse"
                             root.manager.transition.direction="left"
                     MDLabel:
                         size_hint_x: 0.4
@@ -1596,7 +1616,7 @@ WindowManager:
             MDLabel:
                 size_hint_x:0.05
             MDLabel:
-                text: "RelearnZ"
+                text: "ReLearnz"
                 color: 8/255, 1, 98/255
                 font_size: 40
                 bold: True
@@ -1703,7 +1723,7 @@ WindowManager:
                         bold: True
                         font_size : 20
                         on_release:
-                            app.root.current= "Sevents"
+                            app.root.current= "Sevent"
                             root.manager.transition.direction="left"
                     MDLabel:
                         size_hint_x: 0.4
@@ -1894,7 +1914,7 @@ WindowManager:
             MDLabel:
                 size_hint_x:0.05
             MDLabel:
-                text: "RelearnZ"
+                text: "ReLearnz"
                 color: 8/255, 1, 98/255
                 font_size: 40
                 bold: True
