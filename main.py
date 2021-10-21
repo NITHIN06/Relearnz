@@ -90,7 +90,7 @@ class Login(Screen):
 
             self.ids.user.text = ""
             self.ids.password.text = ""
-
+     
         self.load()
         self.a = 1
 
