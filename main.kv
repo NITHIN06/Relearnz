@@ -11,9 +11,15 @@ WindowManager:
     Schat:
     Sannouncement:
     Sfeedback:
-
-
-
+    Sprofile:
+    Ai:
+    Cf:
+    Dsp:
+    Hrm:
+    Sc:
+    Sepm:
+    Fma:
+    Osm:
 
 <Welcome>:
     name: "Welcome"
@@ -311,6 +317,7 @@ WindowManager:
             size_hint : 1, 0.3
             text: ""
 
+                
 
 <Tdashboard>:
 
@@ -375,6 +382,9 @@ WindowManager:
                 icon: "account"
                 elevation_normal: 8
                 md_bg_color: "black"
+                on_release:
+                    app.root.current= "Sprofile"
+                    root.manager.transition.direction="left"
 
             MDLabel:
                 size_hint_x:0.09
@@ -667,6 +677,9 @@ WindowManager:
                     MDIconButton:
                         icon: "assets/AI.png"
                         user_font_size: "35sp"
+                        on_release:
+                            app.root.current= "Ai"
+                            root.manager.transition.direction="left"
                     MDBoxLayout:
                         orientation: "vertical"
                         MDBoxLayout:
@@ -690,7 +703,9 @@ WindowManager:
                             text: "Artificial Intelligence"
                             font_size: 30
                             bold: True
-
+                            on_release:
+                                app.root.current= "Ai"
+                                root.manager.transition.direction="left"
                 MDLabel:
                     text: ""
                     size_hint_y: 0.05
@@ -709,6 +724,9 @@ WindowManager:
                     MDIconButton:
                         icon: "assets/DSP.png"
                         user_font_size: "35sp"
+                        on_release:
+                            app.root.current= "Dsp"
+                            root.manager.transition.direction="left"
                     MDBoxLayout:
                         orientation: "vertical"
                         MDBoxLayout:
@@ -732,7 +750,9 @@ WindowManager:
                             text: "Digital Signal Processing"
                             font_size: 30
                             bold: True
-
+                            on_release:
+                                app.root.current= "Dsp"
+                                root.manager.transition.direction="left"
                 MDLabel:
                     text: ""
                     size_hint_y: 0.05
@@ -973,7 +993,9 @@ WindowManager:
                 icon: "account"
                 elevation_normal: 8
                 md_bg_color: "black"
-
+                on_release:
+                    app.root.current= "Sprofile"
+                    root.manager.transition.direction="left"
             MDLabel:
                 size_hint_x:0.09
         MDLabel:
@@ -1171,12 +1193,17 @@ WindowManager:
                     spacing: 25
                     MDIconButton:
                         icon: "assets/AI.png"
-                        user_font_size: "35sp"    
+                        user_font_size: "35sp" 
+                        on_release:
+                            app.root.current= "Ai"
+                            root.manager.transition.direction="left"
                     MDTextButton:
                         text: "Artificial Intelligence                            "
                         font_size: 18
                         bold: True                       
-
+                        on_release:
+                            app.root.current= "Ai"
+                            root.manager.transition.direction="left"
                 MDLabel:
                     size_hint_y: 0.1
 
@@ -1194,11 +1221,16 @@ WindowManager:
                     MDIconButton:
                         icon: "assets/SEPM.png"
                         user_font_size: "35sp"    
+                        on_release:
+                            app.root.current= "Sepm"
+                            root.manager.transition.direction="left"
                     MDTextButton:
                         text: "Software Engineering And Project Management"
                         font_size: 18
                         bold: True                       
-
+                        on_release:
+                            app.root.current= "Sepm"
+                            root.manager.transition.direction="left"
                 MDLabel:
                     size_hint_y: 0.1
 
@@ -1216,11 +1248,16 @@ WindowManager:
                     MDIconButton:
                         icon: "assets/CF.png"
                         user_font_size: "35sp"    
+                        on_release:
+                            app.root.current= "Cf"
+                            root.manager.transition.direction="left"
                     MDTextButton:
                         text: "Computer Forensics                      "
                         font_size: 18
                         bold: True                       
-
+                        on_release:
+                            app.root.current= "Cf"
+                            root.manager.transition.direction="left"
                 MDLabel:
                     size_hint_y: 0.1
 
@@ -1237,12 +1274,17 @@ WindowManager:
                     spacing: 25
                     MDIconButton:
                         icon: "assets/DSP.png"
-                        user_font_size: "35sp"    
+                        user_font_size: "35sp"   
+                        on_release:
+                            app.root.current= "Dsp"
+                            root.manager.transition.direction="left"
                     MDTextButton:
                         text: "Digital Signal Processing         "
                         font_size: 18
                         bold: True                       
-                 
+                        on_release:
+                            app.root.current= "Dsp"
+                            root.manager.transition.direction="left"
                 MDLabel:
                     size_hint_y: 0.1
 
@@ -1265,12 +1307,17 @@ WindowManager:
                     spacing: 25
                     MDIconButton:
                         icon: "assets/HRM.png"
-                        user_font_size: "35sp"    
+                        user_font_size: "35sp"  
+                        on_release:
+                            app.root.current= "Hrm"
+                            root.manager.transition.direction="left" 
                     MDTextButton:
                         text: "Human Resource Management     "
                         font_size: 18
                         bold: True                       
-
+                        on_release:
+                            app.root.current= "Hrm"
+                            root.manager.transition.direction="left"
                 MDLabel:
                     size_hint_y: 0.1
 
@@ -1288,11 +1335,16 @@ WindowManager:
                     MDIconButton:
                         icon: "assets/OSM.png"
                         user_font_size: "35sp"    
+                        on_release:
+                            app.root.current= "Osm"
+                            root.manager.transition.direction="left"
                     MDTextButton:
                         text: "Operations & Supply Chain Management"
                         font_size: 18
                         bold: True                       
-
+                        on_release:
+                            app.root.current= "Osm"
+                            root.manager.transition.direction="left"
                 MDLabel:
                     size_hint_y: 0.1
 
@@ -1309,12 +1361,17 @@ WindowManager:
                     spacing: 25
                     MDIconButton:
                         icon: "assets/FMA.png"
-                        user_font_size: "35sp"    
+                        user_font_size: "35sp"   
+                        on_release:
+                            app.root.current= "Fma"
+                            root.manager.transition.direction="left"
                     MDTextButton:
                         text: "Financial Management & Accounting  "
                         font_size: 18
                         bold: True                       
-
+                        on_release:
+                            app.root.current= "Fma"
+                            root.manager.transition.direction="left"
                 MDLabel:
                     size_hint_y: 0.1
 
@@ -1331,12 +1388,17 @@ WindowManager:
                     spacing: 25
                     MDIconButton:
                         icon: "assets/SC.png"
-                        user_font_size: "35sp"    
+                        user_font_size: "35sp"   
+                        on_release:
+                            app.root.current= "Sc"
+                            root.manager.transition.direction="left"
                     MDTextButton:
                         text: "Soft Computing"
                         font_size: 18
                         bold: True                       
-                     
+                        on_release:
+                            app.root.current= "Sc"
+                            root.manager.transition.direction="left"                     
                 MDLabel:
                     size_hint_y: 0.1                                
 
@@ -1382,7 +1444,9 @@ WindowManager:
                 icon: "account"
                 elevation_normal: 8
                 md_bg_color: "black"
-
+                on_release:
+                    app.root.current= "Sprofile"
+                    root.manager.transition.direction="left"
             MDLabel:
                 size_hint_x:0.09
         MDLabel:
@@ -1607,7 +1671,9 @@ WindowManager:
                 icon: "account"
                 elevation_normal: 8
                 md_bg_color: "black"
-
+                on_release:
+                    app.root.current= "Sprofile"
+                    root.manager.transition.direction="left"
             MDLabel:
                 size_hint_x:0.09
         MDLabel:
@@ -1831,7 +1897,9 @@ WindowManager:
                 icon: "account"
                 elevation_normal: 8
                 md_bg_color: "black"
-
+                on_release:
+                    app.root.current= "Sprofile"
+                    root.manager.transition.direction="left"
             MDLabel:
                 size_hint_x:0.09
         MDLabel:
@@ -2129,7 +2197,9 @@ WindowManager:
                 icon: "account"
                 elevation_normal: 8
                 md_bg_color: "black"
-
+                on_release:
+                    app.root.current= "Sprofile"
+                    root.manager.transition.direction="left"
             MDLabel:
                 size_hint_x:0.09
         MDLabel:
@@ -2357,3 +2427,3261 @@ WindowManager:
                             on_press: root.feedback_send()
                 MDLabel:
                     size_hint_y: 0.8
+
+
+<Sprofile>:
+    name: "Sprofile"
+
+    MDBoxLayout:
+        orientation: "vertical"
+        MDLabel:
+            size_hint_y:0.025
+        MDBoxLayout:
+            size_hint_y: 0.1
+            MDLabel:
+                size_hint_x:0.05
+            MDLabel:
+                text: "ReLearnz"
+                color: 8/255, 1, 98/255
+                font_size: 40
+                bold: True
+                size_hint_x:0.5
+            MDTextField:
+                id: "A"
+                mode: "fill"
+                icon_right: "magnify"
+                font_size: 20
+                hint_text: "Search"
+                hint_text_color: 1,1,1
+                icon_left_color: 1,1,1
+                radius: [30]
+                fill_color: 184/255, 226/255, 1, 0.3
+                line_color_focus: 252/255, 5/255, 121/255, 1
+                size_hint_x:0.5
+            MDLabel:
+                size_hint_x:0.4
+            MDFloatingActionButton:
+                icon: "bell"
+                elevation_normal: 8
+                md_bg_color: "black"
+            MDLabel:
+                size_hint_x:0.08
+
+            MDFloatingActionButton:
+                icon: "account"
+                elevation_normal: 8
+                md_bg_color: "black"
+
+            MDLabel:
+                size_hint_x:0.09
+        MDLabel:
+            size_hint_y:0.02
+        MDBoxLayout:
+            md_bg_color: 117/255, 255/255, 230/255, 0.1
+            MDLabel:
+                size_hint_x:0.02
+            MDBoxLayout:
+                size_hint_x:0.4
+                orientation: "vertical"
+                MDLabel:
+                    size_hint_y: 0.1
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "eye"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Overview"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Sdashboard"
+                            root.manager.transition.direction="right"
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "book-multiple"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Courses"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Scourse"
+                            root.manager.transition.direction="right"
+
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "bookmark-multiple"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Events"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Sevent"
+                            root.manager.transition.direction="right"
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "chat"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Chat"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Schat"
+                            root.manager.transition.direction="right"
+                    MDLabel:
+                        size_hint_x: 0.45
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "alert"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Announcements"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Sannouncement"
+                            root.manager.transition.direction="right"
+                    MDLabel:
+                        size_hint_x: 0.1
+                MDLabel:
+                    size_hint_y: 0.85
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "file-document"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Feedback"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Sfeedback"
+                            root.manager.transition.direction="right"
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    id: logout
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "logout"
+                        font_size : 30
+                        size_hint_x: 0.3
+
+                    MDTextButton:
+                        text:"Logout"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Welcome"
+                            root.manager.transition.direction="right"
+                    MDLabel:
+                        size_hint_x: 0.4
+
+                MDLabel:
+                    size_hint_y: 0.05    
+            MDBoxLayout:
+                orientation: "vertical"
+                Image:
+                    source: "assets/user.png"
+                MDBoxLayout:
+                    orientation: "vertical"                    
+                    MDLabel:
+                        text: "Username"
+                        bold: True
+                        font_size: 28
+                        size_hint: 1, 1                        
+                    MDLabel:
+                        text: "Charan"
+                        bold: True
+                        font_size: 20
+                        size_hint: 1, 1  
+                    MDLabel:
+                        text: ""
+                        size_hint: 1, 1  
+                    MDLabel:
+                        text: "Email"
+                        bold: True
+                        font_size: 28
+                        size_hint: 1, 1  
+                    MDLabel:
+                        text: "Charan@gmail.com"
+                        bold: True
+                        font_size: 20                        
+                        size_hint: 1, 1    
+                    MDLabel:
+                        text: ""
+                        size_hint: 1, 1  
+                    MDLabel:
+                        text: "Role"
+                        bold: True
+                        font_size: 28
+                        size_hint: 1, 1  
+                    MDLabel:
+                        text: "Student"
+                        bold: True
+                        font_size: 20
+                        size_hint: 1, 1
+                    MDLabel:
+                        text: ""
+                        size_hint: 1, 1
+            MDLabel:
+                text: ""
+                size_hint: 0.1, 1        
+
+
+
+
+
+
+<Ai>:
+    name: "Ai"
+    MDBoxLayout:
+        orientation: "vertical"
+        MDLabel:
+            size_hint_y:0.025
+        MDBoxLayout:
+            size_hint_y: 0.1
+            MDLabel:
+                size_hint_x:0.05
+            MDLabel:
+                text: "ReLearnz"
+                color: 8/255, 1, 98/255
+                font_size: 40
+                bold: True
+                size_hint_x:0.5
+            MDTextField:
+                id: "A"
+                mode: "fill"
+                icon_right: "magnify"
+                font_size: 20
+                hint_text: "Search"
+                hint_text_color: 1,1,1
+                icon_left_color: 1,1,1
+                radius: [30]
+                fill_color: 184/255, 226/255, 1, 0.3
+                line_color_focus: 252/255, 5/255, 121/255, 1
+                size_hint_x:0.5
+            MDLabel:
+                size_hint_x:0.4
+            MDFloatingActionButton:
+                icon: "bell"
+                elevation_normal: 8
+                md_bg_color: "black"
+            MDLabel:
+                size_hint_x:0.08
+
+            MDFloatingActionButton:
+                icon: "account"
+                elevation_normal: 8
+                md_bg_color: "black"
+                on_release:
+                    app.root.current= "Sprofile"
+                    root.manager.transition.direction="left"
+            MDLabel:
+                size_hint_x:0.09
+        MDLabel:
+            size_hint_y:0.02
+        MDBoxLayout:
+            md_bg_color: 117/255, 255/255, 230/255, 0.1
+            MDLabel:
+                size_hint_x:0.02
+            MDBoxLayout:
+                size_hint_x:0.3
+                orientation: "vertical"
+                MDLabel:
+                    size_hint_y: 0.1
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "eye"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Overview"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Sdashboard"
+                            root.manager.transition.direction="right"
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    md_bg_color: 8/255, 1, 98/255,1
+                    radius: [15]
+                    MDIcon:
+                        icon: "book-multiple"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Courses"
+                        bold: True
+                        font_size : 20
+
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "bookmark-multiple"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Events"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Sevent"
+                            root.manager.transition.direction="left"
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "chat"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Chat"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Schat"
+                            root.manager.transition.direction="left"
+                    MDLabel:
+                        size_hint_x: 0.45
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "alert"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Announcements"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Sannouncement"
+                            root.manager.transition.direction="left"
+                    MDLabel:
+                        size_hint_x: 0.1
+                MDLabel:
+                    size_hint_y: 0.85
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "file-document"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Feedback"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Sfeedback"
+                            root.manager.transition.direction="left"
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    id: logout
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "logout"
+                        font_size : 30
+                        size_hint_x: 0.3
+
+                    MDTextButton:
+                        text:"Logout"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Welcome"
+                            root.manager.transition.direction="right"
+                    MDLabel:
+                        size_hint_x: 0.4
+
+                MDLabel:
+                    size_hint_y: 0.05    
+            MDBoxLayout:
+                orientation: "vertical"   
+                MDLabel:
+                    size_hint_y: 0.04
+                MDFloatingActionButton:
+                    icon: "arrow-left-thick"
+                    on_release:
+                        app.root.current= "Scourse"
+                        root.manager.transition.direction="right"                     
+                MDIconButton:
+                    icon: "assets/male.png"
+                    pos_hint:{"center_x": 0.5, "center_y": 0.5}
+                    user_font_size: "100sp"
+                    ize_hint: 1, 0.5
+                MDLabel:
+                    text: "Dr. Sivaiah Bellamkonda"    
+                    font_style: "H6"
+                    halign: "center"
+                    size_hint: 1, 0.3
+                MDCard:
+                    size_hint: None, None
+                    size: 300, 50
+                    elevation: 10
+                    pos_hint:{"center_x": 0.5, "center_y": 0.5}
+                    ripple_behavior: False
+                    border_radius: 20
+                    radius: [20]
+                    MDLabel:
+                        text : "sivaiah@iiitkottayam.ac.in"
+                        halign: "center"
+                        font_style: "H6"
+                MDBoxLayout:
+                    size_hint_y:0.3
+                    MDLabel:
+                        text:"Attendance -"
+                        font_style: "H6"
+                        size_hint_x: 0.1
+                    MDLabel:
+                        text:"80%"
+                        font_style: "H6"
+                        size_hint_x: 0.4
+                    MDFillRoundFlatIconButton:
+                        text: "Join Class"
+                        icon: "arrow-right-thick"
+                        font_style: "H6"
+                        on_press: root.joinclass()
+                MDBoxLayout:
+                    MDCard:
+                        size_hint: None, None
+                        size: 440, 220
+                        elevation: 10
+                        ripple_behavior: False
+                        border_radius: 20
+                        radius: [20]
+                        orientation: "vertical"
+                        MDLabel:
+                            text : "LAB"
+                            font_style: "H6"
+                            halign: "center"
+                            size_hint_y : 0.2
+                        MDCard:
+                            size_hint: None, None
+                            size: 380, 70
+                            elevation: 10
+                            border_radius: 30
+                            pos_hint:{"center_x": 0.5, "center_y": 0.5}
+                            md_bg_color: 255/255, 204/255, 104/255, 0.5
+                            ripple_behavior: True
+                            radius: [30]
+                            padding: 10
+                            orientation: 'vertical'
+                            MDBoxLayout:
+                                MDLabel:
+                                    text: "LAB-1"
+                                    color: 1, 105/255, 5/255
+                                    font_size: 18
+                                    bold: True
+                                MDLabel:
+                                    text:"10:00 PM"
+                                    color: 1, 105/255, 5/255
+                                    font_size: 21
+                                    size_hint_x: 0.5
+                                    bold: True
+                            MDLabel:
+                                text: "Artificial Intelligence"
+                                color: 1, 105/255, 5/255
+                                font_size: 18
+                                bold: True  
+                        MDLabel:
+                            size_hint_y: 0.05
+                        MDCard:
+                            size_hint: None, None
+                            size: 380, 70
+                            elevation: 10
+                            border_radius: 30
+                            pos_hint:{"center_x": 0.5, "center_y": 0.5}
+                            md_bg_color: 255/255, 204/255, 104/255, 0.5
+                            ripple_behavior: True
+                            radius: [30]
+                            padding: 10
+                            orientation: 'vertical'
+                            MDBoxLayout:
+                                MDLabel:
+                                    text: "LAB-2"
+                                    color: 1, 105/255, 5/255
+                                    font_size: 18
+                                    bold: True
+
+                                MDLabel:
+                                    text:"12:00 PM"
+                                    color: 1, 105/255, 5/255
+                                    font_size: 21
+                                    size_hint_x: 0.5
+                                    bold: True
+                            MDLabel:
+                                text: "Artificial Intelligence"
+                                color: 1, 105/255, 5/255
+                                font_size: 18
+                                bold: True  
+
+                    MDLabel:
+                        size_hint_x: 0.05
+                    MDCard:
+                        size_hint: None, None
+                        size: 440, 220
+                        elevation: 10
+                        ripple_behavior: False
+                        border_radius: 20
+                        radius: [20]
+                        orientation: "vertical"
+                        MDLabel:
+                            text : "ASSIGNMENTS"
+                            halign: "center"
+                            font_style: "H6"  
+                            size_hint_y : 0.2
+                        MDCard:
+                            size_hint: None, None
+                            size: 380, 70
+                            elevation: 10
+                            border_radius: 30
+                            pos_hint:{"center_x": 0.5, "center_y": 0.5}
+                            md_bg_color: 255/255, 204/255, 104/255, 0.5
+                            ripple_behavior: True
+                            radius: [30]
+                            padding: 10
+                            orientation: 'vertical'
+                            MDBoxLayout:
+                                MDLabel:
+                                    text: "Assignment-1"
+                                    color: 1, 105/255, 5/255
+                                    font_size: 18
+                                    bold: True
+                                MDLabel:
+                                    text:"10:00 PM"
+                                    color: 1, 105/255, 5/255
+                                    font_size: 21
+                                    size_hint_x: 0.5
+                                    bold: True
+                            MDLabel:
+                                text: "Artificial Intelligence"
+                                color: 1, 105/255, 5/255
+                                font_size: 18
+                                bold: True  
+                        MDLabel:
+                            size_hint_y: 0.05
+                        MDCard:
+                            size_hint: None, None
+                            size: 380, 70
+                            elevation: 10
+                            border_radius: 30
+                            pos_hint:{"center_x": 0.5, "center_y": 0.5}
+                            md_bg_color: 255/255, 204/255, 104/255, 0.5
+                            ripple_behavior: True
+                            radius: [30]
+                            padding: 10
+                            orientation: 'vertical'
+                            MDBoxLayout:
+                                MDLabel:
+                                    text: "Assignment-2"
+                                    color: 1, 105/255, 5/255
+                                    font_size: 18
+                                    bold: True
+
+                                MDLabel:
+                                    text:"12:00 PM"
+                                    color: 1, 105/255, 5/255
+                                    font_size: 21
+                                    size_hint_x: 0.5
+                                    bold: True
+                            MDLabel:
+                                text: "Artificial Intelligence"
+                                color: 1, 105/255, 5/255
+                                font_size: 18
+                                bold: True  
+                MDLabel:
+                    size_hint_y: 0.04
+            MDLabel:
+                size_hint_x: 0.08
+                    
+
+<Cf>:
+    name: "Cf"
+    MDBoxLayout:
+        orientation: "vertical"
+        MDLabel:
+            size_hint_y:0.025
+        MDBoxLayout:
+            size_hint_y: 0.1
+            MDLabel:
+                size_hint_x:0.05
+            MDLabel:
+                text: "ReLearnz"
+                color: 8/255, 1, 98/255
+                font_size: 40
+                bold: True
+                size_hint_x:0.5
+            MDTextField:
+                id: "A"
+                mode: "fill"
+                icon_right: "magnify"
+                font_size: 20
+                hint_text: "Search"
+                hint_text_color: 1,1,1
+                icon_left_color: 1,1,1
+                radius: [30]
+                fill_color: 184/255, 226/255, 1, 0.3
+                line_color_focus: 252/255, 5/255, 121/255, 1
+                size_hint_x:0.5
+            MDLabel:
+                size_hint_x:0.4
+            MDFloatingActionButton:
+                icon: "bell"
+                elevation_normal: 8
+                md_bg_color: "black"
+            MDLabel:
+                size_hint_x:0.08
+
+            MDFloatingActionButton:
+                icon: "account"
+                elevation_normal: 8
+                md_bg_color: "black"
+                on_release:
+                    app.root.current= "Sprofile"
+                    root.manager.transition.direction="left"
+            MDLabel:
+                size_hint_x:0.09
+        MDLabel:
+            size_hint_y:0.02
+        MDBoxLayout:
+            md_bg_color: 117/255, 255/255, 230/255, 0.1
+            MDLabel:
+                size_hint_x:0.02
+            MDBoxLayout:
+                size_hint_x:0.3
+                orientation: "vertical"
+                MDLabel:
+                    size_hint_y: 0.1
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "eye"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Overview"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Sdashboard"
+                            root.manager.transition.direction="right"
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    md_bg_color: 8/255, 1, 98/255,1
+                    radius: [15]
+                    MDIcon:
+                        icon: "book-multiple"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Courses"
+                        bold: True
+                        font_size : 20
+
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "bookmark-multiple"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Events"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Sevent"
+                            root.manager.transition.direction="left"
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "chat"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Chat"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Schat"
+                            root.manager.transition.direction="left"
+                    MDLabel:
+                        size_hint_x: 0.45
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "alert"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Announcements"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Sannouncement"
+                            root.manager.transition.direction="left"
+                    MDLabel:
+                        size_hint_x: 0.1
+                MDLabel:
+                    size_hint_y: 0.85
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "file-document"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Feedback"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Sfeedback"
+                            root.manager.transition.direction="left"
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    id: logout
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "logout"
+                        font_size : 30
+                        size_hint_x: 0.3
+
+                    MDTextButton:
+                        text:"Logout"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Welcome"
+                            root.manager.transition.direction="right"
+                    MDLabel:
+                        size_hint_x: 0.4
+
+                MDLabel:
+                    size_hint_y: 0.05    
+            MDBoxLayout:
+                orientation: "vertical"   
+                MDLabel:
+                    size_hint_y: 0.04
+                MDFloatingActionButton:
+                    icon: "arrow-left-thick"
+                    on_release:
+                        app.root.current= "Scourse"
+                        root.manager.transition.direction="right"                     
+                MDIconButton:
+                    icon: "assets/male.png"
+                    pos_hint:{"center_x": 0.5, "center_y": 0.5}
+                    user_font_size: "100sp"
+                    ize_hint: 1, 0.5
+                MDLabel:
+                    text: "Dr. Arun Cyril Jose"    
+                    font_style: "H6"
+                    halign: "center"
+                    size_hint: 1, 0.3
+                MDCard:
+                    size_hint: None, None
+                    size: 300, 50
+                    elevation: 10
+                    pos_hint:{"center_x": 0.5, "center_y": 0.5}
+                    ripple_behavior: False
+                    border_radius: 20
+                    radius: [20]
+                    MDLabel:
+                        text : "aruncyril@iiitkottayam.ac.in"
+                        halign: "center"
+                        font_style: "H6"
+                MDBoxLayout:
+                    size_hint_y:0.3
+                    MDLabel:
+                        text:"Attendance -"
+                        font_style: "H6"
+                        size_hint_x: 0.1
+                    MDLabel:
+                        text:"80%"
+                        font_style: "H6"
+                        size_hint_x: 0.4
+                    MDFillRoundFlatIconButton:
+                        text: "Join Class"
+                        icon: "arrow-right-thick"
+                        font_style: "H6"
+                        on_press: root.joinclass()
+                MDBoxLayout:
+                    MDCard:
+                        size_hint: None, None
+                        size: 440, 220
+                        elevation: 10
+                        ripple_behavior: False
+                        border_radius: 20
+                        radius: [20]
+                        orientation: "vertical"
+                        MDLabel:
+                            text : "LAB"
+                            font_style: "H6"
+                            halign: "center"
+                            size_hint_y : 0.2
+                        MDCard:
+                            size_hint: None, None
+                            size: 380, 70
+                            elevation: 10
+                            border_radius: 30
+                            pos_hint:{"center_x": 0.5, "center_y": 0.5}
+                            md_bg_color: 255/255, 204/255, 104/255, 0.5
+                            ripple_behavior: True
+                            radius: [30]
+                            padding: 10
+                            orientation: 'vertical'
+                            MDBoxLayout:
+                                MDLabel:
+                                    text: "LAB-1"
+                                    color: 1, 105/255, 5/255
+                                    font_size: 18
+                                    bold: True
+                                MDLabel:
+                                    text:"10:00 PM"
+                                    color: 1, 105/255, 5/255
+                                    font_size: 21
+                                    size_hint_x: 0.5
+                                    bold: True
+                            MDLabel:
+                                text: "Artificial Intelligence"
+                                color: 1, 105/255, 5/255
+                                font_size: 18
+                                bold: True  
+                        MDLabel:
+                            size_hint_y: 0.05
+                        MDCard:
+                            size_hint: None, None
+                            size: 380, 70
+                            elevation: 10
+                            border_radius: 30
+                            pos_hint:{"center_x": 0.5, "center_y": 0.5}
+                            md_bg_color: 255/255, 204/255, 104/255, 0.5
+                            ripple_behavior: True
+                            radius: [30]
+                            padding: 10
+                            orientation: 'vertical'
+                            MDBoxLayout:
+                                MDLabel:
+                                    text: "LAB-2"
+                                    color: 1, 105/255, 5/255
+                                    font_size: 18
+                                    bold: True
+
+                                MDLabel:
+                                    text:"12:00 PM"
+                                    color: 1, 105/255, 5/255
+                                    font_size: 21
+                                    size_hint_x: 0.5
+                                    bold: True
+                            MDLabel:
+                                text: "Artificial Intelligence"
+                                color: 1, 105/255, 5/255
+                                font_size: 18
+                                bold: True  
+
+                    MDLabel:
+                        size_hint_x: 0.05
+                    MDCard:
+                        size_hint: None, None
+                        size: 440, 220
+                        elevation: 10
+                        ripple_behavior: False
+                        border_radius: 20
+                        radius: [20]
+                        orientation: "vertical"
+                        MDLabel:
+                            text : "ASSIGNMENTS"
+                            halign: "center"
+                            font_style: "H6"  
+                            size_hint_y : 0.2
+                        MDCard:
+                            size_hint: None, None
+                            size: 380, 70
+                            elevation: 10
+                            border_radius: 30
+                            pos_hint:{"center_x": 0.5, "center_y": 0.5}
+                            md_bg_color: 255/255, 204/255, 104/255, 0.5
+                            ripple_behavior: True
+                            radius: [30]
+                            padding: 10
+                            orientation: 'vertical'
+                            MDBoxLayout:
+                                MDLabel:
+                                    text: "Assignment-1"
+                                    color: 1, 105/255, 5/255
+                                    font_size: 18
+                                    bold: True
+                                MDLabel:
+                                    text:"10:00 PM"
+                                    color: 1, 105/255, 5/255
+                                    font_size: 21
+                                    size_hint_x: 0.5
+                                    bold: True
+                            MDLabel:
+                                text: "Artificial Intelligence"
+                                color: 1, 105/255, 5/255
+                                font_size: 18
+                                bold: True  
+                        MDLabel:
+                            size_hint_y: 0.05
+                        MDCard:
+                            size_hint: None, None
+                            size: 380, 70
+                            elevation: 10
+                            border_radius: 30
+                            pos_hint:{"center_x": 0.5, "center_y": 0.5}
+                            md_bg_color: 255/255, 204/255, 104/255, 0.5
+                            ripple_behavior: True
+                            radius: [30]
+                            padding: 10
+                            orientation: 'vertical'
+                            MDBoxLayout:
+                                MDLabel:
+                                    text: "Assignment-2"
+                                    color: 1, 105/255, 5/255
+                                    font_size: 18
+                                    bold: True
+
+                                MDLabel:
+                                    text:"12:00 PM"
+                                    color: 1, 105/255, 5/255
+                                    font_size: 21
+                                    size_hint_x: 0.5
+                                    bold: True
+                            MDLabel:
+                                text: "Artificial Intelligence"
+                                color: 1, 105/255, 5/255
+                                font_size: 18
+                                bold: True  
+                MDLabel:
+                    size_hint_y: 0.04
+            MDLabel:
+                size_hint_x: 0.08
+
+<Dsp>:
+    name: "Dsp"
+    MDBoxLayout:
+        orientation: "vertical"
+        MDLabel:
+            size_hint_y:0.025
+        MDBoxLayout:
+            size_hint_y: 0.1
+            MDLabel:
+                size_hint_x:0.05
+            MDLabel:
+                text: "ReLearnz"
+                color: 8/255, 1, 98/255
+                font_size: 40
+                bold: True
+                size_hint_x:0.5
+            MDTextField:
+                id: "A"
+                mode: "fill"
+                icon_right: "magnify"
+                font_size: 20
+                hint_text: "Search"
+                hint_text_color: 1,1,1
+                icon_left_color: 1,1,1
+                radius: [30]
+                fill_color: 184/255, 226/255, 1, 0.3
+                line_color_focus: 252/255, 5/255, 121/255, 1
+                size_hint_x:0.5
+            MDLabel:
+                size_hint_x:0.4
+            MDFloatingActionButton:
+                icon: "bell"
+                elevation_normal: 8
+                md_bg_color: "black"
+            MDLabel:
+                size_hint_x:0.08
+
+            MDFloatingActionButton:
+                icon: "account"
+                elevation_normal: 8
+                md_bg_color: "black"
+                on_release:
+                    app.root.current= "Sprofile"
+                    root.manager.transition.direction="left"
+            MDLabel:
+                size_hint_x:0.09
+        MDLabel:
+            size_hint_y:0.02
+        MDBoxLayout:
+            md_bg_color: 117/255, 255/255, 230/255, 0.1
+            MDLabel:
+                size_hint_x:0.02
+            MDBoxLayout:
+                size_hint_x:0.3
+                orientation: "vertical"
+                MDLabel:
+                    size_hint_y: 0.1
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "eye"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Overview"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Sdashboard"
+                            root.manager.transition.direction="right"
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    md_bg_color: 8/255, 1, 98/255,1
+                    radius: [15]
+                    MDIcon:
+                        icon: "book-multiple"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Courses"
+                        bold: True
+                        font_size : 20
+
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "bookmark-multiple"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Events"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Sevent"
+                            root.manager.transition.direction="left"
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "chat"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Chat"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Schat"
+                            root.manager.transition.direction="left"
+                    MDLabel:
+                        size_hint_x: 0.45
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "alert"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Announcements"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Sannouncement"
+                            root.manager.transition.direction="left"
+                    MDLabel:
+                        size_hint_x: 0.1
+                MDLabel:
+                    size_hint_y: 0.85
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "file-document"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Feedback"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Sfeedback"
+                            root.manager.transition.direction="left"
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    id: logout
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "logout"
+                        font_size : 30
+                        size_hint_x: 0.3
+
+                    MDTextButton:
+                        text:"Logout"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Welcome"
+                            root.manager.transition.direction="right"
+                    MDLabel:
+                        size_hint_x: 0.4
+
+                MDLabel:
+                    size_hint_y: 0.05    
+            MDBoxLayout:
+                orientation: "vertical"   
+                MDLabel:
+                    size_hint_y: 0.04
+                MDFloatingActionButton:
+                    icon: "arrow-left-thick"
+                    on_release:
+                        app.root.current= "Scourse"
+                        root.manager.transition.direction="right"                     
+                MDIconButton:
+                    icon: "assets/female.png"
+                    pos_hint:{"center_x": 0.5, "center_y": 0.5}
+                    user_font_size: "100sp"
+                    ize_hint: 1, 0.5
+                MDLabel:
+                    text: "Dr. Bini A. A."    
+                    font_style: "H6"
+                    halign: "center"
+                    size_hint: 1, 0.3
+                MDCard:
+                    size_hint: None, None
+                    size: 300, 50
+                    elevation: 10
+                    pos_hint:{"center_x": 0.5, "center_y": 0.5}
+                    ripple_behavior: False
+                    border_radius: 20
+                    radius: [20]
+                    MDLabel:
+                        text : "bini@iiitkottayam.ac.in"
+                        halign: "center"
+                        font_style: "H6"
+                MDBoxLayout:
+                    size_hint_y:0.3
+                    MDLabel:
+                        text:"Attendance -"
+                        font_style: "H6"
+                        size_hint_x: 0.1
+                    MDLabel:
+                        text:"80%"
+                        font_style: "H6"
+                        size_hint_x: 0.4
+                    MDFillRoundFlatIconButton:
+                        text: "Join Class"
+                        icon: "arrow-right-thick"
+                        font_style: "H6"
+                        on_press: root.joinclass()
+                MDBoxLayout:
+                    MDCard:
+                        size_hint: None, None
+                        size: 440, 220
+                        elevation: 10
+                        ripple_behavior: False
+                        border_radius: 20
+                        radius: [20]
+                        orientation: "vertical"
+                        MDLabel:
+                            text : "LAB"
+                            font_style: "H6"
+                            halign: "center"
+                            size_hint_y : 0.2
+                        MDCard:
+                            size_hint: None, None
+                            size: 380, 70
+                            elevation: 10
+                            border_radius: 30
+                            pos_hint:{"center_x": 0.5, "center_y": 0.5}
+                            md_bg_color: 255/255, 204/255, 104/255, 0.5
+                            ripple_behavior: True
+                            radius: [30]
+                            padding: 10
+                            orientation: 'vertical'
+                            MDBoxLayout:
+                                MDLabel:
+                                    text: "LAB-1"
+                                    color: 1, 105/255, 5/255
+                                    font_size: 18
+                                    bold: True
+                                MDLabel:
+                                    text:"10:00 PM"
+                                    color: 1, 105/255, 5/255
+                                    font_size: 21
+                                    size_hint_x: 0.5
+                                    bold: True
+                            MDLabel:
+                                text: "Artificial Intelligence"
+                                color: 1, 105/255, 5/255
+                                font_size: 18
+                                bold: True  
+                        MDLabel:
+                            size_hint_y: 0.05
+                        MDCard:
+                            size_hint: None, None
+                            size: 380, 70
+                            elevation: 10
+                            border_radius: 30
+                            pos_hint:{"center_x": 0.5, "center_y": 0.5}
+                            md_bg_color: 255/255, 204/255, 104/255, 0.5
+                            ripple_behavior: True
+                            radius: [30]
+                            padding: 10
+                            orientation: 'vertical'
+                            MDBoxLayout:
+                                MDLabel:
+                                    text: "LAB-2"
+                                    color: 1, 105/255, 5/255
+                                    font_size: 18
+                                    bold: True
+
+                                MDLabel:
+                                    text:"12:00 PM"
+                                    color: 1, 105/255, 5/255
+                                    font_size: 21
+                                    size_hint_x: 0.5
+                                    bold: True
+                            MDLabel:
+                                text: "Artificial Intelligence"
+                                color: 1, 105/255, 5/255
+                                font_size: 18
+                                bold: True  
+
+                    MDLabel:
+                        size_hint_x: 0.05
+                    MDCard:
+                        size_hint: None, None
+                        size: 440, 220
+                        elevation: 10
+                        ripple_behavior: False
+                        border_radius: 20
+                        radius: [20]
+                        orientation: "vertical"
+                        MDLabel:
+                            text : "ASSIGNMENTS"
+                            halign: "center"
+                            font_style: "H6"  
+                            size_hint_y : 0.2
+                        MDCard:
+                            size_hint: None, None
+                            size: 380, 70
+                            elevation: 10
+                            border_radius: 30
+                            pos_hint:{"center_x": 0.5, "center_y": 0.5}
+                            md_bg_color: 255/255, 204/255, 104/255, 0.5
+                            ripple_behavior: True
+                            radius: [30]
+                            padding: 10
+                            orientation: 'vertical'
+                            MDBoxLayout:
+                                MDLabel:
+                                    text: "Assignment-1"
+                                    color: 1, 105/255, 5/255
+                                    font_size: 18
+                                    bold: True
+                                MDLabel:
+                                    text:"10:00 PM"
+                                    color: 1, 105/255, 5/255
+                                    font_size: 21
+                                    size_hint_x: 0.5
+                                    bold: True
+                            MDLabel:
+                                text: "Artificial Intelligence"
+                                color: 1, 105/255, 5/255
+                                font_size: 18
+                                bold: True  
+                        MDLabel:
+                            size_hint_y: 0.05
+                        MDCard:
+                            size_hint: None, None
+                            size: 380, 70
+                            elevation: 10
+                            border_radius: 30
+                            pos_hint:{"center_x": 0.5, "center_y": 0.5}
+                            md_bg_color: 255/255, 204/255, 104/255, 0.5
+                            ripple_behavior: True
+                            radius: [30]
+                            padding: 10
+                            orientation: 'vertical'
+                            MDBoxLayout:
+                                MDLabel:
+                                    text: "Assignment-2"
+                                    color: 1, 105/255, 5/255
+                                    font_size: 18
+                                    bold: True
+
+                                MDLabel:
+                                    text:"12:00 PM"
+                                    color: 1, 105/255, 5/255
+                                    font_size: 21
+                                    size_hint_x: 0.5
+                                    bold: True
+                            MDLabel:
+                                text: "Artificial Intelligence"
+                                color: 1, 105/255, 5/255
+                                font_size: 18
+                                bold: True  
+                MDLabel:
+                    size_hint_y: 0.04
+            MDLabel:
+                size_hint_x: 0.08
+
+<Hrm>:
+    name: "Hrm"
+    MDBoxLayout:
+        orientation: "vertical"
+        MDLabel:
+            size_hint_y:0.025
+        MDBoxLayout:
+            size_hint_y: 0.1
+            MDLabel:
+                size_hint_x:0.05
+            MDLabel:
+                text: "ReLearnz"
+                color: 8/255, 1, 98/255
+                font_size: 40
+                bold: True
+                size_hint_x:0.5
+            MDTextField:
+                id: "A"
+                mode: "fill"
+                icon_right: "magnify"
+                font_size: 20
+                hint_text: "Search"
+                hint_text_color: 1,1,1
+                icon_left_color: 1,1,1
+                radius: [30]
+                fill_color: 184/255, 226/255, 1, 0.3
+                line_color_focus: 252/255, 5/255, 121/255, 1
+                size_hint_x:0.5
+            MDLabel:
+                size_hint_x:0.4
+            MDFloatingActionButton:
+                icon: "bell"
+                elevation_normal: 8
+                md_bg_color: "black"
+            MDLabel:
+                size_hint_x:0.08
+
+            MDFloatingActionButton:
+                icon: "account"
+                elevation_normal: 8
+                md_bg_color: "black"
+                on_release:
+                    app.root.current= "Sprofile"
+                    root.manager.transition.direction="left"
+            MDLabel:
+                size_hint_x:0.09
+        MDLabel:
+            size_hint_y:0.02
+        MDBoxLayout:
+            md_bg_color: 117/255, 255/255, 230/255, 0.1
+            MDLabel:
+                size_hint_x:0.02
+            MDBoxLayout:
+                size_hint_x:0.3
+                orientation: "vertical"
+                MDLabel:
+                    size_hint_y: 0.1
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "eye"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Overview"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Sdashboard"
+                            root.manager.transition.direction="right"
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    md_bg_color: 8/255, 1, 98/255,1
+                    radius: [15]
+                    MDIcon:
+                        icon: "book-multiple"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Courses"
+                        bold: True
+                        font_size : 20
+
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "bookmark-multiple"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Events"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Sevent"
+                            root.manager.transition.direction="left"
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "chat"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Chat"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Schat"
+                            root.manager.transition.direction="left"
+                    MDLabel:
+                        size_hint_x: 0.45
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "alert"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Announcements"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Sannouncement"
+                            root.manager.transition.direction="left"
+                    MDLabel:
+                        size_hint_x: 0.1
+                MDLabel:
+                    size_hint_y: 0.85
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "file-document"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Feedback"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Sfeedback"
+                            root.manager.transition.direction="left"
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    id: logout
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "logout"
+                        font_size : 30
+                        size_hint_x: 0.3
+
+                    MDTextButton:
+                        text:"Logout"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Welcome"
+                            root.manager.transition.direction="right"
+                    MDLabel:
+                        size_hint_x: 0.4
+
+                MDLabel:
+                    size_hint_y: 0.05    
+            MDBoxLayout:
+                orientation: "vertical"   
+                MDLabel:
+                    size_hint_y: 0.04
+                MDFloatingActionButton:
+                    icon: "arrow-left-thick"
+                    on_release:
+                        app.root.current= "Scourse"
+                        root.manager.transition.direction="right"                     
+                MDIconButton:
+                    icon: "assets/male.png"
+                    pos_hint:{"center_x": 0.5, "center_y": 0.5}
+                    user_font_size: "100sp"
+                    ize_hint: 1, 0.5
+                MDLabel:
+                    text: "Dr. Mathew.C.D"    
+                    font_style: "H6"
+                    halign: "center"
+                    size_hint: 1, 0.3
+                MDCard:
+                    size_hint: None, None
+                    size: 300, 50
+                    elevation: 10
+                    pos_hint:{"center_x": 0.5, "center_y": 0.5}
+                    ripple_behavior: False
+                    border_radius: 20
+                    radius: [20]
+                    MDLabel:
+                        text : "mathewcd@iiitkottayam.ac.in"
+                        halign: "center"
+                        font_style: "H6"
+                MDBoxLayout:
+                    size_hint_y:0.3
+                    MDLabel:
+                        text:"Attendance -"
+                        font_style: "H6"
+                        size_hint_x: 0.1
+                    MDLabel:
+                        text:"80%"
+                        font_style: "H6"
+                        size_hint_x: 0.4
+                    MDFillRoundFlatIconButton:
+                        text: "Join Class"
+                        icon: "arrow-right-thick"
+                        font_style: "H6"
+                        on_press: root.joinclass()
+                MDCard:
+                    size_hint: None, None
+                    size: 550, 220
+                    elevation: 10
+                    ripple_behavior: False
+                    border_radius: 20
+                    radius: [20]
+                    pos_hint:{"center_x": 0.5, "center_y": 0.5}
+                    orientation: "vertical"
+                    MDLabel:
+                        text : "ASSIGNMENTS"
+                        halign: "center"
+                        font_style: "H6"  
+                        size_hint_y : 0.09
+                    MDCard:
+                        size_hint: None, None
+                        size: 490, 70
+                        elevation: 10
+                        border_radius: 30
+                        pos_hint:{"center_x": 0.5, "center_y": 0.5}
+                        md_bg_color: 255/255, 204/255, 104/255, 0.5
+                        ripple_behavior: True
+                        radius: [30]
+                        padding: 10
+                        orientation: 'vertical'
+                        MDBoxLayout:
+                            MDLabel:
+                                text: "Assignment-1"
+                                color: 1, 105/255, 5/255
+                                font_size: 18
+                                bold: True
+                            MDLabel:
+                                text:"10:00 PM"
+                                color: 1, 105/255, 5/255
+                                font_size: 21
+                                size_hint_x: 0.5
+                                bold: True
+                        MDLabel:
+                            text: "Human Resource Management"
+                            color: 1, 105/255, 5/255
+                            font_size: 18
+                            bold: True  
+                    MDLabel:
+                        size_hint_y: 0.03
+                    MDCard:
+                        size_hint: None, None
+                        size: 490, 70
+                        elevation: 10
+                        border_radius: 30
+                        pos_hint:{"center_x": 0.5, "center_y": 0.5}
+                        md_bg_color: 255/255, 204/255, 104/255, 0.5
+                        ripple_behavior: True
+                        radius: [30]
+                        padding: 10
+                        orientation: 'vertical'
+                        MDBoxLayout:
+                            MDLabel:
+                                text: "Assignment-2"
+                                color: 1, 105/255, 5/255
+                                font_size: 18
+                                bold: True
+
+                            MDLabel:
+                                text:"12:00 PM"
+                                color: 1, 105/255, 5/255
+                                font_size: 21
+                                size_hint_x: 0.5
+                                bold: True
+                        MDLabel:
+                            text: "Human Resource Management"
+                            color: 1, 105/255, 5/255
+                            font_size: 18
+                            bold: True  
+                MDLabel:
+                    size_hint_y: 0.04
+            MDLabel:
+                size_hint_x: 0.08
+
+<Sc>:
+    name: "Sc"
+    MDBoxLayout:
+        orientation: "vertical"
+        MDLabel:
+            size_hint_y:0.025
+        MDBoxLayout:
+            size_hint_y: 0.1
+            MDLabel:
+                size_hint_x:0.05
+            MDLabel:
+                text: "ReLearnz"
+                color: 8/255, 1, 98/255
+                font_size: 40
+                bold: True
+                size_hint_x:0.5
+            MDTextField:
+                id: "A"
+                mode: "fill"
+                icon_right: "magnify"
+                font_size: 20
+                hint_text: "Search"
+                hint_text_color: 1,1,1
+                icon_left_color: 1,1,1
+                radius: [30]
+                fill_color: 184/255, 226/255, 1, 0.3
+                line_color_focus: 252/255, 5/255, 121/255, 1
+                size_hint_x:0.5
+            MDLabel:
+                size_hint_x:0.4
+            MDFloatingActionButton:
+                icon: "bell"
+                elevation_normal: 8
+                md_bg_color: "black"
+            MDLabel:
+                size_hint_x:0.08
+
+            MDFloatingActionButton:
+                icon: "account"
+                elevation_normal: 8
+                md_bg_color: "black"
+                on_release:
+                    app.root.current= "Sprofile"
+                    root.manager.transition.direction="left"
+            MDLabel:
+                size_hint_x:0.09
+        MDLabel:
+            size_hint_y:0.02
+        MDBoxLayout:
+            md_bg_color: 117/255, 255/255, 230/255, 0.1
+            MDLabel:
+                size_hint_x:0.02
+            MDBoxLayout:
+                size_hint_x:0.3
+                orientation: "vertical"
+                MDLabel:
+                    size_hint_y: 0.1
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "eye"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Overview"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Sdashboard"
+                            root.manager.transition.direction="right"
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    md_bg_color: 8/255, 1, 98/255,1
+                    radius: [15]
+                    MDIcon:
+                        icon: "book-multiple"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Courses"
+                        bold: True
+                        font_size : 20
+
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "bookmark-multiple"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Events"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Sevent"
+                            root.manager.transition.direction="left"
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "chat"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Chat"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Schat"
+                            root.manager.transition.direction="left"
+                    MDLabel:
+                        size_hint_x: 0.45
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "alert"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Announcements"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Sannouncement"
+                            root.manager.transition.direction="left"
+                    MDLabel:
+                        size_hint_x: 0.1
+                MDLabel:
+                    size_hint_y: 0.85
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "file-document"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Feedback"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Sfeedback"
+                            root.manager.transition.direction="left"
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    id: logout
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "logout"
+                        font_size : 30
+                        size_hint_x: 0.3
+
+                    MDTextButton:
+                        text:"Logout"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Welcome"
+                            root.manager.transition.direction="right"
+                    MDLabel:
+                        size_hint_x: 0.4
+
+                MDLabel:
+                    size_hint_y: 0.05    
+            MDBoxLayout:
+                orientation: "vertical"   
+                MDLabel:
+                    size_hint_y: 0.04
+                MDFloatingActionButton:
+                    icon: "arrow-left-thick"
+                    on_release:
+                        app.root.current= "Scourse"
+                        root.manager.transition.direction="right"                     
+                MDIconButton:
+                    icon: "assets/female.png"
+                    pos_hint:{"center_x": 0.5, "center_y": 0.5}
+                    user_font_size: "100sp"
+                    ize_hint: 1, 0.5
+                MDLabel:
+                    text: "Dr. Suchithra M S"    
+                    font_style: "H6"
+                    halign: "center"
+                    size_hint: 1, 0.3
+                MDCard:
+                    size_hint: None, None
+                    size: 300, 50
+                    elevation: 10
+                    pos_hint:{"center_x": 0.5, "center_y": 0.5}
+                    ripple_behavior: False
+                    border_radius: 20
+                    radius: [20]
+                    MDLabel:
+                        text : "suchithra@iiitkottayam.ac.in"
+                        halign: "center"
+                        font_style: "H6"
+                MDBoxLayout:
+                    size_hint_y:0.3
+                    MDLabel:
+                        text:"Attendance -"
+                        font_style: "H6"
+                        size_hint_x: 0.1
+                    MDLabel:
+                        text:"80%"
+                        font_style: "H6"
+                        size_hint_x: 0.4
+                    MDFillRoundFlatIconButton:
+                        text: "Join Class"
+                        icon: "arrow-right-thick"
+                        font_style: "H6"
+                        on_press: root.joinclass()
+                MDCard:
+                    size_hint: None, None
+                    size: 550, 220
+                    elevation: 10
+                    ripple_behavior: False
+                    border_radius: 20
+                    radius: [20]
+                    pos_hint:{"center_x": 0.5, "center_y": 0.5}
+                    orientation: "vertical"
+                    MDLabel:
+                        text : "ASSIGNMENTS"
+                        halign: "center"
+                        font_style: "H6"  
+                        size_hint_y : 0.09
+                    MDCard:
+                        size_hint: None, None
+                        size: 490, 70
+                        elevation: 10
+                        border_radius: 30
+                        pos_hint:{"center_x": 0.5, "center_y": 0.5}
+                        md_bg_color: 255/255, 204/255, 104/255, 0.5
+                        ripple_behavior: True
+                        radius: [30]
+                        padding: 10
+                        orientation: 'vertical'
+                        MDBoxLayout:
+                            MDLabel:
+                                text: "Assignment-1"
+                                color: 1, 105/255, 5/255
+                                font_size: 18
+                                bold: True
+                            MDLabel:
+                                text:"10:00 PM"
+                                color: 1, 105/255, 5/255
+                                font_size: 21
+                                size_hint_x: 0.5
+                                bold: True
+                        MDLabel:
+                            text: "Soft Computing"
+                            color: 1, 105/255, 5/255
+                            font_size: 18
+                            bold: True  
+                    MDLabel:
+                        size_hint_y: 0.03
+                    MDCard:
+                        size_hint: None, None
+                        size: 490, 70
+                        elevation: 10
+                        border_radius: 30
+                        pos_hint:{"center_x": 0.5, "center_y": 0.5}
+                        md_bg_color: 255/255, 204/255, 104/255, 0.5
+                        ripple_behavior: True
+                        radius: [30]
+                        padding: 10
+                        orientation: 'vertical'
+                        MDBoxLayout:
+                            MDLabel:
+                                text: "Assignment-2"
+                                color: 1, 105/255, 5/255
+                                font_size: 18
+                                bold: True
+
+                            MDLabel:
+                                text:"12:00 PM"
+                                color: 1, 105/255, 5/255
+                                font_size: 21
+                                size_hint_x: 0.5
+                                bold: True
+                        MDLabel:
+                            text: "Soft Computing"
+                            color: 1, 105/255, 5/255
+                            font_size: 18
+                            bold: True  
+                MDLabel:
+                    size_hint_y: 0.04
+            MDLabel:
+                size_hint_x: 0.08
+
+<Sepm>:
+    name: "Sepm"
+    MDBoxLayout:
+        orientation: "vertical"
+        MDLabel:
+            size_hint_y:0.025
+        MDBoxLayout:
+            size_hint_y: 0.1
+            MDLabel:
+                size_hint_x:0.05
+            MDLabel:
+                text: "ReLearnz"
+                color: 8/255, 1, 98/255
+                font_size: 40
+                bold: True
+                size_hint_x:0.5
+            MDTextField:
+                id: "A"
+                mode: "fill"
+                icon_right: "magnify"
+                font_size: 20
+                hint_text: "Search"
+                hint_text_color: 1,1,1
+                icon_left_color: 1,1,1
+                radius: [30]
+                fill_color: 184/255, 226/255, 1, 0.3
+                line_color_focus: 252/255, 5/255, 121/255, 1
+                size_hint_x:0.5
+            MDLabel:
+                size_hint_x:0.4
+            MDFloatingActionButton:
+                icon: "bell"
+                elevation_normal: 8
+                md_bg_color: "black"
+            MDLabel:
+                size_hint_x:0.08
+
+            MDFloatingActionButton:
+                icon: "account"
+                elevation_normal: 8
+                md_bg_color: "black"
+                on_release:
+                    app.root.current= "Sprofile"
+                    root.manager.transition.direction="left"
+            MDLabel:
+                size_hint_x:0.09
+        MDLabel:
+            size_hint_y:0.02
+        MDBoxLayout:
+            md_bg_color: 117/255, 255/255, 230/255, 0.1
+            MDLabel:
+                size_hint_x:0.02
+            MDBoxLayout:
+                size_hint_x:0.3
+                orientation: "vertical"
+                MDLabel:
+                    size_hint_y: 0.1
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "eye"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Overview"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Sdashboard"
+                            root.manager.transition.direction="right"
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    md_bg_color: 8/255, 1, 98/255,1
+                    radius: [15]
+                    MDIcon:
+                        icon: "book-multiple"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Courses"
+                        bold: True
+                        font_size : 20
+
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "bookmark-multiple"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Events"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Sevent"
+                            root.manager.transition.direction="left"
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "chat"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Chat"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Schat"
+                            root.manager.transition.direction="left"
+                    MDLabel:
+                        size_hint_x: 0.45
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "alert"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Announcements"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Sannouncement"
+                            root.manager.transition.direction="left"
+                    MDLabel:
+                        size_hint_x: 0.1
+                MDLabel:
+                    size_hint_y: 0.85
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "file-document"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Feedback"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Sfeedback"
+                            root.manager.transition.direction="left"
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    id: logout
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "logout"
+                        font_size : 30
+                        size_hint_x: 0.3
+
+                    MDTextButton:
+                        text:"Logout"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Welcome"
+                            root.manager.transition.direction="right"
+                    MDLabel:
+                        size_hint_x: 0.4
+
+                MDLabel:
+                    size_hint_y: 0.05    
+            MDBoxLayout:
+                orientation: "vertical"   
+                MDLabel:
+                    size_hint_y: 0.04
+                MDFloatingActionButton:
+                    icon: "arrow-left-thick"
+                    on_release:
+                        app.root.current= "Scourse"
+                        root.manager.transition.direction="right"                     
+                MDIconButton:
+                    icon: "assets/female.png"
+                    pos_hint:{"center_x": 0.5, "center_y": 0.5}
+                    user_font_size: "100sp"
+                    ize_hint: 1, 0.5
+                MDLabel:
+                    text: "Dr Divya Sindhu Lekha"    
+                    font_style: "H6"
+                    halign: "center"
+                    size_hint: 1, 0.3
+                MDCard:
+                    size_hint: None, None
+                    size: 300, 50
+                    elevation: 10
+                    pos_hint:{"center_x": 0.5, "center_y": 0.5}
+                    ripple_behavior: False
+                    border_radius: 20
+                    radius: [20]
+                    MDLabel:
+                        text : "divyaslekha@iiitkottayam.ac.in"
+                        halign: "center"
+                        font_style: "H6"
+                MDBoxLayout:
+                    size_hint_y:0.3
+                    MDLabel:
+                        text:"Attendance -"
+                        font_style: "H6"
+                        size_hint_x: 0.1
+                    MDLabel:
+                        text:"80%"
+                        font_style: "H6"
+                        size_hint_x: 0.4
+                    MDFillRoundFlatIconButton:
+                        text: "Join Class"
+                        icon: "arrow-right-thick"
+                        font_style: "H6"
+                        on_press: root.joinclass()
+                MDCard:
+                    size_hint: None, None
+                    size: 550, 220
+                    elevation: 10
+                    ripple_behavior: False
+                    border_radius: 20
+                    radius: [20]
+                    pos_hint:{"center_x": 0.5, "center_y": 0.5}
+                    orientation: "vertical"
+                    MDLabel:
+                        text : "ASSIGNMENTS"
+                        halign: "center"
+                        font_style: "H6"  
+                        size_hint_y : 0.09
+                    MDCard:
+                        size_hint: None, None
+                        size: 490, 70
+                        elevation: 10
+                        border_radius: 30
+                        pos_hint:{"center_x": 0.5, "center_y": 0.5}
+                        md_bg_color: 255/255, 204/255, 104/255, 0.5
+                        ripple_behavior: True
+                        radius: [30]
+                        padding: 10
+                        orientation: 'vertical'
+                        MDBoxLayout:
+                            MDLabel:
+                                text: "Assignment-1"
+                                color: 1, 105/255, 5/255
+                                font_size: 18
+                                bold: True
+                            MDLabel:
+                                text:"10:00 PM"
+                                color: 1, 105/255, 5/255
+                                font_size: 21
+                                size_hint_x: 0.5
+                                bold: True
+                        MDLabel:
+                            text: "Software Engineering and Project Management"
+                            color: 1, 105/255, 5/255
+                            font_size: 18
+                            bold: True  
+                    MDLabel:
+                        size_hint_y: 0.03
+                    MDCard:
+                        size_hint: None, None
+                        size: 490, 70
+                        elevation: 10
+                        border_radius: 30
+                        pos_hint:{"center_x": 0.5, "center_y": 0.5}
+                        md_bg_color: 255/255, 204/255, 104/255, 0.5
+                        ripple_behavior: True
+                        radius: [30]
+                        padding: 10
+                        orientation: 'vertical'
+                        MDBoxLayout:
+                            MDLabel:
+                                text: "Assignment-2"
+                                color: 1, 105/255, 5/255
+                                font_size: 18
+                                bold: True
+
+                            MDLabel:
+                                text:"12:00 PM"
+                                color: 1, 105/255, 5/255
+                                font_size: 21
+                                size_hint_x: 0.5
+                                bold: True
+                        MDLabel:
+                            text: "Software Engineering and Project Management"
+                            color: 1, 105/255, 5/255
+                            font_size: 18
+                            bold: True  
+                MDLabel:
+                    size_hint_y: 0.04
+            MDLabel:
+                size_hint_x: 0.08
+
+<Fma>:
+    name: "Fma"
+    MDBoxLayout:
+        orientation: "vertical"
+        MDLabel:
+            size_hint_y:0.025
+        MDBoxLayout:
+            size_hint_y: 0.1
+            MDLabel:
+                size_hint_x:0.05
+            MDLabel:
+                text: "ReLearnz"
+                color: 8/255, 1, 98/255
+                font_size: 40
+                bold: True
+                size_hint_x:0.5
+            MDTextField:
+                id: "A"
+                mode: "fill"
+                icon_right: "magnify"
+                font_size: 20
+                hint_text: "Search"
+                hint_text_color: 1,1,1
+                icon_left_color: 1,1,1
+                radius: [30]
+                fill_color: 184/255, 226/255, 1, 0.3
+                line_color_focus: 252/255, 5/255, 121/255, 1
+                size_hint_x:0.5
+            MDLabel:
+                size_hint_x:0.4
+            MDFloatingActionButton:
+                icon: "bell"
+                elevation_normal: 8
+                md_bg_color: "black"
+            MDLabel:
+                size_hint_x:0.08
+
+            MDFloatingActionButton:
+                icon: "account"
+                elevation_normal: 8
+                md_bg_color: "black"
+                on_release:
+                    app.root.current= "Sprofile"
+                    root.manager.transition.direction="left"
+            MDLabel:
+                size_hint_x:0.09
+        MDLabel:
+            size_hint_y:0.02
+        MDBoxLayout:
+            md_bg_color: 117/255, 255/255, 230/255, 0.1
+            MDLabel:
+                size_hint_x:0.02
+            MDBoxLayout:
+                size_hint_x:0.3
+                orientation: "vertical"
+                MDLabel:
+                    size_hint_y: 0.1
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "eye"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Overview"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Sdashboard"
+                            root.manager.transition.direction="right"
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    md_bg_color: 8/255, 1, 98/255,1
+                    radius: [15]
+                    MDIcon:
+                        icon: "book-multiple"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Courses"
+                        bold: True
+                        font_size : 20
+
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "bookmark-multiple"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Events"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Sevent"
+                            root.manager.transition.direction="left"
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "chat"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Chat"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Schat"
+                            root.manager.transition.direction="left"
+                    MDLabel:
+                        size_hint_x: 0.45
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "alert"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Announcements"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Sannouncement"
+                            root.manager.transition.direction="left"
+                    MDLabel:
+                        size_hint_x: 0.1
+                MDLabel:
+                    size_hint_y: 0.85
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "file-document"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Feedback"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Sfeedback"
+                            root.manager.transition.direction="left"
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    id: logout
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "logout"
+                        font_size : 30
+                        size_hint_x: 0.3
+
+                    MDTextButton:
+                        text:"Logout"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Welcome"
+                            root.manager.transition.direction="right"
+                    MDLabel:
+                        size_hint_x: 0.4
+
+                MDLabel:
+                    size_hint_y: 0.05    
+            MDBoxLayout:
+                orientation: "vertical"   
+                MDLabel:
+                    size_hint_y: 0.04
+                MDFloatingActionButton:
+                    icon: "arrow-left-thick"
+                    on_release:
+                        app.root.current= "Scourse"
+                        root.manager.transition.direction="right"                     
+                MDIconButton:
+                    icon: "assets/male.png"
+                    pos_hint:{"center_x": 0.5, "center_y": 0.5}
+                    user_font_size: "100sp"
+                    ize_hint: 1, 0.5
+                MDLabel:
+                    text: "Dr Raghunadhan T"    
+                    font_style: "H6"
+                    halign: "center"
+                    size_hint: 1, 0.3
+                MDCard:
+                    size_hint: None, None
+                    size: 300, 50
+                    elevation: 10
+                    pos_hint:{"center_x": 0.5, "center_y": 0.5}
+                    ripple_behavior: False
+                    border_radius: 20
+                    radius: [20]
+                    MDLabel:
+                        text : "raghu.vaidyaratnam@gmail.com"
+                        halign: "center"
+                        font_style: "H6"
+                MDBoxLayout:
+                    size_hint_y:0.3
+                    MDLabel:
+                        text:"Attendance -"
+                        font_style: "H6"
+                        size_hint_x: 0.1
+                    MDLabel:
+                        text:"80%"
+                        font_style: "H6"
+                        size_hint_x: 0.4
+                    MDFillRoundFlatIconButton:
+                        text: "Join Class"
+                        icon: "arrow-right-thick"
+                        font_style: "H6"
+                        on_press: root.joinclass()
+                MDCard:
+                    size_hint: None, None
+                    size: 550, 220
+                    elevation: 10
+                    ripple_behavior: False
+                    border_radius: 20
+                    radius: [20]
+                    pos_hint:{"center_x": 0.5, "center_y": 0.5}
+                    orientation: "vertical"
+                    MDLabel:
+                        text : "ASSIGNMENTS"
+                        halign: "center"
+                        font_style: "H6"  
+                        size_hint_y : 0.09
+                    MDCard:
+                        size_hint: None, None
+                        size: 490, 70
+                        elevation: 10
+                        border_radius: 30
+                        pos_hint:{"center_x": 0.5, "center_y": 0.5}
+                        md_bg_color: 255/255, 204/255, 104/255, 0.5
+                        ripple_behavior: True
+                        radius: [30]
+                        padding: 10
+                        orientation: 'vertical'
+                        MDBoxLayout:
+                            MDLabel:
+                                text: "Assignment-1"
+                                color: 1, 105/255, 5/255
+                                font_size: 18
+                                bold: True
+                            MDLabel:
+                                text:"10:00 PM"
+                                color: 1, 105/255, 5/255
+                                font_size: 21
+                                size_hint_x: 0.5
+                                bold: True
+                        MDLabel:
+                            text: "Financial Management & Accounting"
+                            color: 1, 105/255, 5/255
+                            font_size: 18
+                            bold: True  
+                    MDLabel:
+                        size_hint_y: 0.03
+                    MDCard:
+                        size_hint: None, None
+                        size: 490, 70
+                        elevation: 10
+                        border_radius: 30
+                        pos_hint:{"center_x": 0.5, "center_y": 0.5}
+                        md_bg_color: 255/255, 204/255, 104/255, 0.5
+                        ripple_behavior: True
+                        radius: [30]
+                        padding: 10
+                        orientation: 'vertical'
+                        MDBoxLayout:
+                            MDLabel:
+                                text: "Assignment-2"
+                                color: 1, 105/255, 5/255
+                                font_size: 18
+                                bold: True
+
+                            MDLabel:
+                                text:"12:00 PM"
+                                color: 1, 105/255, 5/255
+                                font_size: 21
+                                size_hint_x: 0.5
+                                bold: True
+                        MDLabel:
+                            text: "Financial Management & Accounting"
+                            color: 1, 105/255, 5/255
+                            font_size: 18
+                            bold: True  
+                MDLabel:
+                    size_hint_y: 0.04
+            MDLabel:
+                size_hint_x: 0.08
+
+
+<Osm>:
+    name: "Osm"
+    MDBoxLayout:
+        orientation: "vertical"
+        MDLabel:
+            size_hint_y:0.025
+        MDBoxLayout:
+            size_hint_y: 0.1
+            MDLabel:
+                size_hint_x:0.05
+            MDLabel:
+                text: "ReLearnz"
+                color: 8/255, 1, 98/255
+                font_size: 40
+                bold: True
+                size_hint_x:0.5
+            MDTextField:
+                id: "A"
+                mode: "fill"
+                icon_right: "magnify"
+                font_size: 20
+                hint_text: "Search"
+                hint_text_color: 1,1,1
+                icon_left_color: 1,1,1
+                radius: [30]
+                fill_color: 184/255, 226/255, 1, 0.3
+                line_color_focus: 252/255, 5/255, 121/255, 1
+                size_hint_x:0.5
+            MDLabel:
+                size_hint_x:0.4
+            MDFloatingActionButton:
+                icon: "bell"
+                elevation_normal: 8
+                md_bg_color: "black"
+            MDLabel:
+                size_hint_x:0.08
+
+            MDFloatingActionButton:
+                icon: "account"
+                elevation_normal: 8
+                md_bg_color: "black"
+                on_release:
+                    app.root.current= "Sprofile"
+                    root.manager.transition.direction="left"
+            MDLabel:
+                size_hint_x:0.09
+        MDLabel:
+            size_hint_y:0.02
+        MDBoxLayout:
+            md_bg_color: 117/255, 255/255, 230/255, 0.1
+            MDLabel:
+                size_hint_x:0.02
+            MDBoxLayout:
+                size_hint_x:0.3
+                orientation: "vertical"
+                MDLabel:
+                    size_hint_y: 0.1
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "eye"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Overview"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Sdashboard"
+                            root.manager.transition.direction="right"
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    md_bg_color: 8/255, 1, 98/255,1
+                    radius: [15]
+                    MDIcon:
+                        icon: "book-multiple"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Courses"
+                        bold: True
+                        font_size : 20
+
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "bookmark-multiple"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Events"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Sevent"
+                            root.manager.transition.direction="left"
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "chat"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Chat"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Schat"
+                            root.manager.transition.direction="left"
+                    MDLabel:
+                        size_hint_x: 0.45
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "alert"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Announcements"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Sannouncement"
+                            root.manager.transition.direction="left"
+                    MDLabel:
+                        size_hint_x: 0.1
+                MDLabel:
+                    size_hint_y: 0.85
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "file-document"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Feedback"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Sfeedback"
+                            root.manager.transition.direction="left"
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    id: logout
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "logout"
+                        font_size : 30
+                        size_hint_x: 0.3
+
+                    MDTextButton:
+                        text:"Logout"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Welcome"
+                            root.manager.transition.direction="right"
+                    MDLabel:
+                        size_hint_x: 0.4
+
+                MDLabel:
+                    size_hint_y: 0.05    
+            MDBoxLayout:
+                orientation: "vertical"   
+                MDLabel:
+                    size_hint_y: 0.04
+                MDFloatingActionButton:
+                    icon: "arrow-left-thick"
+                    on_release:
+                        app.root.current= "Scourse"
+                        root.manager.transition.direction="right"                     
+                MDIconButton:
+                    icon: "assets/male.png"
+                    pos_hint:{"center_x": 0.5, "center_y": 0.5}
+                    user_font_size: "100sp"
+                    ize_hint: 1, 0.5
+                MDLabel:
+                    text: "Dr. Mathew.C.D"    
+                    font_style: "H6"
+                    halign: "center"
+                    size_hint: 1, 0.3
+                MDCard:
+                    size_hint: None, None
+                    size: 300, 50
+                    elevation: 10
+                    pos_hint:{"center_x": 0.5, "center_y": 0.5}
+                    ripple_behavior: False
+                    border_radius: 20
+                    radius: [20]
+                    MDLabel:
+                        text : "mathewcd@iiitkottayam.ac.in"
+                        halign: "center"
+                        font_style: "H6"
+                MDBoxLayout:
+                    size_hint_y:0.3
+                    MDLabel:
+                        text:"Attendance -"
+                        font_style: "H6"
+                        size_hint_x: 0.1
+                    MDLabel:
+                        text:"80%"
+                        font_style: "H6"
+                        size_hint_x: 0.4
+                    MDFillRoundFlatIconButton:
+                        text: "Join Class"
+                        icon: "arrow-right-thick"
+                        font_style: "H6"
+                        on_press: root.joinclass()
+
+                MDCard:
+                    size_hint: None, None
+                    size: 550, 220
+                    elevation: 10
+                    ripple_behavior: False
+                    border_radius: 20
+                    radius: [20]
+                    pos_hint:{"center_x": 0.5, "center_y": 0.5}
+                    orientation: "vertical"
+                    MDLabel:
+                        text : "ASSIGNMENTS"
+                        halign: "center"
+                        font_style: "H6"  
+                        size_hint_y : 0.09
+                    MDCard:
+                        size_hint: None, None
+                        size: 490, 70
+                        elevation: 10
+                        border_radius: 30
+                        pos_hint:{"center_x": 0.5, "center_y": 0.5}
+                        md_bg_color: 255/255, 204/255, 104/255, 0.5
+                        ripple_behavior: True
+                        radius: [30]
+                        padding: 10
+                        orientation: 'vertical'
+                        MDBoxLayout:
+                            MDLabel:
+                                text: "Assignment-1"
+                                color: 1, 105/255, 5/255
+                                font_size: 18
+                                bold: True
+                            MDLabel:
+                                text:"10:00 PM"
+                                color: 1, 105/255, 5/255
+                                font_size: 21
+                                size_hint_x: 0.5
+                                bold: True
+                        MDLabel:
+                            text: "Operations & Supply Chain Management"
+                            color: 1, 105/255, 5/255
+                            font_size: 18
+                            bold: True  
+                    MDLabel:
+                        size_hint_y: 0.03
+                    MDCard:
+                        size_hint: None, None
+                        size: 490, 70
+                        elevation: 10
+                        border_radius: 30
+                        pos_hint:{"center_x": 0.5, "center_y": 0.5}
+                        md_bg_color: 255/255, 204/255, 104/255, 0.5
+                        ripple_behavior: True
+                        radius: [30]
+                        padding: 10
+                        orientation: 'vertical'
+                        MDBoxLayout:
+                            MDLabel:
+                                text: "Assignment-2"
+                                color: 1, 105/255, 5/255
+                                font_size: 18
+                                bold: True
+
+                            MDLabel:
+                                text:"12:00 PM"
+                                color: 1, 105/255, 5/255
+                                font_size: 21
+                                size_hint_x: 0.5
+                                bold: True
+                        MDLabel:
+                            text: "Operations & Supply Chain Management"
+                            color: 1, 105/255, 5/255
+                            font_size: 18
+                            bold: True  
+                MDLabel:
+                    size_hint_y: 0.04
+            MDLabel:
+                size_hint_x: 0.08
+
+

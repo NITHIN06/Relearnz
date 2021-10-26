@@ -17,6 +17,8 @@ from kivymd.uix.spinner import MDSpinner
 from kivy.uix.screenmanager import ScreenManager, Screen
 from firebase import firebase
 import threading
+import webbrowser
+
 
 
 # firebase connection
@@ -90,7 +92,7 @@ class Login(Screen):
 
             self.ids.user.text = ""
             self.ids.password.text = ""
-
+     
         self.load()
         self.a = 1
 
@@ -228,6 +230,33 @@ class Sfeedback(Screen):
         self.ids.feedback_txt.text = ""
         return
 
+class Sprofile(Screen):
+    pass
+
+class Ai(Screen):
+    def joinclass(self):
+        webbrowser.open('https://meet.google.com/jpq-webf-iwy?pli=1', new = 1)
+class Cf(Screen):
+    def joinclass(self):
+        webbrowser.open('https://meet.google.com/jpq-webf-iwy?pli=1', new = 1)
+class Dsp(Screen):
+    def joinclass(self):
+        webbrowser.open('https://meet.google.com/jpq-webf-iwy?pli=1', new = 1)
+class Hrm(Screen):
+    def joinclass(self):
+        webbrowser.open('https://meet.google.com/jpq-webf-iwy?pli=1', new = 1)
+class Sc(Screen):
+    def joinclass(self):
+        webbrowser.open('https://meet.google.com/jpq-webf-iwy?pli=1', new = 1)
+class Sepm(Screen):
+    def joinclass(self):
+        webbrowser.open('https://meet.google.com/jpq-webf-iwy?pli=1', new = 1)
+class Fma(Screen):
+    def joinclass(self):
+        webbrowser.open('https://meet.google.com/jpq-webf-iwy?pli=1', new = 1)
+class Osm(Screen):
+    def joinclass(self):
+        webbrowser.open('https://meet.google.com/jpq-webf-iwy?pli=1', new = 1)
 
 class Main(MDApp):
     pass
