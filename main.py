@@ -252,7 +252,7 @@ class ClockLabel(Label):
 class InfoLabel(MDLabel):
         def __init__(self,**kwargs):
             super(InfoLabel,self).__init__(**kwargs)
-            Clock.schedule_interval(self.update,20)
+            Clock.schedule_interval(self.update,23)
         def update(self,*args):
             self.text = "Hello "+str(user_info["username"])
 
