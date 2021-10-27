@@ -29,14 +29,14 @@ WindowManager:
         MDBoxLayout:
             MDLabel:
                 text:""
-                size_hint: 0.2 ,1   
+                size_hint: 0.2 ,1
             Image:
                 source: 'assets\welcome.png'
                 keep_ratio: False
                 allow_stretch: True
             MDLabel:
                 text:""
-                size_hint: 0.2 ,1   
+                size_hint: 0.2 ,1
         MDLabel:
             text:"Welcome"
             font_style: "H2"
@@ -75,14 +75,14 @@ WindowManager:
         MDBoxLayout:
             MDLabel:
                 text:""
-                size_hint: 0.2 ,1   
+                size_hint: 0.2 ,1
             Image:
                 source: 'assets\login.png'
                 keep_ratio: False
                 allow_stretch: True
             MDLabel:
                 text:""
-                size_hint: 0.2 ,1   
+                size_hint: 0.2 ,1
 
         MDBoxLayout:
             size_hint : 1, 0.4
@@ -183,14 +183,14 @@ WindowManager:
         MDBoxLayout:
             MDLabel:
                 text:""
-                size_hint: 0.2 ,1   
+                size_hint: 0.2 ,1
             Image:
                 source: 'assets/register.png'
                 keep_ratio: False
                 allow_stretch: True
             MDLabel:
                 text:""
-                size_hint: 0.2 ,1   
+                size_hint: 0.2 ,1
 
         MDBoxLayout:
             size_hint: 1, 0.2
@@ -317,7 +317,7 @@ WindowManager:
             size_hint : 1, 0.3
             text: ""
 
-                
+
 
 <Tdashboard>:
 
@@ -369,6 +369,15 @@ WindowManager:
                 fill_color: 184/255, 226/255, 1, 0.3
                 line_color_focus: 252/255, 5/255, 121/255, 1
                 size_hint_x:0.5
+
+            ClockLabel:
+                id: timer
+                font_size: 35
+                bold: True
+                color: "darkblue"
+                padding_x: 30
+                size_hint_x: 0.3
+
             MDLabel:
                 size_hint_x:0.4
             MDFloatingActionButton:
@@ -580,9 +589,7 @@ WindowManager:
                     radius: [30]
                     orientation: 'vertical'
 
-                    MDLabel:
-                        id: susername
-                        text: "Hello "
+                    InfoLabel:
                         font_size: 24
                         bold: True
                         adaptive_height: True
@@ -674,11 +681,11 @@ WindowManager:
                     border_radius: 30
                     radius: [30]
 
-                    MDIconButton:
-                        icon: "assets/AI.png"
+                    NowIcon:
+                        # icon: "assets/AI.png"
                         user_font_size: "35sp"
                         on_release:
-                            app.root.current= "Ai"
+                            app.root.current= self.screen
                             root.manager.transition.direction="left"
                     MDBoxLayout:
                         orientation: "vertical"
@@ -699,12 +706,12 @@ WindowManager:
                                     font_size: 18
                                     bold: True
                                     color: 1, 105/255, 5/255
-                        MDTextButton:
-                            text: "Artificial Intelligence"
+                        NowText:
+                            # text: "Artificial Intelligence"
                             font_size: 30
                             bold: True
                             on_release:
-                                app.root.current= "Ai"
+                                app.root.current= self.screen
                                 root.manager.transition.direction="left"
                 MDLabel:
                     text: ""
@@ -721,11 +728,11 @@ WindowManager:
                     focus_behavior: True
                     ripple_behavior: True
                     spacing: 25
-                    MDIconButton:
-                        icon: "assets/DSP.png"
+                    NextIcon:
+                        # icon: "assets/DSP.png"
                         user_font_size: "35sp"
                         on_release:
-                            app.root.current= "Dsp"
+                            app.root.current= self.screen
                             root.manager.transition.direction="left"
                     MDBoxLayout:
                         orientation: "vertical"
@@ -746,12 +753,12 @@ WindowManager:
                                     font_size: 18
                                     bold: True
                                     color: 68/255, 4/255, 117/255
-                        MDTextButton:
-                            text: "Digital Signal Processing"
+                        NextText:
+                            # text: "Digital Signal Processing"
                             font_size: 30
                             bold: True
                             on_release:
-                                app.root.current= "Dsp"
+                                app.root.current= self.screen
                                 root.manager.transition.direction="left"
                 MDLabel:
                     text: ""
@@ -766,16 +773,19 @@ WindowManager:
                 radius: [30]
                 padding: 10
                 orientation: 'vertical'
-                MDLabel:
-                    text: "Today"
-                    bold: True
-                    font_size: 30
-                    adaptive_height: True
-                MDLabel:
-                    text: "12-oct"
-                    bold: True
-                    font_size: 30
-                    adaptive_height: True
+                MDBoxLayout:
+                    orientation: 'horizontal'
+                    size_hint_y: 0.05
+                    MDLabel:
+                        text: "Today"
+                        bold: True
+                        font_size: 30
+                        adaptive_height: True
+                    TodayDate:
+                        bold: True
+                        font_size: 30
+                        adaptive_height: True
+                        padding_x: 15
                 MDCard:
                     size_hint: None, None
                     size: 380, 80
@@ -1193,14 +1203,14 @@ WindowManager:
                     spacing: 25
                     MDIconButton:
                         icon: "assets/AI.png"
-                        user_font_size: "35sp" 
+                        user_font_size: "35sp"
                         on_release:
                             app.root.current= "Ai"
                             root.manager.transition.direction="left"
                     MDTextButton:
                         text: "Artificial Intelligence                            "
                         font_size: 18
-                        bold: True                       
+                        bold: True
                         on_release:
                             app.root.current= "Ai"
                             root.manager.transition.direction="left"
@@ -1220,14 +1230,14 @@ WindowManager:
                     spacing: 25
                     MDIconButton:
                         icon: "assets/SEPM.png"
-                        user_font_size: "35sp"    
+                        user_font_size: "35sp"
                         on_release:
                             app.root.current= "Sepm"
                             root.manager.transition.direction="left"
                     MDTextButton:
                         text: "Software Engineering And Project Management"
                         font_size: 18
-                        bold: True                       
+                        bold: True
                         on_release:
                             app.root.current= "Sepm"
                             root.manager.transition.direction="left"
@@ -1247,14 +1257,14 @@ WindowManager:
                     spacing: 25
                     MDIconButton:
                         icon: "assets/CF.png"
-                        user_font_size: "35sp"    
+                        user_font_size: "35sp"
                         on_release:
                             app.root.current= "Cf"
                             root.manager.transition.direction="left"
                     MDTextButton:
                         text: "Computer Forensics                      "
                         font_size: 18
-                        bold: True                       
+                        bold: True
                         on_release:
                             app.root.current= "Cf"
                             root.manager.transition.direction="left"
@@ -1274,14 +1284,14 @@ WindowManager:
                     spacing: 25
                     MDIconButton:
                         icon: "assets/DSP.png"
-                        user_font_size: "35sp"   
+                        user_font_size: "35sp"
                         on_release:
                             app.root.current= "Dsp"
                             root.manager.transition.direction="left"
                     MDTextButton:
                         text: "Digital Signal Processing         "
                         font_size: 18
-                        bold: True                       
+                        bold: True
                         on_release:
                             app.root.current= "Dsp"
                             root.manager.transition.direction="left"
@@ -1307,14 +1317,14 @@ WindowManager:
                     spacing: 25
                     MDIconButton:
                         icon: "assets/HRM.png"
-                        user_font_size: "35sp"  
+                        user_font_size: "35sp"
                         on_release:
                             app.root.current= "Hrm"
-                            root.manager.transition.direction="left" 
+                            root.manager.transition.direction="left"
                     MDTextButton:
                         text: "Human Resource Management     "
                         font_size: 18
-                        bold: True                       
+                        bold: True
                         on_release:
                             app.root.current= "Hrm"
                             root.manager.transition.direction="left"
@@ -1334,14 +1344,14 @@ WindowManager:
                     spacing: 25
                     MDIconButton:
                         icon: "assets/OSM.png"
-                        user_font_size: "35sp"    
+                        user_font_size: "35sp"
                         on_release:
                             app.root.current= "Osm"
                             root.manager.transition.direction="left"
                     MDTextButton:
                         text: "Operations & Supply Chain Management"
                         font_size: 18
-                        bold: True                       
+                        bold: True
                         on_release:
                             app.root.current= "Osm"
                             root.manager.transition.direction="left"
@@ -1361,14 +1371,14 @@ WindowManager:
                     spacing: 25
                     MDIconButton:
                         icon: "assets/FMA.png"
-                        user_font_size: "35sp"   
+                        user_font_size: "35sp"
                         on_release:
                             app.root.current= "Fma"
                             root.manager.transition.direction="left"
                     MDTextButton:
                         text: "Financial Management & Accounting  "
                         font_size: 18
-                        bold: True                       
+                        bold: True
                         on_release:
                             app.root.current= "Fma"
                             root.manager.transition.direction="left"
@@ -1388,19 +1398,19 @@ WindowManager:
                     spacing: 25
                     MDIconButton:
                         icon: "assets/SC.png"
-                        user_font_size: "35sp"   
+                        user_font_size: "35sp"
                         on_release:
                             app.root.current= "Sc"
                             root.manager.transition.direction="left"
                     MDTextButton:
                         text: "Soft Computing"
                         font_size: 18
-                        bold: True                       
+                        bold: True
                         on_release:
                             app.root.current= "Sc"
-                            root.manager.transition.direction="left"                     
+                            root.manager.transition.direction="left"
                 MDLabel:
-                    size_hint_y: 0.1                                
+                    size_hint_y: 0.1
 
 <Sevent>:
 
@@ -2649,44 +2659,44 @@ WindowManager:
                         size_hint_x: 0.4
 
                 MDLabel:
-                    size_hint_y: 0.05    
+                    size_hint_y: 0.05
             MDBoxLayout:
                 orientation: "vertical"
                 Image:
                     source: "assets/user.png"
                 MDBoxLayout:
-                    orientation: "vertical"                    
+                    orientation: "vertical"
                     MDLabel:
                         text: "Username"
                         bold: True
                         font_size: 28
-                        size_hint: 1, 1                        
+                        size_hint: 1, 1
                     MDLabel:
                         text: "Charan"
                         bold: True
                         font_size: 20
-                        size_hint: 1, 1  
+                        size_hint: 1, 1
                     MDLabel:
                         text: ""
-                        size_hint: 1, 1  
+                        size_hint: 1, 1
                     MDLabel:
                         text: "Email"
                         bold: True
                         font_size: 28
-                        size_hint: 1, 1  
+                        size_hint: 1, 1
                     MDLabel:
                         text: "Charan@gmail.com"
                         bold: True
-                        font_size: 20                        
-                        size_hint: 1, 1    
+                        font_size: 20
+                        size_hint: 1, 1
                     MDLabel:
                         text: ""
-                        size_hint: 1, 1  
+                        size_hint: 1, 1
                     MDLabel:
                         text: "Role"
                         bold: True
                         font_size: 28
-                        size_hint: 1, 1  
+                        size_hint: 1, 1
                     MDLabel:
                         text: "Student"
                         bold: True
@@ -2697,7 +2707,7 @@ WindowManager:
                         size_hint: 1, 1
             MDLabel:
                 text: ""
-                size_hint: 0.1, 1        
+                size_hint: 0.1, 1
 
 
 
@@ -2923,23 +2933,23 @@ WindowManager:
                         size_hint_x: 0.4
 
                 MDLabel:
-                    size_hint_y: 0.05    
+                    size_hint_y: 0.05
             MDBoxLayout:
-                orientation: "vertical"   
+                orientation: "vertical"
                 MDLabel:
                     size_hint_y: 0.04
                 MDFloatingActionButton:
                     icon: "arrow-left-thick"
                     on_release:
                         app.root.current= "Scourse"
-                        root.manager.transition.direction="right"                     
+                        root.manager.transition.direction="right"
                 MDIconButton:
                     icon: "assets/male.png"
                     pos_hint:{"center_x": 0.5, "center_y": 0.5}
                     user_font_size: "100sp"
                     ize_hint: 1, 0.5
                 MDLabel:
-                    text: "Dr. Sivaiah Bellamkonda"    
+                    text: "Dr. Sivaiah Bellamkonda"
                     font_style: "H6"
                     halign: "center"
                     size_hint: 1, 0.3
@@ -3011,7 +3021,7 @@ WindowManager:
                                 text: "Artificial Intelligence"
                                 color: 1, 105/255, 5/255
                                 font_size: 18
-                                bold: True  
+                                bold: True
                         MDLabel:
                             size_hint_y: 0.05
                         MDCard:
@@ -3042,9 +3052,13 @@ WindowManager:
                                 text: "Artificial Intelligence"
                                 color: 1, 105/255, 5/255
                                 font_size: 18
+<<<<<<< HEAD
+                                bold: True
+=======
                                 bold: True  
                         MDLabel:
                             size_hint_y: 0.05                           
+>>>>>>> b26c4390eddc07f91e9a66982754782cc1043332
 
                     MDLabel:
                         size_hint_x: 0.05
@@ -3059,7 +3073,7 @@ WindowManager:
                         MDLabel:
                             text : "ASSIGNMENTS"
                             halign: "center"
-                            font_style: "H6"  
+                            font_style: "H6"
                             size_hint_y : 0.2
                         MDCard:
                             size_hint: None, None
@@ -3088,7 +3102,7 @@ WindowManager:
                                 text: "Artificial Intelligence"
                                 color: 1, 105/255, 5/255
                                 font_size: 18
-                                bold: True  
+                                bold: True
                         MDLabel:
                             size_hint_y: 0.05
                         MDCard:
@@ -3119,14 +3133,18 @@ WindowManager:
                                 text: "Artificial Intelligence"
                                 color: 1, 105/255, 5/255
                                 font_size: 18
+<<<<<<< HEAD
+                                bold: True
+=======
                                 bold: True  
                         MDLabel:
                             size_hint_y: 0.05
+>>>>>>> b26c4390eddc07f91e9a66982754782cc1043332
                 MDLabel:
                     size_hint_y: 0.04
             MDLabel:
                 size_hint_x: 0.08
-                    
+
 
 <Cf>:
     name: "Cf"
@@ -3347,23 +3365,23 @@ WindowManager:
                         size_hint_x: 0.4
 
                 MDLabel:
-                    size_hint_y: 0.05    
+                    size_hint_y: 0.05
             MDBoxLayout:
-                orientation: "vertical"   
+                orientation: "vertical"
                 MDLabel:
                     size_hint_y: 0.04
                 MDFloatingActionButton:
                     icon: "arrow-left-thick"
                     on_release:
                         app.root.current= "Scourse"
-                        root.manager.transition.direction="right"                     
+                        root.manager.transition.direction="right"
                 MDIconButton:
                     icon: "assets/male.png"
                     pos_hint:{"center_x": 0.5, "center_y": 0.5}
                     user_font_size: "100sp"
                     ize_hint: 1, 0.5
                 MDLabel:
-                    text: "Dr. Arun Cyril Jose"    
+                    text: "Dr. Arun Cyril Jose"
                     font_style: "H6"
                     halign: "center"
                     size_hint: 1, 0.3
@@ -3435,7 +3453,7 @@ WindowManager:
                                 text: "Artificial Intelligence"
                                 color: 1, 105/255, 5/255
                                 font_size: 18
-                                bold: True  
+                                bold: True
                         MDLabel:
                             size_hint_y: 0.05
                         MDCard:
@@ -3466,9 +3484,14 @@ WindowManager:
                                 text: "Artificial Intelligence"
                                 color: 1, 105/255, 5/255
                                 font_size: 18
+<<<<<<< HEAD
+                                bold: True
+
+=======
                                 bold: True  
                         MDLabel:
                             size_hint_y: 0.05
+>>>>>>> b26c4390eddc07f91e9a66982754782cc1043332
                     MDLabel:
                         size_hint_x: 0.05
                     MDCard:
@@ -3482,7 +3505,7 @@ WindowManager:
                         MDLabel:
                             text : "ASSIGNMENTS"
                             halign: "center"
-                            font_style: "H6"  
+                            font_style: "H6"
                             size_hint_y : 0.2
                         MDCard:
                             size_hint: None, None
@@ -3511,7 +3534,7 @@ WindowManager:
                                 text: "Artificial Intelligence"
                                 color: 1, 105/255, 5/255
                                 font_size: 18
-                                bold: True  
+                                bold: True
                         MDLabel:
                             size_hint_y: 0.05
                         MDCard:
@@ -3542,9 +3565,13 @@ WindowManager:
                                 text: "Artificial Intelligence"
                                 color: 1, 105/255, 5/255
                                 font_size: 18
+<<<<<<< HEAD
+                                bold: True
+=======
                                 bold: True  
                         MDLabel:
                             size_hint_y: 0.05                              
+>>>>>>> b26c4390eddc07f91e9a66982754782cc1043332
                 MDLabel:
                     size_hint_y: 0.04
             MDLabel:
@@ -3769,23 +3796,23 @@ WindowManager:
                         size_hint_x: 0.4
 
                 MDLabel:
-                    size_hint_y: 0.05    
+                    size_hint_y: 0.05
             MDBoxLayout:
-                orientation: "vertical"   
+                orientation: "vertical"
                 MDLabel:
                     size_hint_y: 0.04
                 MDFloatingActionButton:
                     icon: "arrow-left-thick"
                     on_release:
                         app.root.current= "Scourse"
-                        root.manager.transition.direction="right"                     
+                        root.manager.transition.direction="right"
                 MDIconButton:
                     icon: "assets/female.png"
                     pos_hint:{"center_x": 0.5, "center_y": 0.5}
                     user_font_size: "100sp"
                     ize_hint: 1, 0.5
                 MDLabel:
-                    text: "Dr. Bini A. A."    
+                    text: "Dr. Bini A. A."
                     font_style: "H6"
                     halign: "center"
                     size_hint: 1, 0.3
@@ -3857,7 +3884,7 @@ WindowManager:
                                 text: "Artificial Intelligence"
                                 color: 1, 105/255, 5/255
                                 font_size: 18
-                                bold: True  
+                                bold: True
                         MDLabel:
                             size_hint_y: 0.05
                         MDCard:
@@ -3888,9 +3915,14 @@ WindowManager:
                                 text: "Artificial Intelligence"
                                 color: 1, 105/255, 5/255
                                 font_size: 18
+<<<<<<< HEAD
+                                bold: True
+
+=======
                                 bold: True  
                         MDLabel:
                             size_hint_y: 0.05
+>>>>>>> b26c4390eddc07f91e9a66982754782cc1043332
                     MDLabel:
                         size_hint_x: 0.05
                     MDCard:
@@ -3904,7 +3936,7 @@ WindowManager:
                         MDLabel:
                             text : "ASSIGNMENTS"
                             halign: "center"
-                            font_style: "H6"  
+                            font_style: "H6"
                             size_hint_y : 0.2
                         MDCard:
                             size_hint: None, None
@@ -3933,7 +3965,7 @@ WindowManager:
                                 text: "Artificial Intelligence"
                                 color: 1, 105/255, 5/255
                                 font_size: 18
-                                bold: True  
+                                bold: True
                         MDLabel:
                             size_hint_y: 0.05
                         MDCard:
@@ -3964,9 +3996,13 @@ WindowManager:
                                 text: "Artificial Intelligence"
                                 color: 1, 105/255, 5/255
                                 font_size: 18
+<<<<<<< HEAD
+                                bold: True
+=======
                                 bold: True  
                         MDLabel:
                             size_hint_y: 0.05
+>>>>>>> b26c4390eddc07f91e9a66982754782cc1043332
                 MDLabel:
                     size_hint_y: 0.04
             MDLabel:
@@ -4191,23 +4227,23 @@ WindowManager:
                         size_hint_x: 0.4
 
                 MDLabel:
-                    size_hint_y: 0.05    
+                    size_hint_y: 0.05
             MDBoxLayout:
-                orientation: "vertical"   
+                orientation: "vertical"
                 MDLabel:
                     size_hint_y: 0.04
                 MDFloatingActionButton:
                     icon: "arrow-left-thick"
                     on_release:
                         app.root.current= "Scourse"
-                        root.manager.transition.direction="right"                     
+                        root.manager.transition.direction="right"
                 MDIconButton:
                     icon: "assets/male.png"
                     pos_hint:{"center_x": 0.5, "center_y": 0.5}
                     user_font_size: "100sp"
                     ize_hint: 1, 0.5
                 MDLabel:
-                    text: "Dr. Mathew.C.D"    
+                    text: "Dr. Mathew.C.D"
                     font_style: "H6"
                     halign: "center"
                     size_hint: 1, 0.3
@@ -4250,7 +4286,7 @@ WindowManager:
                     MDLabel:
                         text : "ASSIGNMENTS"
                         halign: "center"
-                        font_style: "H6"  
+                        font_style: "H6"
                         size_hint_y : 0.09
                     MDCard:
                         size_hint: None, None
@@ -4279,7 +4315,7 @@ WindowManager:
                             text: "Human Resource Management"
                             color: 1, 105/255, 5/255
                             font_size: 18
-                            bold: True  
+                            bold: True
                     MDLabel:
                         size_hint_y: 0.03
                     MDCard:
@@ -4310,9 +4346,13 @@ WindowManager:
                             text: "Human Resource Management"
                             color: 1, 105/255, 5/255
                             font_size: 18
+<<<<<<< HEAD
+                            bold: True
+=======
                             bold: True  
                     MDLabel:
                         size_hint_y: 0.05
+>>>>>>> b26c4390eddc07f91e9a66982754782cc1043332
                 MDLabel:
                     size_hint_y: 0.04
             MDLabel:
@@ -4537,23 +4577,23 @@ WindowManager:
                         size_hint_x: 0.4
 
                 MDLabel:
-                    size_hint_y: 0.05    
+                    size_hint_y: 0.05
             MDBoxLayout:
-                orientation: "vertical"   
+                orientation: "vertical"
                 MDLabel:
                     size_hint_y: 0.04
                 MDFloatingActionButton:
                     icon: "arrow-left-thick"
                     on_release:
                         app.root.current= "Scourse"
-                        root.manager.transition.direction="right"                     
+                        root.manager.transition.direction="right"
                 MDIconButton:
                     icon: "assets/female.png"
                     pos_hint:{"center_x": 0.5, "center_y": 0.5}
                     user_font_size: "100sp"
                     ize_hint: 1, 0.5
                 MDLabel:
-                    text: "Dr. Suchithra M S"    
+                    text: "Dr. Suchithra M S"
                     font_style: "H6"
                     halign: "center"
                     size_hint: 1, 0.3
@@ -4596,7 +4636,7 @@ WindowManager:
                     MDLabel:
                         text : "ASSIGNMENTS"
                         halign: "center"
-                        font_style: "H6"  
+                        font_style: "H6"
                         size_hint_y : 0.09
                     MDCard:
                         size_hint: None, None
@@ -4625,7 +4665,7 @@ WindowManager:
                             text: "Soft Computing"
                             color: 1, 105/255, 5/255
                             font_size: 18
-                            bold: True  
+                            bold: True
                     MDLabel:
                         size_hint_y: 0.03
                     MDCard:
@@ -4656,9 +4696,13 @@ WindowManager:
                             text: "Soft Computing"
                             color: 1, 105/255, 5/255
                             font_size: 18
+<<<<<<< HEAD
+                            bold: True
+=======
                             bold: True  
                     MDLabel:
                         size_hint_y: 0.05
+>>>>>>> b26c4390eddc07f91e9a66982754782cc1043332
                 MDLabel:
                     size_hint_y: 0.04
             MDLabel:
@@ -4883,23 +4927,23 @@ WindowManager:
                         size_hint_x: 0.4
 
                 MDLabel:
-                    size_hint_y: 0.05    
+                    size_hint_y: 0.05
             MDBoxLayout:
-                orientation: "vertical"   
+                orientation: "vertical"
                 MDLabel:
                     size_hint_y: 0.04
                 MDFloatingActionButton:
                     icon: "arrow-left-thick"
                     on_release:
                         app.root.current= "Scourse"
-                        root.manager.transition.direction="right"                     
+                        root.manager.transition.direction="right"
                 MDIconButton:
                     icon: "assets/female.png"
                     pos_hint:{"center_x": 0.5, "center_y": 0.5}
                     user_font_size: "100sp"
                     ize_hint: 1, 0.5
                 MDLabel:
-                    text: "Dr Divya Sindhu Lekha"    
+                    text: "Dr Divya Sindhu Lekha"
                     font_style: "H6"
                     halign: "center"
                     size_hint: 1, 0.3
@@ -4942,7 +4986,7 @@ WindowManager:
                     MDLabel:
                         text : "ASSIGNMENTS"
                         halign: "center"
-                        font_style: "H6"  
+                        font_style: "H6"
                         size_hint_y : 0.09
                     MDCard:
                         size_hint: None, None
@@ -4971,7 +5015,7 @@ WindowManager:
                             text: "Software Engineering and Project Management"
                             color: 1, 105/255, 5/255
                             font_size: 18
-                            bold: True  
+                            bold: True
                     MDLabel:
                         size_hint_y: 0.03
                     MDCard:
@@ -5002,9 +5046,13 @@ WindowManager:
                             text: "Software Engineering and Project Management"
                             color: 1, 105/255, 5/255
                             font_size: 18
+<<<<<<< HEAD
+                            bold: True
+=======
                             bold: True  
                     MDLabel:
                         size_hint_y: 0.05
+>>>>>>> b26c4390eddc07f91e9a66982754782cc1043332
                 MDLabel:
                     size_hint_y: 0.04
             MDLabel:
@@ -5229,23 +5277,23 @@ WindowManager:
                         size_hint_x: 0.4
 
                 MDLabel:
-                    size_hint_y: 0.05    
+                    size_hint_y: 0.05
             MDBoxLayout:
-                orientation: "vertical"   
+                orientation: "vertical"
                 MDLabel:
                     size_hint_y: 0.04
                 MDFloatingActionButton:
                     icon: "arrow-left-thick"
                     on_release:
                         app.root.current= "Scourse"
-                        root.manager.transition.direction="right"                     
+                        root.manager.transition.direction="right"
                 MDIconButton:
                     icon: "assets/male.png"
                     pos_hint:{"center_x": 0.5, "center_y": 0.5}
                     user_font_size: "100sp"
                     ize_hint: 1, 0.5
                 MDLabel:
-                    text: "Dr Raghunadhan T"    
+                    text: "Dr Raghunadhan T"
                     font_style: "H6"
                     halign: "center"
                     size_hint: 1, 0.3
@@ -5288,7 +5336,7 @@ WindowManager:
                     MDLabel:
                         text : "ASSIGNMENTS"
                         halign: "center"
-                        font_style: "H6"  
+                        font_style: "H6"
                         size_hint_y : 0.09
                     MDCard:
                         size_hint: None, None
@@ -5317,7 +5365,7 @@ WindowManager:
                             text: "Financial Management & Accounting"
                             color: 1, 105/255, 5/255
                             font_size: 18
-                            bold: True  
+                            bold: True
                     MDLabel:
                         size_hint_y: 0.03
                     MDCard:
@@ -5348,9 +5396,13 @@ WindowManager:
                             text: "Financial Management & Accounting"
                             color: 1, 105/255, 5/255
                             font_size: 18
+<<<<<<< HEAD
+                            bold: True
+=======
                             bold: True  
                     MDLabel:
                         size_hint_y: 0.05
+>>>>>>> b26c4390eddc07f91e9a66982754782cc1043332
                 MDLabel:
                     size_hint_y: 0.04
             MDLabel:
@@ -5576,23 +5628,23 @@ WindowManager:
                         size_hint_x: 0.4
 
                 MDLabel:
-                    size_hint_y: 0.05    
+                    size_hint_y: 0.05
             MDBoxLayout:
-                orientation: "vertical"   
+                orientation: "vertical"
                 MDLabel:
                     size_hint_y: 0.04
                 MDFloatingActionButton:
                     icon: "arrow-left-thick"
                     on_release:
                         app.root.current= "Scourse"
-                        root.manager.transition.direction="right"                     
+                        root.manager.transition.direction="right"
                 MDIconButton:
                     icon: "assets/male.png"
                     pos_hint:{"center_x": 0.5, "center_y": 0.5}
                     user_font_size: "100sp"
                     ize_hint: 1, 0.5
                 MDLabel:
-                    text: "Dr. Mathew.C.D"    
+                    text: "Dr. Mathew.C.D"
                     font_style: "H6"
                     halign: "center"
                     size_hint: 1, 0.3
@@ -5636,7 +5688,7 @@ WindowManager:
                     MDLabel:
                         text : "ASSIGNMENTS"
                         halign: "center"
-                        font_style: "H6"  
+                        font_style: "H6"
                         size_hint_y : 0.09
                     MDCard:
                         size_hint: None, None
@@ -5665,7 +5717,7 @@ WindowManager:
                             text: "Operations & Supply Chain Management"
                             color: 1, 105/255, 5/255
                             font_size: 18
-                            bold: True  
+                            bold: True
                     MDLabel:
                         size_hint_y: 0.03
                     MDCard:
@@ -5696,12 +5748,14 @@ WindowManager:
                             text: "Operations & Supply Chain Management"
                             color: 1, 105/255, 5/255
                             font_size: 18
+<<<<<<< HEAD
+                            bold: True
+=======
                             bold: True  
                     MDLabel:
                         size_hint_y: 0.05
+>>>>>>> b26c4390eddc07f91e9a66982754782cc1043332
                 MDLabel:
                     size_hint_y: 0.04
             MDLabel:
                 size_hint_x: 0.08
-
-

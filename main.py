@@ -1,3 +1,4 @@
+from logging import Manager
 from kivy.config import Config
 
 Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
@@ -11,13 +12,17 @@ from kivymd.app import MDApp
 from kivy.lang import Builder
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivy.core.window import Window
-from kivymd.uix.button import MDFlatButton
+from kivymd.uix.button import MDFlatButton, MDIconButton,MDTextButton
+from kivymd.uix.label import MDLabel
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.spinner import MDSpinner
 from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.uix.label import Label
 from firebase import firebase
 import threading
 import webbrowser
+from datetime import datetime,date
+from kivy.clock import Clock
 
 
 
@@ -27,13 +32,50 @@ firebase = firebase.FirebaseApplication(
 
 socket.getaddrinfo('localhost',25)
 
+#time-table
+time_table=[{"name":"Artifical Intelligence","pic":"assets/AI.png","start":9,"batch":'even',"screen":"Ai"},
+            {"name":"Software Engineering And ...","pic":"assets/SEPM.png","start":9,"batch":'odd',"screen":"Sepm"},
+            {"name":"Computer Forensics","pic":"assets/CF.png","start":10,"batch":'even',"screen":"Cf"},
+            {"name":"Digital Signal Processing","pic":"assets/DSP.png","start":10,"batch":'odd',"screen":"Dsp"},
+            {"name":"Human Resource Management","pic":"assets/HRM.png","start":11,"batch":'even',"screen":"Hrm"},
+            {"name":"Operations & Supply Chain ...","pic":"assets/OSM.png","start":11,"batch":'odd',"screen":"Osm"},
+            {"name":"Finanical Management","pic":"assets/FMA.png","start":12,"batch":'even',"screen":"Fma"},
+            {"name":"Soft Computing","pic":"assets/SC.png","start":12,"batch":'odd',"screen":"Sc"}]
+
+def nearest_class(l):
+    time_now=datetime.now().hour
+    x=[i["start"] for i in l]
+    c=0
+    z=[]
+    for i in range(len(x)):
+        if (time_now<=x[i] and len(z)!=2):
+            z.append(l[i])
+    return z
+
+def tt():
+    global now_next
+    now_next=[]
+    l=[]
+    for i in time_table:
+        today= date.today().day
+        if (today%2==0 and i["batch"]=='even'):
+            #even-> batch-even
+            l.append(i)
+        elif (today%2!=0 and i["batch"]=='odd'):
+            #odd-> batch-odd
+            l.append(i)
+    now_next=nearest_class(l)
+    if len(now_next)==1:
+        now_next.append({"name":"NONE","pic":"assets/female.png","screen":"Sdashboard"})
+    elif len(now_next)==0:
+        now_next.append({"name":"NONE","pic":"assets/female.png","screen":"Sdashboard"})
+        now_next.append({"name":"NONE","pic":"assets/female.png","screen":"Sdashboard"})
+
 class WindowManager(ScreenManager):
     pass
 
-
 class Welcome(Screen):
     pass
-
 
 class Login(Screen):
     a = 1
@@ -92,7 +134,7 @@ class Login(Screen):
 
             self.ids.user.text = ""
             self.ids.password.text = ""
-     
+
         self.load()
         self.a = 1
 
@@ -197,9 +239,66 @@ class Register(Screen):
 class Tdashboard(Screen):
     pass
 
-
 class Sdashboard(Screen):
     pass
+
+class ClockLabel(Label):
+    def __init__(self,**kwargs):
+        super(ClockLabel,self).__init__(**kwargs)
+        Clock.schedule_interval(self.update,1)
+    def update(self,*args):
+        self.text= f"{datetime.now().strftime('%H:%M')}"
+
+class InfoLabel(MDLabel):
+        def __init__(self,**kwargs):
+            super(InfoLabel,self).__init__(**kwargs)
+            Clock.schedule_interval(self.update,20)
+        def update(self,*args):
+            self.text = "Hello "+str(user_info["username"])
+
+class NowIcon(MDIconButton):
+    def __init__(self, **kwargs):
+        super(NowIcon,self).__init__(**kwargs)
+        Clock.schedule_interval(self.update_class_icon,15)
+    def update_class_icon(self,*args):
+        tt()
+        self.screen=now_next[0]["screen"]
+        self.icon=now_next[0]["pic"]
+
+class NowText(MDTextButton):
+    def __init__(self, **kwargs):
+        super(NowText,self).__init__(**kwargs)
+        Clock.schedule_interval(self.update_class_text,15)
+
+    def update_class_text(self,*args):
+        tt()
+        self.screen=now_next[0]["screen"]
+        self.text=now_next[0]["name"]
+
+class NextIcon(MDIconButton):
+    def __init__(self, **kwargs):
+        super(NextIcon,self).__init__(**kwargs)
+        Clock.schedule_interval(self.update_class_icon,15)
+    def update_class_icon(self,*args):
+        tt()
+        self.screen=now_next[1]["screen"]
+        self.icon=now_next[1]["pic"]
+
+class NextText(MDTextButton):
+    def __init__(self, **kwargs):
+        super(NextText,self).__init__(**kwargs)
+        Clock.schedule_interval(self.update_class_text,15)
+    def update_class_text(self,*args):
+        tt()
+        self.screen=now_next[1]["screen"]
+        self.text=now_next[1]["name"]
+
+class TodayDate(MDLabel):
+    def __init__(self, **kwargs):
+        super(TodayDate,self).__init__(**kwargs)
+        Clock.schedule_interval(self.update_date,15)
+    def update_date(self,*args):
+        self.text=str(datetime.now().day)+"-"+str(datetime.now().month)+"-"+str(datetime.now().year)
 
 class Scourse(Screen):
     pass
