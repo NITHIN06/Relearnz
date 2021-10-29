@@ -253,7 +253,7 @@ class ClockLabel(Label):
 class InfoLabel(MDLabel):
         def __init__(self,**kwargs):
             super(InfoLabel,self).__init__(**kwargs)
-            Clock.schedule_interval(self.update, 60)
+            Clock.schedule_interval(self.update,60)
         def update(self,*args):
             self.text = "Hello "+str(user_info["username"])
 
@@ -303,14 +303,22 @@ class TodayDate(MDLabel):
 
 class Scourse(Screen):
     pass
+class Tcourse(Screen):
+    pass
 
 class Sevent(Screen):
+    pass
+class Tevent(Screen):
     pass
 
 class Schat(Screen):
     pass
+class Tchat(Screen):
+    pass
 
 class Sannouncement(Screen):
+    pass
+class Tannouncement(Screen):
     pass
 
 class Sfeedback(Screen):
@@ -332,7 +340,8 @@ class Sfeedback(Screen):
 
 class Sprofile(Screen):
     pass
-
+class Tprofile(Screen):
+    pass
 class Ai(Screen):
     def joinclass(self):
         webbrowser.open('https://meet.google.com/jpq-webf-iwy?pli=1', new = 1)
