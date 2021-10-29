@@ -251,11 +251,17 @@ class ClockLabel(Label):
         self.text= f"{datetime.now().strftime('%H:%M')}"
 
 class InfoLabel(MDLabel):
-        def __init__(self,**kwargs):
+    def __init__(self,**kwargs):
+        try:
             super(InfoLabel,self).__init__(**kwargs)
-            Clock.schedule_interval(self.update,60)
-        def update(self,*args):
+            Clock.schedule_interval(self.update,0.5)
+        except:
+            pass  
+    def update(self,*args):
+        try:
             self.text = "Hello "+str(user_info["username"])
+        except:
+            pass
 
 class NowIcon(MDIconButton):
     def __init__(self, **kwargs):
@@ -323,7 +329,7 @@ class Tannouncement(Screen):
 
 class Tfeedback(Screen):
     pass
-    
+
 class Sfeedback(Screen):
     def feedback_send(self):
         server= smtplib.SMTP("smtp.gmail.com",587)
