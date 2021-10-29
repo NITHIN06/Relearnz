@@ -34,7 +34,7 @@ socket.getaddrinfo('localhost',25)
 
 #time-table
 time_table=[{"name":"Artifical Intelligence","pic":"assets/AI.png","start":9,"batch":'even',"screen":"Ai"},
-            {"name":"Software Engineering And ...","pic":"assets/SEPM.png","start":9,"batch":'odd',"screen":"Sepm"},
+            {"name":"Software Engineering And ...","pic":"assets/SEPM.png","batch":'odd',"start":9,"screen":"Sepm"},
             {"name":"Computer Forensics","pic":"assets/CF.png","start":10,"batch":'even',"screen":"Cf"},
             {"name":"Digital Signal Processing","pic":"assets/DSP.png","start":10,"batch":'odd',"screen":"Dsp"},
             {"name":"Human Resource Management","pic":"assets/HRM.png","start":11,"batch":'even',"screen":"Hrm"},
@@ -70,6 +70,8 @@ def tt():
     elif len(now_next)==0:
         now_next.append({"name":"NONE","pic":"assets/female.png","screen":"Sdashboard"})
         now_next.append({"name":"NONE","pic":"assets/female.png","screen":"Sdashboard"})
+
+
 
 class WindowManager(ScreenManager):
     pass
@@ -235,7 +237,6 @@ class Register(Screen):
         self.ids.load.active = False
         self.a = 1
 
-
 class Tdashboard(Screen):
     pass
 
@@ -320,6 +321,9 @@ class Sannouncement(Screen):
 class Tannouncement(Screen):
     pass
 
+class Tfeedback(Screen):
+    pass
+    
 class Sfeedback(Screen):
     def feedback_send(self):
         server= smtplib.SMTP("smtp.gmail.com",587)
@@ -371,3 +375,5 @@ class Main(MDApp):
 
 
 Main().run()
+
+
