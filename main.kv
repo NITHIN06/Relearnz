@@ -762,11 +762,10 @@ WindowManager:
                                 root.manager.transition.direction="left"
                 MDLabel:
                     text: ""
-                    size_hint_y: 0.05
-
+                    size_hint_y: 0.03
             MDCard:
                 size_hint: None, None
-                size: 410, 650
+                size: 410, 630
                 pos_hint: {"center_x": 0.5, "center_y": 0.5}
                 elevation: 10
                 border_radius: 30
@@ -959,7 +958,9 @@ WindowManager:
                         bold: True
                         font_size: 21
                         color: 7/255, 12/255, 173/255
-
+            MDLabel:
+                text: ""
+                size_hint_x: 0.02
 
 <Scourse>:
 
@@ -5713,3 +5714,5 @@ WindowManager:
                     size_hint_y: 0.04
             MDLabel:
                 size_hint_x: 0.08
+
+
