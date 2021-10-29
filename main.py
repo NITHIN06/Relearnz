@@ -321,6 +321,9 @@ class Sannouncement(Screen):
 class Tannouncement(Screen):
     pass
 
+class Tfeedback(Screen):
+    pass
+    
 class Sfeedback(Screen):
     def feedback_send(self):
         server= smtplib.SMTP("smtp.gmail.com",587)
