@@ -302,14 +302,22 @@ class TodayDate(MDLabel):
 
 class Scourse(Screen):
     pass
+class Tcourse(Screen):
+    pass
 
 class Sevent(Screen):
+    pass
+class Tevent(Screen):
     pass
 
 class Schat(Screen):
     pass
+class Tchat(Screen):
+    pass
 
 class Sannouncement(Screen):
+    pass
+class Tannouncement(Screen):
     pass
 
 class Sfeedback(Screen):
@@ -331,7 +339,8 @@ class Sfeedback(Screen):
 
 class Sprofile(Screen):
     pass
-
+class Tprofile(Screen):
+    pass
 class Ai(Screen):
     def joinclass(self):
         webbrowser.open('https://meet.google.com/jpq-webf-iwy?pli=1', new = 1)

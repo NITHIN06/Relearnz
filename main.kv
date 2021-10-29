@@ -1,8 +1,8 @@
 #:kivy 2.0.0
 
 WindowManager:
-	Welcome:
-	Login:
+	Welcome: 
+	Login: 
     Register:
     Tdashboard:
     Sdashboard:
@@ -11,6 +11,7 @@ WindowManager:
     Schat:
     Sannouncement:
     Sfeedback:
+    Tprofile:
     Sprofile:
     Ai:
     Cf:
@@ -372,7 +373,7 @@ WindowManager:
                 elevation_normal: 8
                 md_bg_color: "black"
                 on_release:
-                    app.root.current= "Sprofile"
+                    app.root.current= "Tprofile"
                     root.manager.transition.direction="left"
 
             MDLabel:
@@ -427,7 +428,7 @@ WindowManager:
                         bold: True
                         font_size : 20
                         on_release:
-                            app.root.current= "Scourse"
+                            app.root.current= "Tcourse"
                             root.manager.transition.direction="left"
                     MDLabel:
                         size_hint_x: 0.4
@@ -450,7 +451,7 @@ WindowManager:
                         bold: True
                         font_size : 20
                         on_release:
-                            app.root.current= "Sevent"
+                            app.root.current= "Tevent"
                             root.manager.transition.direction="left"
                     MDLabel:
                         size_hint_x: 0.4
@@ -473,7 +474,7 @@ WindowManager:
                         bold: True
                         font_size : 20
                         on_release:
-                            app.root.current= "Schat"
+                            app.root.current= "Tchat"
                             root.manager.transition.direction="left"
                     MDLabel:
                         size_hint_x: 0.45
@@ -496,7 +497,7 @@ WindowManager:
                         bold: True
                         font_size : 20
                         on_release:
-                            app.root.current= "Sannouncement"
+                            app.root.current= "Tannouncement"
                             root.manager.transition.direction="left"
                     MDLabel:
                         size_hint_x: 0.1
@@ -519,7 +520,7 @@ WindowManager:
                         bold: True
                         font_size : 20
                         on_release:
-                            app.root.current= "Sfeedback"
+                            app.root.current= "Tfeedback"
                             root.manager.transition.direction="left"
                     MDLabel:
                         size_hint_x: 0.4
@@ -3040,6 +3041,275 @@ WindowManager:
                             on_press: root.feedback_send()
                 MDLabel:
                     size_hint_y: 0.8
+
+<Tprofile>:
+    name: "Tprofile"
+
+    MDBoxLayout:
+        orientation: "vertical"
+        MDLabel:
+            size_hint_y:0.025
+        MDBoxLayout:
+            size_hint_y: 0.1
+            MDLabel:
+                size_hint_x:0.05
+            MDLabel:
+                text: "ReLearnz"
+                color: 8/255, 1, 98/255
+                font_size: 40
+                bold: True
+                size_hint_x:0.5
+            MDTextField:
+                id: "A"
+                mode: "fill"
+                icon_right: "magnify"
+                font_size: 20
+                hint_text: "Search"
+                hint_text_color: 1,1,1
+                icon_left_color: 1,1,1
+                radius: [30]
+                fill_color: 184/255, 226/255, 1, 0.3
+                line_color_focus: 252/255, 5/255, 121/255, 1
+                size_hint_x:0.5
+            MDLabel:
+                size_hint_x:0.4
+            MDFloatingActionButton:
+                icon: "bell"
+                elevation_normal: 8
+                md_bg_color: "black"
+            MDLabel:
+                size_hint_x:0.08
+
+            MDFloatingActionButton:
+                icon: "account"
+                elevation_normal: 8
+                md_bg_color: "black"
+            MDLabel:
+                size_hint_x:0.09
+        MDLabel:
+            size_hint_y:0.02
+        MDBoxLayout:
+            md_bg_color: 117/255, 255/255, 230/255, 0.1
+            MDLabel:
+                size_hint_x:0.02
+            MDBoxLayout:
+                size_hint_x:0.4
+                orientation: "vertical"
+                MDLabel:
+                    size_hint_y: 0.1
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "eye"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Overview"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Tdashboard"
+                            root.manager.transition.direction="right"
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "book-multiple"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Courses"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Scourse"
+                            root.manager.transition.direction="right"
+
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "bookmark-multiple"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Events"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Tevent"
+                            root.manager.transition.direction="right"
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "chat"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Chat"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Tchat"
+                            root.manager.transition.direction="right"
+                    MDLabel:
+                        size_hint_x: 0.45
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "alert"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Announcements"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Tannouncement"
+                            root.manager.transition.direction="right"
+                    MDLabel:
+                        size_hint_x: 0.1
+                MDLabel:
+                    size_hint_y: 0.85
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "file-document"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDTextButton:
+                        text:"Feedback"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Tfeedback"
+                            root.manager.transition.direction="right"
+                    MDLabel:
+                        size_hint_x: 0.4
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    id: logout
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDIcon:
+                        icon: "logout"
+                        font_size : 30
+                        size_hint_x: 0.3
+
+                    MDTextButton:
+                        text:"Logout"
+                        bold: True
+                        font_size : 20
+                        on_release:
+                            app.root.current= "Welcome"
+                            root.manager.transition.direction="right"
+                    MDLabel:
+                        size_hint_x: 0.4
+
+                MDLabel:
+                    size_hint_y: 0.05
+            MDBoxLayout:
+                orientation: "vertical"
+                Image:
+                    source: "assets/TIcon.png"
+                MDBoxLayout:
+                    orientation: "vertical"
+                    MDLabel:
+                        text: "Username"
+                        bold: True
+                        font_size: 28
+                        size_hint: 1, 1
+                    MDLabel:
+                        text: "xyz"
+                        bold: True
+                        font_size: 20
+                        size_hint: 1, 1
+                    MDLabel:
+                        text: ""
+                        size_hint: 1, 1
+                    MDLabel:
+                        text: "Email"
+                        bold: True
+                        font_size: 28
+                        size_hint: 1, 1
+                    MDLabel:
+                        text: "xyz@gmail.com"
+                        bold: True
+                        font_size: 20
+                        size_hint: 1, 1
+                    MDLabel:
+                        text: ""
+                        size_hint: 1, 1
+                    MDLabel:
+                        text: "Role"
+                        bold: True
+                        font_size: 28
+                        size_hint: 1, 1
+                    MDLabel:
+                        text: "Teacher"
+                        bold: True
+                        font_size: 20
+                        size_hint: 1, 1
+                    MDLabel:
+                        text: ""
+                        size_hint: 1, 1
+            MDLabel:
+                text: ""
+                size_hint: 0.1, 1
 
 
 <Sprofile>:
