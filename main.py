@@ -72,7 +72,6 @@ def tt():
         now_next.append({"name":"NONE","pic":"assets/female.png","screen":"Sdashboard"})
 
 
-
 class WindowManager(ScreenManager):
     pass
 
@@ -218,8 +217,19 @@ class Register(Screen):
         if(self.a == 1 and self.t == -1):
 
             # store the values in the database
+
+            courses={"AI":{"Labs":[],"Assignments":[],"Attendence":75},
+                    "SEPM":{"Labs":[],"Assignments":[],"Attendence":70},
+                    "CF":{"Labs":[],"Assignments":[],"Attendence":85},
+                    "SC":{"Labs":[],"Assignments":[],"Attendence":74},
+                    "DSP":{"Labs":[],"Assignments":[],"Attendence":95},
+                    "HRM":{"Labs":[],"Assignments":[],"Attendence":55},
+                    "OSM":{"Labs":[],"Assignments":[],"Attendence":45},
+                    "FMA":{"Labs":[],"Assignments":[],"Attendence":78}}
+
             info = {"username": username, "email": email,
-                    "password": password, "role": self.t}
+                    "password": password, "role": self.t,
+                    "courses":courses}
             x = firebase.post("/Users/Student", info)
             user_id = x['name']
             user_info = info
@@ -332,25 +342,43 @@ class Tfeedback(Screen):
 
 class Sfeedback(Screen):
     def feedback_send(self):
-        server= smtplib.SMTP("smtp.gmail.com",587)
-        server.ehlo()
-        server.starttls()
-        server.login("vajrapusugnankranthiraju@gmail.com","yqqladmhfdgmuoes")
-        From="vajrapusugnankranthiraju@gmail.com"
-        To="akhilsaibande13@gmail.com"
+        # server= smtplib.SMTP("smtp.gmail.com",587)
+        # server.ehlo()
+        # server.starttls()
+        # server.login("vajrapusugnankranthiraju@gmail.com","yqqladmhfdgmuoes")
+        # From="vajrapusugnankranthiraju@gmail.com"
+        # To="akhilsaibande13@gmail.com"
         txt=self.ids.feedback_txt.text
 
-        body="""Subject: Feedback from %s\n
-                %s"""%(user_info['username'],txt)
-        self.server.sendmail(From,[To],body)
+        # body="""Subject: Feedback from %s\n
+        #         %s"""%(user_info['username'],txt)
+        # self.server.sendmail(From,[To],body)
+        x=firebase.get('Users/Student','')
+        for i in x:
+            if len(txt)<10:
+                firebase.post('Users/Student/'+i+'/courses/AI/Labs',{'question':txt,'sender':user_info['username'],'time':f"{datetime.now().strftime('%H:%M')}"})
+            else:
+                firebase.post('Users/Student/'+i+'/courses/AI/Assignments',{'question':txt,'sender':user_info['username'],'time':f"{datetime.now().strftime('%H:%M')}"})
 
         self.ids.feedback_txt.text = ""
         return
 
 class Sprofile(Screen):
-    pass
+    def __init__(self, **kwargs):
+        super(Sprofile,self).__init__(**kwargs)
+        Clock.schedule_interval(self.update_profile,20)
+    def update_profile(self,*args):
+        self.ids.pro_name.text=user_info["username"]
+        self.ids.pro_email.text=user_info["email"]
+
 class Tprofile(Screen):
-    pass
+    def __init__(self, **kwargs):
+        super(Tprofile,self).__init__(**kwargs)
+        Clock.schedule_interval(self.update_profile,20)
+    def update_profile(self,*args):
+        self.ids.pro_name.text=user_info["username"]
+        self.ids.pro_email.text=user_info["email"]
+
 class Ai(Screen):
     def joinclass(self):
         webbrowser.open('https://meet.google.com/jpq-webf-iwy?pli=1', new = 1)
