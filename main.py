@@ -276,7 +276,7 @@ class InfoLabel(MDLabel):
 class NowIcon(MDIconButton):
     def __init__(self, **kwargs):
         super(NowIcon,self).__init__(**kwargs)
-        Clock.schedule_interval(self.update_class_icon,15)
+        Clock.schedule_interval(self.update_class_icon,5)
     def update_class_icon(self,*args):
         tt()
         self.screen=now_next[0]["screen"]
@@ -285,7 +285,7 @@ class NowIcon(MDIconButton):
 class NowText(MDTextButton):
     def __init__(self, **kwargs):
         super(NowText,self).__init__(**kwargs)
-        Clock.schedule_interval(self.update_class_text,15)
+        Clock.schedule_interval(self.update_class_text,5)
 
     def update_class_text(self,*args):
         tt()
@@ -295,7 +295,7 @@ class NowText(MDTextButton):
 class NextIcon(MDIconButton):
     def __init__(self, **kwargs):
         super(NextIcon,self).__init__(**kwargs)
-        Clock.schedule_interval(self.update_class_icon,15)
+        Clock.schedule_interval(self.update_class_icon,5)
     def update_class_icon(self,*args):
         tt()
         self.screen=now_next[1]["screen"]
@@ -304,7 +304,7 @@ class NextIcon(MDIconButton):
 class NextText(MDTextButton):
     def __init__(self, **kwargs):
         super(NextText,self).__init__(**kwargs)
-        Clock.schedule_interval(self.update_class_text,15)
+        Clock.schedule_interval(self.update_class_text,5)
     def update_class_text(self,*args):
         tt()
         self.screen=now_next[1]["screen"]
@@ -313,7 +313,7 @@ class NextText(MDTextButton):
 class TodayDate(MDLabel):
     def __init__(self, **kwargs):
         super(TodayDate,self).__init__(**kwargs)
-        Clock.schedule_interval(self.update_date,15)
+        Clock.schedule_interval(self.update_date,5)
     def update_date(self,*args):
         self.text=str(datetime.now().day)+"-"+str(datetime.now().month)+"-"+str(datetime.now().year)
 
@@ -365,19 +365,31 @@ class Sfeedback(Screen):
 
 class Sprofile(Screen):
     def __init__(self, **kwargs):
-        super(Sprofile,self).__init__(**kwargs)
-        Clock.schedule_interval(self.update_profile,20)
+        try:
+            super(Sprofile,self).__init__(**kwargs)
+            Clock.schedule_interval(self.update_profile,0.5)
+        except:
+            pass
     def update_profile(self,*args):
-        self.ids.pro_name.text=user_info["username"]
-        self.ids.pro_email.text=user_info["email"]
+        try:
+            self.ids.pro_name.text=user_info["username"]
+            self.ids.pro_email.text=user_info["email"]
+        except:
+            pass
 
 class Tprofile(Screen):
     def __init__(self, **kwargs):
-        super(Tprofile,self).__init__(**kwargs)
-        Clock.schedule_interval(self.update_profile,20)
+        try:
+            super(Tprofile,self).__init__(**kwargs)
+            Clock.schedule_interval(self.update_profile,0.5)
+        except:
+            pass
     def update_profile(self,*args):
-        self.ids.pro_name.text=user_info["username"]
-        self.ids.pro_email.text=user_info["email"]
+        try:
+            self.ids.pro_name.text=user_info["username"]
+            self.ids.pro_email.text=user_info["email"]
+        except:
+            pass    
 
 class Ai(Screen):
     def joinclass(self):
