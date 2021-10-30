@@ -139,7 +139,6 @@ class Login(Screen):
         self.load()
         self.a = 1
 
-
 class Register(Screen):
 
     t = 0
@@ -179,6 +178,8 @@ class Register(Screen):
         global user_id
         global user_info
 
+        global user_id
+        global user_info
         if(username == "" or username == "FIELD SHOULD NOT BE EMPTY"):
             self.ids.user.text = "FIELD SHOULD NOT BE EMPTY"
             self.a = 0
@@ -255,7 +256,7 @@ class Tdashboard(Screen):
             super(Tdashboard,self).__init__(**kwargs)
             Clock.schedule_interval(self.update,0.5)
         except:
-            pass  
+            pass
     def update(self,*args):
         try:
             self.ids.uname.text = "Hello "+str(user_info["username"])
@@ -269,7 +270,7 @@ class Sdashboard(Screen):
             super(Sdashboard,self).__init__(**kwargs)
             Clock.schedule_interval(self.update,0.5)
         except:
-            pass  
+            pass
     def update(self,*args):
         try:
             self.ids.uname.text = "Hello "+str(user_info["username"])
@@ -399,7 +400,7 @@ class Tprofile(Screen):
             self.ids.pro_name.text=user_info["username"]
             self.ids.pro_email.text=user_info["email"]
         except:
-            pass    
+            pass
 
 class Ai(Screen):
     def joinclass(self):
