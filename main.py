@@ -176,6 +176,8 @@ class Register(Screen):
         username = self.ids.user.text
         email = self.ids.email.text
         password = self.ids.password.text
+        global user_id
+        global user_info
 
         if(username == "" or username == "FIELD SHOULD NOT BE EMPTY"):
             self.ids.user.text = "FIELD SHOULD NOT BE EMPTY"
@@ -280,9 +282,6 @@ class ClockLabel(Label):
         Clock.schedule_interval(self.update,1)
     def update(self,*args):
         self.text= f"{datetime.now().strftime('%H:%M')}"
-
-
-
 
 class NowIcon(MDIconButton):
     def __init__(self, **kwargs):
