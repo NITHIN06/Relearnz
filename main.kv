@@ -3681,10 +3681,51 @@ WindowManager:
                 MDLabel:
                     size_hint_y: 0.05
 
-            MDLabel:
-                text:"Announcements"
-                font_style: "H1"
-                halign: "center"
+            MDBoxLayout:
+                orientation: "vertical"
+
+                MDLabel:
+                    text: "Make an announcement"
+                    size_hint_y: 0.2
+                    font_size: 24
+                    bold: True
+                MDCard:
+                    size_hint: None,None
+                    size: 600,300
+                    elevation: 0
+                    padding: 10
+                    border_radius: 10
+                    radius: [20]
+                    pos_hint: {"center_x":0.3,"center_y":0.4}
+                    orientation: "vertical"
+
+                    MDBoxLayout:
+                        orientation: "horizontal"
+                        size_hint: 1,0.2
+                        MDLabel:
+                            text: "Announcement"
+                            font_size: 14
+                            size_hint: 1,0.2
+                            bold: True
+                    MDTextField:
+                        id: Announcemnet_txt
+                        hint_text: "Type a message"
+                        multiline: True
+                        max_height: 200
+                    MDBoxLayout:
+                        orientation: "horizontal"
+                        MDLabel:
+                            size_hint: 0.7,0
+                        MDFillRoundFlatIconButton:
+                            icon: "send"
+                            text: "send"
+                            fill_color: 185/255,0.4,58/255,1
+                            font_size: 24
+                            bold: True
+                            on_press: root.announcement_send()
+                MDLabel:
+                    size_hint_y: 0.8
+
 
 
 <Sfeedback>:
