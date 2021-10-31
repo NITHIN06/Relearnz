@@ -25,7 +25,7 @@ from datetime import datetime,date
 from kivy.clock import Clock
 from kivymd.uix.list import OneLineAvatarIconListItem
 from kivy.properties import StringProperty
-
+import re
 
 # firebase connection
 firebase = firebase.FirebaseApplication(
@@ -108,12 +108,13 @@ class Login(Screen):
     def logger(self):
         username = self.ids.user.text
         password = self.ids.password.text
+        regex = r'[\s]*'
 
-        if(username == "" or username == "FIELD SHOULD NOT BE EMPTY"):
+        if(username == "" or username == "FIELD SHOULD NOT BE EMPTY" or re.fullmatch(regex, username)):
             self.ids.user.text = "FIELD SHOULD NOT BE EMPTY"
             self.a = 0
 
-        if(password == "" or password == "FIELD SHOULD NOT BE EMPTY"):
+        if(password == "" or password == "FIELD SHOULD NOT BE EMPTY" or re.fullmatch(regex, password)):
             self.ids.password.text = "FIELD SHOULD NOT BE EMPTY"
             self.a = 0
 
@@ -307,28 +308,38 @@ class Register(Screen):
         username = self.ids.user.text
         email = self.ids.email.text
         password = self.ids.password.text
+        regexe = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
+        regex = r'[\s]*'
+        alert = 0
+        alert1 = 0
         global user_id
         global user_info
-
-        global user_id
-        global user_info
-        if(username == "" or username == "FIELD SHOULD NOT BE EMPTY"):
+        if(username == "" or username == "FIELD SHOULD NOT BE EMPTY" or re.fullmatch(regex, username)):
             self.ids.user.text = "FIELD SHOULD NOT BE EMPTY"
             self.a = 0
 
-        if(password == "" or password == "FIELD SHOULD NOT BE EMPTY"):
+        if(password == "" or password == "FIELD SHOULD NOT BE EMPTY" or re.fullmatch(regex, password)):
             self.ids.password.text = "FIELD SHOULD NOT BE EMPTY"
             self.a = 0
 
-        if(email == "" or email == "FIELD SHOULD NOT BE EMPTY"):
+        if(email == "" or email == "FIELD SHOULD NOT BE EMPTY" or re.fullmatch(regex, email)):
             self.ids.email.text = "FIELD SHOULD NOT BE EMPTY"
             self.a = 0
+            alert1 = 1
+            alert = 1
 
-        if(self.ids.btn_std.icon == "assets/student.png" and self.ids.btn_tch.icon == "assets/teacher.png"):
+        if(not(re.fullmatch(regexe, email)) and alert1 == 0):
+            self.dialog = MDDialog(
+                title="Invalid Email", text="Please enter a valid email", radius=[20, 7, 20, 7])
+            self.dialog.open()
+            self.a = 0
+            alert = 1
+
+        if(self.ids.btn_std.icon == "assets/student.png" and self.ids.btn_tch.icon == "assets/teacher.png" and alert == 0):
             self.dialog = MDDialog(
                 title="Select a Role", text="Please select either Teacher or Student role", radius=[20, 7, 20, 7])
             self.dialog.open()
-            return
+            self.a = 0
 
         if(self.a == 1 and self.t == 1):
 
