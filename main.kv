@@ -41,7 +41,7 @@ WindowManager:
                 text:""
                 size_hint: 0.2 ,1
             Image:
-                source: 'assets\welcome.png'
+                source: 'assets/welcome.png'
                 keep_ratio: False
                 allow_stretch: True
             MDLabel:
@@ -87,7 +87,7 @@ WindowManager:
                 text:""
                 size_hint: 0.2 ,1
             Image:
-                source: 'assets\login.png'
+                source: 'assets/login.png'
                 keep_ratio: False
                 allow_stretch: True
             MDLabel:
@@ -4992,7 +4992,7 @@ WindowManager:
                         bold: True
                         font_size : 20
                         on_release:
-                            app.root.current= "Welcome"
+                            app.root.current= "login"
                             root.manager.transition.direction="right"
                     MDLabel:
                         size_hint_x: 0.4
@@ -5049,16 +5049,32 @@ WindowManager:
                     MDCard:
                         size_hint: None, None
                         size: 440, 220
-                        elevation: 10
                         ripple_behavior: False
                         border_radius: 20
+                        elevation:10
                         radius: [20]
+                        ripple_behavior: False
                         orientation: "vertical"
                         MDLabel:
-                            text : "LAB"
-                            font_style: "H6"
-                            halign: "center"
-                            size_hint_y : 0.2
+                            size_hint_y: 0.05 
+                        MDCard:
+                            size_hint: None, None
+                            size: 380, 40
+                            border_radius: 30
+                            pos_hint:{"center_x": 0.5, "center_y": 0.5}
+                            radius: [15]     
+                            MDLabel:
+                                text: "LAB"
+                                font_style: "H6"
+                                size_hint_x: 0.5
+                                halign: "center"
+                            MDFillRoundFlatButton:
+                                text: "ADD"
+                                halign: "right"
+                                font_style: "H6"
+                                md_bg_color: 8/255, 1, 98/255,1 
+                        MDLabel:
+                            size_hint_y: 0.05        
                         MDCard:
                             size_hint: None, None
                             size: 380, 70
@@ -5132,10 +5148,25 @@ WindowManager:
                         radius: [20]
                         orientation: "vertical"
                         MDLabel:
-                            text : "ASSIGNMENTS"
-                            halign: "center"
-                            font_style: "H6"
-                            size_hint_y : 0.2
+                            size_hint_y: 0.05 
+                        MDCard:
+                            size_hint: None, None
+                            size: 380, 40
+                            border_radius: 30
+                            pos_hint:{"center_x": 0.5, "center_y": 0.5}
+                            radius: [15]     
+                            MDLabel:
+                                text: "ASSIGNMENTS"
+                                font_style: "H6"
+                                size_hint_x: 0.5
+                                halign: "center"
+                            MDFillRoundFlatButton:
+                                text: "ADD"
+                                halign: "right"
+                                font_style: "H6"
+                                md_bg_color: 8/255, 1, 98/255,1 
+                        MDLabel:
+                            size_hint_y: 0.05         
                         MDCard:
                             size_hint: None, None
                             size: 380, 70
@@ -5201,7 +5232,7 @@ WindowManager:
                     size_hint_y: 0.04
             MDLabel:
                 size_hint_x: 0.08
-
+        
 
 <Cf>:
     name: "Cf"
