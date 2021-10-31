@@ -23,7 +23,8 @@ import threading
 import webbrowser
 from datetime import datetime,date
 from kivy.clock import Clock
-
+from kivymd.uix.list import OneLineAvatarIconListItem
+from kivy.properties import StringProperty
 
 
 # firebase connection
@@ -139,10 +140,16 @@ class Login(Screen):
         self.load()
         self.a = 1
 
+class Item(OneLineAvatarIconListItem):
+    divider = None
+    source = StringProperty()
+
 class Register(Screen):
 
     t = 0
     dialog = None
+    d = None
+    course = ""
     a = 1
 
     def load(self):
@@ -170,6 +177,131 @@ class Register(Screen):
         else:
             self.ids.btn_std.icon = "assets/student.png"
         self.t = -1
+
+    def ai(self, inst):
+        self.course = "Artificial Intelligence"
+        self.d = MDDialog(
+            title="Confirm ?",
+            text="Are you sure you want to select Artificial intelligence",
+            radius=[20, 7, 20, 7],
+            buttons=[
+                MDFlatButton(text="NO", on_press=self.no),
+                MDFlatButton(text="YES",on_press=self.yes),
+            ],
+        )
+        self.d.open()
+
+    def sepm(self, inst):
+        self.course = "Software Engineering and Project Management"
+        self.d = MDDialog(
+            title="Confirm ?",
+            text="Are you sure you want to select Software Engineering and Project Management",
+            radius=[20, 7, 20, 7],
+            buttons=[
+                MDFlatButton(text="NO", on_press=self.no),
+                MDFlatButton(text="YES",on_press=self.yes),
+            ],
+        )
+        self.d.open()
+
+    def dsp(self, inst):
+        self.course = "Digital Signal Processing"
+        self.d = MDDialog(
+            title="Confirm ?",
+            text="Are you sure you want to select Digital Signal Processing",
+            radius=[20, 7, 20, 7],
+            buttons=[
+                MDFlatButton(text="NO", on_press=self.no),
+                MDFlatButton(text="YES",on_press=self.yes),
+            ],
+        )
+        self.d.open()
+
+    def sc(self, inst):
+        self.course = "Soft Computing"
+        self.d = MDDialog(
+            title="Confirm ?",
+            text="Are you sure you want to select Soft Computing",
+            radius=[20, 7, 20, 7],
+            buttons=[
+                MDFlatButton(text="NO", on_press=self.no),
+                MDFlatButton(text="YES",on_press=self.yes),
+            ],
+        )
+        self.d.open()
+
+    def hrm(self, inst):
+        self.course = "Human Resource Management"
+        self.d = MDDialog(
+            title="Confirm ?",
+            text="Are you sure you want to select Human Resource Management",
+            radius=[20, 7, 20, 7],
+            buttons=[
+                MDFlatButton(text="NO", on_press=self.no),
+                MDFlatButton(text="YES",on_press=self.yes),
+            ],
+        )
+        self.d.open()
+
+    def cf(self, inst):
+        self.course = "Computer Forensics"
+        self.d = MDDialog(
+            title="Confirm ?",
+            text="Are you sure you want to select Computer Forensics",
+            radius=[20, 7, 20, 7],
+            buttons=[
+                MDFlatButton(text="NO", on_press=self.no),
+                MDFlatButton(text="YES",on_press=self.yes),
+            ],
+        )
+        self.d.open()
+
+    def fma(self, inst):
+        self.course = "Financial Management & Accounting"
+        self.d = MDDialog(
+            title="Confirm ?",
+            text="Are you sure you want to select Financial Management & Accounting",
+            radius=[20, 7, 20, 7],
+            buttons=[
+                MDFlatButton(text="NO", on_press=self.no),
+                MDFlatButton(text="YES",on_press=self.yes),
+            ],
+        )
+        self.d.open()
+
+    def osm(self, inst):
+        self.course = "Operations & Supply Chain Management"
+        self.d = MDDialog(
+            title="Confirm ?",
+            text="Are you sure you want to select Operations & Supply Chain Management",
+            radius=[20, 7, 20, 7],
+            buttons=[
+                MDFlatButton(text="NO", on_press=self.no),
+                MDFlatButton(text="YES",on_press=self.yes),
+            ],
+        )
+        self.d.open()
+         
+    def yes(self, inst):
+
+        # self.course 
+        # store the above value in database
+        print(self.course)
+
+        self.d.dismiss()
+        self.dialog.dismiss()
+        self.ids.btn_tch.icon = "assets/teacher.png"
+        self.ids.btn_std.icon == "assets/student.png"
+        self.ids.user.text = ""
+        self.ids.password.text = ""
+        self.ids.email.text = ""
+        self.t = 0
+        self.ids.load.active = False
+        self.manager.current = "Tdashboard"
+        self.manager.transition.direction = "left"    
+
+    def no(self, inst):
+        self.d.dismiss()
 
     def registration(self):
         username = self.ids.user.text
@@ -200,22 +332,27 @@ class Register(Screen):
 
         if(self.a == 1 and self.t == 1):
 
-            # store the values in the database
+            self.dialog = MDDialog(
+                title="Select a Course",
+                type="simple",
+                items=[
+                    Item(text="Artificial Intelligence", source="assets\AI.png", on_press=self.ai),
+                    Item(text="Software Engineering and Project Management", source="assets\SEPM.png", on_press=self.sepm),
+                    Item(text="Digital Signal Processing", source="assets\DSP.png", on_press=self.dsp),
+                    Item(text="Computer Forensics", source="assets\CF.png", on_press=self.cf),
+                    Item(text="Soft Computing", source="assets\SC.png", on_press=self.sc),
+                    Item(text="Human Resource Management", source="assets\HRM.png", on_press=self.hrm),
+                    Item(text="Financial Management & Accounting", source="assets\FMA.png", on_press=self.fma),
+                    Item(text="Operations & Supply Chain Management", source="assets\OSM.png", on_press=self.osm),
+                ],
+            )
+            self.dialog.open()
             info = {"username": username, "email": email,
                     "password": password, "role": self.t}
             x = firebase.post("/Users/Teacher", info)
             user_id = x['name']
             user_info = info
-            self.ids.btn_tch.icon = "assets/teacher.png"
-            self.ids.btn_std.icon == "assets/student.png"
-            self.ids.user.text = ""
-            self.ids.password.text = ""
-            self.ids.email.text = ""
-            self.t = 0
-            self.ids.load.active = False
-
-            self.manager.current = "Tdashboard"
-            self.manager.transition.direction = "left"
+            
 
         if(self.a == 1 and self.t == -1):
 
