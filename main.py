@@ -27,7 +27,7 @@ import time
 from kivy.clock import Clock
 from kivymd.uix.list import OneLineAvatarIconListItem
 from kivy.properties import StringProperty
-
+import re
 
 # firebase connection
 firebase = firebase.FirebaseApplication(
@@ -103,14 +103,23 @@ class Login(Screen):
     def logger(self):
         username = self.ids.user.text
         password = self.ids.password.text
+        z = 0
+        regex = r'[\s]*'
 
-        if(username == "" or username == "FIELD SHOULD NOT BE EMPTY"):
-            self.ids.user.text = "FIELD SHOULD NOT BE EMPTY"
+        if(re.fullmatch(regex, username)):
+            self.ids.user.text = ""
             self.a = 0
+            z = 1
+            self.dialog = MDDialog(
+                title="Invalid Username", text="Username should not be empty", radius=[20, 7, 20, 7])
+            self.dialog.open()
 
-        if(password == "" or password == "FIELD SHOULD NOT BE EMPTY"):
-            self.ids.password.text = "FIELD SHOULD NOT BE EMPTY"
+        if(re.fullmatch(regex, password)and z == 0):
+            self.ids.password.text = ""
             self.a = 0
+            self.dialog = MDDialog(
+                title="Invalid Password", text="Password should not be empty", radius=[20, 7, 20, 7])
+            self.dialog.open()
 
         if(self.a == 1):
 
@@ -323,26 +332,56 @@ class Register(Screen):
         username = self.ids.user.text
         email = self.ids.email.text
         password = self.ids.password.text
+        regexe = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
+        regex = r'[\s]*'
+        alert, alert1, alert2, alert3 = 0, 0, 0, 0
         global user_id
         global user_info
 
         if(username == "" or username == "FIELD SHOULD NOT BE EMPTY"):
             self.ids.user.text = "FIELD SHOULD NOT BE EMPTY"
+        if(re.fullmatch(regex, username)):
+            self.ids.user.text = ""
             self.a = 0
+            alert = 1
+            alert1 = 1
+            alert2 = 1
+            alert3 = 1
+            self.dialog = MDDialog(
+                title="Invalid Field", text="Username should not be empty", radius=[20, 7, 20, 7])
+            self.dialog.open()
 
-        if(password == "" or password == "FIELD SHOULD NOT BE EMPTY"):
-            self.ids.password.text = "FIELD SHOULD NOT BE EMPTY"
+        if(re.fullmatch(regex, email) and alert3 == 0):
+            self.ids.email.text = ""
             self.a = 0
+            alert1 = 1
+            alert = 1
+            alert2 = 1
+            self.dialog = MDDialog(
+                title="Invalid Field", text="Email should not be empty", radius=[20, 7, 20, 7])
+            self.dialog.open()
 
-        if(email == "" or email == "FIELD SHOULD NOT BE EMPTY"):
-            self.ids.email.text = "FIELD SHOULD NOT BE EMPTY"
+        if(re.fullmatch(regex, password) and alert2 == 0):
+            self.ids.password.text = ""
             self.a = 0
+            alert = 1
+            alert1 = 1
+            self.dialog = MDDialog(
+                title="Invalid Field", text="Password should not be empty", radius=[20, 7, 20, 7])
+            self.dialog.open()
 
-        if(self.ids.btn_std.icon == "assets/student.png" and self.ids.btn_tch.icon == "assets/teacher.png"):
+        if(not(re.fullmatch(regexe, email)) and alert1 == 0):
+            self.dialog = MDDialog(
+                title="Invalid Email", text="Please enter a valid email", radius=[20, 7, 20, 7])
+            self.dialog.open()
+            self.a = 0
+            alert = 1
+
+        if(self.ids.btn_std.icon == "assets/student.png" and self.ids.btn_tch.icon == "assets/teacher.png" and alert == 0):
             self.dialog = MDDialog(
                 title="Select a Role", text="Please select either Teacher or Student role", radius=[20, 7, 20, 7])
             self.dialog.open()
-            return
+            self.a = 0
 
         if(self.a == 1 and self.t == 1):
 
