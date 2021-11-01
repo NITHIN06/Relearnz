@@ -55,18 +55,35 @@ time_table1={
 
 def tt():
     global now_next
+    t = time.localtime()
+    current_time = datetime.strptime(str(t.tm_hour)+":"+str(t.tm_min), '%H:%M')
     now_next=[]
-    for i in times:
-        h=[datetime.strptime(j, '%I:%M %p') for j in i.split(" - ")]
-        if(h[0]<current_time and h[1]>current_time):
-            try:
-                no=list(df.index[df['Time']==i])
-                now_next.append(time_table1[df.iloc[no[0]].loc[time.ctime().split()[0]]])
-                now_next.append(time_table1[df.iloc[no[0]+1].loc[time.ctime().split()[0]]])
-            except:
-                print("error")
-                now_next.append({"name":"NONE","pic":"assets/female.png","screen":"Sdashboard"})
-
+    for i in range(len(times)):
+        h=[datetime.strptime(j, '%I:%M %p') for j in times[i].split(" - ")]
+        if(i!=len(times)-1):
+            hn=[datetime.strptime(j, '%I:%M %p') for j in times[i+1].split(" - ")]
+        try:
+            if(h[0]<=current_time and h[1]>=current_time):
+                no=list(df.index[df['Time']==times[i]])
+                if(no[0]<len(times)-1):
+                    now_next.append(time_table1[df.iloc[no[0]].loc[time.ctime().split()[0]]])
+                    now_next.append(time_table1[df.iloc[no[0]+1].loc[time.ctime().split()[0]]])
+                elif no[0]==len(times)-1:
+                    now_next.append(time_table1[df.iloc[no[0]].loc[time.ctime().split()[0]]])
+                    now_next.append({"name":"NONE","pic":"assets/female.png","screen":"Sdashboard"})
+            elif h[1]<current_time and hn[0]>current_time:
+                no=list(df.index[df['Time']==times[i+1]])
+                if(no[0]<len(times)-1):
+                    now_next.append(time_table1[df.iloc[no[0]].loc[time.ctime().split()[0]]])
+                    now_next.append(time_table1[df.iloc[no[0]+1].loc[time.ctime().split()[0]]])
+                elif no[0]==len(times)-1:
+                    now_next.append(time_table1[df.iloc[no[0]].loc[time.ctime().split()[0]]])
+                    now_next.append({"name":"NONE","pic":"assets/female.png","screen":"Sdashboard"})
+        except Exception as e:
+            print(str(e))
+    if len(now_next)==0:
+        now_next.append({"name":"NONE","pic":"assets/female.png","screen":"Sdashboard"})
+        now_next.append({"name":"NONE","pic":"assets/female.png","screen":"Sdashboard"})
 
 class WindowManager(ScreenManager):
     pass
@@ -447,7 +464,6 @@ class Tdashboard(Screen):
         except:
             pass
 
-
 class Sdashboard(Screen):
     def __init__(self,**kwargs):
         try:
@@ -617,7 +633,6 @@ class Osm(Screen):
 
 class Main(MDApp):
     pass
-
 
 Main().run()
 
