@@ -7,6 +7,7 @@ Config.set('graphics', 'height', 750)
 Config.set('graphics', 'resizable', False)
 
 import smtplib
+import pandas as pd
 import socket
 from kivymd.app import MDApp
 from kivy.lang import Builder
@@ -22,6 +23,7 @@ from firebase import firebase
 import threading
 import webbrowser
 from datetime import datetime,date
+import time
 from kivy.clock import Clock
 from kivymd.uix.list import OneLineAvatarIconListItem
 from kivy.properties import StringProperty
@@ -34,43 +36,36 @@ firebase = firebase.FirebaseApplication(
 socket.getaddrinfo('localhost',25)
 
 #time-table
-time_table=[{"name":"Artifical Intelligence","pic":"assets/AI.png","start":9,"batch":'even',"screen":"Ai"},
-            {"name":"Software Engineering And ...","pic":"assets/SEPM.png","batch":'odd',"start":9,"screen":"Sepm"},
-            {"name":"Computer Forensics","pic":"assets/CF.png","start":10,"batch":'even',"screen":"Cf"},
-            {"name":"Digital Signal Processing","pic":"assets/DSP.png","start":10,"batch":'odd',"screen":"Dsp"},
-            {"name":"Human Resource Management","pic":"assets/HRM.png","start":11,"batch":'even',"screen":"Hrm"},
-            {"name":"Operations & Supply Chain ...","pic":"assets/OSM.png","start":11,"batch":'odd',"screen":"Osm"},
-            {"name":"Finanical Management","pic":"assets/FMA.png","start":12,"batch":'even',"screen":"Fma"},
-            {"name":"Soft Computing","pic":"assets/SC.png","start":12,"batch":'odd',"screen":"Sc"}]
+df = pd.read_csv(f"https://docs.google.com/spreadsheets/d/1UVyCrSjX4pX2La2JW9IOtmpkkfaNaW_sN4-nAPpELgU/export?format=csv")
+times=list(df['Time'])
 
-def nearest_class(l):
-    time_now=datetime.now().hour
-    x=[i["start"] for i in l]
-    c=0
-    z=[]
-    for i in range(len(x)):
-        if (time_now<=x[i] and len(z)!=2):
-            z.append(l[i])
-    return z
+
+t = time.localtime()
+current_time = datetime.strptime(str(t.tm_hour)+":"+str(t.tm_min), '%H:%M')
+time_table1={
+    "AI":{'name':"Artifical Intelligence","pic":"assets/AI.png","screen":"Ai"},
+    "SEPM":{"name":"Software Engineering And ...","pic":"assets/SEPM.png","screen":"Sepm"},
+    "CF":{"name":"Computer Forensics","pic":"assets/CF.png","screen":"Cf"},
+    "DSP":{"name":"Digital Signal Processing","pic":"assets/DSP.png","screen":"Dsp"},
+    "HRM":{"name":"Human Resource Management","pic":"assets/HRM.png","screen":"Hrm"},
+    "OSM":{"name":"Operations & Supply Chain ...","pic":"assets/OSM.png","screen":"Osm"},
+    "FMA":{"name":"Finanical Management","pic":"assets/FMA.png","screen":"Fma"},
+    "SC":{"name":"Soft Computing","pic":"assets/SC.png","screen":"Sc"}
+}
 
 def tt():
     global now_next
     now_next=[]
-    l=[]
-    for i in time_table:
-        today= date.today().day
-        if (today%2==0 and i["batch"]=='even'):
-            #even-> batch-even
-            l.append(i)
-        elif (today%2!=0 and i["batch"]=='odd'):
-            #odd-> batch-odd
-            l.append(i)
-    now_next=nearest_class(l)
-    if len(now_next)==1:
-        now_next.append({"name":"NONE","pic":"assets/female.png","screen":"Sdashboard"})
-    elif len(now_next)==0:
-        now_next.append({"name":"NONE","pic":"assets/female.png","screen":"Sdashboard"})
-        now_next.append({"name":"NONE","pic":"assets/female.png","screen":"Sdashboard"})
+    for i in times:
+        h=[datetime.strptime(j, '%I:%M %p') for j in i.split(" - ")]
+        if(h[0]<current_time and h[1]>current_time):
+            try:
+                no=list(df.index[df['Time']==i])
+                now_next.append(time_table1[df.iloc[no[0]].loc[time.ctime().split()[0]]])
+                now_next.append(time_table1[df.iloc[no[0]+1].loc[time.ctime().split()[0]]])
+            except:
+                print("error")
+                now_next.append({"name":"NONE","pic":"assets/female.png","screen":"Sdashboard"})
 
 
 class WindowManager(ScreenManager):
@@ -150,6 +145,7 @@ class Register(Screen):
     dialog = None
     d = None
     course = ""
+    c_id=""
     a = 1
 
     def load(self):
@@ -180,6 +176,8 @@ class Register(Screen):
 
     def ai(self, inst):
         self.course = "Artificial Intelligence"
+        self.c_id = "AI"
+
         self.d = MDDialog(
             title="Confirm ?",
             text="Are you sure you want to select Artificial intelligence",
@@ -193,6 +191,8 @@ class Register(Screen):
 
     def sepm(self, inst):
         self.course = "Software Engineering and Project Management"
+        self.c_id = "SEPM"
+
         self.d = MDDialog(
             title="Confirm ?",
             text="Are you sure you want to select Software Engineering and Project Management",
@@ -206,6 +206,8 @@ class Register(Screen):
 
     def dsp(self, inst):
         self.course = "Digital Signal Processing"
+        self.c_id = "DSP"
+
         self.d = MDDialog(
             title="Confirm ?",
             text="Are you sure you want to select Digital Signal Processing",
@@ -219,6 +221,8 @@ class Register(Screen):
 
     def sc(self, inst):
         self.course = "Soft Computing"
+        self.c_id = "SC"
+
         self.d = MDDialog(
             title="Confirm ?",
             text="Are you sure you want to select Soft Computing",
@@ -232,6 +236,7 @@ class Register(Screen):
 
     def hrm(self, inst):
         self.course = "Human Resource Management"
+        self.c_id = "HRM"
         self.d = MDDialog(
             title="Confirm ?",
             text="Are you sure you want to select Human Resource Management",
@@ -245,6 +250,8 @@ class Register(Screen):
 
     def cf(self, inst):
         self.course = "Computer Forensics"
+        self.c_id = "CF"
+
         self.d = MDDialog(
             title="Confirm ?",
             text="Are you sure you want to select Computer Forensics",
@@ -258,6 +265,8 @@ class Register(Screen):
 
     def fma(self, inst):
         self.course = "Financial Management & Accounting"
+        self.c_id = "FMA"
+
         self.d = MDDialog(
             title="Confirm ?",
             text="Are you sure you want to select Financial Management & Accounting",
@@ -271,6 +280,8 @@ class Register(Screen):
 
     def osm(self, inst):
         self.course = "Operations & Supply Chain Management"
+        self.c_id = "OSM"
+
         self.d = MDDialog(
             title="Confirm ?",
             text="Are you sure you want to select Operations & Supply Chain Management",
@@ -281,12 +292,17 @@ class Register(Screen):
             ],
         )
         self.d.open()
-         
-    def yes(self, inst):
 
-        # self.course 
-        # store the above value in database
-        print(self.course)
+    def yes(self, inst):
+        global user_id
+        global user_info
+
+        info = {"username": self.ids.user.text, "email": self.ids.email.text,
+        "password": self.ids.password.text, "role": self.t,
+        "course":{"name":self.course,"cid":self.c_id}}
+        x = firebase.post("/Users/Teacher", info)
+        user_id = x['name']
+        user_info = info
 
         self.d.dismiss()
         self.dialog.dismiss()
@@ -298,7 +314,7 @@ class Register(Screen):
         self.t = 0
         self.ids.load.active = False
         self.manager.current = "Tdashboard"
-        self.manager.transition.direction = "left"    
+        self.manager.transition.direction = "left"
 
     def no(self, inst):
         self.d.dismiss()
@@ -310,8 +326,6 @@ class Register(Screen):
         global user_id
         global user_info
 
-        global user_id
-        global user_info
         if(username == "" or username == "FIELD SHOULD NOT BE EMPTY"):
             self.ids.user.text = "FIELD SHOULD NOT BE EMPTY"
             self.a = 0
@@ -347,12 +361,7 @@ class Register(Screen):
                 ],
             )
             self.dialog.open()
-            info = {"username": username, "email": email,
-                    "password": password, "role": self.t}
-            x = firebase.post("/Users/Teacher", info)
-            user_id = x['name']
-            user_info = info
-            
+
 
         if(self.a == 1 and self.t == -1):
 
@@ -368,8 +377,7 @@ class Register(Screen):
                     "FMA":{"Labs":[],"Assignments":[],"Attendence":78}}
 
             info = {"username": username, "email": email,
-                    "password": password, "role": self.t,
-                    "courses":courses}
+                    "password": password, "role": self.t}
             x = firebase.post("/Users/Student", info)
             user_id = x['name']
             user_info = info
@@ -483,7 +491,10 @@ class Tchat(Screen):
 class Sannouncement(Screen):
     pass
 class Tannouncement(Screen):
-    pass
+    def announcement_send(self):
+        txt=self.ids.Announcemnet_txt.text
+        firebase.post("Announcements",{"message":txt,"sender":user_info["username"],"time":f"{datetime.now().strftime('%H:%M')}","course":firebase.get("/Users/Teacher/"+user_id+"/", 'course/cid')})
+        self.ids.Announcemnet_txt.text= ''
 
 class Tfeedback(Screen):
     pass
@@ -536,6 +547,7 @@ class Tprofile(Screen):
         try:
             self.ids.pro_name.text=user_info["username"]
             self.ids.pro_email.text=user_info["email"]
+            self.ids.pro_course.text=user_info["course"]["name"]
         except:
             pass
 
