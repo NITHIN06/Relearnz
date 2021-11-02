@@ -4321,67 +4321,73 @@ WindowManager:
                 MDLabel:
                     size_hint_y: 0.05
             MDBoxLayout:
-                orientation: "vertical"
-                Image:
-                    source: "assets/TIcon.png"
-                MDBoxLayout:
-                    orientation: "vertical"
+                MDLabel:
+                    text: ""
+                    size_hint: 1, 1
+                MDCard:
+                    orientation: 'vertical'
+                    padding: "8dp"
+                    size_hint: None, None
+                    size: "400dp", "500dp"
+                    pos_hint: {"x": -2.0, "y": 0.1}
+                    radius : 30
+                    Image:
+                        source: "assets/TIcon.png"
+                        size_hint_y: None
+                        width: 150
                     MDLabel:
-                        text: "Username"
+                        text: "Username :"
                         bold: True
-                        font_size: 28
-                        size_hint: 1, 1
+                        font_size: 25
                     MDLabel:
                         id: pro_name
-                        bold: True
                         font_size: 20
                         size_hint: 1, 1
                     MDLabel:
                         text: ""
                         size_hint: 1, 1
                     MDLabel:
-                        text: "Email"
+                        text: "Email :"
                         bold: True
-                        font_size: 28
+                        font_size: 25
                         size_hint: 1, 1
                     MDLabel:
                         id: pro_email
-                        bold: True
                         font_size: 20
                         size_hint: 1, 1
                     MDLabel:
                         text: ""
                         size_hint: 1, 1
                     MDLabel:
-                        text: "Course"
+                        text: "Role :"
                         bold: True
-                        font_size: 28
-                        size_hint: 1, 1
-                    MDLabel:
-                        id: pro_course
-                        bold: True
-                        font_size: 20
-                        size_hint: 1, 1
-                    MDLabel:
-                        text: ""
-                        size_hint: 1, 1
-                    MDLabel:
-                        text: "Role"
-                        bold: True
-                        font_size: 28
+                        font_size: 25
                         size_hint: 1, 1
                     MDLabel:
                         text: "Teacher"
-                        bold: True
                         font_size: 20
                         size_hint: 1, 1
                     MDLabel:
                         text: ""
                         size_hint: 1, 1
-            MDLabel:
-                text: ""
-                size_hint: 0.1, 1
-
+                    MDLabel:
+                        text: "Course :"
+                        bold: True
+                        font_size: 25
+                        size_hint: 1, 1
+                    MDLabel:
+                        text: "Soft computing"
+                        font_size: 20
+                        size_hint: 1, 1
+                    MDLabel:
+                        text: ""
+                        size_hint: 1, 1
+                MDLabel:
+                    text: ""
+                    size_hint: 1, 1
+                MDLabel:
+                    text: ""
+                    size_hint: 0.5, 1
 
 <Sprofile>:
     name: "Sprofile"
