@@ -189,7 +189,12 @@ WindowManager:
 
     MDBoxLayout:
         orientation: "vertical"
-
+        
+        MDFloatingActionButton:
+            icon: "arrow-left-thick"
+            on_release:
+                app.root.current= "Login"
+                root.manager.transition.direction="right"
         MDBoxLayout:
             MDLabel:
                 text:""
