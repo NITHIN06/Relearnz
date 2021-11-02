@@ -1,4 +1,5 @@
 from logging import Manager
+from os import close
 from kivy.config import Config
 
 Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
@@ -14,9 +15,11 @@ from kivy.lang import Builder
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivy.core.window import Window
 from kivymd.uix.button import MDFlatButton, MDIconButton,MDTextButton
+from kivymd.uix.card import MDCard
 from kivymd.uix.label import MDLabel
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.spinner import MDSpinner
+from kivymd.uix.snackbar import Snackbar
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.label import Label
 from firebase import firebase
@@ -25,7 +28,7 @@ import webbrowser
 from datetime import datetime,date
 import time
 from kivy.clock import Clock
-from kivymd.uix.list import OneLineAvatarIconListItem
+from kivymd.uix.list import OneLineAvatarIconListItem,MDList,TwoLineAvatarListItem,ImageLeftWidget
 from kivy.properties import StringProperty
 import re
 
@@ -50,7 +53,8 @@ time_table1={
     "HRM":{"name":"Human Resource Management","pic":"assets/HRM.png","screen":"Hrm"},
     "OSM":{"name":"Operations & Supply Chain ...","pic":"assets/OSM.png","screen":"Osm"},
     "FMA":{"name":"Finanical Management","pic":"assets/FMA.png","screen":"Fma"},
-    "SC":{"name":"Soft Computing","pic":"assets/SC.png","screen":"Sc"}
+    "SC":{"name":"Soft Computing","pic":"assets/SC.png","screen":"Sc"},
+    "NONE":{"name":"NONE","pic":"assets/female.png","screen":"Sdashboard"}
 }
 
 def tt():
@@ -62,28 +66,28 @@ def tt():
         h=[datetime.strptime(j, '%I:%M %p') for j in times[i].split(" - ")]
         if(i!=len(times)-1):
             hn=[datetime.strptime(j, '%I:%M %p') for j in times[i+1].split(" - ")]
-        try:
-            if(h[0]<=current_time and h[1]>=current_time):
-                no=list(df.index[df['Time']==times[i]])
-                if(no[0]<len(times)-1):
-                    now_next.append(time_table1[df.iloc[no[0]].loc[time.ctime().split()[0]]])
-                    now_next.append(time_table1[df.iloc[no[0]+1].loc[time.ctime().split()[0]]])
-                elif no[0]==len(times)-1:
-                    now_next.append(time_table1[df.iloc[no[0]].loc[time.ctime().split()[0]]])
-                    now_next.append({"name":"NONE","pic":"assets/female.png","screen":"Sdashboard"})
-            elif h[1]<current_time and hn[0]>current_time:
-                no=list(df.index[df['Time']==times[i+1]])
-                if(no[0]<len(times)-1):
-                    now_next.append(time_table1[df.iloc[no[0]].loc[time.ctime().split()[0]]])
-                    now_next.append(time_table1[df.iloc[no[0]+1].loc[time.ctime().split()[0]]])
-                elif no[0]==len(times)-1:
-                    now_next.append(time_table1[df.iloc[no[0]].loc[time.ctime().split()[0]]])
-                    now_next.append({"name":"NONE","pic":"assets/female.png","screen":"Sdashboard"})
-        except Exception as e:
-            print(str(e))
+        # try:
+        if(h[0]<=current_time and h[1]>=current_time):
+            no=list(df.index[df['Time']==times[i]])
+            if(no[0]<len(times)-1):
+                now_next.append(time_table1[df.iloc[no[0]].loc[time.ctime().split()[0]]])
+                now_next.append(time_table1[df.iloc[no[0]+1].loc[time.ctime().split()[0]]])
+            elif no[0]==len(times)-1:
+                now_next.append(time_table1[df.iloc[no[0]].loc[time.ctime().split()[0]]])
+                now_next.append(time_table1["NONE"])
+        elif h[1]<current_time and hn[0]>current_time:
+            no=list(df.index[df['Time']==times[i+1]])
+            if(no[0]<len(times)-1):
+                now_next.append(time_table1[df.iloc[no[0]].loc[time.ctime().split()[0]]])
+                now_next.append(time_table1[df.iloc[no[0]+1].loc[time.ctime().split()[0]]])
+            elif no[0]==len(times)-1:
+                now_next.append(time_table1[df.iloc[no[0]].loc[time.ctime().split()[0]]])
+                now_next.append(time_table1["NONE"])
+        # except Exception as e:
+        #     print("hello")
     if len(now_next)==0:
-        now_next.append({"name":"NONE","pic":"assets/female.png","screen":"Sdashboard"})
-        now_next.append({"name":"NONE","pic":"assets/female.png","screen":"Sdashboard"})
+        now_next.append(time_table1["NONE"])
+        now_next.append(time_table1["NONE"])
 
 class WindowManager(ScreenManager):
     pass
@@ -544,11 +548,43 @@ class Tchat(Screen):
     pass
 
 class Sannouncement(Screen):
-    pass
+    def __init__(self, **kw):
+        super(Sannouncement,self).__init__(**kw)
+        # Clock.schedule_interval(self.on_enter,5)
+    def on_enter(self,*args):
+        self.ids.v_list.clear_widgets()
+        x= firebase.get("Announcements/",'')
+        for i in reversed(x):
+            card = MDCard(orientation='vertical',pos_hint={'center_x':.5 , 'center_y':.7},size_hint=(None, None),size=(880,100),border_radius=10,radius=[10],md_bg_color=[184/255,255/255,203/255,1],padding=10,elevation=0)
+            icon = MDIconButton(icon='assets/'+x[i]["course"]+'.png',user_font_size=(36),pos_hint={'center_x':.5 , 'center_y':.5})
+            space = MDLabel(size_hint_x=0.05)
+            card_nt = MDBoxLayout(orientation='horizontal',pos_hint={'center_x':0.5 , 'center_y': 1},size_hint_y=0.001,spacing=50)
+            card_name = MDLabel(text='Dr. '+x[i]["sender"]+'@'+x[i]["course"],font_size='100dp',bold=True,size_hint_y=0.001)
+            card_time = MDLabel(text=x[i]["time"],size_hint_y=0.001,pos_hint={'center_x':0.8 , 'center_y':0.1})
+            card_nt.add_widget(card_name)
+            card_nt.add_widget(card_time)
+            card_message = MDLabel(text=x[i]["message"],font_size=(20),size_hint_y=0.01)
+            card_inner = MDBoxLayout(orientation='vertical')
+            card_inner.add_widget(card_nt)
+            card_inner.add_widget(card_message)
+            a= MDBoxLayout(orientation='horizontal')
+            a.add_widget(icon)
+            a.add_widget(space)
+            a.add_widget(card_inner)
+            card.add_widget(a)
+            self.ids.v_list.add_widget(card)
+
 class Tannouncement(Screen):
     def announcement_send(self):
         txt=self.ids.Announcemnet_txt.text
-        firebase.post("Announcements",{"message":txt,"sender":user_info["username"],"time":f"{datetime.now().strftime('%H:%M')}","course":firebase.get("/Users/Teacher/"+user_id+"/", 'course/cid')})
+        firebase.post("Announcements",{"message":txt,"sender":user_info["username"],"time":str(datetime.now().day)+"-"+str(datetime.now().month)+"-"+str(datetime.now().year)+"  "+str(datetime.now().hour)+"-"+str(datetime.now().minute)+"-"+str(datetime.now().second),"course":firebase.get("/Users/Teacher/"+user_id+"/", 'course/cid')})
+        Snackbar(
+            text="Successfully posted Announcement -_- ",
+            snackbar_x="10dp",
+            snackbar_y="10dp",
+            size_hint_x=0.5,
+            pos_hint={'center_x': 0.5, 'center_y': 0.1}
+        ).open()
         self.ids.Announcemnet_txt.text= ''
 
 class Tfeedback(Screen):
