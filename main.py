@@ -577,22 +577,44 @@ class Tcourse(Screen):
         pass
 
     def lab_ok(self, inst):
+        regex = r'[\s]*'
+        a = 0
         list = []
         for obj in self.dialog.content_cls.children:
             if isinstance(obj, MDTextField):
                 list.append(obj.text)
         list.reverse()
-        print(list)
-        self.dialog.dismiss()
+
+        for i in list:
+            if(re.fullmatch(regex, i)):
+                self.d = MDDialog(title = "Invalid Input", text = "Field must not be empty")
+                self.d.open()
+                a = 1
+                break
+
+        if(a == 0):
+            print(list)
+            self.dialog.dismiss()
 
     def assign_ok(self, inst):
+        regex = r'[\s]*'
+        a = 0
         list = []
         for obj in self.dialog.content_cls.children:
             if isinstance(obj, MDTextField):
                 list.append(obj.text)
         list.reverse()
-        print(list)
-        self.dialog.dismiss()
+
+        for i in list:
+            if(re.fullmatch(regex, i)):
+                self.d = MDDialog(title = "Invalid Input", text = "Field must not be empty")
+                self.d.open()
+                a = 1
+                break
+
+        if(a == 0):
+            print(list)
+            self.dialog.dismiss()
 
     def cancel(self, inst):
         self.dialog.dismiss()
