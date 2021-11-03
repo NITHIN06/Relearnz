@@ -27,9 +27,41 @@ WindowManager:
     Fma:
     Osm:
 
-<Item>
+<Item>:
     ImageLeftWidget:
         source: root.source
+
+<Lab>:
+    orientation: "vertical"
+    size_hint: None, None
+    size: 510, 500
+    spacing: 25
+    MDTextField:
+        id: labtitle
+        hint_text: "Title"
+    MDTextField:
+        id: labquestions
+        hint_text: "Questions"
+        multiline: True
+    MDTextField:
+        id: labdue
+        hint_text: "Due Date (DD-MM-YYYY)"
+
+<Assignment>:
+    orientation: "vertical"
+    size_hint: None, None
+    size: 510, 500
+    spacing: 25
+    MDTextField:
+        id: assignmenttitle
+        hint_text: "Title"
+    MDTextField:
+        id: assignmentquestions
+        hint_text: "Questions"
+        multiline: True
+    MDTextField:
+        id: assignmentdue
+        hint_text: "Due Date (DD-MM-YYYY)"
 
 <Welcome>:
     name: "Welcome"
@@ -2054,7 +2086,7 @@ WindowManager:
             MDLabel:
                 size_hint_x:0.02
             MDBoxLayout:
-                size_hint_x:0.4
+                size_hint_x:0.3
                 orientation: "vertical"
                 MDLabel:
                     size_hint_y: 0.1
@@ -2217,15 +2249,162 @@ WindowManager:
                             root.manager.transition.direction="right"
                     MDLabel:
                         size_hint_x: 0.4
-
                 MDLabel:
                     size_hint_y: 0.05
 
-            MDLabel:
-                size_hint_x:0.1
-            MDLabel:
-                text: "COURSES"
-                halign: "center"
+#asdfsdadfbabf               
+            MDBoxLayout:
+                orientation: "vertical"
+                MDLabel:
+                    size_hint_y: 0.04
+                MDBoxLayout:
+                    ScrollView:
+                        do_scroll_x: False    
+                        bar_width: 7
+                        MDBoxLayout:
+                            orientation: "vertical" 
+                            size_hint_y: None
+                            height: self.minimum_height  
+                            spacing: 25
+                            MDFloatingActionButton:
+                                icon: "arrow-left-thick"
+                                on_release:
+                                    app.root.current= "Tdashboard"
+                                    root.manager.transition.direction="right"
+                            MDIconButton:
+                                icon: "assets/male.png"
+                                pos_hint:{"center_x": 0.5, "center_y": 0.5}
+                                user_font_size: "100sp"
+                                ize_hint: 1, 0.5
+                            MDLabel:
+                                id: tname
+                                font_style: "H6"
+                                halign: "center"
+                                size_hint: 1, 0.3
+                            MDCard:
+                                size_hint: None, None
+                                size: 300, 50
+                                elevation: 10
+                                pos_hint:{"center_x": 0.5, "center_y": 0.5}
+                                ripple_behavior: False
+                                border_radius: 20
+                                radius: [20]
+                                MDLabel:
+                                    id: tmail
+                                    halign: "center"
+                                    font_style: "H6"
+                            MDBoxLayout:
+
+                                MDLabel:
+                                    size_hint_x: 0.1
+                                MDLabel:
+                                    size_hint_x: 0.4
+                                MDFillRoundFlatIconButton:
+                                    text: "Join Class"
+                                    icon: "arrow-right-thick"
+                                    font_style: "H6"
+                                    on_press: root.joinclass()
+                                MDLabel:
+                                    size_hint_x: 0.01
+
+                            MDBoxLayout:
+                                orientation: "vertical"
+                                spacing: 50
+                                size_hint_y: None
+                                height: self.minimum_height  
+                                MDBoxLayout:
+                                    MDLabel:
+                                        text: "LAB"
+                                        size_hint_x: 0.15
+                                        font_style: "H3"
+                                    MDFloatingActionButton:
+                                        icon: "plus"
+                                        font_size: "30sp"
+                                        pos_hint: {"center_x" :0.5, "center_y" : 0.5}
+                                        on_press: root.addlab()
+                                    MDLabel:
+                                MDCard:
+                                    id: lab_card
+                                    elevation: 0
+                                    padding: 20
+                                    border_radius: 20
+                                    size_hint: (None, None)
+                                    size: (920,500)
+                                    radius: [20]
+                                    pos_hint: {"center_x":0.5,"center_y":0.5}
+                                    orientation: "vertical"
+                                    ScrollView:
+                                        do_scroll_x: False 
+                                        MDBoxLayout:
+                                            id: tlab
+                                            orientation: "vertical"
+                                            spacing: 20
+                                            size_hint_y: None
+                                            height: self.minimum_height    
+                                       
+
+                                MDBoxLayout:
+                                    MDLabel:
+                                        text: "ASSIGNMENTS"
+                                        size_hint_x: 0.64
+                                        font_style: "H3"
+                                    MDFloatingActionButton:
+                                        icon: "plus"
+                                        font_size: "24sp"
+                                        pos_hint: {"center_x" :0.5, "center_y" : 0.5}
+                                        on_press: root.addassignment()
+                                    MDLabel:
+                                MDCard:
+                                    id: assignment_card
+                                    elevation: 0
+                                    padding: 20
+                                    border_radius: 20
+                                    size_hint: (None, None)
+                                    size: (920,500)
+                                    radius: [20]
+                                    pos_hint: {"center_x":0.5,"center_y":0.5}
+                                    orientation: "vertical"
+                                    ScrollView:
+                                        do_scroll_x: False 
+                                        MDBoxLayout:
+                                            id: tassignment
+                                            orientation: "vertical"
+                                            spacing: 20
+                                            size_hint_y: None
+                                            height: self.minimum_height       
+
+                                MDBoxLayout:
+                                    MDLabel:
+                                        text: "LECTURE NOTES"
+                                        size_hint_x: 0.75
+                                        font_style: "H3"
+                                    MDFloatingActionButton:
+                                        icon: "plus"
+                                        font_size: "60sp"
+                                        pos_hint: {"center_x" :0.5, "center_y" : 0.5}
+                                        on_press: root.addnotes()
+                                    MDLabel:
+                                MDCard:
+                                    id: notes_card
+                                    elevation: 0
+                                    padding: 20
+                                    border_radius: 20
+                                    size_hint: (None, None)
+                                    size: (920,500)
+                                    radius: [20]
+                                    pos_hint: {"center_x":0.5,"center_y":0.5}
+                                    orientation: "vertical"
+                                    ScrollView:
+                                        do_scroll_x: False 
+                                        MDBoxLayout:
+                                            id: tnotes
+                                            orientation: "vertical"
+                                            spacing: 20
+                                            size_hint_y: None
+                                            height: self.minimum_height       
+
+                    MDLabel:
+                        size_hint_x: 0.01 
 
 
 <Sevent>:
@@ -4381,7 +4560,8 @@ WindowManager:
                         font_size: 25
                         size_hint: 1, 1
                     MDLabel:
-                        text: "Soft computing"
+                        id: pro_course
+                        text: ""
                         font_size: 20
                         size_hint: 1, 1
                     MDLabel:

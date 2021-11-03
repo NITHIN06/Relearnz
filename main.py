@@ -27,6 +27,9 @@ import threading
 import webbrowser
 from datetime import datetime,date
 import time
+from kivymd.uix.textfield import MDTextField
+from kivy.uix.textinput import TextInput
+from kivy.uix.popup import Popup
 from kivy.clock import Clock
 from kivymd.uix.list import OneLineAvatarIconListItem,MDList,TwoLineAvatarListItem,ImageLeftWidget
 from kivy.properties import StringProperty
@@ -534,7 +537,74 @@ class TodayDate(MDLabel):
 
 class Scourse(Screen):
     pass
+
 class Tcourse(Screen):
+
+    dialog = None
+
+    def __init__(self, **kw):
+        super(Tcourse, self).__init__(**kw)
+        # Clock.schedule_interval(self.on_enter,5)
+
+    def joinclass(self):
+        webbrowser.open('https://meet.google.com/jpq-webf-iwy?pli=1', new = 1)
+
+    def addlab(self):
+        self.dialog = MDDialog(
+            title="ADD LAB",
+            type="custom",
+            content_cls=Lab(),
+            buttons=[
+                MDFlatButton(text="CANCEL", on_press = self.cancel),
+                MDFlatButton(text="OK", on_press = self.lab_ok),
+            ],
+        )
+        self.dialog.open()
+
+    def addassignment(self):
+        self.dialog = MDDialog(
+            title="ADD ASSIGNMENT",
+            type="custom",
+            content_cls=Assignment(),
+            buttons=[
+                MDFlatButton(text="CANCEL", on_press = self.cancel),
+                MDFlatButton(text="OK", on_press = self.assign_ok),
+            ],
+        )
+        self.dialog.open()
+
+    def addnotes(self):
+        pass
+
+    def lab_ok(self, inst):
+        # store values in database
+        self.dialog.dismiss()
+
+    def assign_ok(self, inst):
+        # store values in database
+        self.dialog.dismiss()
+
+    def cancel(self, inst):
+        self.dialog.dismiss()
+
+    def on_enter(self, *args):
+        self.ids.tname.text = 'Dr. ' + user_info["username"]
+        self.ids.tmail.text = user_info["email"]
+        # add_widgets() for lab_card 
+        card = MDCard(orientation='vertical',pos_hint={'center_x':.5 , 'center_y':.7},size_hint=(None, None),size=(880,100),border_radius=10,radius=[10],md_bg_color=[184/255,255/255,203/255,1],padding=10,elevation=0)
+        self.ids.tlab.add_widget(card)
+
+        # add_widgets() for assignment_card 
+        card1 = MDCard(orientation='vertical',pos_hint={'center_x':.5 , 'center_y':.7},size_hint=(None, None),size=(880,100),border_radius=10,radius=[10],md_bg_color=[184/255,255/255,203/255,1],padding=10,elevation=0)
+        self.ids.tassignment.add_widget(card1)
+
+class Lab(MDBoxLayout):
+    pass
+
+class Assignment(MDBoxLayout):
+    pass
+
+class Notes(MDBoxLayout):
     pass
 
 class Sevent(Screen):
@@ -671,5 +741,3 @@ class Main(MDApp):
     pass
 
 Main().run()
-
-
