@@ -577,15 +577,21 @@ class Tcourse(Screen):
         pass
 
     def lab_ok(self, inst):
+        list = []
         for obj in self.dialog.content_cls.children:
             if isinstance(obj, MDTextField):
-                print(obj.text)
+                list.append(obj.text)
+        list.reverse()
+        print(list)
         self.dialog.dismiss()
 
     def assign_ok(self, inst):
+        list = []
         for obj in self.dialog.content_cls.children:
             if isinstance(obj, MDTextField):
-                print(obj.text)
+                list.append(obj.text)
+        list.reverse()
+        print(list)
         self.dialog.dismiss()
 
     def cancel(self, inst):
