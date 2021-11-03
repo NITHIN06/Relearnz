@@ -591,12 +591,9 @@ class Tcourse(Screen):
         self.ids.tname.text = 'Dr. ' + user_info["username"]
         self.ids.tmail.text = user_info["email"]
         # add_widgets() for lab_card 
-        card = MDCard(orientation='vertical',pos_hint={'center_x':.5 , 'center_y':.7},size_hint=(None, None),size=(880,100),border_radius=10,radius=[10],md_bg_color=[184/255,255/255,203/255,1],padding=10,elevation=0)
-        self.ids.tlab.add_widget(card)
 
         # add_widgets() for assignment_card 
-        card1 = MDCard(orientation='vertical',pos_hint={'center_x':.5 , 'center_y':.7},size_hint=(None, None),size=(880,100),border_radius=10,radius=[10],md_bg_color=[184/255,255/255,203/255,1],padding=10,elevation=0)
-        self.ids.tassignment.add_widget(card1)
+
 
 class Lab(MDBoxLayout):
     pass
@@ -631,7 +628,9 @@ class Sannouncement(Screen):
             card_nt = MDBoxLayout(orientation='horizontal',pos_hint={'center_x':0.5 , 'center_y': 1},size_hint_y=0.001,spacing=50)
             card_name = MDLabel(text='Dr. '+x[i]["sender"]+'@'+x[i]["course"],font_size='100dp',bold=True,size_hint_y=0.001)
             card_time = MDLabel(text=x[i]["time"],size_hint_y=0.001,pos_hint={'center_x':0.8 , 'center_y':0.1})
+            card_empty = MDLabel()
             card_nt.add_widget(card_name)
+            card_nt.add_widget(card_empty)
             card_nt.add_widget(card_time)
             card_message = MDLabel(text=x[i]["message"],font_size=(20),size_hint_y=0.01)
             card_inner = MDBoxLayout(orientation='vertical')
