@@ -577,11 +577,15 @@ class Tcourse(Screen):
         pass
 
     def lab_ok(self, inst):
-        # store values in database
+        for obj in self.dialog.content_cls.children:
+            if isinstance(obj, MDTextField):
+                print(obj.text)
         self.dialog.dismiss()
 
     def assign_ok(self, inst):
-        # store values in database
+        for obj in self.dialog.content_cls.children:
+            if isinstance(obj, MDTextField):
+                print(obj.text)
         self.dialog.dismiss()
 
     def cancel(self, inst):
