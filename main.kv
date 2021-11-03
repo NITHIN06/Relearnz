@@ -37,11 +37,14 @@ WindowManager:
     size: 510, 500
     spacing: 25
     MDTextField:
+        id: labtitle
         hint_text: "Title"
     MDTextField:
+        id: labquestions
         hint_text: "Questions"
         multiline: True
     MDTextField:
+        id: labdue
         hint_text: "Due Date (DD-MM-YYYY)"
 
 <Assignment>:
@@ -50,11 +53,14 @@ WindowManager:
     size: 510, 500
     spacing: 25
     MDTextField:
+        id: assignmenttitle
         hint_text: "Title"
     MDTextField:
+        id: assignmentquestions
         hint_text: "Questions"
         multiline: True
     MDTextField:
+        id: assignmentdue
         hint_text: "Due Date (DD-MM-YYYY)"
 
 <Welcome>:
@@ -2254,6 +2260,7 @@ WindowManager:
                 MDBoxLayout:
                     ScrollView:
                         do_scroll_x: False    
+                        bar_width: 7
                         MDBoxLayout:
                             orientation: "vertical" 
                             size_hint_y: None
@@ -2287,8 +2294,7 @@ WindowManager:
                                     halign: "center"
                                     font_style: "H6"
                             MDBoxLayout:
-                                size_hint_y: None
-                                height: self.minimum_height  
+
                                 MDLabel:
                                     size_hint_x: 0.1
                                 MDLabel:
@@ -2317,7 +2323,15 @@ WindowManager:
                                         pos_hint: {"center_x" :0.5, "center_y" : 0.5}
                                         on_press: root.addlab()
                                     MDLabel:
-                                MDBoxLayout:
+                                MDCard:
+                                    id: lab_card
+                                    elevation: 0
+                                    padding: 20
+                                    border_radius: 20
+                                    size_hint: (None, None)
+                                    size: (920,500)
+                                    radius: [20]
+                                    pos_hint: {"center_x":0.5,"center_y":0.5}
                                     orientation: "vertical"
                                     ScrollView:
                                         do_scroll_x: False 
@@ -2326,9 +2340,8 @@ WindowManager:
                                             orientation: "vertical"
                                             spacing: 20
                                             size_hint_y: None
-                                            height: self.minimum_height                                            
-                                            MDLabel:
-                                                text: "asafs"
+                                            height: self.minimum_height    
+                                       
 
                                 MDBoxLayout:
                                     MDLabel:
@@ -2341,15 +2354,24 @@ WindowManager:
                                         pos_hint: {"center_x" :0.5, "center_y" : 0.5}
                                         on_press: root.addassignment()
                                     MDLabel:
-                                MDBoxLayout:
+                                MDCard:
+                                    id: assignment_card
+                                    elevation: 0
+                                    padding: 20
+                                    border_radius: 20
+                                    size_hint: (None, None)
+                                    size: (920,500)
+                                    radius: [20]
+                                    pos_hint: {"center_x":0.5,"center_y":0.5}
                                     orientation: "vertical"
                                     ScrollView:
                                         do_scroll_x: False 
                                         MDBoxLayout:
-                                            id: tassignments
+                                            id: tassignment
+                                            orientation: "vertical"
                                             spacing: 20
                                             size_hint_y: None
-                                            height: self.minimum_height    
+                                            height: self.minimum_height       
 
                                 MDBoxLayout:
                                     MDLabel:
@@ -2362,15 +2384,24 @@ WindowManager:
                                         pos_hint: {"center_x" :0.5, "center_y" : 0.5}
                                         on_press: root.addnotes()
                                     MDLabel:
-                                MDBoxLayout:
+                                MDCard:
+                                    id: notes_card
+                                    elevation: 0
+                                    padding: 20
+                                    border_radius: 20
+                                    size_hint: (None, None)
+                                    size: (920,500)
+                                    radius: [20]
+                                    pos_hint: {"center_x":0.5,"center_y":0.5}
                                     orientation: "vertical"
                                     ScrollView:
                                         do_scroll_x: False 
                                         MDBoxLayout:
                                             id: tnotes
+                                            orientation: "vertical"
                                             spacing: 20
                                             size_hint_y: None
-                                            height: self.minimum_height    
+                                            height: self.minimum_height       
 
                     MDLabel:
                         size_hint_x: 0.01 
