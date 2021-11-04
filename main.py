@@ -172,6 +172,12 @@ class Login(Screen):
         self.load()
         self.a = 1
 
+    def signup(self):
+        self.ids.user.text = ""
+        self.ids.password.text = ""
+        self.manager.current = "Register"
+        self.manager.transition.direction = "left"  
+
 class Item(OneLineAvatarIconListItem):
     divider = None
     source = StringProperty()
@@ -184,6 +190,13 @@ class Register(Screen):
     course = ""
     c_id=""
     a = 1
+
+    def back(self):
+        self.ids.user.text = ""
+        self.ids.password.text = ""
+        self.ids.email.text = ""
+        self.manager.current = "Login"
+        self.manager.transition.direction = "right"      
 
     def load(self):
         if self.ids.load.active == False:
