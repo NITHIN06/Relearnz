@@ -199,9 +199,7 @@ WindowManager:
                     font_style: "Button"
                     md_bg_color: 1, 0.2, 0, 1
                     pos_hint:{"center_x":0.3, "center_y":1}
-                    on_release:
-                        app.root.current = "Register"
-                        root.manager.transition.direction = "left"
+                    on_release: root.signup()
 
         MDLabel:
             size_hint : 1, 0.3
@@ -224,9 +222,7 @@ WindowManager:
         
         MDFloatingActionButton:
             icon: "arrow-left-thick"
-            on_release:
-                app.root.current= "Login"
-                root.manager.transition.direction="right"
+            on_release: root.back()
         MDBoxLayout:
             MDLabel:
                 text:""
