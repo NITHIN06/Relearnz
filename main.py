@@ -617,6 +617,7 @@ class Tcourse(Screen):
         self.p = "C:"+self.p
         print(self.p)
         self.file_manager.close()
+        Snackbar(text="File Successfully uploaded -_- ",snackbar_x="10dp",snackbar_y="10dp",size_hint_x=0.5,pos_hint={'center_x': 0.5, 'center_y': 0.1}).open()
 
     def select_path(self, path):
         self.p = path
@@ -655,6 +656,7 @@ class Tcourse(Screen):
                 firebase.post("Users/Student/"+i+"/courses/"+user_info["course"]["cid"]+"/Labs",{"title":list[0],"question":list[1],"deadline":list[2],"post_time":str(datetime.now().day)+"-"+str(datetime.now().month)+"-"+str(datetime.now().year)+"  "+str(datetime.now().hour)+"-"+str(datetime.now().minute)+"-"+str(datetime.now().second),"status":0})
             firebase.post("Users/Teacher/"+user_id+"/course/Labs",{"title":list[0],"question":list[1],"deadline":list[2],"post_time":str(datetime.now().day)+"-"+str(datetime.now().month)+"-"+str(datetime.now().year)+"  "+str(datetime.now().hour)+"-"+str(datetime.now().minute)+"-"+str(datetime.now().second)})
             self.dialog.dismiss()
+            Snackbar(text="Lab Successfully posted -_- ",snackbar_x="10dp",snackbar_y="10dp",size_hint_x=0.5,pos_hint={'center_x': 0.5, 'center_y': 0.1}).open()
             self.add_labcard()
 
     def add_labcard(self):
@@ -695,6 +697,7 @@ class Tcourse(Screen):
                 firebase.post("Users/Student/"+i+"/courses/"+user_info["course"]["cid"]+"/Assignments",{"title":list[0],"question":list[1],"deadline":list[2],"post_time":str(datetime.now().day)+"-"+str(datetime.now().month)+"-"+str(datetime.now().year)+"  "+str(datetime.now().hour)+"-"+str(datetime.now().minute)+"-"+str(datetime.now().second),"status":0})
             firebase.post("Users/Teacher/"+user_id+"/course/Assignments",{"title":list[0],"question":list[1],"deadline":list[2],"post_time":str(datetime.now().day)+"-"+str(datetime.now().month)+"-"+str(datetime.now().year)+"  "+str(datetime.now().hour)+"-"+str(datetime.now().minute)+"-"+str(datetime.now().second)})
             self.dialog.dismiss()
+            Snackbar(text="Assignment Successfully posted -_- ",snackbar_x="10dp",snackbar_y="10dp",size_hint_x=0.5,pos_hint={'center_x': 0.5, 'center_y': 0.1}).open()
             self.add_asscard()
 
     def add_asscard(self):
@@ -717,13 +720,18 @@ class Tcourse(Screen):
     def cancel(self, inst):
         self.dialog.dismiss()
 
+    def add_notescard(self):
+        pass
+
     def on_enter(self, *args):
         self.ids.tname.text = 'Dr. ' + user_info["username"]
         self.ids.tmail.text = user_info["email"]
-        # add_widgets() for lab_card
+
         self.add_labcard()
-        # add_widgets() for assignment_card
+
         self.add_asscard()
+
+        #self.add_notescard()
 
 
 class Lab(MDBoxLayout):
@@ -773,21 +781,28 @@ class Sannouncement(Screen):
             self.ids.v_list.add_widget(card)
 
 class Tannouncement(Screen):
+
     def on_enter(self, *args):
         self.add_announcements()
         
     def announcement_send(self):
         txt=self.ids.Announcemnet_txt.text
-        firebase.post("Announcements",{"message":txt,"sender":user_info["username"],"time":str(datetime.now().day)+"-"+str(datetime.now().month)+"-"+str(datetime.now().year)+"  "+str(datetime.now().hour)+"-"+str(datetime.now().minute)+"-"+str(datetime.now().second),"course":firebase.get("/Users/Teacher/"+user_id+"/", 'course/cid')})
-        Snackbar(
-            text="Successfully posted Announcement -_- ",
-            snackbar_x="10dp",
-            snackbar_y="10dp",
-            size_hint_x=0.5,
-            pos_hint={'center_x': 0.5, 'center_y': 0.1}
-        ).open()
-        self.ids.Announcemnet_txt.text= ''
-        self.add_announcements()
+        regex = r'[\s]*'
+
+        if(re.fullmatch(regex,txt)):
+            MDDialog(title = "Invalid", text = "Field must not be empty").open()
+            self.ids.Announcemnet_txt.text= ''
+        else:
+            firebase.post("Announcements",{"message":txt,"sender":user_info["username"],"time":str(datetime.now().day)+"-"+str(datetime.now().month)+"-"+str(datetime.now().year)+"  "+str(datetime.now().hour)+"-"+str(datetime.now().minute)+"-"+str(datetime.now().second),"course":firebase.get("/Users/Teacher/"+user_id+"/", 'course/cid')})
+            Snackbar(
+                text="Announcement Successfully posted -_- ",
+                snackbar_x="10dp",
+                snackbar_y="10dp",
+                size_hint_x=0.5,
+                pos_hint={'center_x': 0.5, 'center_y': 0.1}
+            ).open()
+            self.ids.Announcemnet_txt.text= ''
+            self.add_announcements()
 
     def add_announcements(self):
         self.ids.tannouncement_card.clear_widgets()
@@ -871,29 +886,918 @@ class Tprofile(Screen):
             pass
 
 class Ai(Screen):
+
+    dialog = None
+    file_manager = None
+    course = ""
+    c_id = ""
+    dialog1 = None
+    p = ""
+
+    def __init__(self, **kw):
+        super(Ai, self).__init__(**kw)
+        # Clock.schedule_interval(self.on_enter,5)
+
     def joinclass(self):
         webbrowser.open('https://meet.google.com/jpq-webf-iwy?pli=1', new = 1)
+
+    def uploadlab(self):
+        self.file_manager = MDFileManager(
+            select_path = self.select_lp,
+            exit_manager = self.exit_manager,
+        )
+        self.file_manager.show('\\Users\\'+current_user)
+
+    def uploadass(self):
+        self.file_manager = MDFileManager(
+            select_path = self.select_ap,
+            exit_manager = self.exit_manager,
+        )
+        self.file_manager.show('\\Users\\'+current_user)
+
+    def select_lp(self, path):
+        self.p = path
+        self.dialog1 = MDDialog(
+            title="Confirm ?",
+            text = "Are you sure you want to upload this file",
+            buttons=[
+                MDFlatButton(text="NO", on_press = self.no),
+                MDFlatButton(text="YES", on_press = self.lyes),
+            ],
+        )
+        self.dialog1.open()
+
+    def select_ap(self, path):
+        self.p = path
+        self.dialog1 = MDDialog(
+            title="Confirm ?",
+            text = "Are you sure you want to upload this file",
+            buttons=[
+                MDFlatButton(text="NO", on_press = self.no),
+                MDFlatButton(text="YES", on_press = self.ayes),
+            ],
+        )
+        self.dialog1.open()
+
+    def lyes(self, inst):
+        n = self.p
+        n = n.split('\\')
+
+        # Name of the file that should be displayed 
+        name = n.pop()
+        self.dialog1.dismiss()
+        print(name)
+
+        # self.p is the path of the file - (LAB file)
+        self.p = "C:"+self.p
+        print(self.p)
+        self.file_manager.close()
+        Snackbar(text="File Successfully uploaded -_- ",snackbar_x="10dp",snackbar_y="10dp",size_hint_x=0.5,pos_hint={'center_x': 0.5, 'center_y': 0.1}).open()
+
+    def ayes(self, inst):
+        n = self.p
+        n = n.split('\\')
+
+        # Name of the file that should be displayed 
+        name = n.pop()
+        self.dialog1.dismiss()
+        print(name)
+
+        # self.p is the path of the file - (Assignment file)
+        self.p = "C:"+self.p
+        print(self.p)
+        self.file_manager.close()
+        Snackbar(text="File Successfully uploaded -_- ",snackbar_x="10dp",snackbar_y="10dp",size_hint_x=0.5,pos_hint={'center_x': 0.5, 'center_y': 0.1}).open()
+
+    def exit_manager(self, *args):
+        self.file_manager.close()
+
+    def no(self, inst):
+        self.dialog1.dismiss()
+
+    def add_labcard(self):
+        # add lab cards
+        pass
+
+    def add_asscard(self):
+        # add assignment cards
+        pass
+
+    def add_notescard(self):
+        # add notes cards
+        pass
+
+    def on_enter(self, *args):
+        self.course = "Artificial Intelligence"
+        self.c_id = "AI"
+
+        # get user details who has c_id = "OSM" 
+        self.ids.tname.text = 'Dr. ' + ""
+        self.ids.tmail.text = ""
+
+        # self.add_labcard()
+        # self.add_asscard()
+        # self.add_notescard()
+
 class Cf(Screen):
+
+    dialog = None
+    file_manager = None
+    course = ""
+    c_id = ""
+    dialog1 = None
+    p = ""
+
+    def __init__(self, **kw):
+        super(Cf, self).__init__(**kw)
+        # Clock.schedule_interval(self.on_enter,5)
+
     def joinclass(self):
         webbrowser.open('https://meet.google.com/jpq-webf-iwy?pli=1', new = 1)
+
+    def uploadlab(self):
+        self.file_manager = MDFileManager(
+            select_path = self.select_lp,
+            exit_manager = self.exit_manager,
+        )
+        self.file_manager.show('\\Users\\'+current_user)
+
+    def uploadass(self):
+        self.file_manager = MDFileManager(
+            select_path = self.select_ap,
+            exit_manager = self.exit_manager,
+        )
+        self.file_manager.show('\\Users\\'+current_user)
+
+    def select_lp(self, path):
+        self.p = path
+        self.dialog1 = MDDialog(
+            title="Confirm ?",
+            text = "Are you sure you want to upload this file",
+            buttons=[
+                MDFlatButton(text="NO", on_press = self.no),
+                MDFlatButton(text="YES", on_press = self.lyes),
+            ],
+        )
+        self.dialog1.open()
+
+    def select_ap(self, path):
+        self.p = path
+        self.dialog1 = MDDialog(
+            title="Confirm ?",
+            text = "Are you sure you want to upload this file",
+            buttons=[
+                MDFlatButton(text="NO", on_press = self.no),
+                MDFlatButton(text="YES", on_press = self.ayes),
+            ],
+        )
+        self.dialog1.open()
+
+    def lyes(self, inst):
+        n = self.p
+        n = n.split('\\')
+
+        # Name of the file that should be displayed 
+        name = n.pop()
+        self.dialog1.dismiss()
+        print(name)
+
+        # self.p is the path of the file - (LAB file)
+        self.p = "C:"+self.p
+        print(self.p)
+        self.file_manager.close()
+        Snackbar(text="File Successfully uploaded -_- ",snackbar_x="10dp",snackbar_y="10dp",size_hint_x=0.5,pos_hint={'center_x': 0.5, 'center_y': 0.1}).open()
+
+    def ayes(self, inst):
+        n = self.p
+        n = n.split('\\')
+
+        # Name of the file that should be displayed 
+        name = n.pop()
+        self.dialog1.dismiss()
+        print(name)
+
+        # self.p is the path of the file - (Assignment file)
+        self.p = "C:"+self.p
+        print(self.p)
+        self.file_manager.close()
+        Snackbar(text="File Successfully uploaded -_- ",snackbar_x="10dp",snackbar_y="10dp",size_hint_x=0.5,pos_hint={'center_x': 0.5, 'center_y': 0.1}).open()
+
+    def exit_manager(self, *args):
+        self.file_manager.close()
+
+    def no(self, inst):
+        self.dialog1.dismiss()
+
+    def add_labcard(self):
+        # add lab cards
+        pass
+
+    def add_asscard(self):
+        # add assignment cards
+        pass
+
+    def add_notescard(self):
+        # add notes cards
+        pass
+
+    def on_enter(self, *args):
+        self.course = "Computer Forensics"
+        self.c_id = "CF"
+
+        # get user details who has c_id = "OSM" 
+        self.ids.tname.text = 'Dr. ' + ""
+        self.ids.tmail.text = ""
+
+        # self.add_labcard()
+        # self.add_asscard()
+        # self.add_notescard()
+
 class Dsp(Screen):
+
+    dialog = None
+    file_manager = None
+    course = ""
+    c_id = ""
+    dialog1 = None
+    p = ""
+
+    def __init__(self, **kw):
+        super(Dsp, self).__init__(**kw)
+        # Clock.schedule_interval(self.on_enter,5)
+
     def joinclass(self):
         webbrowser.open('https://meet.google.com/jpq-webf-iwy?pli=1', new = 1)
+
+    def uploadlab(self):
+        self.file_manager = MDFileManager(
+            select_path = self.select_lp,
+            exit_manager = self.exit_manager,
+        )
+        self.file_manager.show('\\Users\\'+current_user)
+
+    def uploadass(self):
+        self.file_manager = MDFileManager(
+            select_path = self.select_ap,
+            exit_manager = self.exit_manager,
+        )
+        self.file_manager.show('\\Users\\'+current_user)
+
+    def select_lp(self, path):
+        self.p = path
+        self.dialog1 = MDDialog(
+            title="Confirm ?",
+            text = "Are you sure you want to upload this file",
+            buttons=[
+                MDFlatButton(text="NO", on_press = self.no),
+                MDFlatButton(text="YES", on_press = self.lyes),
+            ],
+        )
+        self.dialog1.open()
+
+    def select_ap(self, path):
+        self.p = path
+        self.dialog1 = MDDialog(
+            title="Confirm ?",
+            text = "Are you sure you want to upload this file",
+            buttons=[
+                MDFlatButton(text="NO", on_press = self.no),
+                MDFlatButton(text="YES", on_press = self.ayes),
+            ],
+        )
+        self.dialog1.open()
+
+    def lyes(self, inst):
+        n = self.p
+        n = n.split('\\')
+
+        # Name of the file that should be displayed 
+        name = n.pop()
+        self.dialog1.dismiss()
+        print(name)
+
+        # self.p is the path of the file - (LAB file)
+        self.p = "C:"+self.p
+        print(self.p)
+        self.file_manager.close()
+        Snackbar(text="File Successfully uploaded -_- ",snackbar_x="10dp",snackbar_y="10dp",size_hint_x=0.5,pos_hint={'center_x': 0.5, 'center_y': 0.1}).open()
+
+    def ayes(self, inst):
+        n = self.p
+        n = n.split('\\')
+
+        # Name of the file that should be displayed 
+        name = n.pop()
+        self.dialog1.dismiss()
+        print(name)
+
+        # self.p is the path of the file - (Assignment file)
+        self.p = "C:"+self.p
+        print(self.p)
+        self.file_manager.close()
+        Snackbar(text="File Successfully uploaded -_- ",snackbar_x="10dp",snackbar_y="10dp",size_hint_x=0.5,pos_hint={'center_x': 0.5, 'center_y': 0.1}).open()
+
+    def exit_manager(self, *args):
+        self.file_manager.close()
+
+    def no(self, inst):
+        self.dialog1.dismiss()
+
+    def add_labcard(self):
+        # add lab cards
+        pass
+
+    def add_asscard(self):
+        # add assignment cards
+        pass
+
+    def add_notescard(self):
+        # add notes cards
+        pass
+
+    def on_enter(self, *args):
+        self.course = "Digital Signal Processing"
+        self.c_id = "DSP"
+
+        # get user details who has c_id = "OSM" 
+        self.ids.tname.text = 'Dr. ' + ""
+        self.ids.tmail.text = ""
+
+        # self.add_labcard()
+        # self.add_asscard()
+        # self.add_notescard()
+
 class Hrm(Screen):
+
+    dialog = None
+    file_manager = None
+    course = ""
+    c_id = ""
+    dialog1 = None
+    p = ""
+
+    def __init__(self, **kw):
+        super(Hrm, self).__init__(**kw)
+        # Clock.schedule_interval(self.on_enter,5)
+
     def joinclass(self):
         webbrowser.open('https://meet.google.com/jpq-webf-iwy?pli=1', new = 1)
+
+    def uploadlab(self):
+        self.file_manager = MDFileManager(
+            select_path = self.select_lp,
+            exit_manager = self.exit_manager,
+        )
+        self.file_manager.show('\\Users\\'+current_user)
+
+    def uploadass(self):
+        self.file_manager = MDFileManager(
+            select_path = self.select_ap,
+            exit_manager = self.exit_manager,
+        )
+        self.file_manager.show('\\Users\\'+current_user)
+
+    def select_lp(self, path):
+        self.p = path
+        self.dialog1 = MDDialog(
+            title="Confirm ?",
+            text = "Are you sure you want to upload this file",
+            buttons=[
+                MDFlatButton(text="NO", on_press = self.no),
+                MDFlatButton(text="YES", on_press = self.lyes),
+            ],
+        )
+        self.dialog1.open()
+
+    def select_ap(self, path):
+        self.p = path
+        self.dialog1 = MDDialog(
+            title="Confirm ?",
+            text = "Are you sure you want to upload this file",
+            buttons=[
+                MDFlatButton(text="NO", on_press = self.no),
+                MDFlatButton(text="YES", on_press = self.ayes),
+            ],
+        )
+        self.dialog1.open()
+
+    def lyes(self, inst):
+        n = self.p
+        n = n.split('\\')
+
+        # Name of the file that should be displayed 
+        name = n.pop()
+        self.dialog1.dismiss()
+        print(name)
+
+        # self.p is the path of the file - (LAB file)
+        self.p = "C:"+self.p
+        print(self.p)
+        self.file_manager.close()
+        Snackbar(text="File Successfully uploaded -_- ",snackbar_x="10dp",snackbar_y="10dp",size_hint_x=0.5,pos_hint={'center_x': 0.5, 'center_y': 0.1}).open()
+
+    def ayes(self, inst):
+        n = self.p
+        n = n.split('\\')
+
+        # Name of the file that should be displayed 
+        name = n.pop()
+        self.dialog1.dismiss()
+        print(name)
+
+        # self.p is the path of the file - (Assignment file)
+        self.p = "C:"+self.p
+        print(self.p)
+        self.file_manager.close()
+        Snackbar(text="File Successfully uploaded -_- ",snackbar_x="10dp",snackbar_y="10dp",size_hint_x=0.5,pos_hint={'center_x': 0.5, 'center_y': 0.1}).open()
+
+    def exit_manager(self, *args):
+        self.file_manager.close()
+
+    def no(self, inst):
+        self.dialog1.dismiss()
+
+    def add_labcard(self):
+        # add lab cards
+        pass
+
+    def add_asscard(self):
+        # add assignment cards
+        pass
+
+    def add_notescard(self):
+        # add notes cards
+        pass
+
+    def on_enter(self, *args):
+        self.course = "Human Resource Management"
+        self.c_id = "HRM"
+
+        # get user details who has c_id = "OSM" 
+        self.ids.tname.text = 'Dr. ' + ""
+        self.ids.tmail.text = ""
+
+        # self.add_labcard()
+        # self.add_asscard()
+        # self.add_notescard()
+
 class Sc(Screen):
+
+    dialog = None
+    file_manager = None
+    course = ""
+    c_id = ""
+    dialog1 = None
+    p = ""
+
+    def __init__(self, **kw):
+        super(Sc, self).__init__(**kw)
+        # Clock.schedule_interval(self.on_enter,5)
+
     def joinclass(self):
         webbrowser.open('https://meet.google.com/jpq-webf-iwy?pli=1', new = 1)
+
+    def uploadlab(self):
+        self.file_manager = MDFileManager(
+            select_path = self.select_lp,
+            exit_manager = self.exit_manager,
+        )
+        self.file_manager.show('\\Users\\'+current_user)
+
+    def uploadass(self):
+        self.file_manager = MDFileManager(
+            select_path = self.select_ap,
+            exit_manager = self.exit_manager,
+        )
+        self.file_manager.show('\\Users\\'+current_user)
+
+    def select_lp(self, path):
+        self.p = path
+        self.dialog1 = MDDialog(
+            title="Confirm ?",
+            text = "Are you sure you want to upload this file",
+            buttons=[
+                MDFlatButton(text="NO", on_press = self.no),
+                MDFlatButton(text="YES", on_press = self.lyes),
+            ],
+        )
+        self.dialog1.open()
+
+    def select_ap(self, path):
+        self.p = path
+        self.dialog1 = MDDialog(
+            title="Confirm ?",
+            text = "Are you sure you want to upload this file",
+            buttons=[
+                MDFlatButton(text="NO", on_press = self.no),
+                MDFlatButton(text="YES", on_press = self.ayes),
+            ],
+        )
+        self.dialog1.open()
+
+    def lyes(self, inst):
+        n = self.p
+        n = n.split('\\')
+
+        # Name of the file that should be displayed 
+        name = n.pop()
+        self.dialog1.dismiss()
+        print(name)
+
+        # self.p is the path of the file - (LAB file)
+        self.p = "C:"+self.p
+        print(self.p)
+        self.file_manager.close()
+        Snackbar(text="File Successfully uploaded -_- ",snackbar_x="10dp",snackbar_y="10dp",size_hint_x=0.5,pos_hint={'center_x': 0.5, 'center_y': 0.1}).open()
+
+    def ayes(self, inst):
+        n = self.p
+        n = n.split('\\')
+
+        # Name of the file that should be displayed 
+        name = n.pop()
+        self.dialog1.dismiss()
+        print(name)
+
+        # self.p is the path of the file - (Assignment file)
+        self.p = "C:"+self.p
+        print(self.p)
+        self.file_manager.close()
+        Snackbar(text="File Successfully uploaded -_- ",snackbar_x="10dp",snackbar_y="10dp",size_hint_x=0.5,pos_hint={'center_x': 0.5, 'center_y': 0.1}).open()
+
+    def exit_manager(self, *args):
+        self.file_manager.close()
+
+    def no(self, inst):
+        self.dialog1.dismiss()
+
+    def add_labcard(self):
+        # add lab cards
+        pass
+
+    def add_asscard(self):
+        # add assignment cards
+        pass
+
+    def add_notescard(self):
+        # add notes cards
+        pass
+
+    def on_enter(self, *args):
+        self.course = "Soft Computing"
+        self.c_id = "SC"
+
+        # get user details who has c_id = "OSM" 
+        self.ids.tname.text = 'Dr. ' + ""
+        self.ids.tmail.text = ""
+
+        # self.add_labcard()
+        # self.add_asscard()
+        # self.add_notescard()
+
 class Sepm(Screen):
+
+    dialog = None
+    file_manager = None
+    course = ""
+    c_id = ""
+    dialog1 = None
+    p = ""
+
+    def __init__(self, **kw):
+        super(Sepm, self).__init__(**kw)
+        # Clock.schedule_interval(self.on_enter,5)
+
     def joinclass(self):
         webbrowser.open('https://meet.google.com/jpq-webf-iwy?pli=1', new = 1)
+
+    def uploadlab(self):
+        self.file_manager = MDFileManager(
+            select_path = self.select_lp,
+            exit_manager = self.exit_manager,
+        )
+        self.file_manager.show('\\Users\\'+current_user)
+
+    def uploadass(self):
+        self.file_manager = MDFileManager(
+            select_path = self.select_ap,
+            exit_manager = self.exit_manager,
+        )
+        self.file_manager.show('\\Users\\'+current_user)
+
+    def select_lp(self, path):
+        self.p = path
+        self.dialog1 = MDDialog(
+            title="Confirm ?",
+            text = "Are you sure you want to upload this file",
+            buttons=[
+                MDFlatButton(text="NO", on_press = self.no),
+                MDFlatButton(text="YES", on_press = self.lyes),
+            ],
+        )
+        self.dialog1.open()
+
+    def select_ap(self, path):
+        self.p = path
+        self.dialog1 = MDDialog(
+            title="Confirm ?",
+            text = "Are you sure you want to upload this file",
+            buttons=[
+                MDFlatButton(text="NO", on_press = self.no),
+                MDFlatButton(text="YES", on_press = self.ayes),
+            ],
+        )
+        self.dialog1.open()
+
+    def lyes(self, inst):
+        n = self.p
+        n = n.split('\\')
+
+        # Name of the file that should be displayed 
+        name = n.pop()
+        self.dialog1.dismiss()
+        print(name)
+
+        # self.p is the path of the file - (LAB file)
+        self.p = "C:"+self.p
+        print(self.p)
+        self.file_manager.close()
+        Snackbar(text="File Successfully uploaded -_- ",snackbar_x="10dp",snackbar_y="10dp",size_hint_x=0.5,pos_hint={'center_x': 0.5, 'center_y': 0.1}).open()
+
+    def ayes(self, inst):
+        n = self.p
+        n = n.split('\\')
+
+        # Name of the file that should be displayed 
+        name = n.pop()
+        self.dialog1.dismiss()
+        print(name)
+
+        # self.p is the path of the file - (Assignment file)
+        self.p = "C:"+self.p
+        print(self.p)
+        self.file_manager.close()
+        Snackbar(text="File Successfully uploaded -_- ",snackbar_x="10dp",snackbar_y="10dp",size_hint_x=0.5,pos_hint={'center_x': 0.5, 'center_y': 0.1}).open()
+
+    def exit_manager(self, *args):
+        self.file_manager.close()
+
+    def no(self, inst):
+        self.dialog1.dismiss()
+
+    def add_labcard(self):
+        # add lab cards
+        pass
+
+    def add_asscard(self):
+        # add assignment cards
+        pass
+
+    def add_notescard(self):
+        # add notes cards
+        pass
+
+    def on_enter(self, *args):
+        self.course = "Software Engineering and Project Management"
+        self.c_id = "SEPM"
+
+        # get user details who has c_id = "OSM" 
+        self.ids.tname.text = 'Dr. ' + ""
+        self.ids.tmail.text = ""
+
+        # self.add_labcard()
+        # self.add_asscard()
+        # self.add_notescard()
+
 class Fma(Screen):
+
+    dialog = None
+    file_manager = None
+    course = ""
+    c_id = ""
+    dialog1 = None
+    p = ""
+
+    def __init__(self, **kw):
+        super(Fma, self).__init__(**kw)
+        # Clock.schedule_interval(self.on_enter,5)
+
     def joinclass(self):
         webbrowser.open('https://meet.google.com/jpq-webf-iwy?pli=1', new = 1)
+
+    def uploadlab(self):
+        self.file_manager = MDFileManager(
+            select_path = self.select_lp,
+            exit_manager = self.exit_manager,
+        )
+        self.file_manager.show('\\Users\\'+current_user)
+
+    def uploadass(self):
+        self.file_manager = MDFileManager(
+            select_path = self.select_ap,
+            exit_manager = self.exit_manager,
+        )
+        self.file_manager.show('\\Users\\'+current_user)
+
+    def select_lp(self, path):
+        self.p = path
+        self.dialog1 = MDDialog(
+            title="Confirm ?",
+            text = "Are you sure you want to upload this file",
+            buttons=[
+                MDFlatButton(text="NO", on_press = self.no),
+                MDFlatButton(text="YES", on_press = self.lyes),
+            ],
+        )
+        self.dialog1.open()
+
+    def select_ap(self, path):
+        self.p = path
+        self.dialog1 = MDDialog(
+            title="Confirm ?",
+            text = "Are you sure you want to upload this file",
+            buttons=[
+                MDFlatButton(text="NO", on_press = self.no),
+                MDFlatButton(text="YES", on_press = self.ayes),
+            ],
+        )
+        self.dialog1.open()
+
+    def lyes(self, inst):
+        n = self.p
+        n = n.split('\\')
+
+        # Name of the file that should be displayed 
+        name = n.pop()
+        self.dialog1.dismiss()
+        print(name)
+
+        # self.p is the path of the file - (LAB file)
+        self.p = "C:"+self.p
+        print(self.p)
+        self.file_manager.close()
+        Snackbar(text="File Successfully uploaded -_- ",snackbar_x="10dp",snackbar_y="10dp",size_hint_x=0.5,pos_hint={'center_x': 0.5, 'center_y': 0.1}).open()
+
+    def ayes(self, inst):
+        n = self.p
+        n = n.split('\\')
+
+        # Name of the file that should be displayed 
+        name = n.pop()
+        self.dialog1.dismiss()
+        print(name)
+
+        # self.p is the path of the file - (Assignment file)
+        self.p = "C:"+self.p
+        print(self.p)
+        self.file_manager.close()
+        Snackbar(text="File Successfully uploaded -_- ",snackbar_x="10dp",snackbar_y="10dp",size_hint_x=0.5,pos_hint={'center_x': 0.5, 'center_y': 0.1}).open()
+
+    def exit_manager(self, *args):
+        self.file_manager.close()
+
+    def no(self, inst):
+        self.dialog1.dismiss()
+
+    def add_labcard(self):
+        # add lab cards
+        pass
+
+    def add_asscard(self):
+        # add assignment cards
+        pass
+
+    def add_notescard(self):
+        # add notes cards
+        pass
+
+    def on_enter(self, *args):
+        self.course = "Financial Management & Accounting"
+        self.c_id = "FMA"
+
+        # get user details who has c_id = "OSM" 
+        self.ids.tname.text = 'Dr. ' + ""
+        self.ids.tmail.text = ""
+
+        # self.add_labcard()
+        # self.add_asscard()
+        # self.add_notescard()
+
 class Osm(Screen):
+
+    dialog = None
+    file_manager = None
+    course = ""
+    c_id = ""
+    dialog1 = None
+    p = ""
+
+    def __init__(self, **kw):
+        super(Osm, self).__init__(**kw)
+        # Clock.schedule_interval(self.on_enter,5)
+
     def joinclass(self):
         webbrowser.open('https://meet.google.com/jpq-webf-iwy?pli=1', new = 1)
+
+    def uploadlab(self):
+        self.file_manager = MDFileManager(
+            select_path = self.select_lp,
+            exit_manager = self.exit_manager,
+        )
+        self.file_manager.show('\\Users\\'+current_user)
+
+    def uploadass(self):
+        self.file_manager = MDFileManager(
+            select_path = self.select_ap,
+            exit_manager = self.exit_manager,
+        )
+        self.file_manager.show('\\Users\\'+current_user)
+
+    def select_lp(self, path):
+        self.p = path
+        self.dialog1 = MDDialog(
+            title="Confirm ?",
+            text = "Are you sure you want to upload this file",
+            buttons=[
+                MDFlatButton(text="NO", on_press = self.no),
+                MDFlatButton(text="YES", on_press = self.lyes),
+            ],
+        )
+        self.dialog1.open()
+
+    def select_ap(self, path):
+        self.p = path
+        self.dialog1 = MDDialog(
+            title="Confirm ?",
+            text = "Are you sure you want to upload this file",
+            buttons=[
+                MDFlatButton(text="NO", on_press = self.no),
+                MDFlatButton(text="YES", on_press = self.ayes),
+            ],
+        )
+        self.dialog1.open()
+
+    def lyes(self, inst):
+        n = self.p
+        n = n.split('\\')
+
+        # Name of the file that should be displayed 
+        name = n.pop()
+        self.dialog1.dismiss()
+        print(name)
+
+        # self.p is the path of the file - (LAB file)
+        self.p = "C:"+self.p
+        print(self.p)
+        self.file_manager.close()
+        Snackbar(text="File Successfully uploaded -_- ",snackbar_x="10dp",snackbar_y="10dp",size_hint_x=0.5,pos_hint={'center_x': 0.5, 'center_y': 0.1}).open()
+
+    def ayes(self, inst):
+        n = self.p
+        n = n.split('\\')
+
+        # Name of the file that should be displayed 
+        name = n.pop()
+        self.dialog1.dismiss()
+        print(name)
+
+        # self.p is the path of the file - (Assignment file)
+        self.p = "C:"+self.p
+        print(self.p)
+        self.file_manager.close()
+        Snackbar(text="File Successfully uploaded -_- ",snackbar_x="10dp",snackbar_y="10dp",size_hint_x=0.5,pos_hint={'center_x': 0.5, 'center_y': 0.1}).open()
+
+    def exit_manager(self, *args):
+        self.file_manager.close()
+
+    def no(self, inst):
+        self.dialog1.dismiss()
+
+    def add_labcard(self):
+        # add lab cards
+        pass
+
+    def add_asscard(self):
+        # add assignment cards
+        pass
+
+    def add_notescard(self):
+        # add notes cards
+        pass
+
+    def on_enter(self, *args):
+        self.course = "Operations & Supply Chain Management"
+        self.c_id = "OSM"
+
+        # get user details who has c_id = "OSM" 
+        self.ids.tname.text = 'Dr. ' + ""
+        self.ids.tmail.text = ""
+
+        # self.add_labcard()
+        # self.add_asscard()
+        # self.add_notescard()
+
+
 
 class Main(MDApp):
     pass
