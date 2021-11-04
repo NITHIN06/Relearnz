@@ -219,7 +219,7 @@ WindowManager:
 
     MDBoxLayout:
         orientation: "vertical"
-        
+
         MDFloatingActionButton:
             icon: "arrow-left-thick"
             on_release: root.back()
@@ -2246,19 +2246,19 @@ WindowManager:
                     MDLabel:
                         size_hint_x: 0.4
                 MDLabel:
-                    size_hint_y: 0.05    
+                    size_hint_y: 0.05
             MDBoxLayout:
                 orientation: "vertical"
                 MDLabel:
                     size_hint_y: 0.04
                 MDBoxLayout:
                     ScrollView:
-                        do_scroll_x: False    
+                        do_scroll_x: False
                         bar_width: 7
                         MDBoxLayout:
-                            orientation: "vertical" 
+                            orientation: "vertical"
                             size_hint_y: None
-                            height: self.minimum_height  
+                            height: self.minimum_height
                             spacing: 25
                             MDFloatingActionButton:
                                 icon: "arrow-left-thick"
@@ -2305,7 +2305,7 @@ WindowManager:
                                 orientation: "vertical"
                                 spacing: 50
                                 size_hint_y: None
-                                height: self.minimum_height  
+                                height: self.minimum_height
                                 MDBoxLayout:
                                     MDLabel:
                                         text: "LAB"
@@ -2328,14 +2328,14 @@ WindowManager:
                                     pos_hint: {"center_x":0.5,"center_y":0.5}
                                     orientation: "vertical"
                                     ScrollView:
-                                        do_scroll_x: False 
+                                        do_scroll_x: False
                                         MDBoxLayout:
                                             id: tlab
                                             orientation: "vertical"
                                             spacing: 20
                                             size_hint_y: None
-                                            height: self.minimum_height    
-                                       
+                                            height: self.minimum_height
+
 
                                 MDBoxLayout:
                                     MDLabel:
@@ -2359,13 +2359,13 @@ WindowManager:
                                     pos_hint: {"center_x":0.5,"center_y":0.5}
                                     orientation: "vertical"
                                     ScrollView:
-                                        do_scroll_x: False 
+                                        do_scroll_x: False
                                         MDBoxLayout:
                                             id: tassignment
                                             orientation: "vertical"
                                             spacing: 20
                                             size_hint_y: None
-                                            height: self.minimum_height       
+                                            height: self.minimum_height
 
                                 MDBoxLayout:
                                     MDLabel:
@@ -2389,16 +2389,16 @@ WindowManager:
                                     pos_hint: {"center_x":0.5,"center_y":0.5}
                                     orientation: "vertical"
                                     ScrollView:
-                                        do_scroll_x: False 
+                                        do_scroll_x: False
                                         MDBoxLayout:
                                             id: tnotes
                                             orientation: "vertical"
                                             spacing: 20
                                             size_hint_y: None
-                                            height: self.minimum_height       
+                                            height: self.minimum_height
 
                     MDLabel:
-                        size_hint_x: 0.01 
+                        size_hint_x: 0.01
 
 
 <Sevent>:
@@ -3745,7 +3745,7 @@ WindowManager:
 
             MDBoxLayout:
                 orientation: "vertical"
-
+                spacing: 5
                 MDLabel:
                     text: "Make an announcement"
                     size_hint_y: 0.2
@@ -3753,30 +3753,27 @@ WindowManager:
                     bold: True
                 MDCard:
                     size_hint: None,None
-                    size: 600,300
+                    size: 800,100
                     elevation: 0
                     padding: 10
                     border_radius: 10
                     radius: [20]
-                    pos_hint: {"center_x":0.3,"center_y":0.4}
-                    orientation: "vertical"
+                    orientation: "horizontal"
+                    spacing: 50
                     MDBoxLayout:
-                        orientation: "horizontal"
-                        size_hint: 1,0.2
+                        orientation: "vertical"
                         MDLabel:
                             text: "Announcement"
                             font_size: 14
-                            size_hint: 1,0.2
                             bold: True
-                    MDTextField:
-                        id: Announcemnet_txt
-                        hint_text: "Type a message"
-                        multiline: False
-                        max_height: 200
+                        MDTextField:
+                            id: Announcemnet_txt
+                            hint_text: "Type a message"
+                            multiline: False
+                            max_height: 200
                     MDBoxLayout:
-                        orientation: "horizontal"
-                        MDLabel:
-                            size_hint: 0.7,0
+                        orientation: "vertical"
+                        size_hint_x: 0.3
                         MDFillRoundFlatIconButton:
                             icon: "send"
                             text: "send"
@@ -3784,8 +3781,21 @@ WindowManager:
                             font_size: 24
                             bold: True
                             on_press: root.announcement_send()
-                MDLabel:
-                    size_hint_y: 0.8
+                MDCard:
+                    size_hint:None,None
+                    size: 800,500
+                    elevation: 0
+                    padding: 10
+                    border_radius: 10
+                    radius: [20]
+                    ScrollView:
+                        do_scroll_x: False
+                        MDBoxLayout:
+                            orientation: 'vertical'
+                            id: tannouncement_card
+                            size_hint_y: None
+                            height: self.minimum_height
+                            spacing: 10
 
 
 

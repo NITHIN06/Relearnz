@@ -42,6 +42,7 @@ from kivymd.uix.filemanager import MDFileManager
 firebase = firebase.FirebaseApplication(
     "https://relearnz-default-rtdb.firebaseio.com/", None)
 
+
 socket.getaddrinfo('localhost',25)
 
 #time-table
@@ -176,7 +177,7 @@ class Login(Screen):
         self.ids.user.text = ""
         self.ids.password.text = ""
         self.manager.current = "Register"
-        self.manager.transition.direction = "left"  
+        self.manager.transition.direction = "left"
 
 class Item(OneLineAvatarIconListItem):
     divider = None
@@ -196,7 +197,7 @@ class Register(Screen):
         self.ids.password.text = ""
         self.ids.email.text = ""
         self.manager.current = "Login"
-        self.manager.transition.direction = "right"      
+        self.manager.transition.direction = "right"
 
     def load(self):
         if self.ids.load.active == False:
@@ -595,7 +596,7 @@ class Tcourse(Screen):
 
     def addnotes(self):
         self.file_manager = MDFileManager(
-            select_path = self.select_path, 
+            select_path = self.select_path,
             exit_manager = self.exit_manager,
         )
         self.file_manager.show('\\Users\\'+current_user)
@@ -611,8 +612,9 @@ class Tcourse(Screen):
         name = n.pop()
         self.dialog1.dismiss()
         print(name)
-        
+
         # self.p is the path of the file
+        self.p = "C:"+self.p
         print(self.p)
         self.file_manager.close()
 
@@ -624,13 +626,13 @@ class Tcourse(Screen):
             buttons=[
                 MDFlatButton(text="NO", on_press = self.no),
                 MDFlatButton(text="YES", on_press = self.yes),
-            ],            
+            ],
         )
         self.dialog1.open()
 
 
     def exit_manager(self, *args):
-        self.file_manager.close()    
+        self.file_manager.close()
 
     def lab_ok(self, inst):
         regex = r'[\s]*'
@@ -649,8 +651,28 @@ class Tcourse(Screen):
                 break
 
         if(a == 0):
-            print(list)
+            for i in firebase.get("Users/Student",''):
+                firebase.post("Users/Student/"+i+"/courses/"+user_info["course"]["cid"]+"/Labs",{"title":list[0],"question":list[1],"deadline":list[2],"post_time":str(datetime.now().day)+"-"+str(datetime.now().month)+"-"+str(datetime.now().year)+"  "+str(datetime.now().hour)+"-"+str(datetime.now().minute)+"-"+str(datetime.now().second),"status":0})
+            firebase.post("Users/Teacher/"+user_id+"/course/Labs",{"title":list[0],"question":list[1],"deadline":list[2],"post_time":str(datetime.now().day)+"-"+str(datetime.now().month)+"-"+str(datetime.now().year)+"  "+str(datetime.now().hour)+"-"+str(datetime.now().minute)+"-"+str(datetime.now().second)})
             self.dialog.dismiss()
+            self.add_labcard()
+
+    def add_labcard(self):
+        self.ids.tlab.clear_widgets()
+        x = firebase.get("Users/Teacher/"+user_id+"/course/Labs",'')
+        for i in reversed(x):
+            card = MDCard(orientation='horizontal',size_hint=(None,None),size=(880,60),border_radius=10,radius=[10],elevation=0,padding=10,md_bg_color=[84/255,255/255,103/255,1])
+            card_l = MDBoxLayout(orientation='vertical')
+            card_l_title = MDLabel(text=x[i]["title"],font_style="H6",bold=True)
+            card_l_question = MDLabel(text=x[i]["question"])
+            card_r_deadline = MDLabel(text=x[i]["deadline"],bold=True)
+            card_r = MDBoxLayout(orientation='vertical')
+            card_l.add_widget(card_l_title)
+            card_l.add_widget(card_l_question)
+            card.add_widget(card_l)
+            card_r.add_widget(card_r_deadline)
+            card.add_widget(card_r)
+            self.ids.tlab.add_widget(card)
 
     def assign_ok(self, inst):
         regex = r'[\s]*'
@@ -669,8 +691,28 @@ class Tcourse(Screen):
                 break
 
         if(a == 0):
-            print(list)
+            for i in firebase.get("Users/Student",''):
+                firebase.post("Users/Student/"+i+"/courses/"+user_info["course"]["cid"]+"/Assignments",{"title":list[0],"question":list[1],"deadline":list[2],"post_time":str(datetime.now().day)+"-"+str(datetime.now().month)+"-"+str(datetime.now().year)+"  "+str(datetime.now().hour)+"-"+str(datetime.now().minute)+"-"+str(datetime.now().second),"status":0})
+            firebase.post("Users/Teacher/"+user_id+"/course/Assignments",{"title":list[0],"question":list[1],"deadline":list[2],"post_time":str(datetime.now().day)+"-"+str(datetime.now().month)+"-"+str(datetime.now().year)+"  "+str(datetime.now().hour)+"-"+str(datetime.now().minute)+"-"+str(datetime.now().second)})
             self.dialog.dismiss()
+            self.add_asscard()
+
+    def add_asscard(self):
+        self.ids.tassignment.clear_widgets()
+        x = firebase.get("Users/Teacher/"+user_id+"/course/Assignments",'')
+        for i in reversed(x):
+            card = MDCard(orientation='horizontal',size_hint=(None,None),size=(880,60),border_radius=10,radius=[10],elevation=0,padding=10,md_bg_color=[84/255,255/255,103/255,1])
+            card_l = MDBoxLayout(orientation='vertical')
+            card_l_title = MDLabel(text=x[i]["title"],font_style="H6",bold=True)
+            card_l_question = MDLabel(text=x[i]["question"])
+            card_r_deadline = MDLabel(text=x[i]["deadline"],bold=True)
+            card_r = MDBoxLayout(orientation='vertical')
+            card_l.add_widget(card_l_title)
+            card_l.add_widget(card_l_question)
+            card.add_widget(card_l)
+            card_r.add_widget(card_r_deadline)
+            card.add_widget(card_r)
+            self.ids.tassignment.add_widget(card)
 
     def cancel(self, inst):
         self.dialog.dismiss()
@@ -678,9 +720,10 @@ class Tcourse(Screen):
     def on_enter(self, *args):
         self.ids.tname.text = 'Dr. ' + user_info["username"]
         self.ids.tmail.text = user_info["email"]
-        # add_widgets() for lab_card 
-
-        # add_widgets() for assignment_card 
+        # add_widgets() for lab_card
+        self.add_labcard()
+        # add_widgets() for assignment_card
+        self.add_asscard()
 
 
 class Lab(MDBoxLayout):
@@ -730,6 +773,9 @@ class Sannouncement(Screen):
             self.ids.v_list.add_widget(card)
 
 class Tannouncement(Screen):
+    def on_enter(self, *args):
+        self.add_announcements()
+        
     def announcement_send(self):
         txt=self.ids.Announcemnet_txt.text
         firebase.post("Announcements",{"message":txt,"sender":user_info["username"],"time":str(datetime.now().day)+"-"+str(datetime.now().month)+"-"+str(datetime.now().year)+"  "+str(datetime.now().hour)+"-"+str(datetime.now().minute)+"-"+str(datetime.now().second),"course":firebase.get("/Users/Teacher/"+user_id+"/", 'course/cid')})
@@ -741,6 +787,33 @@ class Tannouncement(Screen):
             pos_hint={'center_x': 0.5, 'center_y': 0.1}
         ).open()
         self.ids.Announcemnet_txt.text= ''
+        self.add_announcements()
+
+    def add_announcements(self):
+        self.ids.tannouncement_card.clear_widgets()
+        x = firebase.get("Announcements/",'')
+        for i in reversed(x):
+            if (x[i]["sender"]==user_info["username"]):
+                card = MDCard(orientation='vertical',pos_hint={'center_x':.5 , 'center_y':.7},size_hint=(None, None),size=(780,80),border_radius=10,radius=[10],md_bg_color=[184/255,255/255,203/255,1],padding=10,elevation=0)
+                icon = MDIconButton(icon='assets/'+x[i]["course"]+'.png',user_font_size=(36),pos_hint={'center_x':.5 , 'center_y':.5})
+                space = MDLabel(size_hint_x=0.05)
+                card_nt = MDBoxLayout(orientation='horizontal',pos_hint={'center_x':0.5 , 'center_y': 1},size_hint_y=0.001,spacing=50)
+                card_name = MDLabel(text='Dr. '+x[i]["sender"]+'@'+x[i]["course"],font_style = "H6",size_hint_y=0.001)
+                card_time = MDLabel(text=x[i]["time"],size_hint_y=0.001,size_hint_x = 0.6, bold=True, pos_hint={'center_x':0.8 , 'center_y':0.1})
+                card_empty = MDLabel()
+                card_nt.add_widget(card_name)
+                card_nt.add_widget(card_empty)
+                card_nt.add_widget(card_time)
+                card_message = MDLabel(text=x[i]["message"],font_size=(20),size_hint_y=0.01)
+                card_inner = MDBoxLayout(orientation='vertical')
+                card_inner.add_widget(card_nt)
+                card_inner.add_widget(card_message)
+                a= MDBoxLayout(orientation='horizontal')
+                a.add_widget(icon)
+                a.add_widget(space)
+                a.add_widget(card_inner)
+                card.add_widget(a)
+                self.ids.tannouncement_card.add_widget(card)
 
 class Tfeedback(Screen):
     pass
