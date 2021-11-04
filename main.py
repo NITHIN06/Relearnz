@@ -34,6 +34,9 @@ from kivy.clock import Clock
 from kivymd.uix.list import OneLineAvatarIconListItem,MDList,TwoLineAvatarListItem,ImageLeftWidget
 from kivy.properties import StringProperty
 import re
+import os
+import getpass
+from kivymd.uix.filemanager import MDFileManager
 
 # firebase connection
 firebase = firebase.FirebaseApplication(
@@ -45,6 +48,7 @@ socket.getaddrinfo('localhost',25)
 df = pd.read_csv(f"https://docs.google.com/spreadsheets/d/1UVyCrSjX4pX2La2JW9IOtmpkkfaNaW_sN4-nAPpELgU/export?format=csv")
 times=list(df['Time'])
 
+current_user = getpass.getuser()
 
 t = time.localtime()
 current_time = datetime.strptime(str(t.tm_hour)+":"+str(t.tm_min), '%H:%M')
@@ -541,6 +545,9 @@ class Scourse(Screen):
 class Tcourse(Screen):
 
     dialog = None
+    file_manager = None
+    dialog1 = None
+    p = ""
 
     def __init__(self, **kw):
         super(Tcourse, self).__init__(**kw)
@@ -574,7 +581,43 @@ class Tcourse(Screen):
         self.dialog.open()
 
     def addnotes(self):
-        pass
+        self.file_manager = MDFileManager(
+            select_path = self.select_path, 
+            exit_manager = self.exit_manager,
+        )
+        self.file_manager.show('\\Users\\'+current_user)
+
+    def no(self, inst):
+        self.dialog1.dismiss()
+
+    def yes(self, inst):
+        n = self.p
+        n = n.split('\\')
+
+        # Name of the file that should be displayed in Tcourse
+        name = n.pop()
+        self.dialog1.dismiss()
+        print(name)
+        
+        # self.p is the path of the file
+        print(self.p)
+        self.file_manager.close()
+
+    def select_path(self, path):
+        self.p = path
+        self.dialog1 = MDDialog(
+            title="Confirm ?",
+            text = "Are you sure you want to upload this file",
+            buttons=[
+                MDFlatButton(text="NO", on_press = self.no),
+                MDFlatButton(text="YES", on_press = self.yes),
+            ],            
+        )
+        self.dialog1.open()
+
+
+    def exit_manager(self, *args):
+        self.file_manager.close()    
 
     def lab_ok(self, inst):
         regex = r'[\s]*'
@@ -633,8 +676,6 @@ class Lab(MDBoxLayout):
 class Assignment(MDBoxLayout):
     pass
 
-class Notes(MDBoxLayout):
-    pass
 
 class Sevent(Screen):
     pass
