@@ -198,6 +198,9 @@ WindowManager:
             size_hint : 1, 0.3
             text: ""
 
+
+<Timetable>
+
 <Register>:
     name: "Register"
 
@@ -631,13 +634,14 @@ WindowManager:
                             radius: [30]
                             md_bg_color: 247/255, 126/255, 126/255, 0.2
                             orientation: 'vertical'
+                            on_release: app.root.current = "Tcourse"
 
                             MDBoxLayout:
                                 MDIcon:
                                     icon: "laptop"
                                     font_size : 48
                                 MDLabel:
-                                    text:"4"
+                                    id: lab_c
                                     bold: True
                                     padding_x: 40
                                     font_size : 40
@@ -662,13 +666,14 @@ WindowManager:
                             ripple_behavior: True
                             radius: [30]
                             orientation: 'vertical'
+                            on_release: app.root.current = "Tcourse"
 
                             MDBoxLayout:
                                 MDIcon:
                                     icon: "clipboard-text-outline"
                                     font_size : 48
                                 MDLabel:
-                                    text:"4"
+                                    id: ass_c
                                     padding_x: 40
                                     font_size : 40
                                     bold: True
@@ -3996,7 +4001,7 @@ WindowManager:
                         MDFillRoundFlatIconButton:
                             icon: "send"
                             text: "send"
-                            fill_color: 185/255,0.4,58/255,1
+                            md_bg_color: 8/255,1,98/255,1
                             font_size: 24
                             bold: True
                             on_press: root.feedback_send()
@@ -4161,7 +4166,7 @@ WindowManager:
 
                     on_release:
                         app.root.current= "Tannouncement"
-                        root.manager.transition.direction="left"                    
+                        root.manager.transition.direction="left"
                     MDIcon:
                         icon: "alert"
                         font_size : 30
@@ -4377,7 +4382,7 @@ WindowManager:
 
                     on_release:
                         app.root.current= "Tannouncement"
-                        root.manager.transition.direction="right"                    
+                        root.manager.transition.direction="right"
                     MDIcon:
                         icon: "alert"
                         font_size : 30
@@ -4850,7 +4855,7 @@ WindowManager:
                     ripple_behavior: True
                     padding: 20
                     border_radius: 15
-                    md_bg_color: 8/255, 1, 98/255,1 
+                    md_bg_color: 8/255, 1, 98/255,1
                     radius: [15]
                     MDIcon:
                         icon: "book-multiple"
@@ -4997,7 +5002,7 @@ WindowManager:
                                 pos_hint:{"center_x": 0.5, "center_y": 0.5}
                                 user_font_size: "100sp"
                             MDLabel:
-                                id: tname  
+                                id: tname
                                 font_style: "H6"
                                 halign: "center"
                                 size_hint: 1, 0.3
