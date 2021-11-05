@@ -5,6 +5,7 @@ WindowManager:
 	Login:
     Register:
     Tdashboard:
+    Ttimetable:
     Tcourse:
     Tevent:
     Tchat:
@@ -12,6 +13,7 @@ WindowManager:
     Tfeedback:
     Tprofile:
     Sdashboard:
+    Stimetable:
     Scourse:
     Sevent:
     Schat:
@@ -199,7 +201,7 @@ WindowManager:
             text: ""
 
 
-<Timetable>
+
 
 <Register>:
     name: "Register"
@@ -411,7 +413,7 @@ WindowManager:
             MDLabel:
                 size_hint_x:0.4
             MDFloatingActionButton:
-                icon: "bell"
+                icon: "timetable"
                 elevation_normal: 8
                 md_bg_color: "black"
             MDLabel:
@@ -578,7 +580,7 @@ WindowManager:
                     border_radius: 15
                     radius: [15]
                     on_release:
-                        app.root.current= "Welcome"
+                        app.root.current= "Login"
                         root.manager.transition.direction="right"
                     MDIcon:
                         icon: "logout"
@@ -1032,9 +1034,12 @@ WindowManager:
             MDLabel:
                 size_hint_x:0.4
             MDFloatingActionButton:
-                icon: "bell"
+                icon: "timetable"
                 elevation_normal: 8
                 md_bg_color: "black"
+                on_release:
+                    app.root.current= "Stimetable"
+                    root.manager.transition.direction="left"   
             MDLabel:
                 size_hint_x:0.08
 
@@ -1199,7 +1204,7 @@ WindowManager:
                     border_radius: 15
                     radius: [15]
                     on_release:
-                        app.root.current= "Welcome"
+                        app.root.current= "Login"
                         root.manager.transition.direction="right"
                     MDIcon:
                         icon: "logout"
@@ -1608,6 +1613,442 @@ WindowManager:
                 text: ""
                 size_hint_x: 0.02
 
+<Stimetable>:
+
+    name: "Stimetable"
+    MDBoxLayout:
+        orientation: "vertical"
+        MDLabel:
+            size_hint_y:0.025
+        MDBoxLayout:
+            size_hint_y: 0.1
+            MDLabel:
+                size_hint_x:0.05
+            MDLabel:
+                text: "ReLearnz"
+                color: 8/255, 1, 98/255
+                font_size: 40
+                bold: True
+                size_hint_x:0.5
+            MDTextField:
+                id: "A"
+                mode: "fill"
+                icon_right: "magnify"
+                font_size: 20
+                hint_text: "Search"
+                hint_text_color: 1,1,1
+                icon_left_color: 1,1,1
+                radius: [30]
+                fill_color: 184/255, 226/255, 1, 0.3
+                line_color_focus: 252/255, 5/255, 121/255, 1
+                size_hint_x:0.5
+            MDLabel:
+                size_hint_x:0.4
+            MDFloatingActionButton:
+                icon: "timetable"
+                elevation_normal: 8
+                md_bg_color: "black"
+            MDLabel:
+                size_hint_x:0.08
+
+            MDFloatingActionButton:
+                icon: "account"
+                elevation_normal: 8
+                md_bg_color: "black"
+                on_release:
+                    app.root.current= "Sprofile"
+                    root.manager.transition.direction="left"
+            MDLabel:
+                size_hint_x:0.09
+        MDLabel:
+            size_hint_y:0.02
+        MDBoxLayout:
+            md_bg_color: 117/255, 255/255, 230/255, 0.1
+            MDLabel:
+                size_hint_x:0.02
+            MDBoxLayout:
+                size_hint_x:0.4
+                orientation: "vertical"
+                MDLabel:
+                    size_hint_y: 0.1
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    on_release:
+                        app.root.current= "Sdashboard"
+                        root.manager.transition.direction="right"
+                    MDIcon:
+                        icon: "eye"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDLabel:
+                        text:"Overview"
+                        bold: True
+                        font_size : 20
+                        padding_x: 20
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    on_release:
+                        app.root.current= "Scourse"
+                        root.manager.transition.direction="left"
+                    MDIcon:
+                        icon: "book-multiple"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDLabel:
+                        text:"Courses"
+                        bold: True
+                        font_size : 20
+                        padding_x: 20
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    on_release:
+                        app.root.current= "Sevent"
+                        root.manager.transition.direction="left"
+                    MDIcon:
+                        icon: "bookmark-multiple"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDLabel:
+                        text:"Events"
+                        bold: True
+                        font_size : 20
+                        padding_x: 20
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    on_release:
+                        app.root.current= "Schat"
+                        root.manager.transition.direction="left"
+                    MDIcon:
+                        icon: "chat"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDLabel:
+                        text:"Chat"
+                        bold: True
+                        font_size : 20
+                        padding_x: 20
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    on_release:
+                        app.root.current= "Sannouncement"
+                        root.manager.transition.direction="left"
+                    MDIcon:
+                        icon: "alert"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDLabel:
+                        text:"Announcements"
+                        bold: True
+                        font_size : 20
+                        padding_x: 0
+                MDLabel:
+                    size_hint_y: 0.85
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    on_release:
+                        app.root.current= "Sfeedback"
+                        root.manager.transition.direction="left"
+                    MDIcon:
+                        icon: "file-document"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDLabel:
+                        text:"Feedback"
+                        bold: True
+                        font_size : 20
+                        padding_x: 20
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    id: logout
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    on_release:
+                        app.root.current= "Login"
+                        root.manager.transition.direction="right"
+                    MDIcon:
+                        icon: "logout"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDLabel:
+                        text:"Logout"
+                        bold: True
+                        font_size : 20
+                        padding_x: 20
+                MDLabel:
+                    size_hint_y: 0.05
+            MDLabel:
+                text:"TIMETABLE"
+                font_style: "H1"
+                halign: "center"
+
+<Ttimetable>:
+
+    name: "Ttimetable"
+    MDBoxLayout:
+        orientation: "vertical"
+        MDLabel:
+            size_hint_y:0.025
+        MDBoxLayout:
+            size_hint_y: 0.1
+            MDLabel:
+                size_hint_x:0.05
+            MDLabel:
+                text: "ReLearnz"
+                color: 8/255, 1, 98/255
+                font_size: 40
+                bold: True
+                size_hint_x:0.5
+            MDTextField:
+                id: "A"
+                mode: "fill"
+                icon_right: "magnify"
+                font_size: 20
+                hint_text: "Search"
+                hint_text_color: 1,1,1
+                icon_left_color: 1,1,1
+                radius: [30]
+                fill_color: 184/255, 226/255, 1, 0.3
+                line_color_focus: 252/255, 5/255, 121/255, 1
+                size_hint_x:0.5
+            MDLabel:
+                size_hint_x:0.4
+            MDFloatingActionButton:
+                icon: "timetable"
+                elevation_normal: 8
+                md_bg_color: "black"
+
+            MDLabel:
+                size_hint_x:0.08
+
+            MDFloatingActionButton:
+                icon: "account"
+                elevation_normal: 8
+                md_bg_color: "black"
+                on_release:
+                    app.root.current= "Tprofile"
+                    root.manager.transition.direction="left"
+            MDLabel:
+                size_hint_x:0.09
+        MDLabel:
+            size_hint_y:0.02
+        MDBoxLayout:
+            md_bg_color: 117/255, 255/255, 230/255, 0.1
+            MDLabel:
+                size_hint_x:0.02
+            MDBoxLayout:
+                size_hint_x:0.4
+                orientation: "vertical"
+                MDLabel:
+                    size_hint_y: 0.1
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    on_release:
+                        app.root.current= "Tdashboard"
+                        root.manager.transition.direction="right"
+                    MDIcon:
+                        icon: "eye"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDLabel:
+                        text:"Overview"
+                        bold: True
+                        font_size : 20
+                        padding_x: 20
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    on_release:
+                        app.root.current= "Tcourse"
+                        root.manager.transition.direction="left"
+                    MDIcon:
+                        icon: "book-multiple"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDLabel:
+                        text:"Courses"
+                        bold: True
+                        font_size : 20
+                        padding_x: 20
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    on_release:
+                        app.root.current= "Tevent"
+                        root.manager.transition.direction="left"
+                    MDIcon:
+                        icon: "bookmark-multiple"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDLabel:
+                        text:"Events"
+                        bold: True
+                        font_size : 20
+                        padding_x: 20
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    on_release:
+                        app.root.current= "Tchat"
+                        root.manager.transition.direction="left"
+                    MDIcon:
+                        icon: "chat"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDLabel:
+                        text:"Chat"
+                        bold: True
+                        font_size : 20
+                        padding_x: 20
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    on_release:
+                        app.root.current= "Tannouncement"
+                        root.manager.transition.direction="left"
+                    MDIcon:
+                        icon: "alert"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDLabel:
+                        text:"Announcements"
+                        bold: True
+                        font_size : 20
+                        padding_x: 0
+                MDLabel:
+                    size_hint_y: 0.85
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    on_release:
+                        app.root.current= "Tfeedback"
+                        root.manager.transition.direction="left"
+                    MDIcon:
+                        icon: "file-document"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDLabel:
+                        text:"Feedback"
+                        bold: True
+                        font_size : 20
+                        padding_x: 20
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    id: logout
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    on_release:
+                        app.root.current= "Login"
+                        root.manager.transition.direction="right"
+                    MDIcon:
+                        icon: "logout"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDLabel:
+                        text:"Logout"
+                        bold: True
+                        font_size : 20
+                        padding_x: 20
+                MDLabel:
+                    size_hint_y: 0.05
+            MDLabel:
+                text:"TIMETABLE"
+                font_style: "H1"
+                halign: "center"
 <Scourse>:
 
     name: "Scourse"
@@ -1640,9 +2081,12 @@ WindowManager:
             MDLabel:
                 size_hint_x:0.4
             MDFloatingActionButton:
-                icon: "bell"
+                icon: "timetable"
                 elevation_normal: 8
                 md_bg_color: "black"
+                on_release:
+                    app.root.current= "Stimetable"
+                    root.manager.transition.direction="left"
             MDLabel:
                 size_hint_x:0.08
 
@@ -1806,7 +2250,7 @@ WindowManager:
                     border_radius: 15
                     radius: [15]
                     on_release:
-                        app.root.current= "Welcome"
+                        app.root.current= "Login"
                         root.manager.transition.direction="right"
                     MDIcon:
                         icon: "logout"
@@ -1910,7 +2354,7 @@ WindowManager:
                         icon: "assets/DSP.png"
                         user_font_size: "35sp"
                     MDLabel:
-                        text: "Digital Signal Processing         "
+                        text: "Digital Signal Processing"
                         font_size: 18
                         bold: True
                         padding_x: 20
@@ -2046,9 +2490,12 @@ WindowManager:
             MDLabel:
                 size_hint_x:0.4
             MDFloatingActionButton:
-                icon: "bell"
+                icon: "timetable"
                 elevation_normal: 8
                 md_bg_color: "black"
+                on_release:
+                    app.root.current= "Ttimetable"
+                    root.manager.transition.direction="left"
             MDLabel:
                 size_hint_x:0.08
 
@@ -2212,7 +2659,7 @@ WindowManager:
                     border_radius: 15
                     radius: [15]
                     on_release:
-                        app.root.current= "Welcome"
+                        app.root.current= "Login"
                         root.manager.transition.direction="right"
                     MDIcon:
                         icon: "logout"
@@ -2405,9 +2852,12 @@ WindowManager:
             MDLabel:
                 size_hint_x:0.4
             MDFloatingActionButton:
-                icon: "bell"
+                icon: "timetable"
                 elevation_normal: 8
                 md_bg_color: "black"
+                on_release:
+                    app.root.current= "Stimetable"
+                    root.manager.transition.direction="left"
             MDLabel:
                 size_hint_x:0.08
 
@@ -2571,7 +3021,7 @@ WindowManager:
                     border_radius: 15
                     radius: [15]
                     on_release:
-                        app.root.current= "Welcome"
+                        app.root.current= "Login"
                         root.manager.transition.direction="right"
                     MDIcon:
                         icon: "logout"
@@ -2621,7 +3071,7 @@ WindowManager:
             MDLabel:
                 size_hint_x:0.4
             MDFloatingActionButton:
-                icon: "bell"
+                icon: "timetable"
                 elevation_normal: 8
                 md_bg_color: "black"
             MDLabel:
@@ -2788,7 +3238,7 @@ WindowManager:
                     border_radius: 15
                     radius: [15]
                     on_release:
-                        app.root.current= "Welcome"
+                        app.root.current= "Login"
                         root.manager.transition.direction="right"
                     MDIcon:
                         icon: "logout"
@@ -2838,9 +3288,12 @@ WindowManager:
             MDLabel:
                 size_hint_x:0.4
             MDFloatingActionButton:
-                icon: "bell"
+                icon: "timetable"
                 elevation_normal: 8
                 md_bg_color: "black"
+                on_release:
+                    app.root.current= "Stimetable"
+                    root.manager.transition.direction="left"
             MDLabel:
                 size_hint_x:0.08
 
@@ -3004,7 +3457,7 @@ WindowManager:
                     border_radius: 15
                     radius: [15]
                     on_release:
-                        app.root.current= "Welcome"
+                        app.root.current= "Login"
                         root.manager.transition.direction="right"
                     MDIcon:
                         icon: "logout"
@@ -3054,7 +3507,7 @@ WindowManager:
             MDLabel:
                 size_hint_x:0.4
             MDFloatingActionButton:
-                icon: "bell"
+                icon: "timetable"
                 elevation_normal: 8
                 md_bg_color: "black"
             MDLabel:
@@ -3221,7 +3674,7 @@ WindowManager:
                     border_radius: 15
                     radius: [15]
                     on_release:
-                        app.root.current= "Welcome"
+                        app.root.current= "Login"
                         root.manager.transition.direction="right"
                     MDIcon:
                         icon: "logout"
@@ -3271,9 +3724,12 @@ WindowManager:
             MDLabel:
                 size_hint_x:0.4
             MDFloatingActionButton:
-                icon: "bell"
+                icon: "timetable"
                 elevation_normal: 8
                 md_bg_color: "black"
+                on_release:
+                    app.root.current= "Stimetable"
+                    root.manager.transition.direction="left"
             MDLabel:
                 size_hint_x:0.08
 
@@ -3437,7 +3893,7 @@ WindowManager:
                     border_radius: 15
                     radius: [15]
                     on_release:
-                        app.root.current= "Welcome"
+                        app.root.current= "Login"
                         root.manager.transition.direction="left"
                     MDIcon:
                         icon: "logout"
@@ -3507,7 +3963,7 @@ WindowManager:
             MDLabel:
                 size_hint_x:0.4
             MDFloatingActionButton:
-                icon: "bell"
+                icon: "timetable"
                 elevation_normal: 8
                 md_bg_color: "black"
             MDLabel:
@@ -3674,7 +4130,7 @@ WindowManager:
                     border_radius: 15
                     radius: [15]
                     on_release:
-                        app.root.current= "Welcome"
+                        app.root.current= "Login"
                         root.manager.transition.direction="right"
                     MDIcon:
                         icon: "logout"
@@ -3776,9 +4232,12 @@ WindowManager:
             MDLabel:
                 size_hint_x:0.4
             MDFloatingActionButton:
-                icon: "bell"
+                icon: "timetable"
                 elevation_normal: 8
                 md_bg_color: "black"
+                on_release:
+                    app.root.current= "Stimetable"
+                    root.manager.transition.direction="left"
             MDLabel:
                 size_hint_x:0.08
 
@@ -3942,7 +4401,7 @@ WindowManager:
                     border_radius: 15
                     radius: [15]
                     on_release:
-                        app.root.current= "Welcome"
+                        app.root.current= "Login"
                         root.manager.transition.direction="right"
                     MDIcon:
                         icon: "logout"
@@ -4040,7 +4499,7 @@ WindowManager:
             MDLabel:
                 size_hint_x:0.4
             MDFloatingActionButton:
-                icon: "bell"
+                icon: "timetable"
                 elevation_normal: 8
                 md_bg_color: "black"
             MDLabel:
@@ -4208,7 +4667,7 @@ WindowManager:
                     border_radius: 15
                     radius: [15]
                     on_release:
-                        app.root.current= "Welcome"
+                        app.root.current= "Login"
                         root.manager.transition.direction="right"
                     MDIcon:
                         icon: "logout"
@@ -4259,7 +4718,7 @@ WindowManager:
             MDLabel:
                 size_hint_x:0.4
             MDFloatingActionButton:
-                icon: "bell"
+                icon: "timetable"
                 elevation_normal: 8
                 md_bg_color: "black"
             MDLabel:
@@ -4426,7 +4885,7 @@ WindowManager:
                     border_radius: 15
                     radius: [15]
                     on_release:
-                        app.root.current= "Welcome"
+                        app.root.current= "Login"
                         root.manager.transition.direction="right"
                     MDIcon:
                         icon: "logout"
@@ -4541,9 +5000,12 @@ WindowManager:
             MDLabel:
                 size_hint_x:0.4
             MDFloatingActionButton:
-                icon: "bell"
+                icon: "timetable"
                 elevation_normal: 8
                 md_bg_color: "black"
+                on_release:
+                    app.root.current= "Stimetable"
+                    root.manager.transition.direction="left"
             MDLabel:
                 size_hint_x:0.08
 
@@ -4707,7 +5169,7 @@ WindowManager:
                     border_radius: 15
                     radius: [15]
                     on_release:
-                        app.root.current= "Welcome"
+                        app.root.current= "Login"
                         root.manager.transition.direction="right"
                     MDIcon:
                         icon: "logout"
@@ -4767,10 +5229,9 @@ WindowManager:
                         size_hint: 1, 1
             MDLabel:
                 text: ""
-                size_hint: 0.1, 1
-
+                size_hint: 0.1, 1             
 <Scourse1>:
-    name: "Scourse1"
+    name: "Scourse1"      
     MDBoxLayout:
         orientation: "vertical"
         MDLabel:
@@ -4800,9 +5261,12 @@ WindowManager:
             MDLabel:
                 size_hint_x:0.4
             MDFloatingActionButton:
-                icon: "bell"
+                icon: "timetable"
                 elevation_normal: 8
                 md_bg_color: "black"
+                on_release:
+                    app.root.current= "Stimetable"
+                    root.manager.transition.direction="left"
             MDLabel:
                 size_hint_x:0.08
 
@@ -4966,7 +5430,7 @@ WindowManager:
                     border_radius: 15
                     radius: [15]
                     on_release:
-                        app.root.current= "Welcome"
+                        app.root.current= "Login"
                         root.manager.transition.direction="right"
                     MDIcon:
                         icon: "logout"
