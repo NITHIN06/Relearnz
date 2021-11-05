@@ -37,11 +37,25 @@ import re
 import os
 import getpass
 from kivymd.uix.filemanager import MDFileManager
+import pyrebase
 
 # firebase connection
 firebase = firebase.FirebaseApplication(
     "https://relearnz-default-rtdb.firebaseio.com/", None)
 
+config = {
+    "apiKey": "AIzaSyCXGdOAi-Hj3zdUrxg4p6h0qsON3fldwts",
+    "authDomain": "relearnz.firebaseapp.com",
+    "databaseURL": "https://relearnz-default-rtdb.firebaseio.com",
+    "projectId": "relearnz",
+    "storageBucket": "relearnz.appspot.com",
+    "messagingSenderId": "236774918194",
+    "appId": "1:236774918194:web:dee36460c9caa85fd8542b"
+    }
+
+pyrebase = pyrebase.initialize_app(config)
+
+storage = pyrebase.storage()
 
 socket.getaddrinfo('localhost',25)
 
@@ -478,29 +492,17 @@ class Register(Screen):
 
 class Tdashboard(Screen):
     def __init__(self,**kwargs):
-        try:
-            super(Tdashboard,self).__init__(**kwargs)
-            Clock.schedule_interval(self.update,0.5)
-        except:
-            pass
-    def update(self,*args):
-        try:
-            self.ids.uname.text = "Hello "+str(user_info["username"])
-        except:
-            pass
+        super(Tdashboard,self).__init__(**kwargs)
+    def on_enter(self,*args):
+        self.ids.uname.text = "Hello "+str(user_info["username"])
+        self.ids.lab_c.text= str(len(firebase.get("Users/Teacher/"+user_id+"/course/Labs",'')))
+        self.ids.ass_c.text= str(len(firebase.get("Users/Teacher/"+user_id+"/course/Assignments",'')))
 
 class Sdashboard(Screen):
     def __init__(self,**kwargs):
-        try:
-            super(Sdashboard,self).__init__(**kwargs)
-            Clock.schedule_interval(self.update,0.5)
-        except:
-            pass
-    def update(self,*args):
-        try:
-            self.ids.uname.text = "Hello "+str(user_info["username"])
-        except:
-            pass
+        super(Sdashboard,self).__init__(**kwargs)
+    def on_enter(self,*args):
+        self.ids.uname.text = "Hello "+str(user_info["username"])
 
 class ClockLabel(Label):
     def __init__(self,**kwargs):
@@ -549,8 +551,7 @@ class NextText(MDTextButton):
 class TodayDate(MDLabel):
     def __init__(self, **kwargs):
         super(TodayDate,self).__init__(**kwargs)
-        Clock.schedule_interval(self.update_date,5)
-    def update_date(self,*args):
+    def on_enter(self,*args):
         self.text=str(datetime.now().day)+"-"+str(datetime.now().month)+"-"+str(datetime.now().year)
 
 class Scourse(Screen):
@@ -611,13 +612,26 @@ class Tcourse(Screen):
         # Name of the file that should be displayed in Tcourse
         name = n.pop()
         self.dialog1.dismiss()
-        print(name)
 
         # self.p is the path of the file
         self.p = "C:"+self.p
-        print(self.p)
+        storage.child(user_info['course']['cid']+name).put(self.p)
+        pdf_url=storage.child(user_info['course']['cid']+name).get_url(None)
+        firebase.post("Courses/"+user_info["course"]["cid"]+"/",{"url":pdf_url,"title":name})
         self.file_manager.close()
+        self.add_note_card()
         Snackbar(text="File Successfully uploaded -_- ",snackbar_x="10dp",snackbar_y="10dp",size_hint_x=0.5,pos_hint={'center_x': 0.5, 'center_y': 0.1}).open()
+
+    def add_note_card(self):
+        self.ids.tnotes.clear_widgets()
+        x= firebase.get("Courses/"+user_info["course"]["cid"],'')
+        for i in reversed(x):
+            card = MDCard(orientation='horizontal',size_hint=(None,None),size=(880,40),border_radius=10,radius=[10],elevation=0,padding=10,md_bg_color=[184/255,25/255,103/255,1],on_release=self.download_pdf(x[i]["title"]))
+            card_title = MDLabel(text=x[i]["title"],font_style="H3")
+            card.add_widget(card_title)
+            self.ids.tnotes.add_widget(card)
+    def download_pdf(self,link):
+        storage.child(link).download(None)
 
     def select_path(self, path):
         self.p = path
@@ -784,7 +798,7 @@ class Tannouncement(Screen):
 
     def on_enter(self, *args):
         self.add_announcements()
-        
+
     def announcement_send(self):
         txt=self.ids.Announcemnet_txt.text
         regex = r'[\s]*'
@@ -943,7 +957,7 @@ class Ai(Screen):
         n = self.p
         n = n.split('\\')
 
-        # Name of the file that should be displayed 
+        # Name of the file that should be displayed
         name = n.pop()
         self.dialog1.dismiss()
         print(name)
@@ -958,7 +972,7 @@ class Ai(Screen):
         n = self.p
         n = n.split('\\')
 
-        # Name of the file that should be displayed 
+        # Name of the file that should be displayed
         name = n.pop()
         self.dialog1.dismiss()
         print(name)
@@ -991,7 +1005,7 @@ class Ai(Screen):
         self.course = "Artificial Intelligence"
         self.c_id = "AI"
 
-        # get user details who has c_id = "OSM" 
+        # get user details who has c_id = "OSM"
         self.ids.tname.text = 'Dr. ' + ""
         self.ids.tmail.text = ""
 
@@ -1057,7 +1071,7 @@ class Cf(Screen):
         n = self.p
         n = n.split('\\')
 
-        # Name of the file that should be displayed 
+        # Name of the file that should be displayed
         name = n.pop()
         self.dialog1.dismiss()
         print(name)
@@ -1072,7 +1086,7 @@ class Cf(Screen):
         n = self.p
         n = n.split('\\')
 
-        # Name of the file that should be displayed 
+        # Name of the file that should be displayed
         name = n.pop()
         self.dialog1.dismiss()
         print(name)
@@ -1105,7 +1119,7 @@ class Cf(Screen):
         self.course = "Computer Forensics"
         self.c_id = "CF"
 
-        # get user details who has c_id = "OSM" 
+        # get user details who has c_id = "OSM"
         self.ids.tname.text = 'Dr. ' + ""
         self.ids.tmail.text = ""
 
@@ -1171,7 +1185,7 @@ class Dsp(Screen):
         n = self.p
         n = n.split('\\')
 
-        # Name of the file that should be displayed 
+        # Name of the file that should be displayed
         name = n.pop()
         self.dialog1.dismiss()
         print(name)
@@ -1186,7 +1200,7 @@ class Dsp(Screen):
         n = self.p
         n = n.split('\\')
 
-        # Name of the file that should be displayed 
+        # Name of the file that should be displayed
         name = n.pop()
         self.dialog1.dismiss()
         print(name)
@@ -1219,7 +1233,7 @@ class Dsp(Screen):
         self.course = "Digital Signal Processing"
         self.c_id = "DSP"
 
-        # get user details who has c_id = "OSM" 
+        # get user details who has c_id = "OSM"
         self.ids.tname.text = 'Dr. ' + ""
         self.ids.tmail.text = ""
 
@@ -1285,7 +1299,7 @@ class Hrm(Screen):
         n = self.p
         n = n.split('\\')
 
-        # Name of the file that should be displayed 
+        # Name of the file that should be displayed
         name = n.pop()
         self.dialog1.dismiss()
         print(name)
@@ -1300,7 +1314,7 @@ class Hrm(Screen):
         n = self.p
         n = n.split('\\')
 
-        # Name of the file that should be displayed 
+        # Name of the file that should be displayed
         name = n.pop()
         self.dialog1.dismiss()
         print(name)
@@ -1333,7 +1347,7 @@ class Hrm(Screen):
         self.course = "Human Resource Management"
         self.c_id = "HRM"
 
-        # get user details who has c_id = "OSM" 
+        # get user details who has c_id = "OSM"
         self.ids.tname.text = 'Dr. ' + ""
         self.ids.tmail.text = ""
 
@@ -1399,7 +1413,7 @@ class Sc(Screen):
         n = self.p
         n = n.split('\\')
 
-        # Name of the file that should be displayed 
+        # Name of the file that should be displayed
         name = n.pop()
         self.dialog1.dismiss()
         print(name)
@@ -1414,7 +1428,7 @@ class Sc(Screen):
         n = self.p
         n = n.split('\\')
 
-        # Name of the file that should be displayed 
+        # Name of the file that should be displayed
         name = n.pop()
         self.dialog1.dismiss()
         print(name)
@@ -1447,7 +1461,7 @@ class Sc(Screen):
         self.course = "Soft Computing"
         self.c_id = "SC"
 
-        # get user details who has c_id = "OSM" 
+        # get user details who has c_id = "OSM"
         self.ids.tname.text = 'Dr. ' + ""
         self.ids.tmail.text = ""
 
@@ -1513,7 +1527,7 @@ class Sepm(Screen):
         n = self.p
         n = n.split('\\')
 
-        # Name of the file that should be displayed 
+        # Name of the file that should be displayed
         name = n.pop()
         self.dialog1.dismiss()
         print(name)
@@ -1528,7 +1542,7 @@ class Sepm(Screen):
         n = self.p
         n = n.split('\\')
 
-        # Name of the file that should be displayed 
+        # Name of the file that should be displayed
         name = n.pop()
         self.dialog1.dismiss()
         print(name)
@@ -1561,7 +1575,7 @@ class Sepm(Screen):
         self.course = "Software Engineering and Project Management"
         self.c_id = "SEPM"
 
-        # get user details who has c_id = "OSM" 
+        # get user details who has c_id = "OSM"
         self.ids.tname.text = 'Dr. ' + ""
         self.ids.tmail.text = ""
 
@@ -1627,7 +1641,7 @@ class Fma(Screen):
         n = self.p
         n = n.split('\\')
 
-        # Name of the file that should be displayed 
+        # Name of the file that should be displayed
         name = n.pop()
         self.dialog1.dismiss()
         print(name)
@@ -1642,7 +1656,7 @@ class Fma(Screen):
         n = self.p
         n = n.split('\\')
 
-        # Name of the file that should be displayed 
+        # Name of the file that should be displayed
         name = n.pop()
         self.dialog1.dismiss()
         print(name)
@@ -1675,7 +1689,7 @@ class Fma(Screen):
         self.course = "Financial Management & Accounting"
         self.c_id = "FMA"
 
-        # get user details who has c_id = "OSM" 
+        # get user details who has c_id = "OSM"
         self.ids.tname.text = 'Dr. ' + ""
         self.ids.tmail.text = ""
 
@@ -1741,7 +1755,7 @@ class Osm(Screen):
         n = self.p
         n = n.split('\\')
 
-        # Name of the file that should be displayed 
+        # Name of the file that should be displayed
         name = n.pop()
         self.dialog1.dismiss()
         print(name)
@@ -1756,7 +1770,7 @@ class Osm(Screen):
         n = self.p
         n = n.split('\\')
 
-        # Name of the file that should be displayed 
+        # Name of the file that should be displayed
         name = n.pop()
         self.dialog1.dismiss()
         print(name)
@@ -1789,15 +1803,13 @@ class Osm(Screen):
         self.course = "Operations & Supply Chain Management"
         self.c_id = "OSM"
 
-        # get user details who has c_id = "OSM" 
+        # get user details who has c_id = "OSM"
         self.ids.tname.text = 'Dr. ' + ""
         self.ids.tmail.text = ""
 
         # self.add_labcard()
         # self.add_asscard()
         # self.add_notescard()
-
-
 
 class Main(MDApp):
     pass
