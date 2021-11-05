@@ -863,7 +863,10 @@ class Schat(Screen):
     pass
 class Tchat(Screen):
     pass
-
+class Stimetable(Screen):
+    pass
+class Ttimetable(Screen):
+    pass
 class Sannouncement(Screen):
     def __init__(self, **kw):
         super(Sannouncement,self).__init__(**kw)
