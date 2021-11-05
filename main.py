@@ -498,14 +498,16 @@ class Tdashboard(Screen):
         super(Tdashboard,self).__init__(**kwargs)
     def on_enter(self,*args):
         self.ids.uname.text = "Hello "+str(user_info["username"])
-        #self.ids.lab_c.text= str(len(firebase.get("Users/Teacher/"+user_id+"/course/Labs",'')))
-        #self.ids.ass_c.text= str(len(firebase.get("Users/Teacher/"+user_id+"/course/Assignments",'')))
+        self.ids.label.text = "An investment in knowledge pays best intrest"
+        self.ids.lab_c.text= str(len(firebase.get("Users/Teacher/"+user_id+"/course/Labs",'')))
+        self.ids.ass_c.text= str(len(firebase.get("Users/Teacher/"+user_id+"/course/Assignments",'')))
 
 class Sdashboard(Screen):
     def __init__(self,**kwargs):
         super(Sdashboard,self).__init__(**kwargs)
     def on_enter(self,*args):
         self.ids.uname.text = "Hello "+str(user_info["username"])
+        self.ids.label.text = "An investment in knowledge pays best intrest"
 
 class ClockLabel(Label):
     def __init__(self,**kwargs):
@@ -800,9 +802,9 @@ class Tcourse(Screen):
         self.ids.tname.text = 'Dr. ' + user_info["username"]
         self.ids.tmail.text = user_info["email"]
 
-        #self.add_labcard()
+        self.add_labcard()
 
-        #self.add_asscard()
+        self.add_asscard()
 
         #self.add_note_card()
 
