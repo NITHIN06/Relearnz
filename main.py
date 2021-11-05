@@ -9,7 +9,7 @@ Config.set('graphics', 'resizable', False)
 
 import smtplib
 import pandas as pd
-import socket
+import socket 
 from kivymd.app import MDApp
 from kivy.lang import Builder
 from kivymd.uix.boxlayout import MDBoxLayout
