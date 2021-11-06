@@ -500,8 +500,13 @@ class Tdashboard(Screen):
             self.ids.label.text = "An investment in knowledge pays best intrest"
             self.ids.lab_c.text= str(len(firebase.get("Users/Teacher/"+user_id+"/course/Labs",'')))
             self.ids.ass_c.text= str(len(firebase.get("Users/Teacher/"+user_id+"/course/Assignments",'')))
+
+            # add student cards to MDboxlayout( id = student_list)
         except:
             pass
+
+        
+
 
 class Sdashboard(Screen):
     def __init__(self,**kwargs):
@@ -509,6 +514,11 @@ class Sdashboard(Screen):
     def on_enter(self,*args):
         self.ids.uname.text = "Hello "+str(user_info["username"])
         self.ids.label.text = "An investment in knowledge pays best intrest"
+        # diaplay no. labs, assignments
+
+        # add widgets to MDboxlayout( id = today)
+        # add widgets to MDboxlayout( id = tomorrow)
+
 
 class ClockLabel(Label):
     def __init__(self,**kwargs):
@@ -575,7 +585,8 @@ class NextText(MDTextButton):
 class TodayDate(MDLabel):
     def __init__(self, **kwargs):
         super(TodayDate,self).__init__(**kwargs)
-    def on_enter(self,*args):
+        Clock.schedule_interval(self.update, 5)
+    def update(self,*args):
         self.text=str(datetime.now().day)+"-"+str(datetime.now().month)+"-"+str(datetime.now().year)
 
 class Scourse(Screen):
@@ -969,10 +980,8 @@ class Tannouncement(Screen):
                 self.ids.tannouncement_card.add_widget(card)
 
 class Tfeedback(Screen):
-    pass
-
-class Sfeedback(Screen):
     def feedback_send(self):
+        regex = r'[\s]*'
         # server= smtplib.SMTP("smtp.gmail.com",587)
         # server.ehlo()
         # server.starttls()
@@ -984,15 +993,47 @@ class Sfeedback(Screen):
         # body="""Subject: Feedback from %s\n
         #         %s"""%(user_info['username'],txt)
         # self.server.sendmail(From,[To],body)
-        x=firebase.get('Users/Student','')
-        for i in x:
-            if len(txt)<10:
-                firebase.post('Users/Student/'+i+'/courses/AI/Labs',{'question':txt,'sender':user_info['username'],'time':f"{datetime.now().strftime('%H:%M')}"})
-            else:
-                firebase.post('Users/Student/'+i+'/courses/AI/Assignments',{'question':txt,'sender':user_info['username'],'time':f"{datetime.now().strftime('%H:%M')}"})
+        # x=firebase.get('Users/Student','')
+        #for i in x:
+        #    if len(txt)<10:
+        #        firebase.post('Users/Student/'+i+'/courses/AI/Labs',{'question':txt,'sender':user_info['username'],'time':f"{datetime.now().strftime('%H:%M')}"})
+        #    else:
+        #        firebase.post('Users/Student/'+i+'/courses/AI/Assignments',{'question':txt,'sender':user_info['username'],'time':f"{datetime.now().strftime('%H:%M')}"})
+        if (re.fullmatch(regex, txt)):
+            MDDialog(title = "Invalid", text = "Field must not be empty").open()
+        else:
+            time.sleep(1.5)
+            self.ids.feedback_txt.text = ""
+            Snackbar(text="Thanks for your Feedback :)",snackbar_x="10dp",snackbar_y="10dp",size_hint_x=0.5,pos_hint={'center_x': 0.5, 'center_y': 0.1}).open()
 
-        self.ids.feedback_txt.text = ""
-        return
+
+class Sfeedback(Screen):
+    def feedback_send(self):
+        regex = r'[\s]*'
+        # server= smtplib.SMTP("smtp.gmail.com",587)
+        # server.ehlo()
+        # server.starttls()
+        # server.login("vajrapusugnankranthiraju@gmail.com","yqqladmhfdgmuoes")
+        # From="vajrapusugnankranthiraju@gmail.com"
+        # To="akhilsaibande13@gmail.com"
+        txt=self.ids.feedback_txt.text
+
+        # body="""Subject: Feedback from %s\n
+        #         %s"""%(user_info['username'],txt)
+        # self.server.sendmail(From,[To],body)
+        # x=firebase.get('Users/Student','')
+        #for i in x:
+        #    if len(txt)<10:
+        #        firebase.post('Users/Student/'+i+'/courses/AI/Labs',{'question':txt,'sender':user_info['username'],'time':f"{datetime.now().strftime('%H:%M')}"})
+        #    else:
+        #        firebase.post('Users/Student/'+i+'/courses/AI/Assignments',{'question':txt,'sender':user_info['username'],'time':f"{datetime.now().strftime('%H:%M')}"})
+        if (re.fullmatch(regex, txt)):
+            MDDialog(title = "Invalid", text = "Field must not be empty").open()
+        else:
+            time.sleep(1.5)
+            self.ids.feedback_txt.text = ""
+            Snackbar(text="Thanks for your Feedback :)",snackbar_x="10dp",snackbar_y="10dp",size_hint_x=0.5,pos_hint={'center_x': 0.5, 'center_y': 0.1}).open()
+
 
 class Sprofile(Screen):
     def __init__(self, **kwargs):
