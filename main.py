@@ -80,8 +80,6 @@ time_table1={
 }
 
 course1 = ""
-c1_id = ""
-
 def tt():
     global now_next
     t = time.localtime()
@@ -526,7 +524,7 @@ class NowIcon(MDIconButton):
 
     def course(self):
         course1 = now_next[0]["name"]
-        c1_id = now_next[0]["cid"]  
+        c1_id = now_next[0]["cid"]
         self.screen = now_next[0]["screen"]
 
 
@@ -540,9 +538,11 @@ class NowText(MDTextButton):
         self.text=now_next[0]["name"]
 
     def course(self):
+        global c1_id
+        global course1
         course1 = now_next[0]["name"]
-        c1_id = now_next[0]["cid"] 
-        self.screen = now_next[0]["screen"] 
+        c1_id = now_next[0]["cid"]
+        self.screen = now_next[0]["screen"]
 
 
 class NextIcon(MDIconButton):
@@ -555,7 +555,7 @@ class NextIcon(MDIconButton):
 
     def course(self):
         course1 = now_next[1]["name"]
-        c1_id = now_next[1]["cid"]  
+        c1_id = now_next[1]["cid"]
         self.screen = now_next[1]["screen"]
 
 
@@ -569,7 +569,7 @@ class NextText(MDTextButton):
 
     def course(self):
         course1 = now_next[1]["name"]
-        c1_id = now_next[1]["cid"]  
+        c1_id = now_next[1]["cid"]
         self.screen = now_next[1]["screen"]
 
 class TodayDate(MDLabel):
@@ -580,43 +580,43 @@ class TodayDate(MDLabel):
 
 class Scourse(Screen):
     def ai(self):
-        course1 = "Artificial Intelligence"
-        c_id = "AI"
+        global c1_id
+        c1_id = "AI"
         self.manager.current = "Scourse1"
         self.manager.transition.direction = "left"
     def sepm(self):
-        course1 = "Software Engineering And Project Management"
-        c_id = "SEPM"   
+        global c1_id
+        c1_id = "SEPM"
         self.manager.current = "Scourse1"
         self.manager.transition.direction = "left"
     def cf(self):
-        course1 = "Computer Forensics"
-        c_id = "CF"    
+        global c1_id
+        c1_id = "CF"
         self.manager.current = "Scourse1"
         self.manager.transition.direction = "left"
     def dsp(self):
-        course1 = "Digital Signal Processing"
-        c_id = "DSP"
+        global c1_id
+        c1_id = "DSP"
         self.manager.current = "Scourse1"
         self.manager.transition.direction = "left"
     def sc(self):
-        course1 = "Soft Computing"
-        c_id = "SC"   
+        global c1_id
+        c1_id = "SC"
         self.manager.current = "Scourse1"
         self.manager.transition.direction = "left"
     def hrm(self):
-        course1 = "Human Resource Management"
-        c_id = "HRM"
+        global c1_id
+        c1_id = "HRM"
         self.manager.current = "Scourse1"
         self.manager.transition.direction = "left"
     def fma(self):
-        course1 = "Financial Management & Accounting"
-        c_id = "FMA"
+        global c1_id
+        c1_id = "FMA"
         self.manager.current = "Scourse1"
         self.manager.transition.direction = "left"
     def osm(self):
-        course1 = "Operations & Supply Chain Management"
-        c_id = "OSM"
+        global c1_id
+        c1_id = "OSM"
         self.manager.current = "Scourse1"
         self.manager.transition.direction = "left"
 
@@ -689,13 +689,14 @@ class Tcourse(Screen):
         self.ids.tnotes.clear_widgets()
         x= firebase.get("Courses/"+user_info["course"]["cid"],'')
         for i in reversed(x):
-            card = MDCard(orientation='horizontal',size_hint=(None,None),size=(880,40),border_radius=10,radius=[10],elevation=0,padding=10,md_bg_color=[184/255,25/255,103/255,1],on_release=self.download_pdf(x[i]["title"]))
-            card_title = MDLabel(text=x[i]["title"],font_style="H3")
+            card = MDCard(orientation='horizontal',size_hint=(None,None),size=(880,40),border_radius=10,radius=[10],elevation=0,padding=10,md_bg_color=[84/255,255/255,103/255,1])
+            card_title = MDLabel(text=x[i]["title"],font_style="H5")
             card.add_widget(card_title)
             self.ids.tnotes.add_widget(card)
 
     def download_pdf(self,link):
-        storage.child(link).download(None)
+        webbrowser.open(link)
+        #storage.child(link).download("",None)
 
     def select_path(self, path):
         self.p = path
@@ -801,12 +802,12 @@ class Tcourse(Screen):
     def on_enter(self, *args):
         self.ids.tname.text = 'Dr. ' + user_info["username"]
         self.ids.tmail.text = user_info["email"]
-
-        self.add_labcard()
-
-        self.add_asscard()
-
-        #self.add_note_card()
+        try:
+            self.add_labcard()
+            self.add_asscard()
+            self.add_note_card()
+        except:
+            pass
 
 
 class Lab(MDBoxLayout):
@@ -968,7 +969,7 @@ class Scourse1(Screen):
     dialog = None
     file_manager = None
     dialog1 = None
-    p = "" 
+    p = ""
 
     def __init__(self, **kw):
         super(Scourse1, self).__init__(**kw)
@@ -1053,26 +1054,85 @@ class Scourse1(Screen):
 
     def add_labcard(self):
         # add lab cards
-        pass
+        self.ids.slab.clear_widgets()
+        x = firebase.get("Users/Student/"+user_id+"/courses/"+c1_id+"/Labs",'')
+        for i in reversed(x):
+            card = MDCard(orientation='horizontal',size_hint=(None,None),size=(880,100),border_radius=10,radius=[10],elevation=0,padding=10,md_bg_color=[84/255,255/255,103/255,1])
+            card_l = MDBoxLayout(orientation='vertical')
+            card_l_title = MDLabel(text=x[i]["title"],font_style="H6",bold=True)
+            card_l_question = MDLabel(text=x[i]["question"])
+            card_r_deadline = MDLabel(text="Deadline : "+x[i]["deadline"],bold=True)
+
+            card_r = MDBoxLayout(orientation='vertical')
+            card_l.add_widget(card_l_title)
+            card_l.add_widget(card_l_question)
+            card.add_widget(card_l)
+            card_r.add_widget(card_r_deadline)
+            card.add_widget(card_r)
+            if (x[i]["status"]==1):
+                card_status = MDIconButton(icon="check-circle",user_font_size="36sp",pos_hint={'center_x':0.5 , 'center_y':0.5 })
+                card.add_widget(card_status)
+            self.ids.slab.add_widget(card)
 
     def add_asscard(self):
         # add assignment cards
-        pass
+        self.ids.sassignment.clear_widgets()
+        x = firebase.get("Users/Student/"+user_id+"/courses/"+c1_id+"/Assignments",'')
+        for i in reversed(x):
+            card = MDCard(orientation='horizontal',size_hint=(None,None),size=(880,100),border_radius=10,radius=[10],elevation=0,padding=10,md_bg_color=[84/255,255/255,103/255,1])
+            card_l = MDBoxLayout(orientation='vertical')
+            card_l_title = MDLabel(text=x[i]["title"],font_style="H6",bold=True)
+            card_l_question = MDLabel(text=x[i]["question"])
+            card_r_deadline = MDLabel(text="Deadline : "+x[i]["deadline"],bold=True)
+
+            card_r = MDBoxLayout(orientation='vertical')
+            card_l.add_widget(card_l_title)
+            card_l.add_widget(card_l_question)
+            card.add_widget(card_l)
+            card_r.add_widget(card_r_deadline)
+            card.add_widget(card_r)
+            if (x[i]["status"]==1):
+                card_status = MDIconButton(icon="check-circle",user_font_size="36sp",pos_hint={'center_x':0.5 , 'center_y':0.5 })
+                card.add_widget(card_status)
+            self.ids.sassignment.add_widget(card)
 
     def add_notescard(self):
         # add notes cards
-        pass
+        self.ids.snotes.clear_widgets()
+        x= firebase.get("Courses/"+c1_id,'')
+        c = len(x)
+        for i in reversed(x):
+            card = MDCard(orientation='horizontal',size_hint=(None,None),size=(880,40),border_radius=10,radius=[10],elevation=0,padding=10,md_bg_color=[84/255,255/255,103/255,1])
+            card_title = MDLabel(text=str(c)+". "+x[i]["title"],font_style="H5")
+            c=c-1
+            card.add_widget(card_title)
+            self.ids.snotes.add_widget(card)
+
+    def open_pdf(self,*args):
+        webbrowser.open()
+
+    def add_info(self):
+        tname=""
+        temail=""
+        x = firebase.get("Users/Teacher",'')
+        for i in x:
+            if x[i]["course"]["cid"] == c1_id:
+                tname = x[i]["username"]
+                temail = x[i]["email"]
+        self.ids.tname.text = 'Dr. ' + str(tname)
+        self.ids.tmail.text = str(temail)
 
     def on_enter(self, *args):
 
         # course1, c1_id
-        # get user details who has c1_id 
-        self.ids.tname.text = 'Dr. ' + ""
-        self.ids.tmail.text = ""
-
-        # self.add_labcard()
-        # self.add_asscard()
-        # self.add_notescard()
+        # get user details who has c1_id
+        try:
+            self.add_info()
+            self.add_labcard()
+            self.add_asscard()
+            self.add_notescard()
+        except:
+            pass
 
 class Main(MDApp):
     pass
