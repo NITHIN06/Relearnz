@@ -497,7 +497,7 @@ class Tdashboard(Screen):
     def on_enter(self,*args):
         try:
             self.ids.uname.text = "Hello "+str(user_info["username"])
-            self.ids.label.text = "An investment in knowledge pays best intrest"
+            self.ids.label.text = "An investment in knowledge pays best interest"
             self.ids.lab_c.text= str(len(firebase.get("Users/Teacher/"+user_id+"/course/Labs",'')))
             self.ids.ass_c.text= str(len(firebase.get("Users/Teacher/"+user_id+"/course/Assignments",'')))
 
@@ -513,7 +513,7 @@ class Sdashboard(Screen):
         super(Sdashboard,self).__init__(**kwargs)
     def on_enter(self,*args):
         self.ids.uname.text = "Hello "+str(user_info["username"])
-        self.ids.label.text = "An investment in knowledge pays best intrest"
+        self.ids.label.text = "An investment in knowledge pays best interest"
         # diaplay no. labs, assignments
 
         # add widgets to MDboxlayout( id = today)
