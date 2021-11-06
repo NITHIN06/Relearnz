@@ -1285,13 +1285,48 @@ WindowManager:
                 padding: 10
                 orientation: 'vertical'
                 ScrollView:
-                    do_scroll_x: False        
+                    do_scroll_x: False 
                     MDBoxLayout:
-                        id: lab_ass
-                        orientation: 'vertical' 
+                        orientation: 'vertical'  
                         size_hint_y: None
-                        height: self.minimum_height
-                        spacing: 20
+                        height: self.minimum_height  
+                        spacing: 20      
+                        MDLabel:
+                            text: "     "
+                            bold: True
+                            font_size: 30
+                            adaptive_height: True
+                        MDBoxLayout:
+                            orientation: 'horizontal'
+                            MDLabel:
+                                text: "Today"
+                                bold: True
+                                font_size: 30
+                                adaptive_height: True
+                            TodayDate:
+                                bold: True
+                                font_size: 30
+                                adaptive_height: True
+                                padding_x: 15       
+                        MDBoxLayout:
+                            id: today
+                            orientation: 'vertical' 
+                            size_hint_y: None
+                            height: self.minimum_height
+                            spacing: 20                       
+                        MDLabel:
+                            text: "Tomorrow"
+                            bold: True
+                            font_size: 30
+                            adaptive_height: True
+                        MDBoxLayout:
+                            id: tomorrow
+                            orientation: 'vertical' 
+                            size_hint_y: None
+                            height: self.minimum_height
+                            spacing: 20
+
+
             MDLabel:
                 text: ""
                 size_hint_x: 0.02
@@ -4117,7 +4152,7 @@ WindowManager:
                     bold: True
                 MDCard:
                     size_hint: None,None
-                    size: 600,300
+                    size: 770,400
                     elevation: 0
                     padding: 20
                     border_radius: 20
@@ -4129,18 +4164,20 @@ WindowManager:
                         orientation: "horizontal"
                         size_hint: 1,0.2
                         MDLabel:
-                            text: "user_email@gmail.com"
-                            font_size: 14
-                            size_hint: 1,0.2
+                            text: "user@gmail.com"
+                            font_size: 18
                             bold: True
                         MDIcon:
                             icon: "arrow-right"
                             halign: "center"
                         MDLabel:
                             text: "relearnz_support@gmail.com"
-                            font_size: 14
-                            size_hint: 1,0.2
+                            font_size: 18
                             bold: True
+                    MDLabel:
+                        font_size: 14
+                        size_hint: 1,0.225
+                        bold: True
                     MDTextField:
                         id: feedback_txt
                         hint_text: "Feedback"
@@ -4378,11 +4415,60 @@ WindowManager:
                     size_hint_y: 0.05
 
 
-            MDLabel:
-                text:"Feedback"
-                font_style: "H1"
-                halign: "center"
+            MDBoxLayout:
+                orientation: "vertical"
 
+                MDLabel:
+                    text: "Feedback"
+                    size_hint_y: 0.2
+                    font_size: 24
+                    bold: True
+                MDCard:
+                    size_hint: None,None
+                    size: 770,400
+                    elevation: 0
+                    padding: 20
+                    border_radius: 20
+                    radius: [20]
+                    pos_hint: {"center_x":0.4,"center_y":0.5}
+                    orientation: "vertical"
+
+                    MDBoxLayout:
+                        orientation: "horizontal"
+                        size_hint: 1,0.2
+                        MDLabel:
+                            text: "user@gmail.com"
+                            font_size: 18
+                            bold: True
+                        MDIcon:
+                            icon: "arrow-right"
+                            halign: "center"
+                        MDLabel:
+                            text: "relearnz_support@gmail.com"
+                            font_size: 18
+                            bold: True
+                    MDLabel:
+                        font_size: 14
+                        size_hint: 1,0.225
+                        bold: True
+                    MDTextField:
+                        id: feedback_txt
+                        hint_text: "Feedback"
+                        multiline: True
+                        max_height: 200
+                    MDBoxLayout:
+                        orientation: "horizontal"
+                        MDLabel:
+                            size_hint: 0.7,0
+                        MDFillRoundFlatIconButton:
+                            icon: "send"
+                            text: "send"
+
+                            font_size: 24
+                            bold: True
+                            on_press: root.feedback_send()
+                MDLabel:
+                    size_hint_y: 0.8
 <Tprofile>:
     name: "Tprofile"
     MDBoxLayout:
