@@ -830,192 +830,21 @@ WindowManager:
                 radius: [30]
                 padding: 10
                 orientation: 'vertical'
-                MDBoxLayout:
-                    orientation: 'horizontal'
-                    size_hint_y: 0.05
-                    MDLabel:
-                        text: "Today"
-                        bold: True
-                        font_size: 30
-                        adaptive_height: True
-                    TodayDate:
-                        bold: True
-                        font_size: 30
-                        adaptive_height: True
-                        padding_x: 15
-                MDCard:
-                    size_hint: None, None
-                    size: 380, 80
-                    pos_hint: {"center_x": 0.5, "center_y": 0.5}
-                    elevation: 10
-                    md_bg_color: 184/255, 226/255, 1, 1
-                    ripple_behavior: True
-                    border_radius: 30
-                    radius: [30]
-                    padding: 10
-                    orientation: 'vertical'
-
-                    MDBoxLayout:
-                        MDLabel:
-                            text: "LAB-1"
-                            bold: True
-                            font_size: 21
-                            color: 7/255, 12/255, 173/255
-
-                        MDLabel:
-                            text:"10:00 AM"
-                            font_size: 24
-                            size_hint_x: 0.5
-                            bold: True
-                            color: 7/255, 12/255, 173/255
-                    MDLabel:
-                        text: "Artificial Intelligence"
-                        color: 7/255, 12/255, 173/255
-                        font_size: 21
-                        bold: True
-
                 MDLabel:
-                    text: ""
-                    size_hint_y: 0.05
-
-                MDCard:
-                    size_hint: None, None
-                    size: 380, 80
-                    pos_hint: {"center_x": 0.5, "center_y": 0.5}
-                    elevation: 10
-                    border_radius: 30
-                    md_bg_color: 255/255, 204/255, 104/255, 0.5
-                    ripple_behavior: True
-                    radius: [30]
-                    padding: 10
-                    orientation: 'vertical'
-                    MDBoxLayout:
-                        MDLabel:
-                            text: "ASSIGNMENT-1"
-                            color: 1, 105/255, 5/255
-                            font_size: 21
-                            bold: True
-
-                        MDLabel:
-                            text:"10:00 PM"
-                            color: 1, 105/255, 5/255
-                            size_hint_x: 0.5
-                            font_size: 24
-                            bold: True
-                    MDLabel:
-                        text: "Soft Computing"
-                        color: 1, 105/255, 5/255
-                        font_size: 21
-                        bold: True
-
-                MDLabel:
-                    text: ""
-                    size_hint_y: 0.05
-
-                MDCard:
-                    size_hint: None, None
-                    size: 380, 80
-                    pos_hint: {"center_x": 0.5, "center_y": 0.5}
-                    elevation: 10
-                    border_radius: 30
-                    md_bg_color: 184/255, 226/255, 1, 1
-                    ripple_behavior: True
-                    radius: [30]
-                    padding: 10
-                    orientation: 'vertical'
-                    MDBoxLayout:
-                        MDLabel:
-                            text: "LAB-2"
-                            bold: True
-                            color: 7/255, 12/255, 173/255
-                            font_size: 21
-
-                        MDLabel:
-                            text:"12:00 PM"
-                            bold: True
-                            size_hint_x: 0.5
-                            color: 7/255, 12/255, 173/255
-                            font_size: 24
-                    MDLabel:
-                        text: "Digital Signal Processing"
-                        bold: True
-                        color: 7/255, 12/255, 173/255
-                        font_size: 21
-
-                MDLabel:
-                    text: ""
-                    size_hint_y: 0.05
-
-                MDLabel:
-                    text: "Tomorrow"
+                    text: "Student List"
                     bold: True
                     font_size: 30
-                    adaptive_height: True
-
-                MDCard:
-                    size_hint: None, None
-                    size: 380, 80
-                    pos_hint: {"center_x": 0.5, "center_y": 0.5}
-                    elevation: 10
-                    border_radius: 30
-                    md_bg_color: 255/255, 204/255, 104/255, 0.5
-                    ripple_behavior: True
-                    radius: [30]
-                    padding: 10
-                    orientation: 'vertical'
+                    padding_x: 108
+                    size_hint_y: 0.1
+                ScrollView:
+                    do_scroll_x: False        
                     MDBoxLayout:
-                        MDLabel:
-                            text: "ASSIGNMENT-2"
-                            color: 1, 105/255, 5/255
-                            font_size: 21
-                            bold: True
+                        id: student_list
+                        orientation: 'vertical' 
+                        size_hint_y: None
+                        height: self.minimum_height
+                        spacing: 20
 
-                        MDLabel:
-                            text:"10:00 PM"
-                            color: 1, 105/255, 5/255
-                            font_size: 24
-                            size_hint_x: 0.5
-                            bold: True
-                    MDLabel:
-                        text: "Digital Signal Processing"
-                        color: 1, 105/255, 5/255
-                        font_size: 21
-                        bold: True
-
-
-                MDLabel:
-                    text: ""
-                    size_hint_y: 0.05
-
-                MDCard:
-                    size_hint: None, None
-                    size: 380, 80
-                    pos_hint: {"center_x": 0.5, "center_y": 0.5}
-                    elevation: 10
-                    border_radius: 30
-                    md_bg_color: 184/255, 226/255, 1, 1
-                    ripple_behavior: True
-                    radius: [30]
-                    padding: 10
-                    orientation: 'vertical'
-                    MDBoxLayout:
-                        MDLabel:
-                            text: "LAB-2"
-                            font_size: 21
-                            bold: True
-                            color: 7/255, 12/255, 173/255
-
-                        MDLabel:
-                            text:"12:00 PM"
-                            font_size: 24
-                            bold: True
-                            size_hint_x: 0.5
-                            color: 7/255, 12/255, 173/255
-                    MDLabel:
-                        text: "Software Engineering and Project ..."
-                        bold: True
-                        font_size: 21
-                        color: 7/255, 12/255, 173/255
             MDLabel:
                 text: ""
                 size_hint_x: 0.02
@@ -1452,192 +1281,14 @@ WindowManager:
                 radius: [30]
                 padding: 10
                 orientation: 'vertical'
-                MDBoxLayout:
-                    orientation: 'horizontal'
-                    size_hint_y: 0.05
-                    MDLabel:
-                        text: "Today"
-                        bold: True
-                        font_size: 30
-                        adaptive_height: True
-                    TodayDate:
-                        bold: True
-                        font_size: 30
-                        adaptive_height: True
-                        padding_x: 15
-                MDCard:
-                    size_hint: None, None
-                    size: 380, 80
-                    pos_hint: {"center_x": 0.5, "center_y": 0.5}
-                    elevation: 10
-                    md_bg_color: 184/255, 226/255, 1, 1
-                    ripple_behavior: True
-                    border_radius: 30
-                    radius: [30]
-                    padding: 10
-                    orientation: 'vertical'
-
+                ScrollView:
+                    do_scroll_x: False        
                     MDBoxLayout:
-                        MDLabel:
-                            text: "LAB-1"
-                            bold: True
-                            font_size: 21
-                            color: 7/255, 12/255, 173/255
-
-                        MDLabel:
-                            text:"10:00 AM"
-                            font_size: 24
-                            size_hint_x: 0.5
-                            bold: True
-                            color: 7/255, 12/255, 173/255
-                    MDLabel:
-                        text: "Artificial Intelligence"
-                        color: 7/255, 12/255, 173/255
-                        font_size: 21
-                        bold: True
-
-                MDLabel:
-                    text: ""
-                    size_hint_y: 0.05
-
-                MDCard:
-                    size_hint: None, None
-                    size: 380, 80
-                    pos_hint: {"center_x": 0.5, "center_y": 0.5}
-                    elevation: 10
-                    border_radius: 30
-                    md_bg_color: 255/255, 204/255, 104/255, 0.5
-                    ripple_behavior: True
-                    radius: [30]
-                    padding: 10
-                    orientation: 'vertical'
-                    MDBoxLayout:
-                        MDLabel:
-                            text: "ASSIGNMENT-1"
-                            color: 1, 105/255, 5/255
-                            font_size: 21
-                            bold: True
-
-                        MDLabel:
-                            text:"10:00 PM"
-                            color: 1, 105/255, 5/255
-                            size_hint_x: 0.5
-                            font_size: 24
-                            bold: True
-                    MDLabel:
-                        text: "Soft Computing"
-                        color: 1, 105/255, 5/255
-                        font_size: 21
-                        bold: True
-
-                MDLabel:
-                    text: ""
-                    size_hint_y: 0.05
-
-                MDCard:
-                    size_hint: None, None
-                    size: 380, 80
-                    pos_hint: {"center_x": 0.5, "center_y": 0.5}
-                    elevation: 10
-                    border_radius: 30
-                    md_bg_color: 184/255, 226/255, 1, 1
-                    ripple_behavior: True
-                    radius: [30]
-                    padding: 10
-                    orientation: 'vertical'
-                    MDBoxLayout:
-                        MDLabel:
-                            text: "LAB-2"
-                            bold: True
-                            color: 7/255, 12/255, 173/255
-                            font_size: 21
-
-                        MDLabel:
-                            text:"12:00 PM"
-                            bold: True
-                            size_hint_x: 0.5
-                            color: 7/255, 12/255, 173/255
-                            font_size: 24
-                    MDLabel:
-                        text: "Digital Signal Processing"
-                        bold: True
-                        color: 7/255, 12/255, 173/255
-                        font_size: 21
-
-                MDLabel:
-                    text: ""
-                    size_hint_y: 0.05
-
-                MDLabel:
-                    text: "Tomorrow"
-                    bold: True
-                    font_size: 30
-                    adaptive_height: True
-
-                MDCard:
-                    size_hint: None, None
-                    size: 380, 80
-                    pos_hint: {"center_x": 0.5, "center_y": 0.5}
-                    elevation: 10
-                    border_radius: 30
-                    md_bg_color: 255/255, 204/255, 104/255, 0.5
-                    ripple_behavior: True
-                    radius: [30]
-                    padding: 10
-                    orientation: 'vertical'
-                    MDBoxLayout:
-                        MDLabel:
-                            text: "ASSIGNMENT-2"
-                            color: 1, 105/255, 5/255
-                            font_size: 21
-                            bold: True
-
-                        MDLabel:
-                            text:"10:00 PM"
-                            color: 1, 105/255, 5/255
-                            font_size: 24
-                            size_hint_x: 0.5
-                            bold: True
-                    MDLabel:
-                        text: "Digital Signal Processing"
-                        color: 1, 105/255, 5/255
-                        font_size: 21
-                        bold: True
-
-
-                MDLabel:
-                    text: ""
-                    size_hint_y: 0.05
-
-                MDCard:
-                    size_hint: None, None
-                    size: 380, 80
-                    pos_hint: {"center_x": 0.5, "center_y": 0.5}
-                    elevation: 10
-                    border_radius: 30
-                    md_bg_color: 184/255, 226/255, 1, 1
-                    ripple_behavior: True
-                    radius: [30]
-                    padding: 10
-                    orientation: 'vertical'
-                    MDBoxLayout:
-                        MDLabel:
-                            text: "LAB-2"
-                            font_size: 21
-                            bold: True
-                            color: 7/255, 12/255, 173/255
-
-                        MDLabel:
-                            text:"12:00 PM"
-                            font_size: 24
-                            bold: True
-                            size_hint_x: 0.5
-                            color: 7/255, 12/255, 173/255
-                    MDLabel:
-                        text: "Software Engineering and Project ..."
-                        bold: True
-                        font_size: 21
-                        color: 7/255, 12/255, 173/255
+                        id: lab_ass
+                        orientation: 'vertical' 
+                        size_hint_y: None
+                        height: self.minimum_height
+                        spacing: 20
             MDLabel:
                 text: ""
                 size_hint_x: 0.02
@@ -5214,10 +4865,16 @@ WindowManager:
                     size_hint_y: 0.05
             MDBoxLayout:
                 orientation: "vertical"
-                Image:
-                    source: "assets/user.png"
                 MDBoxLayout:
-                    orientation: "vertical"
+                    Image:
+                        source: "assets/user.png"
+                    MDCard:
+                        size_hint: None, None
+                        size: 600, 300
+                        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+
+                MDBoxLayout:
+                    orientation: "vertical"              
                     MDLabel:
                         text: "Username"
                         bold: True

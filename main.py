@@ -502,12 +502,20 @@ class Tdashboard(Screen):
         self.ids.lab_c.text= str(len(firebase.get("Users/Teacher/"+user_id+"/course/Labs",'')))
         self.ids.ass_c.text= str(len(firebase.get("Users/Teacher/"+user_id+"/course/Assignments",'')))
 
+        # add student cards to MDboxlayout( id = student_list)
+
+
 class Sdashboard(Screen):
     def __init__(self,**kwargs):
         super(Sdashboard,self).__init__(**kwargs)
     def on_enter(self,*args):
         self.ids.uname.text = "Hello "+str(user_info["username"])
         self.ids.label.text = "An investment in knowledge pays best intrest"
+        
+        # add widgets to MDboxlayout( id = lab_ass)
+        # add MDLabel = Today and add lab, ass cards
+        # add MDLabel = Tomorrow and add lab, ass cards 
+
 
 class ClockLabel(Label):
     def __init__(self,**kwargs):
