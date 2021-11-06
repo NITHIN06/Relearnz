@@ -58,6 +58,35 @@ WindowManager:
         id: assignmentdue
         hint_text: "Due Date (DD-MM-YYYY)"
 
+<Slab_title>:
+    orientation: "vertical"
+    size_hint: None, None
+    size: 500, 100
+    spacing: 25
+    MDLabel:
+        text: "Enter the title of respective Lab Work"
+    MDTextField:
+        id: title
+        hint_text: "Title"
+
+<Sass_title>:
+    orientation: "vertical"
+    size_hint: None, None
+    size: 500, 100
+    spacing: 25
+    MDLabel:
+        text: "Enter the title of respective Assignment"
+    MDTextField:
+        id: title
+        hint_text: "Title"
+
+<Loader>:
+    MDSpinner:
+        size_hint: None, None
+        size: dp(46), dp(46)
+        active: True
+
+
 <Welcome>:
     name: "Welcome"
 
@@ -2464,6 +2493,7 @@ WindowManager:
 <Tcourse>:
 
     name: "Tcourse"
+
     MDBoxLayout:
         orientation: "vertical"
         MDLabel:
@@ -5534,7 +5564,7 @@ WindowManager:
                                         icon: "upload"
                                         font_style: "H6"
                                         pos_hint: {"center_x" :0.5, "center_y" : 0.5}
-                                        on_press: root.uploadlab()
+                                        on_press: root.lab_title()
                                     MDLabel:
                                 MDCard:
                                     id: lab_card
@@ -5564,7 +5594,7 @@ WindowManager:
                                         icon: "upload"
                                         font_style: "H6"
                                         pos_hint: {"center_x" :0.5, "center_y" : 0.5}
-                                        on_press: root.uploadass()
+                                        on_press: root.ass_title()
                                     MDLabel:
                                 MDCard:
                                     id: assignment_card

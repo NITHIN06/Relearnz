@@ -495,10 +495,13 @@ class Tdashboard(Screen):
     def __init__(self,**kwargs):
         super(Tdashboard,self).__init__(**kwargs)
     def on_enter(self,*args):
-        self.ids.uname.text = "Hello "+str(user_info["username"])
-        self.ids.label.text = "An investment in knowledge pays best intrest"
-        self.ids.lab_c.text= str(len(firebase.get("Users/Teacher/"+user_id+"/course/Labs",'')))
-        self.ids.ass_c.text= str(len(firebase.get("Users/Teacher/"+user_id+"/course/Assignments",'')))
+        try:
+            self.ids.uname.text = "Hello "+str(user_info["username"])
+            self.ids.label.text = "An investment in knowledge pays best intrest"
+            self.ids.lab_c.text= str(len(firebase.get("Users/Teacher/"+user_id+"/course/Labs",'')))
+            self.ids.ass_c.text= str(len(firebase.get("Users/Teacher/"+user_id+"/course/Assignments",'')))
+        except:
+            pass
 
 class Sdashboard(Screen):
     def __init__(self,**kwargs):
@@ -527,7 +530,6 @@ class NowIcon(MDIconButton):
         c1_id = now_next[0]["cid"]
         self.screen = now_next[0]["screen"]
 
-
 class NowText(MDTextButton):
     def __init__(self, **kwargs):
         super(NowText,self).__init__(**kwargs)
@@ -544,7 +546,6 @@ class NowText(MDTextButton):
         c1_id = now_next[0]["cid"]
         self.screen = now_next[0]["screen"]
 
-
 class NextIcon(MDIconButton):
     def __init__(self, **kwargs):
         super(NextIcon,self).__init__(**kwargs)
@@ -557,7 +558,6 @@ class NextIcon(MDIconButton):
         course1 = now_next[1]["name"]
         c1_id = now_next[1]["cid"]
         self.screen = now_next[1]["screen"]
-
 
 class NextText(MDTextButton):
     def __init__(self, **kwargs):
@@ -596,6 +596,19 @@ class Scourse(Screen):
         self.manager.transition.direction = "left"
     def dsp(self):
         global c1_id
+        course1 = "Software Engineering And Project Management"
+        c1_id = "SEPM"
+        self.manager.current = "Scourse1"
+        self.manager.transition.direction = "left"
+    def cf(self):
+        global c1_id
+        course1 = "Computer Forensics"
+        c1_id = "CF"
+        self.manager.current = "Scourse1"
+        self.manager.transition.direction = "left"
+    def dsp(self):
+        global c1_id
+        course1 = "Digital Signal Processing"
         c1_id = "DSP"
         self.manager.current = "Scourse1"
         self.manager.transition.direction = "left"
@@ -606,16 +619,25 @@ class Scourse(Screen):
         self.manager.transition.direction = "left"
     def hrm(self):
         global c1_id
+        course1 = "Soft Computing"
+        c1_id = "SC"
+        self.manager.current = "Scourse1"
+        self.manager.transition.direction = "left"
+    def hrm(self):
+        global c1_id
+        course1 = "Human Resource Management"
         c1_id = "HRM"
         self.manager.current = "Scourse1"
         self.manager.transition.direction = "left"
     def fma(self):
         global c1_id
+        course1 = "Financial Management & Accounting"
         c1_id = "FMA"
         self.manager.current = "Scourse1"
         self.manager.transition.direction = "left"
     def osm(self):
         global c1_id
+        course1 = "Operations & Supply Chain Management"
         c1_id = "OSM"
         self.manager.current = "Scourse1"
         self.manager.transition.direction = "left"
@@ -626,6 +648,7 @@ class Tcourse(Screen):
     file_manager = None
     dialog1 = None
     p = ""
+    loader = None
 
     def __init__(self, **kw):
         super(Tcourse, self).__init__(**kw)
@@ -634,6 +657,27 @@ class Tcourse(Screen):
     def joinclass(self):
         webbrowser.open('https://meet.google.com/jpq-webf-iwy?pli=1', new = 1)
 
+    def load(self):
+        self.loader = MDDialog(
+            size_hint=(None, None),
+            size= (0,0),
+            type="custom",
+            content_cls=Loader(),
+        )
+        self.loader.open()
+
+    def lab_load(self, inst):
+        self.load()
+        threading.Thread(target=self.lab_ok).start()
+
+    def ass_load(self, inst):
+        self.load()
+        threading.Thread(target=self.assign_ok).start()
+
+    def notes_load(self, inst):
+        self.load()
+        threading.Thread(target=self.yes).start()
+
     def addlab(self):
         self.dialog = MDDialog(
             title="ADD LAB",
@@ -641,7 +685,7 @@ class Tcourse(Screen):
             content_cls=Lab(),
             buttons=[
                 MDFlatButton(text="CANCEL", on_press = self.cancel),
-                MDFlatButton(text="OK", on_press = self.lab_ok),
+                MDFlatButton(text="OK", on_press = self.lab_load),
             ],
         )
         self.dialog.open()
@@ -653,7 +697,7 @@ class Tcourse(Screen):
             content_cls=Assignment(),
             buttons=[
                 MDFlatButton(text="CANCEL", on_press = self.cancel),
-                MDFlatButton(text="OK", on_press = self.assign_ok),
+                MDFlatButton(text="OK", on_press = self.ass_load),
             ],
         )
         self.dialog.open()
@@ -668,7 +712,7 @@ class Tcourse(Screen):
     def no(self, inst):
         self.dialog1.dismiss()
 
-    def yes(self, inst):
+    def yes(self):
         n = self.p
         n = n.split('\\')
 
@@ -678,9 +722,12 @@ class Tcourse(Screen):
 
         # self.p is the path of the file
         self.p = "C:"+self.p
+
         storage.child(user_info['course']['cid']+name).put(self.p)
         pdf_url=storage.child(user_info['course']['cid']+name).get_url(None)
         firebase.post("Courses/"+user_info["course"]["cid"]+"/",{"url":pdf_url,"title":name})
+
+        self.loader.dismiss()
         self.file_manager.close()
         self.add_note_card()
         Snackbar(text="File Successfully uploaded -_- ",snackbar_x="10dp",snackbar_y="10dp",size_hint_x=0.5,pos_hint={'center_x': 0.5, 'center_y': 0.1}).open()
@@ -695,8 +742,7 @@ class Tcourse(Screen):
             self.ids.tnotes.add_widget(card)
 
     def download_pdf(self,link):
-        webbrowser.open(link)
-        #storage.child(link).download("",None)
+        webbrowser.open(link, new = 1)
 
     def select_path(self, path):
         self.p = path
@@ -705,7 +751,7 @@ class Tcourse(Screen):
             text = "Are you sure you want to upload this file",
             buttons=[
                 MDFlatButton(text="NO", on_press = self.no),
-                MDFlatButton(text="YES", on_press = self.yes),
+                MDFlatButton(text="YES", on_press = self.notes_load),
             ],
         )
         self.dialog1.open()
@@ -714,7 +760,7 @@ class Tcourse(Screen):
     def exit_manager(self, *args):
         self.file_manager.close()
 
-    def lab_ok(self, inst):
+    def lab_ok(self):
         regex = r'[\s]*'
         a = 0
         list = []
@@ -725,6 +771,8 @@ class Tcourse(Screen):
 
         for i in list:
             if(re.fullmatch(regex, i)):
+                self.loader.dismiss()
+                time.sleep(0.5)
                 self.d = MDDialog(title = "Invalid Input", text = "Field must not be empty")
                 self.d.open()
                 a = 1
@@ -734,6 +782,8 @@ class Tcourse(Screen):
             for i in firebase.get("Users/Student",''):
                 firebase.post("Users/Student/"+i+"/courses/"+user_info["course"]["cid"]+"/Labs",{"title":list[0],"question":list[1],"deadline":list[2],"post_time":str(datetime.now().day)+"-"+str(datetime.now().month)+"-"+str(datetime.now().year)+"  "+str(datetime.now().hour)+"-"+str(datetime.now().minute)+"-"+str(datetime.now().second),"status":0})
             firebase.post("Users/Teacher/"+user_id+"/course/Labs",{"title":list[0],"question":list[1],"deadline":list[2],"post_time":str(datetime.now().day)+"-"+str(datetime.now().month)+"-"+str(datetime.now().year)+"  "+str(datetime.now().hour)+"-"+str(datetime.now().minute)+"-"+str(datetime.now().second)})
+
+            self.loader.dismiss()
             self.dialog.dismiss()
             Snackbar(text="Lab Successfully posted -_- ",snackbar_x="10dp",snackbar_y="10dp",size_hint_x=0.5,pos_hint={'center_x': 0.5, 'center_y': 0.1}).open()
             self.add_labcard()
@@ -755,7 +805,7 @@ class Tcourse(Screen):
             card.add_widget(card_r)
             self.ids.tlab.add_widget(card)
 
-    def assign_ok(self, inst):
+    def assign_ok(self):
         regex = r'[\s]*'
         a = 0
         list = []
@@ -766,15 +816,20 @@ class Tcourse(Screen):
 
         for i in list:
             if(re.fullmatch(regex, i)):
+                self.loader.dismiss()
+                time.sleep(0.5)
                 self.d = MDDialog(title = "Invalid Input", text = "Field must not be empty")
                 self.d.open()
                 a = 1
                 break
 
         if(a == 0):
+
             for i in firebase.get("Users/Student",''):
                 firebase.post("Users/Student/"+i+"/courses/"+user_info["course"]["cid"]+"/Assignments",{"title":list[0],"question":list[1],"deadline":list[2],"post_time":str(datetime.now().day)+"-"+str(datetime.now().month)+"-"+str(datetime.now().year)+"  "+str(datetime.now().hour)+"-"+str(datetime.now().minute)+"-"+str(datetime.now().second),"status":0})
             firebase.post("Users/Teacher/"+user_id+"/course/Assignments",{"title":list[0],"question":list[1],"deadline":list[2],"post_time":str(datetime.now().day)+"-"+str(datetime.now().month)+"-"+str(datetime.now().year)+"  "+str(datetime.now().hour)+"-"+str(datetime.now().minute)+"-"+str(datetime.now().second)})
+
+            self.loader.dismiss()
             self.dialog.dismiss()
             Snackbar(text="Assignment Successfully posted -_- ",snackbar_x="10dp",snackbar_y="10dp",size_hint_x=0.5,pos_hint={'center_x': 0.5, 'center_y': 0.1}).open()
             self.add_asscard()
@@ -812,10 +867,14 @@ class Tcourse(Screen):
 
 class Lab(MDBoxLayout):
     pass
-
+class Slab_title(MDBoxLayout):
+    pass
 class Assignment(MDBoxLayout):
     pass
-
+class Sass_title(MDBoxLayout):
+    pass
+class Loader(MDBoxLayout):
+    pass
 
 class Sevent(Screen):
     pass
@@ -970,6 +1029,8 @@ class Scourse1(Screen):
     file_manager = None
     dialog1 = None
     p = ""
+    d = None
+    loader = None
 
     def __init__(self, **kw):
         super(Scourse1, self).__init__(**kw)
@@ -977,6 +1038,75 @@ class Scourse1(Screen):
 
     def joinclass(self):
         webbrowser.open('https://meet.google.com/jpq-webf-iwy?pli=1', new = 1)
+
+    def load(self):
+        self.loader = MDDialog(
+            size_hint=(None, None),
+            size= (0,0),
+            type="custom",
+            content_cls=Loader(),
+        )
+        self.loader.open()
+
+    def lab_title(self):
+        self.dialog = MDDialog(
+            title="Attention!!!",
+            type="custom",
+            content_cls=Slab_title(),
+            buttons=[
+                MDFlatButton(text="CANCEL", on_press = self.cancel),
+                MDFlatButton(text="OK", on_press = self.lab_title_ok),
+            ],
+        )
+        self.dialog.open()
+
+    def ass_title(self):
+        self.dialog = MDDialog(
+            title="Attention!!!",
+            type="custom",
+            content_cls=Sass_title(),
+            buttons=[
+                MDFlatButton(text="CANCEL", on_press = self.cancel),
+                MDFlatButton(text="OK", on_press = self.ass_title_ok),
+            ],
+        )
+        self.dialog.open()
+
+    def lab_title_ok(self, inst):
+        regex = r'[\s]*'
+        a = 0
+        for obj in self.dialog.content_cls.children:
+            if isinstance(obj, MDTextField):
+                t = obj.text
+
+        if(re.fullmatch(regex, t)):
+            self.d = MDDialog(title = "Invalid Input", text = "Field must not be empty")
+            self.d.open()
+            a = 1
+        if(a == 0):
+            global title
+            title = t
+            # add something
+            self.dialog.dismiss()
+            self.uploadlab()
+
+    def ass_title_ok(self, inst):
+        regex = r'[\s]*'
+        a = 0
+        for obj in self.dialog.content_cls.children:
+            if isinstance(obj, MDTextField):
+                t = obj.text
+
+        if(re.fullmatch(regex, t)):
+            self.d = MDDialog(title = "Invalid Input", text = "Field must not be empty")
+            self.d.open()
+            a = 1
+        if(a == 0):
+            global title
+            title = t
+            # add something
+            self.dialog.dismiss()
+            self.uploadass()
 
     def uploadlab(self):
         self.file_manager = MDFileManager(
@@ -999,7 +1129,7 @@ class Scourse1(Screen):
             text = "Are you sure you want to upload this file",
             buttons=[
                 MDFlatButton(text="NO", on_press = self.no),
-                MDFlatButton(text="YES", on_press = self.lyes),
+                MDFlatButton(text="YES", on_press = self.lab_load),
             ],
         )
         self.dialog1.open()
@@ -1011,38 +1141,75 @@ class Scourse1(Screen):
             text = "Are you sure you want to upload this file",
             buttons=[
                 MDFlatButton(text="NO", on_press = self.no),
-                MDFlatButton(text="YES", on_press = self.ayes),
+                MDFlatButton(text="YES", on_press = self.ass_load),
             ],
         )
         self.dialog1.open()
 
-    def lyes(self, inst):
+    def lab_load(self, inst):
+        self.load()
+        threading.Thread(target=self.lyes).start()
+
+    def ass_load(self, inst):
+        self.load()
+        threading.Thread(target=self.ayes).start()
+
+    def lyes(self):
         n = self.p
         n = n.split('\\')
 
         # Name of the file that should be displayed
         name = n.pop()
         self.dialog1.dismiss()
-        print(name)
 
         # self.p is the path of the file - (LAB file)
         self.p = "C:"+self.p
-        print(self.p)
+        storage.child(c1_id+title+name).put(self.p)
+        pdf_url=storage.child(c1_id+title+name).get_url(None)
+        x = firebase.get("Users/Teacher",'')
+        for i in x:
+            if (x[i]["username"]==(self.ids.tname.text).replace("Dr. ","")):
+                y = x[i]["course"]["Labs"]
+                for j in y:
+                    if ((y[j]["title"].replace(" ","").lower())==(title.replace(" ","")).lower()):
+                        firebase.post("Users/Teacher/"+i+"/course/Labs/"+j+"/student_files/",{"name":user_info["username"],"url":pdf_url})
+                        z = firebase.get("Users/Student/"+user_id+"/courses/"+x[i]["course"]["cid"]+"/Labs/",'')
+                        for k in z:
+                            if ((z[k]["title"].replace(" ","").lower())==(title.replace(" ","")).lower()):
+                                firebase.put("Users/Student/"+user_id+"/courses/"+x[i]["course"]["cid"]+"/Labs/"+k+"/","status",1)
+                                self.add_labcard()
+
+        self.loader.dismiss()
         self.file_manager.close()
         Snackbar(text="File Successfully uploaded -_- ",snackbar_x="10dp",snackbar_y="10dp",size_hint_x=0.5,pos_hint={'center_x': 0.5, 'center_y': 0.1}).open()
 
-    def ayes(self, inst):
+    def ayes(self):
         n = self.p
         n = n.split('\\')
 
         # Name of the file that should be displayed
         name = n.pop()
         self.dialog1.dismiss()
-        print(name)
 
         # self.p is the path of the file - (Assignment file)
         self.p = "C:"+self.p
-        print(self.p)
+        # store the file in firebase
+        storage.child(c1_id+title+name).put(self.p)
+        pdf_url=storage.child(c1_id+title+name).get_url(None)
+        x = firebase.get("Users/Teacher",'')
+        for i in x:
+            if (x[i]["username"]==(self.ids.tname.text).replace("Dr. ","")):
+                y = x[i]["course"]["Assignments"]
+                for j in y:
+                    if ((y[j]["title"].replace(" ","").lower())==(title.replace(" ","")).lower()):
+                        firebase.post("Users/Teacher/"+i+"/course/Assignments/"+j+"/student_files/",{"name":user_info["username"],"url":pdf_url})
+                        z = firebase.get("Users/Student/"+user_id+"/courses/"+x[i]["course"]["cid"]+"/Assignments/",'')
+                        for k in z:
+                            if ((z[k]["title"].replace(" ","").lower())==(title.replace(" ","")).lower()):
+                                firebase.put("Users/Student/"+user_id+"/courses/"+x[i]["course"]["cid"]+"/Assignments/"+k+"/","status",1)
+                                self.add_asscard()
+
+        self.loader.dismiss()
         self.file_manager.close()
         Snackbar(text="File Successfully uploaded -_- ",snackbar_x="10dp",snackbar_y="10dp",size_hint_x=0.5,pos_hint={'center_x': 0.5, 'center_y': 0.1}).open()
 
@@ -1051,6 +1218,9 @@ class Scourse1(Screen):
 
     def no(self, inst):
         self.dialog1.dismiss()
+
+    def cancel(self, inst):
+        self.dialog.dismiss()
 
     def add_labcard(self):
         # add lab cards
@@ -1121,6 +1291,7 @@ class Scourse1(Screen):
                 temail = x[i]["email"]
         self.ids.tname.text = 'Dr. ' + str(tname)
         self.ids.tmail.text = str(temail)
+        #self.ids.attendance.text= str(firebase.get("Users/Student/"+user_id+"/courses/"+c1_id+"/Attendence",'')+" %")
 
     def on_enter(self, *args):
 
@@ -1133,6 +1304,7 @@ class Scourse1(Screen):
             self.add_notescard()
         except:
             pass
+
 
 class Main(MDApp):
     pass
