@@ -3035,7 +3035,7 @@ WindowManager:
             MDLabel:
                 size_hint_x:0.02
             MDBoxLayout:
-                size_hint_x:0.4
+                size_hint_x:0.2
                 orientation: "vertical"
                 MDLabel:
                     size_hint_y: 0.1
@@ -3192,10 +3192,7 @@ WindowManager:
                         padding_x: 20
                 MDLabel:
                     size_hint_y: 0.05
-            MDLabel:
-                text:"CHAT"
-                font_style: "H1"
-                halign: "center"
+            
 
 <Tchat>:
 
@@ -4463,7 +4460,6 @@ WindowManager:
                         MDFillRoundFlatIconButton:
                             icon: "send"
                             text: "send"
-
                             font_size: 24
                             bold: True
                             on_press: root.feedback_send()
@@ -5090,6 +5086,7 @@ WindowManager:
                     border_radius: 15
                     radius: [15]
                     on_release:
+                        root.clear()
                         app.root.current= "Sdashboard"
                         root.manager.transition.direction="right"
                     MDIcon:
@@ -5132,6 +5129,7 @@ WindowManager:
                     border_radius: 15
                     radius: [15]
                     on_release:
+                        root.clear()
                         app.root.current= "Sevent"
                         root.manager.transition.direction="left"
                     MDIcon:
@@ -5154,6 +5152,7 @@ WindowManager:
                     border_radius: 15
                     radius: [15]
                     on_release:
+                        root.clear()
                         app.root.current= "Schat"
                         root.manager.transition.direction="left"
                     MDIcon:
@@ -5176,6 +5175,7 @@ WindowManager:
                     border_radius: 15
                     radius: [15]
                     on_release:
+                        root.clear()
                         app.root.current= "Sannouncement"
                         root.manager.transition.direction="left"
                     MDIcon:
@@ -5198,6 +5198,7 @@ WindowManager:
                     border_radius: 15
                     radius: [15]
                     on_release:
+                        root.clear()
                         app.root.current= "Sfeedback"
                         root.manager.transition.direction="left"
                     MDIcon:
@@ -5249,7 +5250,8 @@ WindowManager:
                             spacing: 30
                             MDFloatingActionButton:
                                 icon: "arrow-left-thick"
-                                on_release:
+                                on_press:
+                                    root.clear()
                                     app.root.current= "Scourse"
                                     root.manager.transition.direction="right"
                             MDIconButton:
