@@ -1079,8 +1079,8 @@ class Sprofile(Screen):
             pass
     def update_profile(self,*args):
         try:
-            self.ids.pro_name.text=user_info["username"]
-            self.ids.pro_email.text=user_info["email"]
+            self.ids.pro_name.text='Username - ' + user_info["username"]
+            self.ids.pro_email.text='Email - ' + user_info["email"]
         except:
             pass
 
