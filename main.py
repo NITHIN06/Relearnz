@@ -900,37 +900,130 @@ class Schat(Screen):
 
     def send(self):
         regex = r'[\s]*'
-        m = self.ids.message.text
-        if(re.fullmatch(regex,m)):
+        txt = self.ids.message.text
+        if(re.fullmatch(regex,txt)):
             MDDialog(title = "Invalid", text = "Field must not be empty").open()
             self.ids.message.text= ""
         else:
-            print(m)
-            # save message in database
+            firebase.post("Schat",{"message":txt,"sender":user_info["username"],"time":str(datetime.now().day)+"-"+str(datetime.now().month)+"-"+str(datetime.now().year)+"  "+str(datetime.now().hour)+":"+str(datetime.now().minute)})
             self.ids.message.text = ""
             self.add_cards()
-            self.loader.dismiss()
 
     def add_cards(self):
-        pass
+        self.ids.other.clear_widgets()
+        self.ids.user.clear_widgets()
+        x = firebase.get("Schat/",'')
+        for i in x:
+            if (x[i]["sender"]==user_info["username"]):
+                card_empty = MDCard(size_hint=(None,None),size=(300,100),elevation=0, radius=[15], pos_hint={'center_x':.5 , 'center_y':.5})
+                self.ids.other.add_widget(card_empty)
+                card = MDCard(orientation='vertical',size_hint=(None,None),size=(440,100), radius=[30, 0, 30, 15],elevation=17,padding=20,md_bg_color=[8/255, 1, 98/255, 0.5], pos_hint={'center_x':.5 , 'center_y':.5})
+                card_nt = MDBoxLayout(orientation='horizontal', size_hint_y=0.1)
+                card_name = MDLabel(text="You",font_style = "H6")
+                card_time = MDLabel(text=x[i]["time"],bold=True)
+                empty = MDLabel()
+                card_nt.add_widget(card_name)
+                card_nt.add_widget(empty)
+                card_nt.add_widget(card_time) 
+                card_message = MDLabel(text=x[i]["message"],font_size=(20))
+                card.add_widget(card_nt)
+                card.add_widget(card_message)
+                self.ids.user.add_widget(card)
+            else:
+                card_empty = MDCard(size_hint=(None,None),size=(300,100),elevation=0, radius= [15], pos_hint={'center_x':.5 , 'center_y':.5})
+                self.ids.user.add_widget(card_empty)
+                card = MDCard(orientation='vertical',size_hint=(None,None),size=(440,100), radius=[0,30,15,30],elevation=17,padding=20,md_bg_color=[54/255, 154/255, 230/255,0.5],pos_hint={'center_x':.5 , 'center_y':.5})
+                card_nt = MDBoxLayout(orientation='horizontal', size_hint_y=0.1)
+                card_name = MDLabel(text=x[i]["sender"],font_style = "H6")
+                card_time = MDLabel(text=x[i]["time"],bold=True)
+                empty = MDLabel()
+                card_nt.add_widget(card_name)
+                card_nt.add_widget(empty)
+                card_nt.add_widget(card_time) 
+                card_message = MDLabel(text=x[i]["message"],font_size=(20))
+                card.add_widget(card_nt)
+                card.add_widget(card_message)
+                self.ids.other.add_widget(card)
 
     def on_enter(self, *args):
-        card1 = MDCard(orientation='horizontal',size_hint=(None,None),size=(400,100),border_radius=10,radius=[10],elevation=0)
-        card2 = MDCard(orientation='horizontal',size_hint=(None,None),size=(430,100),border_radius=10,radius=[10],elevation=10,md_bg_color=[84/255,255/255,103/255,1])
-        card3 = MDCard(orientation='horizontal',size_hint=(None,None),size=(400,100),border_radius=10,radius=[10],elevation=0)
-        card4 = MDCard(orientation='horizontal',size_hint=(None,None),size=(430,100),border_radius=10,radius=[10],elevation=10,md_bg_color=[84/255,255/255,103/255,1])
-        
-        self.ids.user.add_widget(card1)
-        self.ids.other.add_widget(card2)
-        self.ids.other.add_widget(card3)
-        self.ids.user.add_widget(card4)
-        self.add_cards()
+        try:
+            self.add_cards()
+        except:
+            pass    
 
+    def clear(self):
+        self.ids.other.clear_widgets()
+        self.ids.user.clear_widgets()
+        self.ids.message.text = ""
 
 
 
 class Tchat(Screen):
-    pass
+
+    def __init__(self, **kw):
+        super(Tchat, self).__init__(**kw)
+        # Clock.schedule_interval(self.on_enter,5)
+
+    def send(self):
+        regex = r'[\s]*'
+        txt = self.ids.message.text
+        if(re.fullmatch(regex,txt)):
+            MDDialog(title = "Invalid", text = "Field must not be empty").open()
+            self.ids.message.text= ""
+        else:
+            firebase.post("Tchat",{"message":txt,"sender":user_info["username"],"time":str(datetime.now().day)+"-"+str(datetime.now().month)+"-"+str(datetime.now().year)+"  "+str(datetime.now().hour)+":"+str(datetime.now().minute),"course":firebase.get("/Users/Teacher/"+user_id+"/", 'course/cid')})
+            self.ids.message.text = ""
+            self.add_cards()
+
+    def add_cards(self):
+        self.ids.other.clear_widgets()
+        self.ids.user.clear_widgets()
+        x = firebase.get("Tchat/",'')
+        for i in x:
+            if (x[i]["sender"]==user_info["username"]):
+                card_empty = MDCard(size_hint=(None,None),size=(300,100),radius=[15], pos_hint={'center_x':.5 , 'center_y':.5}, elevation=0)
+                self.ids.other.add_widget(card_empty)
+                card = MDCard(orientation='vertical',size_hint=(None,None),size=(440,100), radius=[30, 0, 30, 15],elevation=17,padding=20,md_bg_color=[8/255, 1, 98/255, 0.5], pos_hint={'center_x':.5 , 'center_y':.5})
+                card_nt = MDBoxLayout(orientation='horizontal', size_hint_y=0.1)
+                card_name = MDLabel(text="You",font_style = "H6")
+                card_time = MDLabel(text=x[i]["time"],bold=True)
+                empty = MDLabel()
+                card_nt.add_widget(card_name)
+                card_nt.add_widget(empty)
+                card_nt.add_widget(card_time) 
+                card_message = MDLabel(text=x[i]["message"],font_size=(20))
+                card.add_widget(card_nt)
+                card.add_widget(card_message)
+                self.ids.user.add_widget(card)
+            else:
+                card_empty = MDCard(size_hint=(None,None),size=(300,100),radius= [15], pos_hint={'center_x':.5 , 'center_y':.5}, elevation=0)
+                self.ids.user.add_widget(card_empty)
+                card = MDCard(orientation='vertical',size_hint=(None,None),size=(440,100), radius=[0,30,15,30], elevation=17,padding=20,md_bg_color=[54/255, 154/255, 230/255,0.5], pos_hint={'center_x':.5 , 'center_y':.5})
+                card_nt = MDBoxLayout(orientation='horizontal', size_hint_y=0.1)
+                card_name = MDLabel(text='Dr. '+x[i]["sender"]+'@'+x[i]["course"],font_style = "H6")
+                card_time = MDLabel(text=x[i]["time"],bold=True)
+                empty = MDLabel()
+                card_nt.add_widget(card_name)
+                card_nt.add_widget(empty)
+                card_nt.add_widget(card_time) 
+                card_message = MDLabel(text=x[i]["message"],font_size=(20))
+                card.add_widget(card_nt)
+                card.add_widget(card_message)
+                self.ids.other.add_widget(card)
+
+    def on_enter(self, *args):
+        try:
+            self.add_cards()
+        except:
+            pass    
+
+    def clear(self):
+        self.ids.other.clear_widgets()
+        self.ids.user.clear_widgets()
+        self.ids.message.text = ""
+
+
+
 class Stimetable(Screen):
     pass
 class Ttimetable(Screen):
@@ -977,7 +1070,7 @@ class Tannouncement(Screen):
             MDDialog(title = "Invalid", text = "Field must not be empty").open()
             self.ids.Announcemnet_txt.text= ''
         else:
-            firebase.post("Announcements",{"message":txt,"sender":user_info["username"],"time":str(datetime.now().day)+"-"+str(datetime.now().month)+"-"+str(datetime.now().year)+"  "+str(datetime.now().hour)+"-"+str(datetime.now().minute)+"-"+str(datetime.now().second),"course":firebase.get("/Users/Teacher/"+user_id+"/", 'course/cid')})
+            firebase.post("Announcements",{"message":txt,"sender":user_info["username"],"time":str(datetime.now().day)+"-"+str(datetime.now().month)+"-"+str(datetime.now().year)+"  "+str(datetime.now().hour)+":"+str(datetime.now().minute)+":"+str(datetime.now().second),"course":firebase.get("/Users/Teacher/"+user_id+"/", 'course/cid')})
             Snackbar(
                 text="Announcement Successfully posted -_- ",
                 snackbar_x="10dp",

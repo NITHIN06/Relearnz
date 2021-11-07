@@ -3562,6 +3562,7 @@ WindowManager:
                 elevation_normal: 8
                 md_bg_color: "black"
                 on_release:
+                    root.clear()
                     app.root.current= "Stimetable"
                     root.manager.transition.direction="left"
             MDLabel:
@@ -3572,6 +3573,7 @@ WindowManager:
                 elevation_normal: 8
                 md_bg_color: "black"
                 on_release:
+                    root.clear()
                     app.root.current= "Sprofile"
                     root.manager.transition.direction="left"
             MDLabel:
@@ -3596,6 +3598,7 @@ WindowManager:
                     border_radius: 15
                     radius: [15]
                     on_release:
+                        root.clear()
                         app.root.current= "Sdashboard"
                         root.manager.transition.direction="right"
                     MDIcon:
@@ -3618,6 +3621,7 @@ WindowManager:
                     border_radius: 15
                     radius: [15]
                     on_release:
+                        root.clear()
                         app.root.current= "Scourse"
                         root.manager.transition.direction="left"
                     MDIcon:
@@ -3640,6 +3644,7 @@ WindowManager:
                     border_radius: 15
                     radius: [15]
                     on_release:
+                        root.clear()
                         app.root.current= "Sevent"
                         root.manager.transition.direction="left"
                     MDIcon:
@@ -3682,6 +3687,7 @@ WindowManager:
                     border_radius: 15
                     radius: [15]
                     on_release:
+                        root.clear()
                         app.root.current= "Sannouncement"
                         root.manager.transition.direction="left"
                     MDIcon:
@@ -3704,6 +3710,7 @@ WindowManager:
                     border_radius: 15
                     radius: [15]
                     on_release:
+                        root.clear()
                         app.root.current= "Sfeedback"
                         root.manager.transition.direction="left"
                     MDIcon:
@@ -3727,6 +3734,7 @@ WindowManager:
                     border_radius: 15
                     radius: [15]
                     on_release:
+                        root.clear()
                         app.root.current= "Login"
                         root.manager.transition.direction="right"
                     MDIcon:
@@ -3750,13 +3758,12 @@ WindowManager:
                     size: 900, 550
                     pos_hint: {"center_x":0.5,"center_y":0.5}
                     radius : 20
-                    padding: 20
+                    padding: 5
                     elevation: 0
                     ScrollView:
                         do_scroll_x: False
                         MDBoxLayout:
                             size_hint_y: None
-                            padding_x: 10
                             height: self.minimum_height     
                             MDBoxLayout:
                                 orientation: "vertical"
@@ -3764,8 +3771,6 @@ WindowManager:
                                 size_hint_y: None
                                 height: self.minimum_height 
                                 spacing: 20
-                            MDBoxLayout:
-                                size_hint_x: 0.02    
                             MDBoxLayout:
                                 orientation: "vertical"
                                 id: user
@@ -3781,7 +3786,7 @@ WindowManager:
                         id: message
                         hint_text: "Enter the Message"
                         mode: "rectangle"
-                        line_color_focus: 0, 1, 0, 1
+                        line_color_focus: 8/255,1,98/255,1
                     MDLabel:
                         text: ""
                         size_hint_x: 0.1
@@ -3838,6 +3843,7 @@ WindowManager:
                 elevation_normal: 8
                 md_bg_color: "black"
                 on_release:
+                    root.clear()
                     app.root.current = "Ttimetable"
                     root.manager.transition.direction = "left"
             MDLabel:
@@ -3848,6 +3854,7 @@ WindowManager:
                 elevation_normal: 8
                 md_bg_color: "black"
                 on_release:
+                    root.clear()
                     app.root.current= "Tprofile"
                     root.manager.transition.direction="left"
             MDLabel:
@@ -3872,6 +3879,7 @@ WindowManager:
                     border_radius: 15
                     radius: [15]
                     on_release:
+                        root.clear()
                         app.root.current= "Tdashboard"
                         root.manager.transition.direction="right"
                     MDIcon:
@@ -3894,6 +3902,7 @@ WindowManager:
                     border_radius: 15
                     radius: [15]
                     on_release:
+                        root.clear()
                         app.root.current= "Tcourse"
                         root.manager.transition.direction="left"
                     MDIcon:
@@ -3916,6 +3925,7 @@ WindowManager:
                     border_radius: 15
                     radius: [15]
                     on_release:
+                        root.clear()
                         app.root.current= "Tevent"
                         root.manager.transition.direction="left"
                     MDIcon:
@@ -3959,6 +3969,7 @@ WindowManager:
                     border_radius: 15
                     radius: [15]
                     on_release:
+                        root.clear()
                         app.root.current= "Tannouncement"
                         root.manager.transition.direction="left"
                     MDIcon:
@@ -3981,6 +3992,7 @@ WindowManager:
                     border_radius: 15
                     radius: [15]
                     on_release:
+                        root.clear()
                         app.root.current= "Tfeedback"
                         root.manager.transition.direction="left"
                     MDIcon:
@@ -4004,6 +4016,7 @@ WindowManager:
                     border_radius: 15
                     radius: [15]
                     on_release:
+                        root.clear()
                         app.root.current= "Login"
                         root.manager.transition.direction="right"
                     MDIcon:
@@ -4027,26 +4040,48 @@ WindowManager:
                     size: 900, 550
                     pos_hint: {"center_x":0.5,"center_y":0.5}
                     radius : 20
-                    padding: 20
+                    padding: 5
                     elevation: 0
+                    ScrollView:
+                        do_scroll_x: False
+                        MDBoxLayout:
+                            size_hint_y: None
+                            height: self.minimum_height     
+                            MDBoxLayout:
+                                orientation: "vertical"
+                                id: other
+                                size_hint_y: None
+                                height: self.minimum_height 
+                                spacing: 20
+                            MDBoxLayout:
+                                orientation: "vertical"
+                                id: user
+                                size_hint_y: None
+                                height: self.minimum_height 
+                                spacing: 20
                 MDBoxLayout:
                     orientation: 'horizontal'
                     MDLabel:
                         text: ""
-                        size_hint_x: 0.2
+                        size_hint_x: 0.13
                     MDTextField:
+                        id: message
                         hint_text: "Enter the Message"
                         mode: "rectangle"
                         line_color_focus: 54/255, 154/255, 230/255,1
                     MDLabel:
                         text: ""
-                        size_hint_x: 0.2
+                        size_hint_x: 0.1
                     MDFillRoundFlatIconButton:
                         icon: "send"
                         text: "send"
                         md_bg_color: 54/255, 154/255, 230/255,1
                         font_size: 24
                         bold: True
+                        on_press: root.send()
+                    MDLabel:
+                        text: ""
+                        size_hint_x: 0.3
                 MDLabel:
                     text: ""
                     size_hint_y: 0.2
@@ -5744,6 +5779,7 @@ WindowManager:
                 elevation_normal: 8
                 md_bg_color: "black"
                 on_release:
+                    root.clear()
                     app.root.current= "Stimetable"
                     root.manager.transition.direction="left"
             MDLabel:
@@ -5754,6 +5790,7 @@ WindowManager:
                 elevation_normal: 8
                 md_bg_color: "black"
                 on_release:
+                    root.clear()
                     app.root.current= "Sprofile"
                     root.manager.transition.direction="left"
             MDLabel:
@@ -5914,6 +5951,7 @@ WindowManager:
                     border_radius: 15
                     radius: [15]
                     on_release:
+                        root.clear()
                         app.root.current= "Login"
                         root.manager.transition.direction="right"
                     MDIcon:
