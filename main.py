@@ -995,7 +995,7 @@ class Tchat(Screen):
                 card.add_widget(card_nt)
                 card.add_widget(card_message)
                 self.ids.user.add_widget(card)
-            else:
+            else: 
                 card_empty = MDCard(size_hint=(None,None),size=(300,100),radius= [15], pos_hint={'center_x':.5 , 'center_y':.5}, elevation=0)
                 self.ids.user.add_widget(card_empty)
                 card = MDCard(orientation='vertical',size_hint=(None,None),size=(440,100), radius=[0,30,15,30], elevation=17,padding=20,md_bg_color=[54/255, 154/255, 230/255,0.5], pos_hint={'center_x':.5 , 'center_y':.5})
