@@ -5325,7 +5325,7 @@ WindowManager:
             MDLabel:
                 size_hint_x:0.02
             MDBoxLayout:
-                size_hint_x:0.4
+                size_hint_x:0.3
                 orientation: "vertical"
                 MDLabel:
                     size_hint_y: 0.1
@@ -5487,57 +5487,109 @@ WindowManager:
             MDBoxLayout:
                 orientation: "vertical"
                 MDBoxLayout:
+                    size_hint_y: 0.7
                     Image:
-                        source: "assets/user.png"
+                        source: "assets/student1.png"
+                        size_hint_x: 0.3
                     MDCard:
                         size_hint: None, None
-                        size: 600, 300
+                        size: 600, 250
                         pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                        padding: 15
+                        border_radius: 15
+                        radius: [15]
+                        md_bg_color: 84/255,255/255,103/255,0.5
+                        MDBoxLayout:
+                            orientation: "vertical"              
+                            MDLabel:
+                                text: "Username -"
+                                bold: True
+                                font_size: 28
+                                id: pro_name
 
-                MDBoxLayout:
-                    orientation: "vertical"              
+                            MDLabel:
+                                text: ""
+                                
+                            MDLabel:
+                                text: "Email -"
+                                bold: True
+                                font_size: 28
+                                id: pro_email
+                           
+                            MDLabel:
+                                text: ""
+                                
+                            MDLabel:
+                                text: "Role - Student"
+                                bold: True
+                                font_size: 28
+                                
+                            MDLabel:
+                                text: ""
+                
                     MDLabel:
-                        text: "Username"
-                        bold: True
-                        font_size: 28
-                        size_hint: 1, 1
-                    MDLabel:
-                        id: pro_name
-                        bold: True
-                        font_size: 20
-                        size_hint: 1, 1
-                    MDLabel:
-                        text: ""
-                        size_hint: 1, 1
-                    MDLabel:
-                        text: "Email"
-                        bold: True
-                        font_size: 28
-                        size_hint: 1, 1
-                    MDLabel:
-                        id: pro_email
-                        bold: True
-                        font_size: 20
-                        size_hint: 1, 1
-                    MDLabel:
-                        text: ""
-                        size_hint: 1, 1
-                    MDLabel:
-                        text: "Role"
-                        bold: True
-                        font_size: 28
-                        size_hint: 1, 1
-                    MDLabel:
-                        text: "Student"
-                        bold: True
-                        font_size: 20
-                        size_hint: 1, 1
-                    MDLabel:
-                        text: ""
-                        size_hint: 1, 1
-            MDLabel:
-                text: ""
-                size_hint: 0.1, 1             
+                        size_hint_x: 0.05
+
+                MDLabel:
+                    text: "Attendence"
+                    font_style: "H3"
+                    size_hint_y: 0.1
+                MDLabel:
+                    size_hint_y: 0.05
+                MDCard:
+                    size_hint: None, None
+                    size: 930, 250
+                    padding: 5
+                    border_radius: 15
+                    radius: [15]
+                    md_bg_color: 84/255,255/255,103/255,0.5
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        MDLabel:
+                            text: "AI - "
+                            padding_x: 85
+                            font_size: 28
+                            bold: True
+                        MDLabel:
+                            text: "SEPM - "
+                            padding_x: 85
+                            font_size: 28
+                            bold: True
+                        MDLabel:
+                            text: "DSP - "
+                            padding_x: 85
+                            font_size: 28
+                            bold: True
+                        MDLabel:
+                            text: "CF - "
+                            padding_x: 85
+                            font_size: 28
+                            bold: True
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        MDLabel:
+                            text: "SC - "
+                            padding_x: 85
+                            font_size: 28
+                            bold: True
+                        MDLabel:
+                            text: "HRM - "
+                            padding_x: 85
+                            font_size: 28
+                            bold: True
+                        MDLabel:
+                            text: "OSM - "
+                            padding_x: 85
+                            font_size: 28
+                            bold: True
+                        MDLabel:
+                            text: "FMA - "
+                            padding_x: 85
+                            font_size: 28
+                            bold: True
+                MDLabel:
+                    size_hint_y: 0.05
+
 <Scourse1>:
     name: "Scourse1"      
     MDBoxLayout:
