@@ -900,7 +900,7 @@ WindowManager:
                 md_bg_color: "black"
                 on_release:
                     app.root.current= "Stimetable"
-                    root.manager.transition.direction="left"
+                    root.manager.transition.direction="left"   
             MDLabel:
                 size_hint_x:0.08
 
@@ -1368,7 +1368,6 @@ WindowManager:
                 md_bg_color: "black"
             MDLabel:
                 size_hint_x:0.08
-
             MDFloatingActionButton:
                 icon: "account"
                 elevation_normal: 8
@@ -1385,7 +1384,7 @@ WindowManager:
             MDLabel:
                 size_hint_x:0.02
             MDBoxLayout:
-                size_hint_x:0.4
+                size_hint_x:0.3
                 orientation: "vertical"
                 MDLabel:
                     size_hint_y: 0.1
@@ -1544,11 +1543,231 @@ WindowManager:
                         padding_x: 20
                 MDLabel:
                     size_hint_y: 0.05
+            MDBoxLayout:
+                orientation: "vertical"
+                MDLabel:
+                    text: ""
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size:1000,625
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDBoxLayout:
+                        orientation: "vertical"                   
+                        MDLabel:
+                            text: "TIME TABLE"
+                            bold: True
+                            font_size:18
+                            size_hint_y: 0.05
+                            color: 7/255, 12/255, 173/255
+                        MDBoxLayout:
+                            size_hint_y: 0.9
+                            MDCard:                           
+                                elevation:0
+                                padding: 10
+                                MDBoxLayout:
+                                    orientation:"vertical"
+                                    MDLabel:
+                                        font_size:14
+                                        text: "Days"
+                                        bold:True
+                                    MDLabel:
+                                        font_size:14
+                                        text: "Monday"
+                                        bold:True
+                                    MDLabel:
+                                        font_size:14
+                                        text: "Tueday"
+                                        bold:True
+                                    MDLabel:
+                                        font_size:14
+                                        text: "Wednesday"
+                                        bold:True
+                                    MDLabel:
+                                        font_size:14
+                                        text: "Thursday"
+                                        bold:True
+                                    MDLabel:
+                                        font_size:14
+                                        text: "Friday"
+                                        bold:True
+                            MDCard:
+                                elevation:0
+                                padding: 10
+                                MDBoxLayout:
+                                    orientation:"vertical"
+                                    MDLabel:
+                                        font_size:14
+                                        text: "8:30-9:25"
+                                        bold:True
+                                    MDLabel:
+                                        font_size:14
+                                        text: "ICS311[SB]/ICS312[ACJ]"
+                                        color:52, 152, 219, 1
+                                    MDLabel:
+                                        font_size:14
+                                        text: "    - -    "
+                                    MDLabel:
+                                        font_size:14
+                                        text: "IEC311[BA]"
+                                        color:231, 76, 60, 1
+                                    MDLabel:
+                                        font_size:14
+                                        text: "CSE311/VP+SBK"
+                                        color:244, 208, 63, 1
+                                    MDLabel:
+                                        font_size:14
+                                        text: "CSE311/VP+SBK"
+                                        color:244, 208, 63, 1
+                            
+                            MDCard:
+                                elevation:0
+                                padding: 10
+                                MDBoxLayout:
+                                    orientation:"vertical"
+                                    MDLabel:
+                                        font_size:14
+                                        text: "09:40-10:35"
+                                        bold:True
+                                    MDLabel:
+                                        font_size:14
+                                        text: "IEC311[BA]"
+                                        color:231, 76, 60, 1
+                                    MDLabel:
+                                        font_size:14
+                                        text: "CSE311/VP+SBK"
+                                        color:244, 208, 63, 1
+                                    MDLabel:
+                                        font_size:14
+                                        text: "IMA311[JS]+SMS"
+                                        color:17, 120, 100, 1
+                                    MDLabel:
+                                        font_size:14
+                                        text: "IHS312/RT"
+                                    MDLabel:
+                                        font_size:14
+                                        text: "IHS313/MCD" 
+                                        color:42, 209, 16, 1
+                                    
+                            MDCard:
+                                elevation:0
+                                padding: 10
+                                MDBoxLayout:
+                                    orientation:"vertical"
+                                    MDLabel:
+                                        font_size:14
+                                        text: "10.50-11.45"
+                                        bold:True
+                                    MDLabel:
+                                        font_size:14
+                                        text: "IMA311[JS]+SMS"
+                                        color:17, 120, 100, 1
+                                    MDLabel:
+                                        font_size:14
+                                        text: "IMA311[JS]+SMS"
+                                        color:17, 120, 100, 1
+                                    MDLabel:
+                                        font_size:14
+                                        text: "CSE312/DSL+PS"
+                                        color:211, 84, 0, 1
+                                    MDLabel:
+                                        font_size:14
+                                        text: "IHS311/MCD"
+                                    MDLabel:
+                                        font_size:14
+                                        text: "IEC311[BA]" 
+                                        color:231, 76, 60, 1
+                                        
+                            MDCard:                         
+                                elevation:0
+                                padding: 10
+                                MDBoxLayout:
+                                    orientation:"vertical"
+                                    MDLabel:
+                                        font_size:14
+                                        text: "12:00-12:55"
+                                        bold:True
+                                    MDLabel:
+                                        font_size:14
+                                        text: "CSE312/DSL+PS"
+                                        color:211, 84, 0, 1
+                                    MDLabel:
+                                        font_size:14
+                                        text: "ICS311[SB]/ICS312[ACJ]"
+                                        color:52, 152, 219, 1
+                                    MDLabel:
+                                        font_size:14
+                                        text: "ICS311[SB]/ICS312[ACJ]"
+                                        color:52, 152, 219, 1
+                                    MDLabel:
+                                        font_size:14
+                                        text: "CSE312/DSL+PS"
+                                        color:211, 84, 0, 1
+                                    MDLabel:
+                                        font_size:14
+                                        text: "    - -     "
+                                          
+                            MDCard:                         
+                                elevation:0
+                                padding: 10
+                                MDBoxLayout:
+                                    orientation:"vertical"
+                                    MDLabel:
+                                        font_size:14
+                                        text: "2:00-4:00pm"
+                                        bold:True
+                                    MDLabel:
+                                        font_size:14
+                                        text: "ICS311(LAB)/ICS312(LAB)"
+                                        color:52, 152, 219, 1
+                                    MDLabel:
+                                        font_size:14
+                                        text: "IEC311(EC LAB)"
+                                        color:231, 76, 60, 1
+                                    MDLabel:
+                                        font_size:14
+                                        text: "CSE312[LAB]/DSL+PS"
+                                        color:211, 84, 0, 1
+                                    MDLabel:
+                                        font_size:14
+                                        text: "CSE311(LAB)/VP+SBK"
+                                        color:244, 208, 63, 1
+                                    MDLabel:
+                                        font_size:14
+                                        text: "CA"    
+                            MDCard:                         
+                                elevation:0
+                                padding: 10
+                                MDBoxLayout:
+                                    orientation:"vertical"
+                                    MDLabel:
+                                        font_size:14
+                                        text: "4:15-6:15"
+                                        bold:True
+                                    MDLabel:
+                                        font_size:14
+                                        text: "Coding Club Activites"
+                                    MDLabel:
+                                        font_size:14
+                                        text: "Coding Club Activites"
+                                    MDLabel:
+                                        font_size:14
+                                        text: "Seminar"
+                                    MDLabel:
+                                        font_size:14
+                                        text: "Placement Activites"
+                                    MDLabel:
+                                        font_size:14
+                                        text: "Placement Activites"                      
+                                                 
+                MDLabel:
+                    text: ""
+                    size_hint_y: 0.05               
             MDLabel:
-                text:"TIMETABLE"
-                font_style: "H1"
-                halign: "center"
-
+                text: ""
+                size_hint_x: 0.2                                     
 <Ttimetable>:
 
     name: "Ttimetable"
@@ -1584,10 +1803,8 @@ WindowManager:
                 icon: "timetable"
                 elevation_normal: 8
                 md_bg_color: "black"
-
             MDLabel:
                 size_hint_x:0.08
-
             MDFloatingActionButton:
                 icon: "account"
                 elevation_normal: 8
@@ -1604,7 +1821,7 @@ WindowManager:
             MDLabel:
                 size_hint_x:0.02
             MDBoxLayout:
-                size_hint_x:0.4
+                size_hint_x:0.3
                 orientation: "vertical"
                 MDLabel:
                     size_hint_y: 0.1
@@ -1763,10 +1980,232 @@ WindowManager:
                         padding_x: 20
                 MDLabel:
                     size_hint_y: 0.05
+            MDBoxLayout:
+                orientation: "vertical"
+                MDLabel:
+                    text: ""
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size:1000,625
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    MDBoxLayout:
+                        orientation: "vertical"                   
+                        MDLabel:
+                            text: "TIME TABLE"
+                            bold: True
+                            font_size:18
+                            size_hint_y: 0.05
+                            color: 7/255, 12/255, 173/255
+                        MDBoxLayout:
+                            size_hint_y: 0.9
+                            MDCard:                           
+                                elevation:0
+                                padding: 10
+                                MDBoxLayout:
+                                    orientation:"vertical"
+                                    MDLabel:
+                                        font_size:14
+                                        text: "Days"
+                                        bold:True
+                                    MDLabel:
+                                        font_size:14
+                                        text: "Monday"
+                                        bold:True
+                                    MDLabel:
+                                        font_size:14
+                                        text: "Tueday"
+                                        bold:True
+                                    MDLabel:
+                                        font_size:14
+                                        text: "Wednesday"
+                                        bold:True
+                                    MDLabel:
+                                        font_size:14
+                                        text: "Thursday"
+                                        bold:True
+                                    MDLabel:
+                                        font_size:14
+                                        text: "Friday"
+                                        bold:True
+                            MDCard:
+                                elevation:0
+                                padding: 10
+                                MDBoxLayout:
+                                    orientation:"vertical"
+                                    MDLabel:
+                                        font_size:14
+                                        text: "8:30-9:25"
+                                        bold:True
+                                    MDLabel:
+                                        font_size:14
+                                        text: "ICS311[SB]/ICS312[ACJ]"
+                                        color:52, 152, 219, 1
+                                    MDLabel:
+                                        font_size:14
+                                        text: "    - -    "
+                                    MDLabel:
+                                        font_size:14
+                                        text: "IEC311[BA]"
+                                        color:231, 76, 60, 1
+                                    MDLabel:
+                                        font_size:14
+                                        text: "CSE311/VP+SBK"
+                                        color:244, 208, 63, 1
+                                    MDLabel:
+                                        font_size:14
+                                        text: "CSE311/VP+SBK"
+                                        color:244, 208, 63, 1
+                            
+                            MDCard:
+                                elevation:0
+                                padding: 10
+                                MDBoxLayout:
+                                    orientation:"vertical"
+                                    MDLabel:
+                                        font_size:14
+                                        text: "09:40-10:35"
+                                        bold:True
+                                    MDLabel:
+                                        font_size:14
+                                        text: "IEC311[BA]"
+                                        color:231, 76, 60, 1
+                                    MDLabel:
+                                        font_size:14
+                                        text: "CSE311/VP+SBK"
+                                        color:244, 208, 63, 1
+                                    MDLabel:
+                                        font_size:14
+                                        text: "IMA311[JS]+SMS"
+                                        color:17, 120, 100, 1
+                                    MDLabel:
+                                        font_size:14
+                                        text: "IHS312/RT"
+                                    MDLabel:
+                                        font_size:14
+                                        text: "IHS313/MCD" 
+                                        color:42, 209, 16, 1
+                                    
+                            MDCard:
+                                elevation:0
+                                padding: 10
+                                MDBoxLayout:
+                                    orientation:"vertical"
+                                    MDLabel:
+                                        font_size:14
+                                        text: "10.50-11.45"
+                                        bold:True
+                                    MDLabel:
+                                        font_size:14
+                                        text: "IMA311[JS]+SMS"
+                                        color:17, 120, 100, 1
+                                    MDLabel:
+                                        font_size:14
+                                        text: "IMA311[JS]+SMS"
+                                        color:17, 120, 100, 1
+                                    MDLabel:
+                                        font_size:14
+                                        text: "CSE312/DSL+PS"
+                                        color:211, 84, 0, 1
+                                    MDLabel:
+                                        font_size:14
+                                        text: "IHS311/MCD"
+                                    MDLabel:
+                                        font_size:14
+                                        text: "IEC311[BA]" 
+                                        color:231, 76, 60, 1
+                                        
+                            MDCard:                         
+                                elevation:0
+                                padding: 10
+                                MDBoxLayout:
+                                    orientation:"vertical"
+                                    MDLabel:
+                                        font_size:14
+                                        text: "12:00-12:55"
+                                        bold:True
+                                    MDLabel:
+                                        font_size:14
+                                        text: "CSE312/DSL+PS"
+                                        color:211, 84, 0, 1
+                                    MDLabel:
+                                        font_size:14
+                                        text: "ICS311[SB]/ICS312[ACJ]"
+                                        color:52, 152, 219, 1
+                                    MDLabel:
+                                        font_size:14
+                                        text: "ICS311[SB]/ICS312[ACJ]"
+                                        color:52, 152, 219, 1
+                                    MDLabel:
+                                        font_size:14
+                                        text: "CSE312/DSL+PS"
+                                        color:211, 84, 0, 1
+                                    MDLabel:
+                                        font_size:14
+                                        text: "    - -     "
+                                          
+                            MDCard:                         
+                                elevation:0
+                                padding: 10
+                                MDBoxLayout:
+                                    orientation:"vertical"
+                                    MDLabel:
+                                        font_size:14
+                                        text: "2:00-4:00pm"
+                                        bold:True
+                                    MDLabel:
+                                        font_size:14
+                                        text: "ICS311(LAB)/ICS312(LAB)"
+                                        color:52, 152, 219, 1
+                                    MDLabel:
+                                        font_size:14
+                                        text: "IEC311(EC LAB)"
+                                        color:231, 76, 60, 1
+                                    MDLabel:
+                                        font_size:14
+                                        text: "CSE312[LAB]/DSL+PS"
+                                        color:211, 84, 0, 1
+                                    MDLabel:
+                                        font_size:14
+                                        text: "CSE311(LAB)/VP+SBK"
+                                        color:244, 208, 63, 1
+                                    MDLabel:
+                                        font_size:14
+                                        text: "CA"    
+                            MDCard:                         
+                                elevation:0
+                                padding: 10
+                                MDBoxLayout:
+                                    orientation:"vertical"
+                                    MDLabel:
+                                        font_size:14
+                                        text: "4:15-6:15"
+                                        bold:True
+                                    MDLabel:
+                                        font_size:14
+                                        text: "Coding Club Activites"
+                                    MDLabel:
+                                        font_size:14
+                                        text: "Coding Club Activites"
+                                    MDLabel:
+                                        font_size:14
+                                        text: "Seminar"
+                                    MDLabel:
+                                        font_size:14
+                                        text: "Placement Activites"
+                                    MDLabel:
+                                        font_size:14
+                                        text: "Placement Activites"                      
+                                                 
+                MDLabel:
+                    text: ""
+                    size_hint_y: 0.05               
             MDLabel:
-                text:"TIMETABLE"
-                font_style: "H1"
-                halign: "center"
+                text: ""
+                size_hint_x: 0.2
+         
 <Scourse>:
 
     name: "Scourse"
@@ -3192,7 +3631,42 @@ WindowManager:
                         padding_x: 20
                 MDLabel:
                     size_hint_y: 0.05
-            
+            MDBoxLayout:
+                orientation: 'vertical'
+                MDLabel:
+                    text: ""
+                    size_hint_y: 0.2            
+                MDCard:
+                    size_hint: None, None
+                    size: 900, 550
+                    pos_hint: {"center_x":0.5,"center_y":0.5}
+                    radius : 20
+                    padding: 20
+                    elevation: 0
+                MDBoxLayout:
+                    orientation: 'horizontal'
+                    MDLabel:
+                        text: ""
+                        size_hint_x: 0.2
+                    MDTextField:
+                        hint_text: "Enter the Message"
+                        mode: "rectangle"
+                        line_color_focus: 0, 1, 0, 1
+                    MDLabel:
+                        text: ""
+                        size_hint_x: 0.2
+                    MDFillRoundFlatIconButton:
+                        icon: "send"
+                        text: "send"
+                        md_bg_color: 8/255,1,98/255,1
+                        font_size: 24
+                        bold: True
+                MDLabel:
+                    text: ""
+                    size_hint_y: 0.2
+            MDLabel:
+                text: ""
+                size_hint: 0.05, 1
 
 <Tchat>:
 
@@ -3409,10 +3883,42 @@ WindowManager:
                         padding_x: 20
                 MDLabel:
                     size_hint_y: 0.05
+            MDBoxLayout:
+                orientation: 'vertical'
+                MDLabel:
+                    text: ""
+                    size_hint_y: 0.2            
+                MDCard:
+                    size_hint: None, None
+                    size: 900, 550
+                    pos_hint: {"center_x":0.5,"center_y":0.5}
+                    radius : 20
+                    padding: 20
+                    elevation: 0
+                MDBoxLayout:
+                    orientation: 'horizontal'
+                    MDLabel:
+                        text: ""
+                        size_hint_x: 0.2
+                    MDTextField:
+                        hint_text: "Enter the Message"
+                        mode: "rectangle"
+                        line_color_focus: 54/255, 154/255, 230/255,1
+                    MDLabel:
+                        text: ""
+                        size_hint_x: 0.2
+                    MDFillRoundFlatIconButton:
+                        icon: "send"
+                        text: "send"
+                        md_bg_color: 54/255, 154/255, 230/255,1
+                        font_size: 24
+                        bold: True
+                MDLabel:
+                    text: ""
+                    size_hint_y: 0.2
             MDLabel:
-                text:"CHAT"
-                font_style: "H1"
-                halign: "center"
+                text: ""
+                size_hint: 0.05, 1
 
 <Sannouncement>:
 
@@ -3626,7 +4132,6 @@ WindowManager:
                         bold: True
                         font_size : 20
                         padding_x: 20
-
                 MDLabel:
                     size_hint_y: 0.05
 
@@ -3652,7 +4157,8 @@ WindowManager:
                             orientation: 'vertical'
                             size_hint_y: None
                             height: self.minimum_height
-                            spacing: 20
+                            spacing: 20   
+
 <Tannouncement>:
 
     name: "Tannouncement"
@@ -5016,9 +5522,9 @@ WindowManager:
                         size_hint: 1, 1
             MDLabel:
                 text: ""
-                size_hint: 0.1, 1
+                size_hint: 0.1, 1             
 <Scourse1>:
-    name: "Scourse1"
+    name: "Scourse1"      
     MDBoxLayout:
         orientation: "vertical"
         MDLabel:
