@@ -1083,7 +1083,7 @@ class Scourse1(Screen):
     def load(self):
         self.loader = MDDialog(
             size_hint=(None, None),
-            size= (0,0),
+            size= (0, 0),
             type="custom",
             content_cls=Loader(),
         )
@@ -1318,6 +1318,7 @@ class Scourse1(Screen):
             c=c-1
             card.add_widget(card_title)
             self.ids.snotes.add_widget(card)
+        self.loader.dismiss()
 
     def open_pdf(self,*args):
         webbrowser.open()
@@ -1335,17 +1336,23 @@ class Scourse1(Screen):
         #self.ids.attendance.text= str(firebase.get("Users/Student/"+user_id+"/courses/"+c1_id+"/Attendence",'')+" %")
 
     def on_enter(self, *args):
+        self.load()
+        threading.Thread(target=self.spin).start()
 
-        # course1, c1_id
-        # get user details who has c1_id
+    def clear(self):
+        self.ids.tname.text = ""
+        self.ids.tmail.text = ""
+        self.ids.snotes.clear_widgets()
+        self.ids.sassignment.clear_widgets()
+        self.ids.slab.clear_widgets()
+    def spin(self):
         try:
             self.add_info()
             self.add_labcard()
             self.add_asscard()
-            self.add_notescard()
+            self.add_notescard()     
         except:
             pass
-
 
 class Main(MDApp):
     pass
