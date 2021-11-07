@@ -893,7 +893,42 @@ class Tevent(Screen):
     pass
 
 class Schat(Screen):
-    pass
+
+    def __init__(self, **kw):
+        super(Schat, self).__init__(**kw)
+        # Clock.schedule_interval(self.on_enter,5)
+
+    def send(self):
+        regex = r'[\s]*'
+        m = self.ids.message.text
+        if(re.fullmatch(regex,m)):
+            MDDialog(title = "Invalid", text = "Field must not be empty").open()
+            self.ids.message.text= ""
+        else:
+            print(m)
+            # save message in database
+            self.ids.message.text = ""
+            self.add_cards()
+            self.loader.dismiss()
+
+    def add_cards(self):
+        pass
+
+    def on_enter(self, *args):
+        card1 = MDCard(orientation='horizontal',size_hint=(None,None),size=(400,100),border_radius=10,radius=[10],elevation=0)
+        card2 = MDCard(orientation='horizontal',size_hint=(None,None),size=(430,100),border_radius=10,radius=[10],elevation=10,md_bg_color=[84/255,255/255,103/255,1])
+        card3 = MDCard(orientation='horizontal',size_hint=(None,None),size=(400,100),border_radius=10,radius=[10],elevation=0)
+        card4 = MDCard(orientation='horizontal',size_hint=(None,None),size=(430,100),border_radius=10,radius=[10],elevation=10,md_bg_color=[84/255,255/255,103/255,1])
+        
+        self.ids.user.add_widget(card1)
+        self.ids.other.add_widget(card2)
+        self.ids.other.add_widget(card3)
+        self.ids.user.add_widget(card4)
+        self.add_cards()
+
+
+
+
 class Tchat(Screen):
     pass
 class Stimetable(Screen):
@@ -947,7 +982,7 @@ class Tannouncement(Screen):
                 text="Announcement Successfully posted -_- ",
                 snackbar_x="10dp",
                 snackbar_y="10dp",
-                size_hint_x=0.5,
+                size_hint_x=0.5, 
                 pos_hint={'center_x': 0.5, 'center_y': 0.1}
             ).open()
             self.ids.Announcemnet_txt.text= ''

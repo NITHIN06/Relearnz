@@ -3643,24 +3643,49 @@ WindowManager:
                     radius : 20
                     padding: 20
                     elevation: 0
+                    ScrollView:
+                        do_scroll_x: False
+                        MDBoxLayout:
+                            size_hint_y: None
+                            padding_x: 10
+                            height: self.minimum_height     
+                            MDBoxLayout:
+                                orientation: "vertical"
+                                id: other
+                                size_hint_y: None
+                                height: self.minimum_height 
+                                spacing: 20
+                            MDBoxLayout:
+                                size_hint_x: 0.02    
+                            MDBoxLayout:
+                                orientation: "vertical"
+                                id: user
+                                size_hint_y: None
+                                height: self.minimum_height 
+                                spacing: 20
                 MDBoxLayout:
                     orientation: 'horizontal'
                     MDLabel:
                         text: ""
-                        size_hint_x: 0.2
+                        size_hint_x: 0.13
                     MDTextField:
+                        id: message
                         hint_text: "Enter the Message"
                         mode: "rectangle"
                         line_color_focus: 0, 1, 0, 1
                     MDLabel:
                         text: ""
-                        size_hint_x: 0.2
+                        size_hint_x: 0.1
                     MDFillRoundFlatIconButton:
                         icon: "send"
                         text: "send"
                         md_bg_color: 8/255,1,98/255,1
                         font_size: 24
                         bold: True
+                        on_press: root.send()
+                    MDLabel:
+                        text: ""
+                        size_hint_x: 0.3
                 MDLabel:
                     text: ""
                     size_hint_y: 0.2
