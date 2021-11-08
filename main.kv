@@ -840,10 +840,10 @@ WindowManager:
                     padding_x: 108
                     size_hint_y: 0.1
                 ScrollView:
-                    do_scroll_x: False        
+                    do_scroll_x: False
                     MDBoxLayout:
                         id: student_list
-                        orientation: 'vertical' 
+                        orientation: 'vertical'
                         size_hint_y: None
                         height: self.minimum_height
                         spacing: 20
@@ -851,7 +851,6 @@ WindowManager:
             MDLabel:
                 text: ""
                 size_hint_x: 0.02
-
 
 <Sdashboard>:
 
@@ -900,7 +899,7 @@ WindowManager:
                 md_bg_color: "black"
                 on_release:
                     app.root.current= "Stimetable"
-                    root.manager.transition.direction="left"   
+                    root.manager.transition.direction="left"
             MDLabel:
                 size_hint_x:0.08
 
@@ -1128,9 +1127,10 @@ WindowManager:
                                     icon: "laptop"
                                     font_size : 48
                                 MDLabel:
-                                    text:"4"
+                                    id: l_c
+                                    text:"0"
                                     bold: True
-                                    padding_x: 40
+                                    padding_x: 20
                                     font_size : 40
                                     color: 1,0,0
                             MDLabel:
@@ -1159,8 +1159,9 @@ WindowManager:
                                     icon: "clipboard-text-outline"
                                     font_size : 48
                                 MDLabel:
-                                    text:"4"
-                                    padding_x: 40
+                                    id: a_c
+                                    text:"0"
+                                    padding_x: 20
                                     font_size : 40
                                     bold: True
                                     color: 22/255, 201/255, 34/255
@@ -1285,12 +1286,12 @@ WindowManager:
                 padding: 10
                 orientation: 'vertical'
                 ScrollView:
-                    do_scroll_x: False 
+                    do_scroll_x: False
                     MDBoxLayout:
-                        orientation: 'vertical'  
+                        orientation: 'vertical'
                         size_hint_y: None
-                        height: self.minimum_height  
-                        spacing: 20      
+                        height: self.minimum_height
+                        spacing: 20
                         MDLabel:
                             text: "     "
                             bold: True
@@ -1307,13 +1308,13 @@ WindowManager:
                                 bold: True
                                 font_size: 30
                                 adaptive_height: True
-                                padding_x: 15       
+                                padding_x: 15
                         MDBoxLayout:
                             id: today
-                            orientation: 'vertical' 
+                            orientation: 'vertical'
                             size_hint_y: None
                             height: self.minimum_height
-                            spacing: 20                       
+                            spacing: 20
                         MDLabel:
                             text: "Tomorrow"
                             bold: True
@@ -1321,7 +1322,7 @@ WindowManager:
                             adaptive_height: True
                         MDBoxLayout:
                             id: tomorrow
-                            orientation: 'vertical' 
+                            orientation: 'vertical'
                             size_hint_y: None
                             height: self.minimum_height
                             spacing: 20
@@ -1555,7 +1556,7 @@ WindowManager:
                     border_radius: 15
                     radius: [15]
                     MDBoxLayout:
-                        orientation: "vertical"                   
+                        orientation: "vertical"
                         MDLabel:
                             text: "TIME TABLE"
                             bold: True
@@ -1564,7 +1565,7 @@ WindowManager:
                             color: 7/255, 12/255, 173/255
                         MDBoxLayout:
                             size_hint_y: 0.9
-                            MDCard:                           
+                            MDCard:
                                 elevation:0
                                 padding: 10
                                 MDBoxLayout:
@@ -1621,7 +1622,7 @@ WindowManager:
                                         font_size:14
                                         text: "CSE311/VP+SBK"
                                         color:244, 208, 63, 1
-                            
+
                             MDCard:
                                 elevation:0
                                 padding: 10
@@ -1648,9 +1649,9 @@ WindowManager:
                                         text: "IHS312/RT"
                                     MDLabel:
                                         font_size:14
-                                        text: "IHS313/MCD" 
+                                        text: "IHS313/MCD"
                                         color:42, 209, 16, 1
-                                    
+
                             MDCard:
                                 elevation:0
                                 padding: 10
@@ -1677,10 +1678,10 @@ WindowManager:
                                         text: "IHS311/MCD"
                                     MDLabel:
                                         font_size:14
-                                        text: "IEC311[BA]" 
+                                        text: "IEC311[BA]"
                                         color:231, 76, 60, 1
-                                        
-                            MDCard:                         
+
+                            MDCard:
                                 elevation:0
                                 padding: 10
                                 MDBoxLayout:
@@ -1708,8 +1709,8 @@ WindowManager:
                                     MDLabel:
                                         font_size:14
                                         text: "    - -     "
-                                          
-                            MDCard:                         
+
+                            MDCard:
                                 elevation:0
                                 padding: 10
                                 MDBoxLayout:
@@ -1736,8 +1737,8 @@ WindowManager:
                                         color:244, 208, 63, 1
                                     MDLabel:
                                         font_size:14
-                                        text: "CA"    
-                            MDCard:                         
+                                        text: "CA"
+                            MDCard:
                                 elevation:0
                                 padding: 10
                                 MDBoxLayout:
@@ -1760,14 +1761,14 @@ WindowManager:
                                         text: "Placement Activites"
                                     MDLabel:
                                         font_size:14
-                                        text: "Placement Activites"                      
-                                                 
+                                        text: "Placement Activites"
+
                 MDLabel:
                     text: ""
-                    size_hint_y: 0.05               
+                    size_hint_y: 0.05
             MDLabel:
                 text: ""
-                size_hint_x: 0.2                                     
+                size_hint_x: 0.2
 <Ttimetable>:
 
     name: "Ttimetable"
@@ -1992,7 +1993,7 @@ WindowManager:
                     border_radius: 15
                     radius: [15]
                     MDBoxLayout:
-                        orientation: "vertical"                   
+                        orientation: "vertical"
                         MDLabel:
                             text: "TIME TABLE"
                             bold: True
@@ -2001,7 +2002,7 @@ WindowManager:
                             color: 7/255, 12/255, 173/255
                         MDBoxLayout:
                             size_hint_y: 0.9
-                            MDCard:                           
+                            MDCard:
                                 elevation:0
                                 padding: 10
                                 MDBoxLayout:
@@ -2058,7 +2059,7 @@ WindowManager:
                                         font_size:14
                                         text: "CSE311/VP+SBK"
                                         color:244, 208, 63, 1
-                            
+
                             MDCard:
                                 elevation:0
                                 padding: 10
@@ -2085,9 +2086,9 @@ WindowManager:
                                         text: "IHS312/RT"
                                     MDLabel:
                                         font_size:14
-                                        text: "IHS313/MCD" 
+                                        text: "IHS313/MCD"
                                         color:42, 209, 16, 1
-                                    
+
                             MDCard:
                                 elevation:0
                                 padding: 10
@@ -2114,10 +2115,10 @@ WindowManager:
                                         text: "IHS311/MCD"
                                     MDLabel:
                                         font_size:14
-                                        text: "IEC311[BA]" 
+                                        text: "IEC311[BA]"
                                         color:231, 76, 60, 1
-                                        
-                            MDCard:                         
+
+                            MDCard:
                                 elevation:0
                                 padding: 10
                                 MDBoxLayout:
@@ -2145,8 +2146,8 @@ WindowManager:
                                     MDLabel:
                                         font_size:14
                                         text: "    - -     "
-                                          
-                            MDCard:                         
+
+                            MDCard:
                                 elevation:0
                                 padding: 10
                                 MDBoxLayout:
@@ -2173,8 +2174,8 @@ WindowManager:
                                         color:244, 208, 63, 1
                                     MDLabel:
                                         font_size:14
-                                        text: "CA"    
-                            MDCard:                         
+                                        text: "CA"
+                            MDCard:
                                 elevation:0
                                 padding: 10
                                 MDBoxLayout:
@@ -2197,15 +2198,15 @@ WindowManager:
                                         text: "Placement Activites"
                                     MDLabel:
                                         font_size:14
-                                        text: "Placement Activites"                      
-                                                 
+                                        text: "Placement Activites"
+
                 MDLabel:
                     text: ""
-                    size_hint_y: 0.05               
+                    size_hint_y: 0.05
             MDLabel:
                 text: ""
                 size_hint_x: 0.2
-         
+
 <Scourse>:
 
     name: "Scourse"
@@ -3635,7 +3636,7 @@ WindowManager:
                 orientation: 'vertical'
                 MDLabel:
                     text: ""
-                    size_hint_y: 0.2            
+                    size_hint_y: 0.2
                 MDCard:
                     size_hint: None, None
                     size: 900, 550
@@ -3887,7 +3888,7 @@ WindowManager:
                 orientation: 'vertical'
                 MDLabel:
                     text: ""
-                    size_hint_y: 0.2            
+                    size_hint_y: 0.2
                 MDCard:
                     size_hint: None, None
                     size: 900, 550
@@ -4157,7 +4158,7 @@ WindowManager:
                             orientation: 'vertical'
                             size_hint_y: None
                             height: self.minimum_height
-                            spacing: 20   
+                            spacing: 20
 
 <Tannouncement>:
 
@@ -5480,7 +5481,7 @@ WindowManager:
                         pos_hint: {"center_x": 0.5, "center_y": 0.5}
 
                 MDBoxLayout:
-                    orientation: "vertical"              
+                    orientation: "vertical"
                     MDLabel:
                         text: "Username"
                         bold: True
@@ -5522,9 +5523,9 @@ WindowManager:
                         size_hint: 1, 1
             MDLabel:
                 text: ""
-                size_hint: 0.1, 1             
+                size_hint: 0.1, 1
 <Scourse1>:
-    name: "Scourse1"      
+    name: "Scourse1"
     MDBoxLayout:
         orientation: "vertical"
         MDLabel:
