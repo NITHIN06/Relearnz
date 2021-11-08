@@ -822,8 +822,9 @@ class Tcourse(Screen):
         c = 1
         for i in x:
             card = MDCard(orientation='horizontal',size_hint=(None,None),size=(880,40),border_radius=10,radius=[10],elevation=0,padding=10,md_bg_color=[84/255,255/255,103/255,1])
-            card_title = MDLabel(text=str(c)+x[i]["title"],font_style="H5")
+            card_title = MDLabel(text=str(c)+". "+x[i]["title"],font_style="H5")
             card.add_widget(card_title)
+            c = c+1
             self.ids.tnotes.add_widget(card)
             c=c+1
 
@@ -877,7 +878,7 @@ class Tcourse(Screen):
     def add_labcard(self):
         self.ids.tlab.clear_widgets()
         x = firebase.get("Users/Teacher/"+user_id+"/course/Labs",'')
-        for i in reversed(x):
+        for i in x:
             card = MDCard(orientation='horizontal',size_hint=(None,None),size=(880,60),border_radius=10,radius=[10],elevation=0,padding=10,md_bg_color=[84/255,255/255,103/255,1])
             card_l = MDBoxLayout(orientation='vertical')
             card_l_title = MDLabel(text=x[i]["title"],font_style="H6",bold=True)
@@ -923,7 +924,7 @@ class Tcourse(Screen):
     def add_asscard(self):
         self.ids.tassignment.clear_widgets()
         x = firebase.get("Users/Teacher/"+user_id+"/course/Assignments",'')
-        for i in reversed(x):
+        for i in x:
             card = MDCard(orientation='horizontal',size_hint=(None,None),size=(880,60),border_radius=10,radius=[10],elevation=0,padding=10,md_bg_color=[84/255,255/255,103/255,1])
             card_l = MDBoxLayout(orientation='vertical')
             card_l_title = MDLabel(text=x[i]["title"],font_style="H6",bold=True)
@@ -941,15 +942,19 @@ class Tcourse(Screen):
         self.dialog.dismiss()
 
     def on_enter(self, *args):
+        self.load()
+        threading.Thread(target=self.spin).start()
+
+    def spin(self):
         self.ids.tname.text = 'Dr. ' + user_info["username"]
         self.ids.tmail.text = user_info["email"]
         try:
             self.add_labcard()
             self.add_asscard()
             self.add_note_card()
+            self.loader.dismiss()
         except:
             pass
-
 
 class Lab(MDBoxLayout):
     pass
@@ -969,6 +974,7 @@ class Tevent(Screen):
 
 class Schat(Screen):
 
+    loader = None
     def __init__(self, **kw):
         super(Schat, self).__init__(**kw)
         # Clock.schedule_interval(self.on_enter,5)
@@ -990,41 +996,55 @@ class Schat(Screen):
         x = firebase.get("Schat/",'')
         for i in x:
             if (x[i]["sender"]==user_info["username"]):
-                card_empty = MDCard(size_hint=(None,None),size=(300,100),elevation=0, radius=[15], pos_hint={'center_x':.5 , 'center_y':.5})
+                card_empty = MDLabel(size_hint=(None,None),size=(300,100), pos_hint={'center_x':.5 , 'center_y':.5})
                 self.ids.other.add_widget(card_empty)
-                card = MDCard(orientation='vertical',size_hint=(None,None),size=(440,100), radius=[30, 0, 30, 15],elevation=17,padding=20,md_bg_color=[8/255, 1, 98/255, 0.5], pos_hint={'center_x':.5 , 'center_y':.5})
+                card = MDCard(orientation='vertical',size_hint=(None,None),size=(480,100), radius=[30, 0, 30, 15],elevation=17,padding=20,md_bg_color=[8/255, 1, 98/255, 0.5], pos_hint={'center_x':.5 , 'center_y':.5})
                 card_nt = MDBoxLayout(orientation='horizontal', size_hint_y=0.1)
                 card_name = MDLabel(text="You",font_style = "H6")
                 card_time = MDLabel(text=x[i]["time"],bold=True)
-                empty = MDLabel()
+                empty = MDLabel(size_hint_x=0.8)
                 card_nt.add_widget(card_name)
                 card_nt.add_widget(empty)
-                card_nt.add_widget(card_time) 
+                card_nt.add_widget(card_time)
                 card_message = MDLabel(text=x[i]["message"],font_size=(20))
                 card.add_widget(card_nt)
                 card.add_widget(card_message)
                 self.ids.user.add_widget(card)
             else:
-                card_empty = MDCard(size_hint=(None,None),size=(300,100),elevation=0, radius= [15], pos_hint={'center_x':.5 , 'center_y':.5})
+                card_empty = MDLabel(size_hint=(None,None),size=(300,100), pos_hint={'center_x':.5 , 'center_y':.5})
                 self.ids.user.add_widget(card_empty)
-                card = MDCard(orientation='vertical',size_hint=(None,None),size=(440,100), radius=[0,30,15,30],elevation=17,padding=20,md_bg_color=[54/255, 154/255, 230/255,0.5],pos_hint={'center_x':.5 , 'center_y':.5})
+                card = MDCard(orientation='vertical',size_hint=(None,None),size=(480,100), radius=[0,30,15,30],elevation=17,padding=20,md_bg_color=[54/255, 154/255, 230/255,0.5],pos_hint={'center_x':.5 , 'center_y':.5})
                 card_nt = MDBoxLayout(orientation='horizontal', size_hint_y=0.1)
                 card_name = MDLabel(text=x[i]["sender"],font_style = "H6")
                 card_time = MDLabel(text=x[i]["time"],bold=True)
                 empty = MDLabel(size_hint_x=0.8)
                 card_nt.add_widget(card_name)
                 card_nt.add_widget(empty)
-                card_nt.add_widget(card_time) 
+                card_nt.add_widget(card_time)
                 card_message = MDLabel(text=x[i]["message"],font_size=(20))
                 card.add_widget(card_nt)
                 card.add_widget(card_message)
                 self.ids.other.add_widget(card)
 
     def on_enter(self, *args):
+        self.load()
+        threading.Thread(target=self.spin).start()
+
+    def spin(self):
         try:
             self.add_cards()
+            self.loader.dismiss()
         except:
-            pass    
+            pass
+
+    def load(self):
+        self.loader = MDDialog(
+            size_hint=(None, None),
+            size= (0, 0),
+            type="custom",
+            content_cls=Loader(),
+        )
+        self.loader.open()
 
     def clear(self):
         self.ids.other.clear_widgets()
@@ -1035,6 +1055,7 @@ class Schat(Screen):
 
 class Tchat(Screen):
 
+    loader = None
     def __init__(self, **kw):
         super(Tchat, self).__init__(**kw)
         # Clock.schedule_interval(self.on_enter,5)
@@ -1056,41 +1077,55 @@ class Tchat(Screen):
         x = firebase.get("Tchat/",'')
         for i in x:
             if (x[i]["sender"]==user_info["username"]):
-                card_empty = MDCard(size_hint=(None,None),size=(300,100),radius=[15], pos_hint={'center_x':.5 , 'center_y':.5}, elevation=0)
+                card_empty = MDLabel(size_hint=(None,None),size=(300,100), pos_hint={'center_x':.5 , 'center_y':.5})
                 self.ids.other.add_widget(card_empty)
-                card = MDCard(orientation='vertical',size_hint=(None,None),size=(440,100), radius=[30, 0, 30, 15],elevation=17,padding=20,md_bg_color=[8/255, 1, 98/255, 0.5], pos_hint={'center_x':.5 , 'center_y':.5})
+                card = MDCard(orientation='vertical',size_hint=(None,None),size=(480,100), radius=[30, 0, 30, 15],elevation=17,padding=20,md_bg_color=[8/255, 1, 98/255, 0.5], pos_hint={'center_x':.5 , 'center_y':.5})
                 card_nt = MDBoxLayout(orientation='horizontal', size_hint_y=0.1)
                 card_name = MDLabel(text="You",font_style = "H6")
                 card_time = MDLabel(text=x[i]["time"],bold=True)
-                empty = MDLabel()
+                empty = MDLabel(size_hint_x=0.8)
                 card_nt.add_widget(card_name)
                 card_nt.add_widget(empty)
-                card_nt.add_widget(card_time) 
+                card_nt.add_widget(card_time)
                 card_message = MDLabel(text=x[i]["message"],font_size=(20))
                 card.add_widget(card_nt)
                 card.add_widget(card_message)
                 self.ids.user.add_widget(card)
-            else: 
-                card_empty = MDCard(size_hint=(None,None),size=(300,100),radius= [15], pos_hint={'center_x':.5 , 'center_y':.5}, elevation=0)
+            else:
+                card_empty = MDLabel(size_hint=(None,None),size=(300,100), pos_hint={'center_x':.5 , 'center_y':.5})
                 self.ids.user.add_widget(card_empty)
-                card = MDCard(orientation='vertical',size_hint=(None,None),size=(440,100), radius=[0,30,15,30], elevation=17,padding=20,md_bg_color=[54/255, 154/255, 230/255,0.5], pos_hint={'center_x':.5 , 'center_y':.5})
+                card = MDCard(orientation='vertical',size_hint=(None,None),size=(480,100), radius=[0,30,15,30], elevation=17,padding=20,md_bg_color=[54/255, 154/255, 230/255,0.5], pos_hint={'center_x':.5 , 'center_y':.5})
                 card_nt = MDBoxLayout(orientation='horizontal', size_hint_y=0.1)
                 card_name = MDLabel(text='Dr. '+x[i]["sender"]+'@'+x[i]["course"],font_style = "H6")
                 card_time = MDLabel(text=x[i]["time"],bold=True)
                 empty = MDLabel(size_hint_x=0.8)
                 card_nt.add_widget(card_name)
                 card_nt.add_widget(empty)
-                card_nt.add_widget(card_time) 
+                card_nt.add_widget(card_time)
                 card_message = MDLabel(text=x[i]["message"],font_size=(20))
                 card.add_widget(card_nt)
                 card.add_widget(card_message)
                 self.ids.other.add_widget(card)
 
     def on_enter(self, *args):
+        self.load()
+        threading.Thread(target=self.spin).start()
+
+    def spin(self):
         try:
             self.add_cards()
+            self.loader.dismiss()
         except:
-            pass    
+            pass
+
+    def load(self):
+        self.loader = MDDialog(
+            size_hint=(None, None),
+            size= (0, 0),
+            type="custom",
+            content_cls=Loader(),
+        )
+        self.loader.open()
 
     def clear(self):
         self.ids.other.clear_widgets()
@@ -1150,7 +1185,7 @@ class Tannouncement(Screen):
                 text="Announcement Successfully posted -_- ",
                 snackbar_x="10dp",
                 snackbar_y="10dp",
-                size_hint_x=0.5, 
+                size_hint_x=0.5,
                 pos_hint={'center_x': 0.5, 'center_y': 0.1}
             ).open()
             self.ids.Announcemnet_txt.text= ''
@@ -1470,7 +1505,7 @@ class Scourse1(Screen):
         # add lab cards
         self.ids.slab.clear_widgets()
         x = firebase.get("Users/Student/"+user_id+"/courses/"+c1_id+"/Labs",'')
-        for i in reversed(x):
+        for i in x:
             card = MDCard(orientation='horizontal',size_hint=(None,None),size=(880,100),border_radius=10,radius=[10],elevation=0,padding=10,md_bg_color=[84/255,255/255,103/255,1])
             card_l = MDBoxLayout(orientation='vertical')
             card_l_title = MDLabel(text=x[i]["title"],font_style="H6",bold=True)
@@ -1492,7 +1527,7 @@ class Scourse1(Screen):
         # add assignment cards
         self.ids.sassignment.clear_widgets()
         x = firebase.get("Users/Student/"+user_id+"/courses/"+c1_id+"/Assignments",'')
-        for i in reversed(x):
+        for i in x:
             card = MDCard(orientation='horizontal',size_hint=(None,None),size=(880,100),border_radius=10,radius=[10],elevation=0,padding=10,md_bg_color=[84/255,255/255,103/255,1])
             card_l = MDBoxLayout(orientation='vertical')
             card_l_title = MDLabel(text=x[i]["title"],font_style="H6",bold=True)
@@ -1514,14 +1549,15 @@ class Scourse1(Screen):
         # add notes cards
         self.ids.snotes.clear_widgets()
         x= firebase.get("Courses/"+c1_id,'')
-        c = len(x)
+        #c = len(x)
+        c = 1
         for i in x:
             card = MDCard(orientation='horizontal',size_hint=(None,None),size=(880,40),border_radius=10,radius=[10],elevation=0,padding=10,md_bg_color=[84/255,255/255,103/255,1])
             card_title = MDLabel(text=str(c)+". "+x[i]["title"],font_style="H5")
-            c=c-1
+            c=c+1
             card.add_widget(card_title)
             self.ids.snotes.add_widget(card)
-        self.loader.dismiss()
+
 
     def open_pdf(self,*args):
         webbrowser.open()
@@ -1554,6 +1590,7 @@ class Scourse1(Screen):
             self.add_labcard()
             self.add_asscard()
             self.add_notescard()
+            self.loader.dismiss()
         except:
             pass
 
