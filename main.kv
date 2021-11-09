@@ -242,7 +242,7 @@ WindowManager:
             size: dp(46), dp(46)
             pos_hint: {'center_x': .9, 'center_y': .1}
             active: False
-            determinate: True
+
 
     MDBoxLayout:
         orientation: "vertical"
@@ -372,23 +372,22 @@ WindowManager:
                 text: ""
                 size_hint : 0.22, 1
             MDFillRoundFlatButton:
+                text: "Back"
+                font_size: 12
+                font_style: "Button"
+                md_bg_color: "purple"
+                on_release: root.back()
+            MDLabel:
+                text: ""
+                size_hint : 0.16 ,1
+
+            MDFillRoundFlatButton:
                 id : register
                 text: "Register"
                 font_size: 12
                 font_style: "Button"
                 md_bg_color: 1, 0.2, 0, 1
                 on_press:root.register()
-
-            MDLabel:
-                text: ""
-                size_hint : 0.16 ,1
-
-            MDFillRoundFlatButton:
-                text: "Back"
-                font_size: 12
-                font_style: "Button"
-                md_bg_color: "purple"
-                on_release: root.back()
 
             MDLabel:
                 text: ""

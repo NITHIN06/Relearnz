@@ -206,6 +206,7 @@ class Register(Screen):
     course = ""
     c_id=""
     a = 1
+    l = None
 
     def back(self):
         self.ids.user.text = ""
@@ -359,17 +360,28 @@ class Register(Screen):
         )
         self.d.open()
 
+    def loader(self):
+        self.l = MDDialog(
+            size_hint=(None, None),
+            size= (0, 0),
+            type="custom",
+            content_cls=Loader(),
+        )
+        self.l.open()
+
     def yes(self, inst):
+        self.loader()
+        threading.Thread(target=self.yess).start()
+
+    def yess(self):
         global user_id
         global user_info
-
         info = {"username": self.ids.user.text, "email": self.ids.email.text,
         "password": self.ids.password.text, "role": self.t,
         "course":{"name":self.course,"cid":self.c_id}}
         x = firebase.post("/Users/Teacher", info)
         user_id = x['name']
         user_info = info
-
         self.d.dismiss()
         self.dialog.dismiss()
         self.ids.btn_tch.icon = "assets/teacher.png"
@@ -378,7 +390,7 @@ class Register(Screen):
         self.ids.password.text = ""
         self.ids.email.text = ""
         self.t = 0
-        self.ids.load.active = False
+        self.l.dismiss()
         self.manager.current = "Tdashboard"
         self.manager.transition.direction = "left"
 
@@ -458,11 +470,9 @@ class Register(Screen):
             )
             self.dialog.open()
 
-
         if(self.a == 1 and self.t == -1):
 
             # store the values in the database
-
             courses={"AI":{"Labs":[],"Assignments":[],"Attendence":75},
                     "SEPM":{"Labs":[],"Assignments":[],"Attendence":70},
                     "CF":{"Labs":[],"Assignments":[],"Attendence":85},
@@ -484,7 +494,6 @@ class Register(Screen):
             self.ids.email.text = ""
             self.t = 0
             self.ids.load.active = False
-
             self.manager.current = "Sdashboard"
             self.manager.transition.direction = "left"
 
