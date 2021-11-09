@@ -503,6 +503,14 @@ class Register(Screen):
 class Tdashboard(Screen):
     def __init__(self,**kwargs):
         super(Tdashboard,self).__init__(**kwargs)
+    def add_stds(self):
+        self.ids.student_list.clear_widgets()
+        x = firebase.get("Users/Student",'')
+        for i in x:
+            card = MDCard(orientation='vertical',size_hint=(None,None),size=(390,60),border_radius=10,radius=[10],md_bg_color=[54/255, 154/255, 230/255,0.5],elevation=0)
+            std_name  = MDLabel(text=x[i]["username"],font_style="H5",bold=True,halign="center")
+            card.add_widget(std_name)
+            self.ids.student_list.add_widget(card)
     def on_enter(self,*args):
         try:
             self.ids.uname.text = "Hello "+str(user_info["username"])
@@ -511,21 +519,86 @@ class Tdashboard(Screen):
             self.ids.ass_c.text= str(len(firebase.get("Users/Teacher/"+user_id+"/course/Assignments",'')))
 
             # add student cards to MDboxlayout( id = student_list)
+            self.add_stds()
         except:
             pass
-
-        
 
 
 class Sdashboard(Screen):
     def __init__(self,**kwargs):
         super(Sdashboard,self).__init__(**kwargs)
+
+    def open_scourse(self,i):
+        print(i)
+    def l_a_count(self):
+        self.ids.today.clear_widgets()
+        self.ids.tomorrow.clear_widgets()
+        x = firebase.get("Users/Student/"+user_id+"/courses",'')
+        l_c = 0
+        a_c = 0
+        for i in x:
+            y = x[i]["Labs"]
+            for j in y:
+                if (y[j]["status"]==0):
+                    l_c=l_c+1
+                    if (int((y[j]["deadline"].split("-"))[0])==datetime.now().day):
+                        card = MDCard(orientation='horizontal',size_hint=(None,None),size=(380,80),pos_hint={'center_x':0.5 , 'center_y':0.5},elevation=10,md_bg_color=[184/255, 226/255, 1, 1],border_radius=10,radius=[10],padding=10,on_release=lambda f:self.open_scourse(str(i)))
+                        card_l = MDBoxLayout(orientation='vertical')
+                        title = MDLabel(text=y[j]["title"],font_style="H5",bold=True,color=[7/255, 12/255, 173/255])
+                        course = MDLabel(text=str(i),font_style="H6",bold=True,color=[7/255, 12/255, 173/255])
+                        time_left = MDLabel(text=str(24-datetime.now().hour)+" hours left",font_style="H6")
+                        card_l.add_widget(title)
+                        card_l.add_widget(course)
+                        card.add_widget(card_l)
+                        card.add_widget(time_left)
+                        self.ids.today.add_widget(card)
+                    elif (int((y[j]["deadline"].split("-"))[0])==int(datetime.now().day)+1):
+                        card = MDCard(orientation='horizontal',size_hint=(None,None),size=(380,80),pos_hint={'center_x':0.5 , 'center_y':0.5},elevation=10,md_bg_color=[184/255, 226/255, 1, 1],border_radius=10,radius=[10],padding=10)
+                        card_l = MDBoxLayout(orientation='vertical')
+                        title = MDLabel(text=y[j]["title"],font_style="H5",bold=True,color=[7/255, 12/255, 173/255])
+                        course = MDLabel(text=str(i),font_style="H6",bold=True,color=[7/255, 12/255, 173/255])
+                        time_left = MDLabel(text=str(24-datetime.now().hour+24)+" hours left",font_style="H6")
+                        card_l.add_widget(title)
+                        card_l.add_widget(course)
+                        card.add_widget(card_l)
+                        card.add_widget(time_left)
+                        self.ids.tomorrow.add_widget(card)
+            z = x[i]["Assignments"]
+            for k in z:
+                if (z[k]["status"]==0):
+                    a_c=a_c+1
+                    if (int((z[k]["deadline"].split("-"))[0])==datetime.now().day):
+                        card = MDCard(orientation='horizontal',size_hint=(None,None),size=(380,80),pos_hint={'center_x':0.5 , 'center_y':0.5},elevation=10,md_bg_color=[255/255, 204/255, 104/255, 0.5],border_radius=10,radius=[10],padding=10)
+                        card_l = MDBoxLayout(orientation='vertical')
+                        title = MDLabel(text=z[k]["title"],font_style="H5",bold=True,color=[7/255, 12/255, 173/255])
+                        course = MDLabel(text=str(i),font_style="H6",bold=True,color=[7/255, 12/255, 173/255])
+                        time_left = MDLabel(text=str(24-datetime.now().hour)+" hours left",font_style="H6")
+                        card_l.add_widget(title)
+                        card_l.add_widget(course)
+                        card.add_widget(card_l)
+                        card.add_widget(time_left)
+                        self.ids.today.add_widget(card)
+                    elif (int((z[k]["deadline"].split("-"))[0])==int(datetime.now().day)+1):
+                        card = MDCard(orientation='horizontal',size_hint=(None,None),size=(380,80),pos_hint={'center_x':0.5 , 'center_y':0.5},elevation=10,md_bg_color=[184/255, 226/255, 1, 1],border_radius=10,radius=[10],padding=10)
+                        card_l = MDBoxLayout(orientation='vertical')
+                        title = MDLabel(text=z[k]["title"],font_style="H5",bold=True,color=[7/255, 12/255, 173/255])
+                        course = MDLabel(text=str(i),font_style="H6",bold=True,color=[7/255, 12/255, 173/255])
+                        time_left = MDLabel(text=str(24-datetime.now().hour+24)+" hours left",font_style="H6")
+                        card_l.add_widget(title)
+                        card_l.add_widget(course)
+                        card.add_widget(card_l)
+                        card.add_widget(time_left)
+                        self.ids.tomorrow.add_widget(card)
+        self.ids.l_c.text=str(l_c)
+        self.ids.a_c.text=str(a_c)
+
     def on_enter(self,*args):
         self.ids.uname.text = "Hello "+str(user_info["username"])
         self.ids.label.text = "An investment in knowledge pays best interest"
         # diaplay no. labs, assignments
 
         # add widgets to MDboxlayout( id = today)
+        self.l_a_count()
         # add widgets to MDboxlayout( id = tomorrow)
 
 
@@ -762,6 +835,7 @@ class Tcourse(Screen):
             card.add_widget(card_title)
             c = c+1
             self.ids.tnotes.add_widget(card)
+            c=c+1
 
     def download_pdf(self,link):
         webbrowser.open(link, new = 1)
@@ -940,7 +1014,7 @@ class Schat(Screen):
                 empty = MDLabel(size_hint_x=0.8)
                 card_nt.add_widget(card_name)
                 card_nt.add_widget(empty)
-                card_nt.add_widget(card_time) 
+                card_nt.add_widget(card_time)
                 card_message = MDLabel(text=x[i]["message"],font_size=(20))
                 card.add_widget(card_nt)
                 card.add_widget(card_message)
@@ -955,7 +1029,7 @@ class Schat(Screen):
                 empty = MDLabel(size_hint_x=0.8)
                 card_nt.add_widget(card_name)
                 card_nt.add_widget(empty)
-                card_nt.add_widget(card_time) 
+                card_nt.add_widget(card_time)
                 card_message = MDLabel(text=x[i]["message"],font_size=(20))
                 card.add_widget(card_nt)
                 card.add_widget(card_message)
@@ -967,8 +1041,8 @@ class Schat(Screen):
 
     def spin(self):
         try:
-            self.add_cards() 
-            self.loader.dismiss()  
+            self.add_cards()
+            self.loader.dismiss()
         except:
             pass
 
@@ -1012,7 +1086,7 @@ class Tchat(Screen):
         x = firebase.get("Tchat/",'')
         for i in x:
             if (x[i]["sender"]==user_info["username"]):
-                card_empty = MDLabel(size_hint=(None,None),size=(300,100), pos_hint={'center_x':.5 , 'center_y':.5}) 
+                card_empty = MDLabel(size_hint=(None,None),size=(300,100), pos_hint={'center_x':.5 , 'center_y':.5})
                 self.ids.other.add_widget(card_empty)
                 card = MDCard(orientation='vertical',size_hint=(None,None),size=(480,100), radius=[30, 0, 30, 15],elevation=17,padding=20,md_bg_color=[8/255, 1, 98/255, 0.5], pos_hint={'center_x':.5 , 'center_y':.5})
                 card_nt = MDBoxLayout(orientation='horizontal', size_hint_y=0.1)
@@ -1021,12 +1095,12 @@ class Tchat(Screen):
                 empty = MDLabel(size_hint_x=0.8)
                 card_nt.add_widget(card_name)
                 card_nt.add_widget(empty)
-                card_nt.add_widget(card_time) 
+                card_nt.add_widget(card_time)
                 card_message = MDLabel(text=x[i]["message"],font_size=(20))
                 card.add_widget(card_nt)
                 card.add_widget(card_message)
                 self.ids.user.add_widget(card)
-            else: 
+            else:
                 card_empty = MDLabel(size_hint=(None,None),size=(300,100), pos_hint={'center_x':.5 , 'center_y':.5})
                 self.ids.user.add_widget(card_empty)
                 card = MDCard(orientation='vertical',size_hint=(None,None),size=(480,100), radius=[0,30,15,30], elevation=17,padding=20,md_bg_color=[54/255, 154/255, 230/255,0.5], pos_hint={'center_x':.5 , 'center_y':.5})
@@ -1036,7 +1110,7 @@ class Tchat(Screen):
                 empty = MDLabel(size_hint_x=0.8)
                 card_nt.add_widget(card_name)
                 card_nt.add_widget(empty)
-                card_nt.add_widget(card_time) 
+                card_nt.add_widget(card_time)
                 card_message = MDLabel(text=x[i]["message"],font_size=(20))
                 card.add_widget(card_nt)
                 card.add_widget(card_message)
@@ -1048,8 +1122,8 @@ class Tchat(Screen):
 
     def spin(self):
         try:
-            self.add_cards() 
-            self.loader.dismiss()  
+            self.add_cards()
+            self.loader.dismiss()
         except:
             pass
 
@@ -1120,7 +1194,7 @@ class Tannouncement(Screen):
                 text="Announcement Successfully posted -_- ",
                 snackbar_x="10dp",
                 snackbar_y="10dp",
-                size_hint_x=0.5, 
+                size_hint_x=0.5,
                 pos_hint={'center_x': 0.5, 'center_y': 0.1}
             ).open()
             self.ids.Announcemnet_txt.text= ''
@@ -1492,7 +1566,7 @@ class Scourse1(Screen):
             c=c+1
             card.add_widget(card_title)
             self.ids.snotes.add_widget(card)
-        
+
 
     def open_pdf(self,*args):
         webbrowser.open()
@@ -1524,8 +1598,8 @@ class Scourse1(Screen):
             self.add_info()
             self.add_labcard()
             self.add_asscard()
-            self.add_notescard()   
-            self.loader.dismiss()  
+            self.add_notescard()
+            self.loader.dismiss()
         except:
             pass
 

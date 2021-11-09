@@ -417,7 +417,7 @@ WindowManager:
                 font_size: 40
                 bold: True
                 size_hint_x:0.5
-            
+
             MDLabel:
                 size_hint_x:0.5
             ClockLabel:
@@ -829,10 +829,10 @@ WindowManager:
                     padding_x: 108
                     size_hint_y: 0.1
                 ScrollView:
-                    do_scroll_x: False        
+                    do_scroll_x: False
                     MDBoxLayout:
                         id: student_list
-                        orientation: 'vertical' 
+                        orientation: 'vertical'
                         size_hint_y: None
                         height: self.minimum_height
                         spacing: 20
@@ -840,7 +840,6 @@ WindowManager:
             MDLabel:
                 text: ""
                 size_hint_x: 0.02
-
 
 <Sdashboard>:
 
@@ -879,7 +878,7 @@ WindowManager:
                 md_bg_color: "black"
                 on_release:
                     app.root.current= "Stimetable"
-                    root.manager.transition.direction="left"   
+                    root.manager.transition.direction="left"
             MDLabel:
                 size_hint_x:0.08
 
@@ -1107,9 +1106,10 @@ WindowManager:
                                     icon: "laptop"
                                     font_size : 48
                                 MDLabel:
-                                    text:"4"
+                                    id: l_c
+                                    text:"0"
                                     bold: True
-                                    padding_x: 40
+                                    padding_x: 20
                                     font_size : 40
                                     color: 1,0,0
                             MDLabel:
@@ -1138,8 +1138,9 @@ WindowManager:
                                     icon: "clipboard-text-outline"
                                     font_size : 48
                                 MDLabel:
-                                    text:"4"
-                                    padding_x: 40
+                                    id: a_c
+                                    text:"0"
+                                    padding_x: 20
                                     font_size : 40
                                     bold: True
                                     color: 22/255, 201/255, 34/255
@@ -1264,12 +1265,12 @@ WindowManager:
                 padding: 10
                 orientation: 'vertical'
                 ScrollView:
-                    do_scroll_x: False 
+                    do_scroll_x: False
                     MDBoxLayout:
-                        orientation: 'vertical'  
+                        orientation: 'vertical'
                         size_hint_y: None
-                        height: self.minimum_height  
-                        spacing: 20      
+                        height: self.minimum_height
+                        spacing: 20
                         MDLabel:
                             text: "     "
                             bold: True
@@ -1286,13 +1287,13 @@ WindowManager:
                                 bold: True
                                 font_size: 30
                                 adaptive_height: True
-                                padding_x: 15       
+                                padding_x: 15
                         MDBoxLayout:
                             id: today
-                            orientation: 'vertical' 
+                            orientation: 'vertical'
                             size_hint_y: None
                             height: self.minimum_height
-                            spacing: 20                       
+                            spacing: 20
                         MDLabel:
                             text: "Tomorrow"
                             bold: True
@@ -1300,7 +1301,7 @@ WindowManager:
                             adaptive_height: True
                         MDBoxLayout:
                             id: tomorrow
-                            orientation: 'vertical' 
+                            orientation: 'vertical'
                             size_hint_y: None
                             height: self.minimum_height
                             spacing: 20
@@ -1524,7 +1525,7 @@ WindowManager:
                     border_radius: 15
                     radius: [15]
                     MDBoxLayout:
-                        orientation: "vertical"                   
+                        orientation: "vertical"
                         MDLabel:
                             text: "TIME TABLE"
                             bold: True
@@ -1533,7 +1534,7 @@ WindowManager:
                             color: 7/255, 12/255, 173/255
                         MDBoxLayout:
                             size_hint_y: 0.7
-                            MDCard:                           
+                            MDCard:
                                 elevation:0
                                 padding: 10
                                 MDBoxLayout:
@@ -1636,10 +1637,10 @@ WindowManager:
                                     MDLabel:
                                         font_size:18
                                         text: "OSM"
-                                        padding_x: 45 
+                                        padding_x: 45
                                         color:42, 209, 16, 1
                                         bold:True
-                                    
+
                             MDCard:
                                 elevation:0
                                 padding: 10
@@ -1675,11 +1676,11 @@ WindowManager:
                                         bold:True
                                     MDLabel:
                                         font_size:18
-                                        text: "DSP" 
+                                        text: "DSP"
                                         padding_x: 45
                                         color:231, 76, 60, 1
                                         bold:True
-                            MDCard:                         
+                            MDCard:
                                 elevation:0
                                 padding: 10
                                 MDBoxLayout:
@@ -1717,8 +1718,8 @@ WindowManager:
                                         text: "- - -"
                                         padding_x: 45
                                         bold:True
-                                          
-                            MDCard:                         
+
+                            MDCard:
                                 elevation:0
                                 padding: 10
                                 MDBoxLayout:
@@ -1753,15 +1754,15 @@ WindowManager:
                                         bold:True
                                     MDLabel:
                                         font_size:18
-                                        text: "- - -"     
-                                        padding_x: 45                
+                                        text: "- - -"
+                                        padding_x: 45
                                         bold:True
                 MDLabel:
                     text: ""
-                    size_hint_y: 0.05               
+                    size_hint_y: 0.05
             MDLabel:
                 text: ""
-                size_hint_x: 0.2                              
+                size_hint_x: 0.2
 <Ttimetable>:
 
     name: "Ttimetable"
@@ -1976,7 +1977,7 @@ WindowManager:
                     border_radius: 15
                     radius: [15]
                     MDBoxLayout:
-                        orientation: "vertical"                   
+                        orientation: "vertical"
                         MDLabel:
                             text: "TIME TABLE"
                             bold: True
@@ -1985,7 +1986,7 @@ WindowManager:
                             color: 7/255, 12/255, 173/255
                         MDBoxLayout:
                             size_hint_y: 0.7
-                            MDCard:                           
+                            MDCard:
                                 elevation:0
                                 padding: 10
                                 MDBoxLayout:
@@ -2088,10 +2089,10 @@ WindowManager:
                                     MDLabel:
                                         font_size:18
                                         text: "OSM"
-                                        padding_x: 45 
+                                        padding_x: 45
                                         color:42, 209, 16, 1
                                         bold:True
-                                    
+
                             MDCard:
                                 elevation:0
                                 padding: 10
@@ -2127,11 +2128,11 @@ WindowManager:
                                         bold:True
                                     MDLabel:
                                         font_size:18
-                                        text: "DSP" 
+                                        text: "DSP"
                                         padding_x: 45
                                         color:231, 76, 60, 1
                                         bold:True
-                            MDCard:                         
+                            MDCard:
                                 elevation:0
                                 padding: 10
                                 MDBoxLayout:
@@ -2169,8 +2170,8 @@ WindowManager:
                                         text: "- - -"
                                         padding_x: 45
                                         bold:True
-                                          
-                            MDCard:                         
+
+                            MDCard:
                                 elevation:0
                                 padding: 10
                                 MDBoxLayout:
@@ -2205,16 +2206,16 @@ WindowManager:
                                         bold:True
                                     MDLabel:
                                         font_size:18
-                                        text: "- - -"     
-                                        padding_x: 45                
+                                        text: "- - -"
+                                        padding_x: 45
                                         bold:True
                 MDLabel:
                     text: ""
-                    size_hint_y: 0.05               
+                    size_hint_y: 0.05
             MDLabel:
                 text: ""
                 size_hint_x: 0.2
-         
+
 <Scourse>:
 
     name: "Scourse"
@@ -3602,7 +3603,7 @@ WindowManager:
                 orientation: 'vertical'
                 MDLabel:
                     text: ""
-                    size_hint_y: 0.2            
+                    size_hint_y: 0.2
                 MDCard:
                     size_hint: None, None
                     size: 1000, 550
@@ -3615,18 +3616,18 @@ WindowManager:
                         do_scroll_x: False
                         MDBoxLayout:
                             size_hint_y: None
-                            height: self.minimum_height     
+                            height: self.minimum_height
                             MDBoxLayout:
                                 orientation: "vertical"
                                 id: other
                                 size_hint_y: None
-                                height: self.minimum_height 
+                                height: self.minimum_height
                                 spacing: 20
                             MDBoxLayout:
                                 orientation: "vertical"
                                 id: user
                                 size_hint_y: None
-                                height: self.minimum_height 
+                                height: self.minimum_height
                                 spacing: 20
                 MDBoxLayout:
                     orientation: 'horizontal'
@@ -3720,7 +3721,7 @@ WindowManager:
                     border_radius: 15
                     radius: [15]
                     on_release:
-                        root.clear() 
+                        root.clear()
                         app.root.current= "Tdashboard"
                         root.manager.transition.direction="right"
                     MDIcon:
@@ -3875,7 +3876,7 @@ WindowManager:
                 orientation: 'vertical'
                 MDLabel:
                     text: ""
-                    size_hint_y: 0.2            
+                    size_hint_y: 0.2
                 MDCard:
                     size_hint: None, None
                     size: 1000, 550
@@ -3888,18 +3889,18 @@ WindowManager:
                         do_scroll_x: False
                         MDBoxLayout:
                             size_hint_y: None
-                            height: self.minimum_height     
+                            height: self.minimum_height
                             MDBoxLayout:
                                 orientation: "vertical"
                                 id: other
                                 size_hint_y: None
-                                height: self.minimum_height 
+                                height: self.minimum_height
                                 spacing: 20
                             MDBoxLayout:
                                 orientation: "vertical"
                                 id: user
                                 size_hint_y: None
-                                height: self.minimum_height 
+                                height: self.minimum_height
                                 spacing: 20
                 MDBoxLayout:
                     orientation: 'horizontal'
@@ -4158,7 +4159,7 @@ WindowManager:
                             orientation: 'vertical'
                             size_hint_y: None
                             height: self.minimum_height
-                            spacing: 20   
+                            spacing: 20
 
 <Tannouncement>:
 
@@ -5436,7 +5437,7 @@ WindowManager:
                         radius: [15]
                         md_bg_color: 84/255,255/255,103/255,0.5
                         MDBoxLayout:
-                            orientation: "vertical"              
+                            orientation: "vertical"
                             MDLabel:
                                 text: "Username -"
                                 bold: True
@@ -5445,24 +5446,24 @@ WindowManager:
 
                             MDLabel:
                                 text: ""
-                                
+
                             MDLabel:
                                 text: "Email -"
                                 bold: True
                                 font_size: 28
                                 id: pro_email
-                           
+
                             MDLabel:
                                 text: ""
-                                
+
                             MDLabel:
                                 text: "Role - Student"
                                 bold: True
                                 font_size: 28
-                                
+
                             MDLabel:
                                 text: ""
-                
+
                     MDLabel:
                         size_hint_x: 0.05
 
@@ -5527,7 +5528,7 @@ WindowManager:
                     size_hint_y: 0.05
 
 <Scourse1>:
-    name: "Scourse1"      
+    name: "Scourse1"
     MDBoxLayout:
         orientation: "vertical"
         MDLabel:
