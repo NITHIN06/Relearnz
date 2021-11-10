@@ -970,8 +970,55 @@ class Loader(MDBoxLayout):
 class Sevent(Screen):
     pass
 class Tevent(Screen):
-    pass
 
+    def add_labcard(self):
+        # add lab cards
+        self.ids.tlab.clear_widgets()
+        x = firebase.get("Users/Teacher/"+user_id+"/course/Labs",'')
+        for i in x:
+            card = MDCard(orientation='horizontal',size_hint=(None,None),size=(880,100),border_radius=10,radius=[10],elevation=0,padding=10,md_bg_color=[84/255,255/255,103/255,1])
+            card_l = MDBoxLayout(orientation='vertical')
+            card_l_title = MDLabel(text=x[i]["title"],font_style="H6",bold=True)
+            card_l_question = MDLabel(text=x[i]["question"])
+            card_r_deadline = MDLabel(text="Deadline : "+x[i]["deadline"],bold=True)
+
+            card_r = MDBoxLayout(orientation='vertical')
+            card_l.add_widget(card_l_title)
+            card_l.add_widget(card_l_question)
+            card.add_widget(card_l)
+            card_r.add_widget(card_r_deadline)
+            card.add_widget(card_r)
+            self.ids.tlab.add_widget(card)
+
+    def add_asscard(self):
+        # add assignment cards
+        self.ids.tassignment.clear_widgets()
+        x = firebase.get("Users/Teacher/"+user_id+"/course/Assignments",'')
+        for i in x:
+            card = MDCard(orientation='horizontal',size_hint=(None,None),size=(880,100),border_radius=10,radius=[10],elevation=0,padding=10,md_bg_color=[84/255,255/255,103/255,1])
+            card_l = MDBoxLayout(orientation='vertical')
+            card_l_title = MDLabel(text=x[i]["title"],font_style="H6",bold=True)
+            card_l_question = MDLabel(text=x[i]["question"])
+            card_r_deadline = MDLabel(text="Deadline : "+x[i]["deadline"],bold=True)
+
+            card_r = MDBoxLayout(orientation='vertical')
+            card_l.add_widget(card_l_title)
+            card_l.add_widget(card_l_question)
+            card.add_widget(card_l)
+            card_r.add_widget(card_r_deadline)
+            card.add_widget(card_r)
+            self.ids.tassignment.add_widget(card)
+
+    def on_enter(self, *args):
+        self.spin()
+
+    def spin(self):
+        try:
+            self.add_labcard()
+            self.add_asscard()
+        except:
+            pass
+        
 class Schat(Screen):
 
     loader = None
