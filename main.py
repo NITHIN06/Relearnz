@@ -622,23 +622,20 @@ class Sdashboard(Screen):
         self.loader.open()
 
     def spin(self):
+        pass
+
+    def on_enter(self,*args):
         try:
-            # diaplay no. labs, assignments
-            # add widgets to MDboxlayout( id = today)
             self.l_a_count()
+            import datetime
+            now = datetime.datetime.now()
+            d = str(now.strftime("%A"))
+            self.ids.uname.text = "Hello "+str(user_info["username"])
+            self.ids.label.text = "An investment in knowledge pays best interest"
+            self.ids.day.text = d
             self.loader.dismiss()
         except:
             pass
-
-    def on_enter(self,*args):
-        import datetime
-        now = datetime.datetime.now()
-        d = str(now.strftime("%A"))
-        self.ids.uname.text = "Hello "+str(user_info["username"])
-        self.ids.label.text = "An investment in knowledge pays best interest"
-        self.ids.day.text = d
-        self.load()
-        threading.Thread(target=self.spin).start()
 
 
 class ClockLabel(Label):
