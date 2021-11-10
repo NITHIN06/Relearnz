@@ -874,7 +874,7 @@ class Tcourse(Screen):
             card.add_widget(card_title)
             c = c+1
             self.ids.tnotes.add_widget(card)
-            c=c+1
+
 
     def download_pdf(self,link):
         webbrowser.open(link, new = 1)
@@ -1025,12 +1025,16 @@ class Sevent(Screen):
             content_cls=Loader(),
         )
         self.loader.open()      
-    def add_events(self):
-        time.sleep(5)
+    def add_labcard(self):
+        pass
+
+    def add_asscard(self):
+        pass    
 
     def spin(self):
         try:
-            self.add_events()
+            self.add_labcard()
+            self.add_asscard()
             self.loader.dismiss()
         except:
             pass
@@ -1049,12 +1053,10 @@ class Tevent(Screen):
         )
         self.loader.open()     
 
-    def add_events(self):
-        time.sleep(5)
-
     def spin(self):
         try:
-            self.add_events()
+            self.add_labcard()
+            self.add_asscard()
             self.loader.dismiss()
         except:
             pass
@@ -1062,6 +1064,45 @@ class Tevent(Screen):
         self.load()
         threading.Thread(target=self.spin).start()
 
+    def add_labcard(self):
+        # add lab cards
+        self.ids.tlab.clear_widgets()
+        x = firebase.get("Users/Teacher/"+user_id+"/course/Labs",'')
+        for i in x:
+            card = MDCard(orientation='horizontal',size_hint=(None,None),size=(880,100),border_radius=10,radius=[10],elevation=0,padding=10,md_bg_color=[84/255,255/255,103/255,1])
+            card_l = MDBoxLayout(orientation='vertical')
+            card_l_title = MDLabel(text=x[i]["title"],font_style="H6",bold=True)
+            card_l_question = MDLabel(text=x[i]["question"])
+            card_r_deadline = MDLabel(text="Deadline : "+x[i]["deadline"],bold=True)
+
+            card_r = MDBoxLayout(orientation='vertical')
+            card_l.add_widget(card_l_title)
+            card_l.add_widget(card_l_question)
+            card.add_widget(card_l)
+            card_r.add_widget(card_r_deadline)
+            card.add_widget(card_r)
+            self.ids.tlab.add_widget(card)
+
+    def add_asscard(self):
+        # add assignment cards
+        self.ids.tassignment.clear_widgets()
+        x = firebase.get("Users/Teacher/"+user_id+"/course/Assignments",'')
+        for i in x:
+            card = MDCard(orientation='horizontal',size_hint=(None,None),size=(880,100),border_radius=10,radius=[10],elevation=0,padding=10,md_bg_color=[84/255,255/255,103/255,1])
+            card_l = MDBoxLayout(orientation='vertical')
+            card_l_title = MDLabel(text=x[i]["title"],font_style="H6",bold=True)
+            card_l_question = MDLabel(text=x[i]["question"])
+            card_r_deadline = MDLabel(text="Deadline : "+x[i]["deadline"],bold=True)
+
+            card_r = MDBoxLayout(orientation='vertical')
+            card_l.add_widget(card_l_title)
+            card_l.add_widget(card_l_question)
+            card.add_widget(card_l)
+            card_r.add_widget(card_r_deadline)
+            card.add_widget(card_r)
+            self.ids.tassignment.add_widget(card)
+
+        
 class Schat(Screen):
 
     loader = None
