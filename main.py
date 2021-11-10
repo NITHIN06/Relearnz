@@ -1041,6 +1041,38 @@ class Sevent(Screen):
     def on_enter(self, *args):
         self.load()
         threading.Thread(target=self.spin).start()
+    
+    def __init__(self,**kwargs):
+        super(Sevent,self).__init__(**kwargs)
+    def on_enter(self, *args):
+        self.events_count()
+    def events_count(self):
+        x = firebase.get("Users/Student/"+user_id+"/courses",'')
+        for i in x:
+            y = x[i]["Labs"]
+            for j in sorted(y,key=lambda j:(y[j]["deadline"]).split("-")[0],reverse=False):
+                card = MDCard(orientation='horizontal',size_hint=(None,None),size=(800,60),pos_hint={'center_x':0.5 , 'center_y':0.5},elevation=10,md_bg_color=[184/255, 226/255, 1, 1],border_radius=10,radius=[10],padding=10)
+                title = MDLabel(text=y[j]["title"],font_style="H5",bold=True,color=[7/255, 12/255, 173/255])
+                course = MDLabel(text=str(i),font_style="H6",bold=True,color=[7/255, 12/255, 173/255])
+                card.add_widget(title)
+                card.add_widget(course)
+                print(y[j]["deadline"])
+                if y[j]["status"] == 1 :
+                    card_icon = MDIconButton(icon = "check",user_font_size = "36dp")
+                    card.add_widget(card_icon)
+                self.ids.event_lab.add_widget(card)
+        for i in x:
+            z = x[i]["Assignments"]
+            for j in sorted(z,key=lambda j:(z[j]["deadline"]).split("-")[0],reverse=False):
+                card = MDCard(orientation='horizontal',size_hint=(None,None),size=(800,60),pos_hint={'center_x':0.5 , 'center_y':0.5},elevation=10,md_bg_color=[184/255, 226/255, 1, 1],border_radius=10,radius=[10],padding=10)
+                title = MDLabel(text=z[j]["title"],font_style="H5",bold=True,color=[7/255, 12/255, 173/255])
+                course = MDLabel(text=str(i),font_style="H6",bold=True,color=[7/255, 12/255, 173/255])
+                card.add_widget(title)
+                card.add_widget(course)
+                if z[j]["status"] == 1 :
+                    card_icon = MDIconButton(icon = "check",user_font_size = "36dp")
+                    card.add_widget(card_icon)
+                self.ids.event_assignment.add_widget(card)
 
 class Tevent(Screen):
     loader = None
