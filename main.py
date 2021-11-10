@@ -39,6 +39,7 @@ import getpass
 from kivymd.uix.filemanager import MDFileManager
 import pyrebase
 
+
 # firebase connection
 firebase = firebase.FirebaseApplication(
     "https://relearnz-default-rtdb.firebaseio.com/", None)
@@ -206,6 +207,7 @@ class Register(Screen):
     course = ""
     c_id=""
     a = 1
+    l = None
 
     def back(self):
         self.ids.user.text = ""
@@ -359,17 +361,28 @@ class Register(Screen):
         )
         self.d.open()
 
+    def loader(self):
+        self.l = MDDialog(
+            size_hint=(None, None),
+            size= (0, 0),
+            type="custom",
+            content_cls=Loader(),
+        )
+        self.l.open()
+
     def yes(self, inst):
+        self.loader()
+        threading.Thread(target=self.yess).start()
+
+    def yess(self):
         global user_id
         global user_info
-
         info = {"username": self.ids.user.text, "email": self.ids.email.text,
         "password": self.ids.password.text, "role": self.t,
         "course":{"name":self.course,"cid":self.c_id}}
         x = firebase.post("/Users/Teacher", info)
         user_id = x['name']
         user_info = info
-
         self.d.dismiss()
         self.dialog.dismiss()
         self.ids.btn_tch.icon = "assets/teacher.png"
@@ -378,7 +391,7 @@ class Register(Screen):
         self.ids.password.text = ""
         self.ids.email.text = ""
         self.t = 0
-        self.ids.load.active = False
+        self.l.dismiss()
         self.manager.current = "Tdashboard"
         self.manager.transition.direction = "left"
 
@@ -458,11 +471,9 @@ class Register(Screen):
             )
             self.dialog.open()
 
-
         if(self.a == 1 and self.t == -1):
 
             # store the values in the database
-
             courses={"AI":{"Labs":[],"Assignments":[],"Attendence":75},
                     "SEPM":{"Labs":[],"Assignments":[],"Attendence":70},
                     "CF":{"Labs":[],"Assignments":[],"Attendence":85},
@@ -484,7 +495,6 @@ class Register(Screen):
             self.ids.email.text = ""
             self.t = 0
             self.ids.load.active = False
-
             self.manager.current = "Sdashboard"
             self.manager.transition.direction = "left"
 
@@ -492,8 +502,18 @@ class Register(Screen):
         self.a = 1
 
 class Tdashboard(Screen):
+    loader = None
     def __init__(self,**kwargs):
         super(Tdashboard,self).__init__(**kwargs)
+
+    def load(self):
+        self.loader = MDDialog(
+            size_hint=(None, None),
+            size= (0, 0),
+            type="custom",
+            content_cls=Loader(),
+        )
+        self.loader.open()        
     def add_stds(self):
         self.ids.student_list.clear_widgets()
         x = firebase.get("Users/Student",'')
@@ -502,20 +522,29 @@ class Tdashboard(Screen):
             std_name  = MDLabel(text=x[i]["username"],font_style="H5",bold=True,halign="center")
             card.add_widget(std_name)
             self.ids.student_list.add_widget(card)
+
     def on_enter(self,*args):
+        self.load()
+        threading.Thread(target=self.spin).start()
+
+    def spin(self):
         try:
+            import datetime
+            now = datetime.datetime.now()
+            d = str(now.strftime("%A"))
             self.ids.uname.text = "Hello "+str(user_info["username"])
             self.ids.label.text = "An investment in knowledge pays best interest"
             self.ids.lab_c.text= str(len(firebase.get("Users/Teacher/"+user_id+"/course/Labs",'')))
             self.ids.ass_c.text= str(len(firebase.get("Users/Teacher/"+user_id+"/course/Assignments",'')))
-
+            self.ids.day.text = d
             # add student cards to MDboxlayout( id = student_list)
             self.add_stds()
+            self.loader.dismiss()
         except:
-            pass
-
+            pass  
 
 class Sdashboard(Screen):
+    loader = None
     def __init__(self,**kwargs):
         super(Sdashboard,self).__init__(**kwargs)
 
@@ -583,14 +612,33 @@ class Sdashboard(Screen):
         self.ids.l_c.text=str(l_c)
         self.ids.a_c.text=str(a_c)
 
+    def load(self):
+        self.loader = MDDialog(
+            size_hint=(None, None),
+            size= (0, 0),
+            type="custom",
+            content_cls=Loader(),
+        )
+        self.loader.open()
+
+    def spin(self):
+        try:
+            # diaplay no. labs, assignments
+            # add widgets to MDboxlayout( id = today)
+            self.l_a_count()
+            self.loader.dismiss()
+        except:
+            pass
+
     def on_enter(self,*args):
+        import datetime
+        now = datetime.datetime.now()
+        d = str(now.strftime("%A"))
         self.ids.uname.text = "Hello "+str(user_info["username"])
         self.ids.label.text = "An investment in knowledge pays best interest"
-        # diaplay no. labs, assignments
-
-        # add widgets to MDboxlayout( id = today)
-        self.l_a_count()
-        # add widgets to MDboxlayout( id = tomorrow)
+        self.ids.day.text = d
+        self.load()
+        threading.Thread(target=self.spin).start()
 
 
 class ClockLabel(Label):
@@ -826,7 +874,7 @@ class Tcourse(Screen):
             card.add_widget(card_title)
             c = c+1
             self.ids.tnotes.add_widget(card)
-            c=c+1
+
 
     def download_pdf(self,link):
         webbrowser.open(link, new = 1)
@@ -968,8 +1016,53 @@ class Loader(MDBoxLayout):
     pass
 
 class Sevent(Screen):
-    pass
+    loader = None
+    def load(self):
+        self.loader = MDDialog(
+            size_hint=(None, None),
+            size= (0, 0),
+            type="custom",
+            content_cls=Loader(),
+        )
+        self.loader.open()      
+    def add_labcard(self):
+        pass
+
+    def add_asscard(self):
+        pass    
+
+    def spin(self):
+        try:
+            self.add_labcard()
+            self.add_asscard()
+            self.loader.dismiss()
+        except:
+            pass
+    def on_enter(self, *args):
+        self.load()
+        threading.Thread(target=self.spin).start()
+
 class Tevent(Screen):
+    loader = None
+    def load(self):
+        self.loader = MDDialog(
+            size_hint=(None, None),
+            size= (0, 0),
+            type="custom",
+            content_cls=Loader(),
+        )
+        self.loader.open()     
+
+    def spin(self):
+        try:
+            self.add_labcard()
+            self.add_asscard()
+            self.loader.dismiss()
+        except:
+            pass
+    def on_enter(self, *args):
+        self.load()
+        threading.Thread(target=self.spin).start()
 
     def add_labcard(self):
         # add lab cards
@@ -1009,15 +1102,6 @@ class Tevent(Screen):
             card.add_widget(card_r)
             self.ids.tassignment.add_widget(card)
 
-    def on_enter(self, *args):
-        self.spin()
-
-    def spin(self):
-        try:
-            self.add_labcard()
-            self.add_asscard()
-        except:
-            pass
         
 class Schat(Screen):
 
@@ -1186,10 +1270,25 @@ class Stimetable(Screen):
 class Ttimetable(Screen):
     pass
 class Sannouncement(Screen):
+    loader = None
     def __init__(self, **kw):
         super(Sannouncement,self).__init__(**kw)
         # Clock.schedule_interval(self.on_enter,5)
-    def on_enter(self,*args):
+    def load(self):
+        self.loader = MDDialog(
+            size_hint=(None, None),
+            size= (0, 0),
+            type="custom",
+            content_cls=Loader(),
+        )
+        self.loader.open()      
+    def spin(self):
+        try:
+            self.add_announcements()
+            self.loader.dismiss()
+        except:
+            pass
+    def add_announcements(self):
         self.ids.v_list.clear_widgets()
         x= firebase.get("Announcements/",'')
         for i in reversed(x):
@@ -1214,10 +1313,30 @@ class Sannouncement(Screen):
             card.add_widget(a)
             self.ids.v_list.add_widget(card)
 
-class Tannouncement(Screen):
+    def on_enter(self,*args):
+        self.load()
+        threading.Thread(target=self.spin).start()
 
+class Tannouncement(Screen):
+    loader = None
+    def load(self):
+        self.loader = MDDialog(
+            size_hint=(None, None),
+            size= (0, 0),
+            type="custom",
+            content_cls=Loader(),
+        )
+        self.loader.open()        
+
+    def spin(self):
+        try:
+            self.add_announcements()
+            self.loader.dismiss()
+        except:
+            pass
     def on_enter(self, *args):
-        self.add_announcements()
+        self.load()
+        threading.Thread(target=self.spin).start()
 
     def announcement_send(self):
         txt=self.ids.Announcemnet_txt.text
@@ -1249,7 +1368,7 @@ class Tannouncement(Screen):
                 card_nt = MDBoxLayout(orientation='horizontal',pos_hint={'center_x':0.5 , 'center_y': 1},size_hint_y=0.001,spacing=50)
                 card_name = MDLabel(text='Dr. '+x[i]["sender"]+'@'+x[i]["course"],font_style = "H6",size_hint_y=0.001)
                 card_time = MDLabel(text=x[i]["time"],size_hint_y=0.001,size_hint_x = 0.6, bold=True, pos_hint={'center_x':0.8 , 'center_y':0.1})
-                card_empty = MDLabel()
+                card_empty = MDLabel(size_hint_x = 0.5)
                 card_nt.add_widget(card_name)
                 card_nt.add_widget(card_empty)
                 card_nt.add_widget(card_time)
@@ -1321,18 +1440,33 @@ class Sfeedback(Screen):
 
 
 class Sprofile(Screen):
+    loader = None
     def __init__(self, **kwargs):
-        try:
-            super(Sprofile,self).__init__(**kwargs)
-            Clock.schedule_interval(self.update_profile,0.5)
-        except:
-            pass
-    def update_profile(self,*args):
+        super(Sprofile,self).__init__(**kwargs)
+
+    def load(self):
+        self.loader = MDDialog(
+            size_hint=(None, None),
+            size= (0, 0),
+            type="custom",
+            content_cls=Loader(),
+        )
+        self.loader.open()    
+
+    def attendance(self):
+        time.sleep(3)    
+            
+    def spin(self):
         try:
             self.ids.pro_name.text='Username - ' + user_info["username"]
             self.ids.pro_email.text='Email - ' + user_info["email"]
+            self.attendance()
+            self.loader.dismiss()
         except:
             pass
+    def on_enter(self, *args):
+        self.load()
+        threading.Thread(target=self.spin).start()
 
 class Tprofile(Screen):
     def __init__(self, **kwargs):
