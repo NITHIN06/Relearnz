@@ -1307,7 +1307,6 @@ WindowManager:
                             height: self.minimum_height
                             spacing: 20
 
-
             MDLabel:
                 text: ""
                 size_hint_x: 0.02
@@ -2964,6 +2963,7 @@ WindowManager:
                                             spacing: 20
                                             size_hint_y: None
                                             height: self.minimum_height
+                                MDLabel:
 
                     MDLabel:
                         size_hint_x: 0.01
@@ -3016,7 +3016,7 @@ WindowManager:
             MDLabel:
                 size_hint_x:0.02
             MDBoxLayout:
-                size_hint_x:0.4
+                size_hint_x:0.3
                 orientation: "vertical"
                 MDLabel:
                     size_hint_y: 0.1
@@ -3173,10 +3173,82 @@ WindowManager:
                         padding_x: 20
                 MDLabel:
                     size_hint_y: 0.05
-            MDLabel:
-                text:"EVENTS"
-                font_style: "H1"
-                halign: "center"
+            MDBoxLayout:
+                orientation: "vertical"
+                MDLabel:
+                    size_hint_y: 0.04
+                MDBoxLayout:
+                    ScrollView:
+                        do_scroll_x: False
+                        bar_width: 7
+                        MDBoxLayout:
+                            orientation: "vertical"
+                            size_hint_y: None
+                            height: self.minimum_height
+                            spacing: 25
+                            MDBoxLayout:
+                                MDLabel:
+                                    size_hint_x: 0.1
+                                MDLabel:
+                                    size_hint_x: 0.4
+                                MDLabel:
+                                    size_hint_x: 0.01
+                            MDBoxLayout:
+                                orientation: "vertical"
+                                spacing: 50
+                                size_hint_y: None
+                                height: self.minimum_height
+                                MDBoxLayout:
+                                    MDLabel:
+                                        text: "LAB"
+                                        size_hint_x: 0.13
+                                        font_style: "H3"
+                                    MDLabel:
+                                MDCard:
+                                    id: lab_card
+                                    elevation: 0
+                                    padding: 20
+                                    border_radius: 20
+                                    size_hint: (None, None)
+                                    size: (920,400)
+                                    radius: [20]
+                                    pos_hint: {"center_x":0.5,"center_y":0.5}
+                                    orientation: "vertical"
+                                    ScrollView:
+                                        do_scroll_x: False
+                                        MDBoxLayout:
+                                            id: tlab
+                                            orientation: "vertical"
+                                            spacing: 20
+                                            size_hint_y: None
+                                            height: self.minimum_height
+                                MDBoxLayout:
+                                    MDLabel:
+                                        text: "ASSIGNMENTS"
+                                        size_hint_x: 0.66
+                                        font_style: "H3"
+                                    MDLabel:
+                                MDCard:
+                                    id: assignment_card
+                                    elevation: 0
+                                    padding: 20
+                                    border_radius: 20
+                                    size_hint: (None, None)
+                                    size: (920,400)
+                                    radius: [20]
+                                    pos_hint: {"center_x":0.5,"center_y":0.5}
+                                    orientation: "vertical"
+                                    ScrollView:
+                                        do_scroll_x: False
+                                        MDBoxLayout:
+                                            id: tassignment
+                                            orientation: "vertical"
+                                            spacing: 20
+                                            size_hint_y: None
+                                            height: self.minimum_height
+                    MDLabel:
+                        size_hint_x: 0.01
+
 
 <Tevent>:
 
@@ -3225,7 +3297,7 @@ WindowManager:
             MDLabel:
                 size_hint_x:0.02
             MDBoxLayout:
-                size_hint_x:0.4
+                size_hint_x:0.3
                 orientation: "vertical"
                 MDLabel:
                     size_hint_y: 0.1
@@ -3384,10 +3456,87 @@ WindowManager:
                 MDLabel:
                     size_hint_y: 0.05
 
-            MDLabel:
-                text:"EVENTS"
-                font_style: "H1"
-                halign: "center"
+            MDBoxLayout:
+                orientation: "vertical"
+                MDLabel:
+                    size_hint_y: 0.04
+                MDBoxLayout:
+                    ScrollView:
+                        do_scroll_x: False
+                        bar_width: 7
+                        MDBoxLayout:
+                            orientation: "vertical"
+                            size_hint_y: None
+                            height: self.minimum_height
+                            spacing: 25    
+                            MDBoxLayout:
+
+                                MDLabel:
+                                    size_hint_x: 0.1
+                                MDLabel:
+                                    size_hint_x: 0.4
+                                MDLabel:
+                                    size_hint_x: 0.01
+
+                            MDBoxLayout:
+                                orientation: "vertical"
+                                spacing: 50
+                                size_hint_y: None
+                                height: self.minimum_height
+                                MDBoxLayout:
+                                    MDLabel:
+                                        text: "LAB"
+                                        size_hint_x: 0.13
+                                        font_style: "H3"
+                                    MDLabel:
+                                MDCard:
+                                    id: lab_card
+                                    elevation: 0
+                                    padding: 20
+                                    border_radius: 20
+                                    size_hint: (None, None)
+                                    size: (920,400)
+                                    radius: [20]
+                                    pos_hint: {"center_x":0.5,"center_y":0.5}
+                                    orientation: "vertical"
+                                    ScrollView:
+                                        do_scroll_x: False
+                                        MDBoxLayout:
+                                            id: tlab
+                                            orientation: "vertical"
+                                            spacing: 20
+                                            size_hint_y: None
+                                            height: self.minimum_height
+
+
+                                MDBoxLayout:
+                                    MDLabel:
+                                        text: "ASSIGNMENTS"
+                                        size_hint_x: 0.66
+                                        font_style: "H3"
+                                    MDLabel:
+                                MDCard:
+                                    id: assignment_card
+                                    elevation: 0
+                                    padding: 20
+                                    border_radius: 20
+                                    size_hint: (None, None)
+                                    size: (920,400)
+                                    radius: [20]
+                                    pos_hint: {"center_x":0.5,"center_y":0.5}
+                                    orientation: "vertical"
+                                    ScrollView:
+                                        do_scroll_x: False
+                                        MDBoxLayout:
+                                            id: tassignment
+                                            orientation: "vertical"
+                                            spacing: 20
+                                            size_hint_y: None
+                                            height: self.minimum_height
+                                MDLabel:
+                                    
+                    MDLabel:
+                        size_hint_x: 0.01
 <Schat>:
 
     name: "Schat"
@@ -5887,6 +6036,6 @@ WindowManager:
                                             spacing: 20
                                             size_hint_y: None
                                             height: self.minimum_height
-
+                                MDLabel:
                     MDLabel:
                         size_hint_x: 0.01
