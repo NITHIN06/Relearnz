@@ -651,7 +651,7 @@ class Ticon(MDIconButton):
     def __init__(self, **kwargs):
         try:
             super(Ticon,self).__init__(**kwargs)
-            Clock.schedule_interval(self.update_class_icon,5)
+            Clock.schedule_interval(self.update_class_icon,0.3)
         except:
             pass    
     def update_class_icon(self,*args):
@@ -670,7 +670,7 @@ class Ttext(MDTextButton):
     def __init__(self, **kwargs):
         try:
             super(Ttext,self).__init__(**kwargs)
-            Clock.schedule_interval(self.update_class_icon,5)
+            Clock.schedule_interval(self.update_class_icon,0.3)
         except:
             pass
     def update_class_icon(self,*args):
