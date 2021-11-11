@@ -529,7 +529,6 @@ class Tdashboard(Screen):
 
     def spin(self):
         try:
-            self.add_stds()
             import datetime
             now = datetime.datetime.now()
             d = str(now.strftime("%A"))
@@ -541,6 +540,7 @@ class Tdashboard(Screen):
             self.ids.nowcard.md_bg_color = [255/255, 204/255, 104/255, 0.5]
             self.ids.nowlabel.text = "Now"
             self.ids.nowlabel.color = [1, 105/255, 5/255]
+            self.add_stds()
             # add student cards to MDboxlayout( id = student_list)
             self.loader.dismiss()
         except:
@@ -657,7 +657,9 @@ class Ticon(MDIconButton):
     def update_class_icon(self,*args):
         try:
             tt()
-            if(user_info["course"]["name"] == now_next[0]["name"]):
+            u = user_info["course"]["name"]
+            n = now_next[0]["name"]
+            if(str(u.split()[0]).lower() == str(n.split()[0]).lower()):
                 self.icon=now_next[0]["pic"]
                 self.screen = "Tcourse"
             else:
@@ -676,7 +678,9 @@ class Ttext(MDTextButton):
     def update_class_icon(self,*args):
         try:
             tt()
-            if(user_info["course"]["name"] == now_next[0]["name"]):
+            u = user_info["course"]["name"]
+            n = now_next[0]["name"]
+            if(str(u.split()[0]).lower() == str(n.split()[0]).lower()):
                 self.text=now_next[0]["name"]
                 self.screen = "Tcourse"
             else:
