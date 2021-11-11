@@ -1091,7 +1091,7 @@ class Sevent(Screen):
                 if y[j]["status"] == 1 :
                     card_icon = MDIconButton(icon = "check",user_font_size = "36dp")
                     card.add_widget(card_icon)
-                self.ids.event_lab.add_widget(card)
+                self.ids.slab.add_widget(card)
         for i in x:
             z = x[i]["Assignments"]
             for j in sorted(z,key=lambda j:(z[j]["deadline"]).split("-")[0],reverse=False):
@@ -1103,7 +1103,7 @@ class Sevent(Screen):
                 if z[j]["status"] == 1 :
                     card_icon = MDIconButton(icon = "check",user_font_size = "36dp")
                     card.add_widget(card_icon)
-                self.ids.event_assignment.add_widget(card)
+                self.ids.sassignment.add_widget(card)
 
 class Tevent(Screen):
     loader = None
