@@ -3133,49 +3133,84 @@ WindowManager:
             MDBoxLayout:
                 orientation: "vertical"
                 MDLabel:
-                    text: "LABS"
-                    font_style: "H5"
-                    bold: True
-                MDCard:
-                    orientation: 'vertical'
-                    size_hint: None, None
-                    size: 830, 250
-                    padding: 10
-                    border_radius: 15
-                    radius: [15]
-                    md_bg_color: 84/255,255/255,103/255,0.5
+                    size_hint_y: 0.04
+                MDBoxLayout:
                     ScrollView:
-                        do_scroll_x:False
+                        do_scroll_x: False
+                        bar_width: 7
                         MDBoxLayout:
-                            orientation: 'vertical'
+                            orientation: "vertical"
                             size_hint_y: None
-                            height:self.minimum_height
-                            spacing: 40
-                            id:event_lab
-                MDLabel:
-                    text: "ASSIGNMENTS"
-                    font_style: "H5"
-                    bold:True
-                MDCard:
-                    orientation: 'vertical'
-                    size_hint: None, None
-                    size: 830, 250
-                    padding: 10
-                    border_radius: 15
-                    radius: [15]
-                    md_bg_color: 84/255,255/255,103/255,0.5
-                    ScrollView:
-                        do_scroll_x:False
-                        MDBoxLayout:
-                            orientation: 'vertical'
-                            size_hint_y: None
-                            height:self.minimum_height
-                            spacing: 40
-                            id:event_assignment
-                MDLabel:
-                    text: ' '
-                    size_hint: 0.1, 1
+                            height: self.minimum_height
+                            spacing: 25    
+                            MDBoxLayout:
 
+                                MDLabel:
+                                    size_hint_x: 0.1
+                                MDLabel:
+                                    size_hint_x: 0.4
+                                MDLabel:
+                                    size_hint_x: 0.01
+
+                            MDBoxLayout:
+                                orientation: "vertical"
+                                spacing: 50
+                                size_hint_y: None
+                                height: self.minimum_height
+                                MDBoxLayout:
+                                    MDLabel:
+                                        text: "LAB"
+                                        size_hint_x: 0.13
+                                        font_style: "H3"
+                                    MDLabel:
+                                MDCard:
+                                    id: lab_card
+                                    elevation: 0
+                                    padding: 20
+                                    border_radius: 20
+                                    size_hint: (None, None)
+                                    size: (920,400)
+                                    radius: [20]
+                                    pos_hint: {"center_x":0.5,"center_y":0.5}
+                                    orientation: "vertical"
+                                    ScrollView:
+                                        do_scroll_x: False
+                                        MDBoxLayout:
+                                            id: slab
+                                            orientation: "vertical"
+                                            spacing: 20
+                                            size_hint_y: None
+                                            height: self.minimum_height
+
+
+                                MDBoxLayout:
+                                    MDLabel:
+                                        text: "ASSIGNMENTS"
+                                        size_hint_x: 0.66
+                                        font_style: "H3"
+                                    MDLabel:
+                                MDCard:
+                                    id: assignment_card
+                                    elevation: 0
+                                    padding: 20
+                                    border_radius: 20
+                                    size_hint: (None, None)
+                                    size: (920,400)
+                                    radius: [20]
+                                    pos_hint: {"center_x":0.5,"center_y":0.5}
+                                    orientation: "vertical"
+                                    ScrollView:
+                                        do_scroll_x: False
+                                        MDBoxLayout:
+                                            id: sassignment
+                                            orientation: "vertical"
+                                            spacing: 20
+                                            size_hint_y: None
+                                            height: self.minimum_height
+                                MDLabel:
+                                    
+                    MDLabel:
+                        size_hint_x: 0.01
 
 <Tevent>:
 
