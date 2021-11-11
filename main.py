@@ -38,6 +38,11 @@ import os
 import getpass
 from kivymd.uix.filemanager import MDFileManager
 import pyrebase
+# Authentication
+from firebase_admin import auth
+import firebase_admin
+from firebase_admin import credentials
+
 
 
 # firebase connection
@@ -56,7 +61,14 @@ config = {
 
 pyrebase = pyrebase.initialize_app(config)
 
+auth1 = pyrebase.auth()
+
+cred = credentials.Certificate('firebase-sdk.json')
+firebase_admin.initialize_app(cred)
+
 storage = pyrebase.storage()
+
+database = pyrebase.database()
 
 socket.getaddrinfo('localhost',25)
 
@@ -146,12 +158,13 @@ class Login(Screen):
                 return users_list2[i]["role"]
 
     def logger(self):
-        username = self.ids.user.text
+        global user_info
+        email = self.ids.user.text
         password = self.ids.password.text
         z = 0
         regex = r'[\s]*'
 
-        if(re.fullmatch(regex, username)):
+        if(re.fullmatch(regex, email)):
             self.ids.user.text = ""
             self.a = 0
             z = 1
@@ -167,24 +180,39 @@ class Login(Screen):
             self.dialog.open()
 
         if(self.a == 1):
+            try:
+                login = auth1.sign_in_with_email_and_password(email, password)
+                user = auth.get_user_by_email(email)
+                values=[]
+                if user.email_verified == True:
+                    print('Successfully fetched user data: {0}'.format(user.uid))
+                    values = database.child("Users").child("Student").child(user.uid).get()
+                    if values.val() is None:
+                        values = database.child("Users").child("Teacher").child(user.uid).get()
+                    print(values.val())
+                    # search for inputs in teacher database
+                    if(values.val()["role"] == 1):
+                        self.manager.current = "Tdashboard"
+                        self.manager.transition.direction = "left"
 
-            # search for inputs in teacher database
-            if(self.account_checker(username, password) == 1):
-                self.manager.current = "Tdashboard"
-                self.manager.transition.direction = "left"
+                    # search for inputs in student database
+                    elif(values.val()["role"] == -1):
+                        self.manager.current = "Sdashboard"
+                        self.manager.transition.direction = "left"
+                    user_info = values.val()
+                    print(user_info)
 
-            # search for inputs in student database
-            elif(self.account_checker(username, password) == -1):
-                self.manager.current = "Sdashboard"
-                self.manager.transition.direction = "left"
+                else:
+                    self.dialog = MDDialog(title="Invalid Login", text="Please confirm your Email Id\nAnd try again", radius=[20, 7, 20, 7])
+                    self.dialog.open()
 
-            else:
-                self.dialog = MDDialog(
-                    title="Invalid Login", text="Enter correct credentials or signup if you don't have an account", radius=[20, 7, 20, 7])
+            except Exception as e:
+                print(e.args)
+                self.dialog = MDDialog(title="Invalid Login", text="Enter correct credentials or signup if you don't have an account", radius=[20, 7, 20, 7])
                 self.dialog.open()
 
-            self.ids.user.text = ""
-            self.ids.password.text = ""
+        self.ids.user.text = ""
+        self.ids.password.text = ""
 
         self.load()
         self.a = 1
@@ -194,6 +222,9 @@ class Login(Screen):
         self.ids.password.text = ""
         self.manager.current = "Register"
         self.manager.transition.direction = "left"
+
+    def reset(self):
+        auth1.send_password_reset_email(self.ids.user.text)
 
 class Item(OneLineAvatarIconListItem):
     divider = None
@@ -370,6 +401,14 @@ class Register(Screen):
         )
         self.l.open()
 
+    # check unique username
+    def username_check(self, name):
+        page=auth.list_users()
+        users = [user.display_name for  user in page.users]
+        if name in users:
+            return False
+        return True
+
     def yes(self, inst):
         self.loader()
         threading.Thread(target=self.yess).start()
@@ -377,23 +416,46 @@ class Register(Screen):
     def yess(self):
         global user_id
         global user_info
-        info = {"username": self.ids.user.text, "email": self.ids.email.text,
-        "password": self.ids.password.text, "role": self.t,
-        "course":{"name":self.course,"cid":self.c_id}}
-        x = firebase.post("/Users/Teacher", info)
-        user_id = x['name']
-        user_info = info
-        self.d.dismiss()
-        self.dialog.dismiss()
-        self.ids.btn_tch.icon = "assets/teacher.png"
-        self.ids.btn_std.icon == "assets/student.png"
-        self.ids.user.text = ""
-        self.ids.password.text = ""
-        self.ids.email.text = ""
-        self.t = 0
-        self.l.dismiss()
-        self.manager.current = "Tdashboard"
-        self.manager.transition.direction = "left"
+
+        email = self.ids.email.text
+        username = self.ids.user.text
+        password= self.ids.password.text
+
+        try:
+            if self.username_check(username):
+                info = {"username": username, "email": email, "role": self.t, "course":{"name":self.course,"cid":self.c_id},"day":1}
+                user = auth.create_user(email =email, password =password, display_name=username)
+                login = auth1.sign_in_with_email_and_password(email, password)
+                print(user.uid)
+                database.child("Users").child("Teacher").child(user.uid).set(info)
+                # db.child("Student").child(user.uid).set(data)
+
+                #send email verification1
+                auth1.send_email_verification(login['idToken'])
+                print("\nPlease verify your email id")
+                user_id = login['displayName']
+                user_info = info
+
+                self.d.dismiss()
+                self.dialog.dismiss()
+                self.ids.btn_tch.icon = "assets/teacher.png"
+                self.ids.btn_std.icon == "assets/student.png"
+                self.ids.user.text = ""
+                self.ids.password.text = ""
+                self.ids.email.text = ""
+                self.t = 0
+                self.l.dismiss()
+                self.ids.load.active = False
+                self.manager.current = "Login"
+                self.manager.transition.direction = "left"
+            else:
+                self.dialog = MDDialog(title="Invalid SignUp", text="Username already existed", radius=[20, 7, 20, 7])
+                self.dialog.open()
+                self.a = 0
+        except Exception as e:
+                self.dialog = MDDialog(title="Invalid SignUp", text="Email already existed", radius=[20, 7, 20, 7])
+                self.dialog.open()
+                self.a = 0
 
     def no(self, inst):
         self.d.dismiss()
@@ -474,29 +536,49 @@ class Register(Screen):
         if(self.a == 1 and self.t == -1):
 
             # store the values in the database
-            courses={"AI":{"Labs":[],"Assignments":[],"Attendence":75},
-                    "SEPM":{"Labs":[],"Assignments":[],"Attendence":70},
-                    "CF":{"Labs":[],"Assignments":[],"Attendence":85},
-                    "SC":{"Labs":[],"Assignments":[],"Attendence":74},
-                    "DSP":{"Labs":[],"Assignments":[],"Attendence":95},
-                    "HRM":{"Labs":[],"Assignments":[],"Attendence":55},
-                    "OSM":{"Labs":[],"Assignments":[],"Attendence":45},
-                    "FMA":{"Labs":[],"Assignments":[],"Attendence":78}}
+            try:
+                if self.username_check(username):
+                    info = {"username": username, "email": email, "role": self.t}
+                    user = auth.create_user(email =email, password =password, display_name=username)
+                    login = auth1.sign_in_with_email_and_password(email, password)
+                    print(user.uid)
+                    database.child("Users").child("Student").child(user.uid).set(info)
 
-            info = {"username": username, "email": email,
-                    "password": password, "role": self.t}
-            x = firebase.post("/Users/Student", info)
-            user_id = x['name']
-            user_info = info
-            self.ids.btn_tch.icon = "assets/teacher.png"
-            self.ids.btn_std.icon == "assets/student.png"
-            self.ids.user.text = ""
-            self.ids.password.text = ""
-            self.ids.email.text = ""
-            self.t = 0
-            self.ids.load.active = False
-            self.manager.current = "Sdashboard"
-            self.manager.transition.direction = "left"
+                    #send email verification1
+                    auth1.send_email_verification(login['idToken'])
+                    print("\nPlease verify your email id")
+                    user_id = login['displayName']
+                    user_info = info
+
+                    x = firebase.get("Users/Teacher/",'')
+                    for i in x:
+                        y =x[i]["course"]["Labs"]
+                        for j in y:
+                            y[j]["status"]=0
+                        database.child("Users").child("Student").child(user_id).child("courses").child(x[i]["course"]["cid"]).child("Labs").set(y)
+                        database.child("Users").child("Student").child(user_id).child("courses").child(x[i]["course"]["cid"]).child("Attendence").set(0)
+                        z = x[i]["course"]["Assignments"]
+                        for k in z:
+                            z[k]["status"]=0
+                        database.child("Users").child("Student").child(user_id).child("courses").child(x[i]["course"]["cid"]).child("Assignments").set(z)
+
+                    self.ids.btn_tch.icon = "assets/teacher.png"
+                    self.ids.btn_std.icon == "assets/student.png"
+                    self.ids.user.text = ""
+                    self.ids.password.text = ""
+                    self.ids.email.text = ""
+                    self.t = 0
+                    self.ids.load.active = False
+                    self.manager.current = "Login"
+                    self.manager.transition.direction = "left"
+                else:
+                    self.dialog = MDDialog(title="Invalid SignUp", text="Username already existed", radius=[20, 7, 20, 7])
+                    self.dialog.open()
+                    self.a = 0
+            except Exception as e:
+                self.dialog = MDDialog(title="Invalid SignUp", text="Email already existed", radius=[20, 7, 20, 7])
+                self.dialog.open()
+                self.a = 0
 
         self.ids.load.active = False
         self.a = 1
@@ -513,7 +595,7 @@ class Tdashboard(Screen):
             type="custom",
             content_cls=Loader(),
         )
-        self.loader.open()        
+        self.loader.open()
     def add_stds(self):
         self.ids.student_list.clear_widgets()
         x = firebase.get("Users/Student",'')
@@ -544,7 +626,7 @@ class Tdashboard(Screen):
             # add student cards to MDboxlayout( id = student_list)
             self.loader.dismiss()
         except:
-            pass  
+            pass
 
 class Sdashboard(Screen):
     loader = None
@@ -653,7 +735,7 @@ class Ticon(MDIconButton):
             super(Ticon,self).__init__(**kwargs)
             Clock.schedule_interval(self.update_class_icon,0.3)
         except:
-            pass    
+            pass
     def update_class_icon(self,*args):
         try:
             tt()
@@ -661,7 +743,7 @@ class Ticon(MDIconButton):
                 self.icon=now_next[0]["pic"]
                 self.screen = "Tcourse"
             else:
-                self.icon="assets/male.png"    
+                self.icon="assets/male.png"
                 self.screen = "Tdashboard"
         except:
             pass
@@ -835,6 +917,47 @@ class Tcourse(Screen):
         )
         self.loader.open()
 
+    def attendence_cal(self):
+        link = database.child("Users").child("Teacher").child(user_id).child("course").child("link").get().val()
+        link = link.replace(link.split("/")[-1],"export?format=csv")
+        course = user_info["course"]["cid"]
+        df = pd.read_csv(link)
+        students = database.child('Users').child('Student').get().val()
+        day = int(database.child('Users').child("Teacher").child(user_id).child('day').get().val())
+        for i in students:
+            try:
+                attendence = int(database.child('Users').child('Student').child(i).child('courses').child(course).child('Attendence').get().val())
+                name = database.child('Users').child('Student').child(i).child('username').get().val()
+                if df[df['First Name']==name]['Present'].values[0] == 'Y':
+                    attendence=(attendence+1)
+                database.child('Users').child('Student').child(i).child('courses').child(course).child('Attendence').set(attendence)
+            except Exception as e:
+                pass
+        day+=1
+        database.child('Users').child('Teacher').child(user_id).child('day').set(day)
+
+    def attendence(self):
+        if (database.child("Users").child("Teacher").child(user_id).child("course").child("link").get().val()==None):
+            self.dialog = MDDialog(
+                title="ADD Link",
+                type="custom",
+                content_cls=Attend_link(),
+                buttons=[
+                    MDFlatButton(text="CANCEL", on_press = self.cancel),
+                    MDFlatButton(text="OK", on_press = self.att_link),
+                ],
+            )
+            self.dialog.open()
+        else:
+            self.attendence_cal()
+
+    def att_link(self,inst):
+        for obj in self.dialog.content_cls.children:
+            if isinstance(obj, MDTextField):
+                database.child("Users").child("Teacher").child(user_id).child("course").child("link").set(obj.text)
+                self.attendence_cal()
+        self.dialog.dismiss()
+
     def lab_load(self, inst):
         self.load()
         threading.Thread(target=self.lab_ok).start()
@@ -901,20 +1024,19 @@ class Tcourse(Screen):
         self.add_note_card()
         Snackbar(text="File Successfully uploaded -_- ",snackbar_x="10dp",snackbar_y="10dp",size_hint_x=0.5,pos_hint={'center_x': 0.5, 'center_y': 0.1}).open()
 
+    def open_notes(self,link):
+        webbrowser.open(link,new=1)
+
     def add_note_card(self):
         self.ids.tnotes.clear_widgets()
         x= firebase.get("Courses/"+user_info["course"]["cid"],'')
         c = 1
         for i in x:
-            card = MDCard(orientation='horizontal',size_hint=(None,None),size=(880,40),border_radius=10,radius=[10],elevation=0,padding=10,md_bg_color=[84/255,255/255,103/255,1])
+            card = MDCard(orientation='horizontal',size_hint=(None,None),size=(880,40),border_radius=10,radius=[10],elevation=0,padding=10,md_bg_color=[84/255,255/255,103/255,1],on_release=lambda f:self.open_notes(x[i]["url"]))
             card_title = MDLabel(text=str(c)+". "+x[i]["title"],font_style="H5")
             card.add_widget(card_title)
             c = c+1
             self.ids.tnotes.add_widget(card)
-
-
-    def download_pdf(self,link):
-        webbrowser.open(link, new = 1)
 
     def select_path(self, path):
         self.p = path
@@ -931,6 +1053,12 @@ class Tcourse(Screen):
 
     def exit_manager(self, *args):
         self.file_manager.close()
+
+    def view_files(self,part):
+        global part_type
+        part_type = part
+        self.manager.current = "Tstudentfiles"
+        self.manager.transition.direction = "up"
 
     def lab_ok(self):
         regex = r'[\s]*'
@@ -964,16 +1092,22 @@ class Tcourse(Screen):
         self.ids.tlab.clear_widgets()
         x = firebase.get("Users/Teacher/"+user_id+"/course/Labs",'')
         for i in x:
-            card = MDCard(orientation='horizontal',size_hint=(None,None),size=(880,60),border_radius=10,radius=[10],elevation=0,padding=10,md_bg_color=[84/255,255/255,103/255,1])
+            if (database.child("Users").child("Teacher").child(user_id).child("course").child("Labs").child(i).child("student_files").get().val()==None):
+                nfs = "0"
+            else:
+                nfs= str(len(x[i]["student_files"]))
+            card = MDCard(orientation='horizontal',size_hint=(None,None),size=(880,60),border_radius=10,radius=[10],elevation=0,padding=10,md_bg_color=[84/255,255/255,103/255,1],on_release=lambda f:self.view_files("Labs"))
             card_l = MDBoxLayout(orientation='vertical')
             card_l_title = MDLabel(text=x[i]["title"],font_style="H6",bold=True)
             card_l_question = MDLabel(text=x[i]["question"])
             card_r_deadline = MDLabel(text=x[i]["deadline"],bold=True)
+            card_nfs = MDLabel(text="Submissions : "+nfs,font_style="H6",bold=True)
             card_r = MDBoxLayout(orientation='vertical')
             card_l.add_widget(card_l_title)
             card_l.add_widget(card_l_question)
             card.add_widget(card_l)
             card_r.add_widget(card_r_deadline)
+            card_r.add_widget(card_nfs)
             card.add_widget(card_r)
             self.ids.tlab.add_widget(card)
 
@@ -1010,16 +1144,22 @@ class Tcourse(Screen):
         self.ids.tassignment.clear_widgets()
         x = firebase.get("Users/Teacher/"+user_id+"/course/Assignments",'')
         for i in x:
+            if (database.child("Users").child("Teacher").child(user_id).child("course").child("Assignments").child(i).child("student_files").get().val()==None):
+                nfs = "0"
+            else:
+                nfs= str(len(x[i]["student_files"]))
             card = MDCard(orientation='horizontal',size_hint=(None,None),size=(880,60),border_radius=10,radius=[10],elevation=0,padding=10,md_bg_color=[84/255,255/255,103/255,1])
             card_l = MDBoxLayout(orientation='vertical')
             card_l_title = MDLabel(text=x[i]["title"],font_style="H6",bold=True)
             card_l_question = MDLabel(text=x[i]["question"])
             card_r_deadline = MDLabel(text=x[i]["deadline"],bold=True)
+            card_nfs = MDLabel(text="Submissions : "+nfs,font_style="H6",bold=True)
             card_r = MDBoxLayout(orientation='vertical')
             card_l.add_widget(card_l_title)
             card_l.add_widget(card_l_question)
             card.add_widget(card_l)
             card_r.add_widget(card_r_deadline)
+            card_r.add_widget(card_nfs)
             card.add_widget(card_r)
             self.ids.tassignment.add_widget(card)
 
@@ -1047,6 +1187,8 @@ class Slab_title(MDBoxLayout):
     pass
 class Assignment(MDBoxLayout):
     pass
+class Attend_link(MDBoxLayout):
+    pass
 class Sass_title(MDBoxLayout):
     pass
 class Loader(MDBoxLayout):
@@ -1061,7 +1203,7 @@ class Sevent(Screen):
             type="custom",
             content_cls=Loader(),
         )
-        self.loader.open()      
+        self.loader.open()
 
     def spin(self):
         try:
@@ -1083,7 +1225,6 @@ class Sevent(Screen):
                 course = MDLabel(text=str(i),font_style="H6",bold=True,color=[7/255, 12/255, 173/255])
                 card.add_widget(title)
                 card.add_widget(course)
-                print(y[j]["deadline"])
                 if y[j]["status"] == 1 :
                     card_icon = MDIconButton(icon = "check",user_font_size = "36dp")
                     card.add_widget(card_icon)
@@ -1110,7 +1251,7 @@ class Tevent(Screen):
             type="custom",
             content_cls=Loader(),
         )
-        self.loader.open()     
+        self.loader.open()
 
     def spin(self):
         try:
@@ -1161,7 +1302,7 @@ class Tevent(Screen):
             card.add_widget(card_r)
             self.ids.tassignment.add_widget(card)
 
-        
+
 class Schat(Screen):
 
     loader = None
@@ -1240,7 +1381,6 @@ class Schat(Screen):
         self.ids.other.clear_widgets()
         self.ids.user.clear_widgets()
         self.ids.message.text = ""
-
 
 
 class Tchat(Screen):
@@ -1323,7 +1463,6 @@ class Tchat(Screen):
         self.ids.message.text = ""
 
 
-
 class Stimetable(Screen):
     pass
 class Ttimetable(Screen):
@@ -1340,7 +1479,7 @@ class Sannouncement(Screen):
             type="custom",
             content_cls=Loader(),
         )
-        self.loader.open()      
+        self.loader.open()
     def spin(self):
         try:
             self.add_announcements()
@@ -1385,7 +1524,7 @@ class Tannouncement(Screen):
             type="custom",
             content_cls=Loader(),
         )
-        self.loader.open()        
+        self.loader.open()
 
     def spin(self):
         try:
@@ -1510,11 +1649,23 @@ class Sprofile(Screen):
             type="custom",
             content_cls=Loader(),
         )
-        self.loader.open()    
+        self.loader.open()
 
     def attendance(self):
-        time.sleep(3)    
-            
+        x = firebase.get("Users/Student/"+user_id+"/courses/",'')
+        c=0
+        for i in x:
+            y = firebase.get("Users/Teacher",'')
+            for j in y:
+                if (y[j]["course"]["cid"]==i):
+                    z=y[j]["day"]
+                    l = MDLabel(text=str(i)+" - "+str(round(x[i]["Attendence"]/int(z),1)*100),padding_x=85,font_style="H5",bold=True)
+            if (c>=4):
+                self.ids.spro_l.add_widget(l)
+            else:
+                self.ids.spro_r.add_widget(l)
+            c=c+1
+
     def spin(self):
         try:
             self.ids.pro_name.text='Username - ' + user_info["username"]
@@ -1785,6 +1936,9 @@ class Scourse1(Screen):
                 card.add_widget(card_status)
             self.ids.sassignment.add_widget(card)
 
+    def open_files(self,link):
+        webbrowser.open(link,new=1)
+
     def add_notescard(self):
         # add notes cards
         self.ids.snotes.clear_widgets()
@@ -1792,27 +1946,27 @@ class Scourse1(Screen):
         #c = len(x)
         c = 1
         for i in x:
-            card = MDCard(orientation='horizontal',size_hint=(None,None),size=(880,40),border_radius=10,radius=[10],elevation=0,padding=10,md_bg_color=[84/255,255/255,103/255,1])
+            card = MDCard(orientation='horizontal',size_hint=(None,None),size=(880,40),border_radius=10,radius=[10],elevation=0,padding=10,md_bg_color=[84/255,255/255,103/255,1],on_release=lambda f:self.open_files(x[i]["url"]))
             card_title = MDLabel(text=str(c)+". "+x[i]["title"],font_style="H5")
             c=c+1
             card.add_widget(card_title)
             self.ids.snotes.add_widget(card)
 
-
-    def open_pdf(self,*args):
-        webbrowser.open()
-
     def add_info(self):
         tname=""
         temail=""
+        day = 1
         x = firebase.get("Users/Teacher",'')
         for i in x:
             if x[i]["course"]["cid"] == c1_id:
                 tname = x[i]["username"]
                 temail = x[i]["email"]
+                day=x[i]["day"]
         self.ids.tname.text = 'Dr. ' + str(tname)
         self.ids.tmail.text = str(temail)
-        #self.ids.attendance.text= str(firebase.get("Users/Student/"+user_id+"/courses/"+c1_id+"/Attendence",'')+" %")
+
+        x = firebase.get("Users/Student/"+user_id+"/courses/"+c1_id,'Attendence')
+        self.ids.att_per.text=str(round(int(x)/int(day),1)*100)+" %"
 
     def on_enter(self, *args):
         self.load()
@@ -1821,6 +1975,7 @@ class Scourse1(Screen):
     def clear(self):
         self.ids.tname.text = ""
         self.ids.tmail.text = ""
+        self.ids.att_per.text= ""
         self.ids.snotes.clear_widgets()
         self.ids.sassignment.clear_widgets()
         self.ids.slab.clear_widgets()
@@ -1833,6 +1988,30 @@ class Scourse1(Screen):
             self.loader.dismiss()
         except:
             pass
+
+class Tstudentfiles(Screen):
+    def __init__(self, **kw):
+        super(Tstudentfiles,self).__init__(**kw)
+    def clear(self):
+        self.ids.std_heading.text=""
+        self.ids.std_files.clear_widgets()
+    def view(self,link):
+        webbrowser.open(link,new=1)
+    def on_enter(self, *args):
+        self.ids.std_heading.text= str(part_type)+" submission files"
+        x = firebase.get("Users/Teacher",'')
+        self.ids.std_files.clear_widgets()
+        for i in x:
+            if (x[i]["course"]["cid"]==user_info["course"]["cid"]):
+                y = x[i]["course"][part_type]
+                for j in y:
+                    z = y[j]["student_files"]
+                    for k in z:
+                        card = MDCard(orientation='vertical',size_hint=(None,None),size=(870,40),elevation=0,border_radius=10,radius=[0,20,0,20],padding=10,md_bg_color=[12/255,172/255,25/255,1],on_release=lambda f:self.view(z[k]["url"]))
+                        card_name = MDLabel(text=z[k]["name"],font_style="H5",halign="center")
+                        card.add_widget(card_name)
+                        self.ids.std_files.add_widget(card)
+
 
 class Main(MDApp):
     pass

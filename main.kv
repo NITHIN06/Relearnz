@@ -21,6 +21,7 @@ WindowManager:
     Sfeedback:
     Sprofile:
     Scourse1:
+    Tstudentfiles:
 
 <Item>:
     ImageLeftWidget:
@@ -57,6 +58,17 @@ WindowManager:
     MDTextField:
         id: assignmentdue
         hint_text: "Due Date (DD-MM-YYYY)"
+
+<Attend_link>:
+    orientation: "vertical"
+    size_hint: None, None
+    size: 500, 100
+    spacing: 25
+    MDLabel:
+        text: "Enter the link of Attendence file :"
+    MDTextField:
+        id: title
+        hint_text: "Link"
 
 <Slab_title>:
     orientation: "vertical"
@@ -156,7 +168,7 @@ WindowManager:
                 orientation :"vertical"
 
                 MDLabel:
-                    text: "Username"
+                    text: "Email"
                     padding_x: 85
                     font_style: "H6"
 
@@ -211,7 +223,15 @@ WindowManager:
 
             MDBoxLayout:
                 orientation :"vertical"
-
+                MDLabel:
+                    size_hint_y: 0.3
+                MDFillRoundFlatButton:
+                    text: "Reset Password"
+                    font_size: 12
+                    font_style: "Button"
+                    md_bg_color: 1, 0, 0, 1
+                    pos_hint:{"center_x":0.3, "center_y":0}
+                    on_release: root.reset()
                 MDLabel:
                     text: "Don't have an account?"
                     padding_x: 105
@@ -221,7 +241,7 @@ WindowManager:
                     text: "Signup"
                     font_size: 12
                     font_style: "Button"
-                    md_bg_color: 1, 0.2, 0, 1
+                    md_bg_color: 1, 0.5, 0, 1
                     pos_hint:{"center_x":0.3, "center_y":1}
                     on_release: root.signup()
 
@@ -746,7 +766,7 @@ WindowManager:
                                 size:80,30
                                 elevation: 0
                                 padding: 20,10
-                                
+
                                 border_radius: 10
                                 radius: [10]
                                 orientation: 'vertical'
@@ -760,12 +780,12 @@ WindowManager:
                             bold: True
                             on_release:
                                 app.root.current= self.screen
-                                root.manager.transition.direction="left" 
+                                root.manager.transition.direction="left"
 
                 MDLabel:
                     text: ""
                     size_hint_y: 0.25
-                
+
             MDCard:
                 size_hint: None, None
                 size: 410, 630
@@ -2801,7 +2821,7 @@ WindowManager:
                                 size_hint: 1, 0.3
                             MDCard:
                                 size_hint: None, None
-                                size: 300, 50
+                                size: 400, 50
                                 elevation: 10
                                 pos_hint:{"center_x": 0.5, "center_y": 0.5}
                                 ripple_behavior: False
@@ -2812,19 +2832,20 @@ WindowManager:
                                     halign: "center"
                                     font_style: "H6"
                             MDBoxLayout:
-
-                                MDLabel:
-                                    size_hint_x: 0.1
-                                MDLabel:
-                                    size_hint_x: 0.4
+                                orientation: 'horizontal'
+                                spacing: 550
+                                MDFillRoundFlatIconButton:
+                                    text: "Take Attendence"
+                                    icon: "list-status"
+                                    font_style: "H6"
+                                    on_press: root.attendence()
                                 MDFillRoundFlatIconButton:
                                     text: "Join Class"
                                     icon: "arrow-right-thick"
                                     font_style: "H6"
                                     on_press: root.joinclass()
-                                MDLabel:
-                                    size_hint_x: 0.01
-
+                            MDLabel:
+                                size_hint_y: 0.2
                             MDBoxLayout:
                                 orientation: "vertical"
                                 spacing: 50
@@ -3129,7 +3150,7 @@ WindowManager:
                         font_size : 20
                         padding_x: 20
                 MDLabel:
-                    size_hint_y: 0.05            
+                    size_hint_y: 0.05
             MDBoxLayout:
                 orientation: "vertical"
                 MDLabel:
@@ -3395,7 +3416,7 @@ WindowManager:
                             orientation: "vertical"
                             size_hint_y: None
                             height: self.minimum_height
-                            spacing: 25    
+                            spacing: 25
                             MDBoxLayout:
 
                                 MDLabel:
@@ -3461,7 +3482,7 @@ WindowManager:
                                             size_hint_y: None
                                             height: self.minimum_height
                                 MDLabel:
-                                    
+
                     MDLabel:
                         size_hint_x: 0.01
 <Schat>:
@@ -5559,48 +5580,10 @@ WindowManager:
                     md_bg_color: 84/255,255/255,103/255,0.5
                     MDBoxLayout:
                         orientation: "vertical"
-                        MDLabel:
-                            text: "AI - "
-                            padding_x: 85
-                            font_size: 28
-                            bold: True
-                        MDLabel:
-                            text: "SEPM - "
-                            padding_x: 85
-                            font_size: 28
-                            bold: True
-                        MDLabel:
-                            text: "DSP - "
-                            padding_x: 85
-                            font_size: 28
-                            bold: True
-                        MDLabel:
-                            text: "CF - "
-                            padding_x: 85
-                            font_size: 28
-                            bold: True
+                        id: spro_l
                     MDBoxLayout:
                         orientation: "vertical"
-                        MDLabel:
-                            text: "SC - "
-                            padding_x: 85
-                            font_size: 28
-                            bold: True
-                        MDLabel:
-                            text: "HRM - "
-                            padding_x: 85
-                            font_size: 28
-                            bold: True
-                        MDLabel:
-                            text: "OSM - "
-                            padding_x: 85
-                            font_size: 28
-                            bold: True
-                        MDLabel:
-                            text: "FMA - "
-                            padding_x: 85
-                            font_size: 28
-                            bold: True
+                        id: spro_r
                 MDLabel:
                     size_hint_y: 0.05
 
@@ -5862,6 +5845,7 @@ WindowManager:
                                     font_style: "H5"
                                     size_hint_x: 0.11
                                 MDLabel:
+                                    id: att_per
                                     text: "80%"
                                     font_style: "H5"
                                     size_hint_x: 0.4
@@ -5966,3 +5950,239 @@ WindowManager:
                                 MDLabel:
                     MDLabel:
                         size_hint_x: 0.01
+<Tstudentfiles>:
+
+    name: "Tstudentfiles"
+    MDBoxLayout:
+        orientation: "vertical"
+        MDLabel:
+            size_hint_y:0.025
+        MDBoxLayout:
+            size_hint_y: 0.1
+            MDLabel:
+                size_hint_x:0.05
+            MDLabel:
+                text: "ReLearnz"
+                color: 54/255, 154/255, 230/255,1
+                font_size: 40
+                bold: True
+                size_hint_x:0.5
+            MDLabel:
+                size_hint_x:0.7
+            MDLabel:
+                size_hint_x:0.5
+            MDFloatingActionButton:
+                icon: "timetable"
+                elevation_normal: 8
+                md_bg_color: "black"
+                on_release:
+                    app.root.current= "Ttimetable"
+                    root.manager.transition.direction="left"
+            MDLabel:
+                size_hint_x:0.08
+
+            MDFloatingActionButton:
+                icon: "account"
+                elevation_normal: 8
+                md_bg_color: "black"
+                on_release:
+                    app.root.current= "Tprofile"
+                    root.manager.transition.direction="left"
+            MDLabel:
+                size_hint_x:0.09
+        MDLabel:
+            size_hint_y:0.02
+        MDBoxLayout:
+            md_bg_color: 117/255, 255/255, 230/255, 0.1
+            MDLabel:
+                size_hint_x:0.02
+            MDBoxLayout:
+                size_hint_x:0.4
+                orientation: "vertical"
+                MDLabel:
+                    size_hint_y: 0.1
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    on_release:
+                        app.root.current= "Tdashboard"
+                        root.manager.transition.direction="right"
+                    MDIcon:
+                        icon: "eye"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDLabel:
+                        text:"Overview"
+                        bold: True
+                        font_size : 20
+                        padding_x: 20
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    on_release:
+                        app.root.current= "Tcourse"
+                        root.manager.transition.direction="left"
+                    MDIcon:
+                        icon: "book-multiple"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDLabel:
+                        text:"Courses"
+                        bold: True
+                        font_size : 20
+                        padding_x: 20
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    on_release:
+                        app.root.current= "Tevent"
+                        root.manager.transition.direction="left"
+                    MDIcon:
+                        icon: "bookmark-multiple"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDLabel:
+                        text:"Events"
+                        bold: True
+                        font_size : 20
+                        padding_x: 20
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    on_release:
+                        app.root.current= "Tchat"
+                        root.manager.transition.direction="left"
+                    MDIcon:
+                        icon: "chat"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDLabel:
+                        text:"Chat"
+                        bold: True
+                        font_size : 20
+                        padding_x: 20
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    on_release:
+                        app.root.current= "Tannouncement"
+                        root.manager.transition.direction="left"
+                    MDIcon:
+                        icon: "alert"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDLabel:
+                        text:"Announcements"
+                        bold: True
+                        font_size : 20
+                        padding_x: 0
+                MDLabel:
+                    size_hint_y: 0.85
+                MDCard:
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    on_release:
+                        app.root.current= "Tfeedback"
+                        root.manager.transition.direction="left"
+                    MDIcon:
+                        icon: "file-document"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDLabel:
+                        text:"Feedback"
+                        bold: True
+                        font_size : 20
+                        padding_x: 20
+                MDLabel:
+                    size_hint_y: 0.03
+                MDCard:
+                    id: logout
+                    size_hint: None, None
+                    size: 240, 60
+                    elevation:0
+                    ripple_behavior: True
+                    padding: 20
+                    border_radius: 15
+                    radius: [15]
+                    on_release:
+                        app.root.current= "Login"
+                        root.manager.transition.direction="left"
+                    MDIcon:
+                        icon: "logout"
+                        font_size : 30
+                        size_hint_x: 0.3
+                    MDLabel:
+                        text:"Logout"
+                        bold: True
+                        font_size : 20
+                        padding_x: 20
+                MDLabel:
+                    size_hint_y: 0.05
+
+            MDBoxLayout:
+                orientation: "vertical"
+                MDFloatingActionButton:
+                    icon: "arrow-left-thick"
+                    on_release:
+                        root.clear()
+                        app.root.current= "Tcourse"
+                        root.manager.transition.direction="down"
+                MDLabel:
+                    id: std_heading
+                    font_size: 24
+                    bold: True
+                    size_hint_y: 0.1
+                MDCard:
+                    size_hint_y: 0.5
+                    elevation: 0
+                    padding: 20
+                    border_radius: 20
+                    radius: [20]
+                    pos_hint: {"center_x":0.4,"center_y":0.5}
+                    orientation: "vertical"
+                    ScrollView:
+                        do_scroll_x: False
+                        MDBoxLayout:
+                            id: std_files
+                            orientation: 'vertical'
+                            size_hint_y: None
+                            height: self.minimum_height
+                            spacing: 20
