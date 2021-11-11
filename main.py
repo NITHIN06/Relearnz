@@ -529,6 +529,7 @@ class Tdashboard(Screen):
 
     def spin(self):
         try:
+            self.add_stds()
             import datetime
             now = datetime.datetime.now()
             d = str(now.strftime("%A"))
@@ -537,8 +538,10 @@ class Tdashboard(Screen):
             self.ids.lab_c.text= str(len(firebase.get("Users/Teacher/"+user_id+"/course/Labs",'')))
             self.ids.ass_c.text= str(len(firebase.get("Users/Teacher/"+user_id+"/course/Assignments",'')))
             self.ids.day.text = d
+            self.ids.nowcard.md_bg_color = [255/255, 204/255, 104/255, 0.5]
+            self.ids.nowlabel.text = "Now"
+            self.ids.nowlabel.color = [1, 105/255, 5/255]
             # add student cards to MDboxlayout( id = student_list)
-            self.add_stds()
             self.loader.dismiss()
         except:
             pass  
@@ -562,7 +565,7 @@ class Sdashboard(Screen):
                 if (y[j]["status"]==0):
                     l_c=l_c+1
                     if (int((y[j]["deadline"].split("-"))[0])==datetime.now().day):
-                        card = MDCard(orientation='horizontal',size_hint=(None,None),size=(380,80),pos_hint={'center_x':0.5 , 'center_y':0.5},elevation=10,md_bg_color=[184/255, 226/255, 1, 1],border_radius=10,radius=[10],padding=10,on_release=lambda f:self.open_scourse(str(i)))
+                        card = MDCard(orientation='horizontal',size_hint=(None,None),size=(380,80),pos_hint={'center_x':0.5 , 'center_y':0.5},elevation=0,md_bg_color=[184/255, 226/255, 1, 1],border_radius=10,radius=[10],padding=10,on_release=lambda f:self.open_scourse(str(i)))
                         card_l = MDBoxLayout(orientation='vertical')
                         title = MDLabel(text=y[j]["title"],font_style="H5",bold=True,color=[7/255, 12/255, 173/255])
                         course = MDLabel(text=str(i),font_style="H6",bold=True,color=[7/255, 12/255, 173/255])
@@ -573,7 +576,7 @@ class Sdashboard(Screen):
                         card.add_widget(time_left)
                         self.ids.today.add_widget(card)
                     elif (int((y[j]["deadline"].split("-"))[0])==int(datetime.now().day)+1):
-                        card = MDCard(orientation='horizontal',size_hint=(None,None),size=(380,80),pos_hint={'center_x':0.5 , 'center_y':0.5},elevation=10,md_bg_color=[184/255, 226/255, 1, 1],border_radius=10,radius=[10],padding=10)
+                        card = MDCard(orientation='horizontal',size_hint=(None,None),size=(380,80),pos_hint={'center_x':0.5 , 'center_y':0.5},elevation=0,md_bg_color=[184/255, 226/255, 1, 1],border_radius=10,radius=[10],padding=10)
                         card_l = MDBoxLayout(orientation='vertical')
                         title = MDLabel(text=y[j]["title"],font_style="H5",bold=True,color=[7/255, 12/255, 173/255])
                         course = MDLabel(text=str(i),font_style="H6",bold=True,color=[7/255, 12/255, 173/255])
@@ -588,7 +591,7 @@ class Sdashboard(Screen):
                 if (z[k]["status"]==0):
                     a_c=a_c+1
                     if (int((z[k]["deadline"].split("-"))[0])==datetime.now().day):
-                        card = MDCard(orientation='horizontal',size_hint=(None,None),size=(380,80),pos_hint={'center_x':0.5 , 'center_y':0.5},elevation=10,md_bg_color=[255/255, 204/255, 104/255, 0.5],border_radius=10,radius=[10],padding=10)
+                        card = MDCard(orientation='horizontal',size_hint=(None,None),size=(380,80),pos_hint={'center_x':0.5 , 'center_y':0.5},elevation=0,md_bg_color=[255/255, 204/255, 104/255, 0.5],border_radius=10,radius=[10],padding=10)
                         card_l = MDBoxLayout(orientation='vertical')
                         title = MDLabel(text=z[k]["title"],font_style="H5",bold=True,color=[7/255, 12/255, 173/255])
                         course = MDLabel(text=str(i),font_style="H6",bold=True,color=[7/255, 12/255, 173/255])
@@ -599,7 +602,7 @@ class Sdashboard(Screen):
                         card.add_widget(time_left)
                         self.ids.today.add_widget(card)
                     elif (int((z[k]["deadline"].split("-"))[0])==int(datetime.now().day)+1):
-                        card = MDCard(orientation='horizontal',size_hint=(None,None),size=(380,80),pos_hint={'center_x':0.5 , 'center_y':0.5},elevation=10,md_bg_color=[184/255, 226/255, 1, 1],border_radius=10,radius=[10],padding=10)
+                        card = MDCard(orientation='horizontal',size_hint=(None,None),size=(380,80),pos_hint={'center_x':0.5 , 'center_y':0.5},elevation=0,md_bg_color=[184/255, 226/255, 1, 1],border_radius=10,radius=[10],padding=10)
                         card_l = MDBoxLayout(orientation='vertical')
                         title = MDLabel(text=z[k]["title"],font_style="H5",bold=True,color=[7/255, 12/255, 173/255])
                         course = MDLabel(text=str(i),font_style="H6",bold=True,color=[7/255, 12/255, 173/255])
@@ -622,9 +625,6 @@ class Sdashboard(Screen):
         self.loader.open()
 
     def spin(self):
-        pass
-
-    def on_enter(self,*args):
         try:
             self.l_a_count()
             import datetime
@@ -636,7 +636,9 @@ class Sdashboard(Screen):
             self.loader.dismiss()
         except:
             pass
-
+    def on_enter(self,*args):
+        self.load()
+        threading.Thread(target=self.spin).start()
 
 class ClockLabel(Label):
     def __init__(self,**kwargs):
@@ -644,6 +646,44 @@ class ClockLabel(Label):
         Clock.schedule_interval(self.update,1)
     def update(self,*args):
         self.text= f"{datetime.now().strftime('%H:%M')}"
+
+class Ticon(MDIconButton):
+    def __init__(self, **kwargs):
+        try:
+            super(Ticon,self).__init__(**kwargs)
+            Clock.schedule_interval(self.update_class_icon,5)
+        except:
+            pass    
+    def update_class_icon(self,*args):
+        try:
+            tt()
+            if(user_info["course"]["name"] == now_next[0]["name"]):
+                self.icon=now_next[0]["pic"]
+                self.screen = "Tcourse"
+            else:
+                self.icon="assets/male.png"    
+                self.screen = "Tdashboard"
+        except:
+            pass
+
+class Ttext(MDTextButton):
+    def __init__(self, **kwargs):
+        try:
+            super(Ttext,self).__init__(**kwargs)
+            Clock.schedule_interval(self.update_class_icon,5)
+        except:
+            pass
+    def update_class_icon(self,*args):
+        try:
+            tt()
+            if(user_info["course"]["name"] == now_next[0]["name"]):
+                self.text=now_next[0]["name"]
+                self.screen = "Tcourse"
+            else:
+                self.text="There is no class right now"
+                self.screen = "Tdashboard"
+        except:
+            pass
 
 class NowIcon(MDIconButton):
     def __init__(self, **kwargs):
@@ -1022,33 +1062,23 @@ class Sevent(Screen):
             content_cls=Loader(),
         )
         self.loader.open()      
-    def add_labcard(self):
-        pass
-
-    def add_asscard(self):
-        pass    
 
     def spin(self):
         try:
-            self.add_labcard()
-            self.add_asscard()
+            self.events_count()
             self.loader.dismiss()
         except:
             pass
     def on_enter(self, *args):
         self.load()
         threading.Thread(target=self.spin).start()
-    
-    def __init__(self,**kwargs):
-        super(Sevent,self).__init__(**kwargs)
-    def on_enter(self, *args):
-        self.events_count()
+
     def events_count(self):
         x = firebase.get("Users/Student/"+user_id+"/courses",'')
         for i in x:
             y = x[i]["Labs"]
             for j in sorted(y,key=lambda j:(y[j]["deadline"]).split("-")[0],reverse=False):
-                card = MDCard(orientation='horizontal',size_hint=(None,None),size=(800,60),pos_hint={'center_x':0.5 , 'center_y':0.5},elevation=10,md_bg_color=[184/255, 226/255, 1, 1],border_radius=10,radius=[10],padding=10)
+                card = MDCard(orientation='horizontal',size_hint=(None,None),size=(800,60),pos_hint={'center_x':0.5 , 'center_y':0.5},elevation=0,md_bg_color=[184/255, 226/255, 1, 1],border_radius=10,radius=[10],padding=10)
                 title = MDLabel(text=y[j]["title"],font_style="H5",bold=True,color=[7/255, 12/255, 173/255])
                 course = MDLabel(text=str(i),font_style="H6",bold=True,color=[7/255, 12/255, 173/255])
                 card.add_widget(title)
@@ -1061,7 +1091,7 @@ class Sevent(Screen):
         for i in x:
             z = x[i]["Assignments"]
             for j in sorted(z,key=lambda j:(z[j]["deadline"]).split("-")[0],reverse=False):
-                card = MDCard(orientation='horizontal',size_hint=(None,None),size=(800,60),pos_hint={'center_x':0.5 , 'center_y':0.5},elevation=10,md_bg_color=[184/255, 226/255, 1, 1],border_radius=10,radius=[10],padding=10)
+                card = MDCard(orientation='horizontal',size_hint=(None,None),size=(800,60),pos_hint={'center_x':0.5 , 'center_y':0.5},elevation=0,md_bg_color=[184/255, 226/255, 1, 1],border_radius=10,radius=[10],padding=10)
                 title = MDLabel(text=z[j]["title"],font_style="H5",bold=True,color=[7/255, 12/255, 173/255])
                 course = MDLabel(text=str(i),font_style="H6",bold=True,color=[7/255, 12/255, 173/255])
                 card.add_widget(title)
