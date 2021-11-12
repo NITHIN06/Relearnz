@@ -159,6 +159,7 @@ class Login(Screen):
 
     def logger(self):
         global user_info
+        global user_id
         email = self.ids.user.text
         password = self.ids.password.text
         z = 0
@@ -200,6 +201,7 @@ class Login(Screen):
                         self.manager.current = "Sdashboard"
                         self.manager.transition.direction = "left"
                     user_info = values.val()
+                    user_id = user.uid
                     print(user_info)
 
                 else:
@@ -430,10 +432,10 @@ class Register(Screen):
                 database.child("Users").child("Teacher").child(user.uid).set(info)
                 # db.child("Student").child(user.uid).set(data)
 
-                #send email verification1
+                # send email verification1
                 auth1.send_email_verification(login['idToken'])
                 print("\nPlease verify your email id")
-                user_id = login['displayName']
+                user_id = user.uid
                 user_info = info
 
                 self.d.dismiss()
