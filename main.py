@@ -549,7 +549,7 @@ class Register(Screen):
                     #send email verification1
                     auth1.send_email_verification(login['idToken'])
                     print("\nPlease verify your email id")
-                    user_id = login['displayName']
+                    user_id = user.uid
                     user_info = info
 
                     x = firebase.get("Users/Teacher/",'')
