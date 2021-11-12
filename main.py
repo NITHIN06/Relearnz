@@ -1539,6 +1539,7 @@ class Tannouncement(Screen):
             self.loader.dismiss()
         except:
             pass
+
     def on_enter(self, *args):
         self.load()
         threading.Thread(target=self.spin).start()
@@ -1611,7 +1612,7 @@ class Tfeedback(Screen):
         if (re.fullmatch(regex, txt)):
             MDDialog(title = "Invalid", text = "Field must not be empty").open()
         else:
-            time.sleep(1.5)
+            time.sleep(2)
             self.ids.feedback_txt.text = ""
             Snackbar(text="Thanks for your Feedback :)",snackbar_x="10dp",snackbar_y="10dp",size_hint_x=0.5,pos_hint={'center_x': 0.5, 'center_y': 0.1}).open()
 
@@ -1639,7 +1640,7 @@ class Sfeedback(Screen):
         if (re.fullmatch(regex, txt)):
             MDDialog(title = "Invalid", text = "Field must not be empty").open()
         else:
-            time.sleep(1.5)
+            time.sleep(2)
             self.ids.feedback_txt.text = ""
             Snackbar(text="Thanks for your Feedback :)",snackbar_x="10dp",snackbar_y="10dp",size_hint_x=0.5,pos_hint={'center_x': 0.5, 'center_y': 0.1}).open()
 
