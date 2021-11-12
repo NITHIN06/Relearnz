@@ -406,7 +406,7 @@ class Register(Screen):
     # check unique username
     def username_check(self, name):
         page=auth.list_users()
-        users = [user.display_name for  user in page.users]
+        users = [user.display_name for user in page.users]
         if name in users:
             return False
         return True
@@ -1222,6 +1222,8 @@ class Sevent(Screen):
         threading.Thread(target=self.spin).start()
 
     def events_count(self):
+        self.ids.slab.clear_widgets()
+        self.ids.sassignment.clear_widgets()
         x = firebase.get("Users/Student/"+user_id+"/courses",'')
         for i in x:
             y = x[i]["Labs"]
@@ -1229,8 +1231,10 @@ class Sevent(Screen):
                 card = MDCard(orientation='horizontal',size_hint=(None,None),size=(800,60),pos_hint={'center_x':0.5 , 'center_y':0.5},elevation=0,md_bg_color=[184/255, 226/255, 1, 1],border_radius=10,radius=[10],padding=10)
                 title = MDLabel(text=y[j]["title"],font_style="H5",bold=True,color=[7/255, 12/255, 173/255])
                 course = MDLabel(text=str(i),font_style="H6",bold=True,color=[7/255, 12/255, 173/255])
+                dl = MDLabel(text=y[j]["deadline"])
                 card.add_widget(title)
                 card.add_widget(course)
+                card.add_widget(dl)
                 if y[j]["status"] == 1 :
                     card_icon = MDIconButton(icon = "check",user_font_size = "36dp")
                     card.add_widget(card_icon)
@@ -1314,7 +1318,7 @@ class Schat(Screen):
     loader = None
     def __init__(self, **kw):
         super(Schat, self).__init__(**kw)
-        # Clock.schedule_interval(self.on_enter,5)
+        Clock.schedule_interval(self.add_cards,5)
 
     def send(self):
         regex = r'[\s]*'
@@ -1394,7 +1398,7 @@ class Tchat(Screen):
     loader = None
     def __init__(self, **kw):
         super(Tchat, self).__init__(**kw)
-        # Clock.schedule_interval(self.on_enter,5)
+        Clock.schedule_interval(self.add_cards,5)
 
     def send(self):
         regex = r'[\s]*'
