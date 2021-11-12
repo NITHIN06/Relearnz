@@ -616,13 +616,13 @@ class Tdashboard(Screen):
             d = str(now.strftime("%A"))
             self.ids.uname.text = "Hello "+str(user_info["username"])
             self.ids.label.text = "An investment in knowledge pays best interest"
-            self.ids.lab_c.text= str(len(firebase.get("Users/Teacher/"+user_id+"/course/Labs",'')))
-            self.ids.ass_c.text= str(len(firebase.get("Users/Teacher/"+user_id+"/course/Assignments",'')))
             self.ids.day.text = d
             self.ids.nowcard.md_bg_color = [255/255, 204/255, 104/255, 0.5]
             self.ids.nowlabel.text = "Now"
             self.ids.nowlabel.color = [1, 105/255, 5/255]
             self.add_stds()
+            self.ids.lab_c.text= str(len(firebase.get("Users/Teacher/"+user_id+"/course/Labs",'')))
+            self.ids.ass_c.text= str(len(firebase.get("Users/Teacher/"+user_id+"/course/Assignments",'')))
             # add student cards to MDboxlayout( id = student_list)
             self.loader.dismiss()
         except:
@@ -708,16 +708,17 @@ class Sdashboard(Screen):
 
     def spin(self):
         try:
-            self.l_a_count()
             import datetime
             now = datetime.datetime.now()
             d = str(now.strftime("%A"))
             self.ids.uname.text = "Hello "+str(user_info["username"])
-            self.ids.label.text = "An investment in knowledge pays best interest"
             self.ids.day.text = d
+            self.ids.label.text = "An investment in knowledge pays best interest"
+            self.l_a_count()
             self.loader.dismiss()
         except:
             pass
+
     def on_enter(self,*args):
         self.load()
         threading.Thread(target=self.spin).start()
@@ -766,7 +767,7 @@ class Ttext(MDTextButton):
                 self.text=now_next[0]["name"]
                 self.screen = "Tcourse"
             else:
-                self.text="There is no class right now"
+                self.text="There is no class today"
                 self.screen = "Tdashboard"
         except:
             pass
