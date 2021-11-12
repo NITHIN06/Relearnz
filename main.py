@@ -424,36 +424,42 @@ class Register(Screen):
         password= self.ids.password.text
 
 
-        if self.username_check(username):
-            info = {"username": username, "email": email, "role": self.t, "course":{"name":self.course,"cid":self.c_id},"day":1}
-            user = auth.create_user(email =email, password =password, display_name=username)
-            login = auth1.sign_in_with_email_and_password(email, password)
-            print(user.uid)
-            database.child("Users").child("Teacher").child(user.uid).set(info)
-            # db.child("Student").child(user.uid).set(data)
+        try:
+            if self.username_check(username):
+                info = {"username": username, "email": email, "role": self.t, "course":{"name":self.course,"cid":self.c_id},"day":1}
+                user = auth.create_user(email =email, password =password, display_name=username)
+                login = auth1.sign_in_with_email_and_password(email, password)
+                print(user.uid)
+                database.child("Users").child("Teacher").child(user.uid).set(info)
+                # db.child("Student").child(user.uid).set(data)
 
-            # send email verification1
-            auth1.send_email_verification(login['idToken'])
-            print("\nPlease verify your email id")
-            user_id = user.uid
-            user_info = info
+                # send email verification1
+                auth1.send_email_verification(login['idToken'])
+                print("\nPlease verify your email id")
+                user_id = user.uid
+                user_info = info
 
-            self.d.dismiss()
-            self.dialog.dismiss()
-            self.ids.btn_tch.icon = "assets/teacher.png"
-            self.ids.btn_std.icon == "assets/student.png"
-            self.ids.user.text = ""
-            self.ids.password.text = ""
-            self.ids.email.text = ""
-            self.t = 0
-            self.l.dismiss()
-            self.ids.load.active = False
-            self.manager.current = "Login"
-            self.manager.transition.direction = "left"
-        else:
-            self.dialog = MDDialog(title="Invalid SignUp", text="Username already existed", radius=[20, 7, 20, 7])
-            self.dialog.open()
-            self.a = 0
+                self.d.dismiss()
+                self.dialog.dismiss()
+                self.ids.btn_tch.icon = "assets/teacher.png"
+                self.ids.btn_std.icon == "assets/student.png"
+                self.ids.user.text = ""
+                self.ids.password.text = ""
+                self.ids.email.text = ""
+                self.t = 0
+                self.l.dismiss()
+                self.ids.load.active = False
+                self.manager.current = "Login"
+                self.manager.transition.direction = "left"
+            else:
+                self.dialog = MDDialog(title="Invalid SignUp", text="Username already existed", radius=[20, 7, 20, 7])
+                self.dialog.open()
+                self.a = 0
+        except Exception as e:
+                self.dialog = MDDialog(title="Invalid SignUp", text="Email already existed", radius=[20, 7, 20, 7])
+                self.dialog.open()
+                self.a = 0
+
 
 
     def no(self, inst):
@@ -1657,6 +1663,8 @@ class Sprofile(Screen):
         self.loader.open()
 
     def attendance(self):
+        self.ids.spro_l.clear_widgets()
+        self.ids.spro_r.clear_widgets()
         x = firebase.get("Users/Student/"+user_id+"/courses/",'')
         c=0
         for i in x:
