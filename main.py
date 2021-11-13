@@ -1249,8 +1249,10 @@ class Sevent(Screen):
                 card = MDCard(orientation='horizontal',size_hint=(None,None),size=(800,60),pos_hint={'center_x':0.5 , 'center_y':0.5},elevation=0,md_bg_color=[184/255, 226/255, 1, 1],border_radius=10,radius=[10],padding=10)
                 title = MDLabel(text=z[j]["title"],font_style="H5",bold=True,color=[7/255, 12/255, 173/255])
                 course = MDLabel(text=str(i),font_style="H6",bold=True,color=[7/255, 12/255, 173/255])
+                dl = MDLabel(text=z[j]["deadline"])
                 card.add_widget(title)
                 card.add_widget(course)
+                card.add_widget(dl)
                 if z[j]["status"] == 1 :
                     card_icon = MDIconButton(icon = "check",user_font_size = "36dp")
                     card.add_widget(card_icon)
